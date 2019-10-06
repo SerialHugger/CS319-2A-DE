@@ -1,7 +1,7 @@
 # CS319-2A-DE
-##Cs319 class project - Defenders Arcade Video Game
+## Cs319 class project - Defenders Arcade Video Game
 
-##Project Members:
+## Project Members:
 
 
     ->Emre Tolga Ayan,
@@ -12,13 +12,13 @@
     ->Cemal Arda Kizilkaya
     
     
-##Description of the Project
+## Description of the Project
 
 
     -The purpose of this project is to recreate the Defenders Arcade Video Game.
     Then improve the game with creative and fun ideas 
     while challenging our Object Oriented Programming Skills.
-##Made up Story of the Defenders
+## Made up Story of the Defenders
 
 
     -Aliens are swarming your planet and abducting whoever they find.
@@ -30,5 +30,5 @@
     Since this is the newest version of the D3sTr0Y3R, its hard to find proper parts to fix the ship.
     -Now go, be the hero this planet needs. Protect those who are lost, be the light that leads!
 
-###[Try out Defenders yourself!](https://archive.org/details/arcade_defender) 
+### [Try out Defenders yourself!](https://archive.org/details/arcade_defender) 
     
