@@ -31,4 +31,3 @@ Since this is the newest version of the D3sTr0Y3R, its hard to find proper parts
 - Now go, be the hero this planet needs. Protect those who are lost, be the light that leads!
 
 ### [Try out Defenders yourself!](https://archive.org/details/arcade_defender) 
-    
