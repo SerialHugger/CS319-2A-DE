@@ -4,11 +4,11 @@
 ## Project Members:
 
 
-- Emre Tolga Ayan,
-- Muhammed Berk Kose, 
-- Ismail Sahal, 
-- Muzaffer Yasin Kokturk, 
-- Batuhan Tosyali, 
+- Emre Tolga Ayan
+- Muhammed Berk Kose
+- Ismail Sahal
+- Muzaffer Yasin Kokturk
+- Batuhan Tosyali
 - Cemal Arda Kizilkaya
     
 ## Important Links
