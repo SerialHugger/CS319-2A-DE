@@ -10,11 +10,17 @@
     ->Muzaffer Yasin Kokturk, 
     ->Batuhan Tosyali, 
     ->Cemal Arda Kizilkaya
+    
+    
 ##Description of the Project
+
+
     -The purpose of this project is to recreate the Defenders Arcade Video Game.
     Then improve the game with creative and fun ideas 
     while challenging our Object Oriented Programming Skills.
 ##Made up Story of the Defenders
+
+
     -Aliens are swarming your planet and abducting whoever they find.
     You are the last hope of humanity. The pilot of the newest version of Space ship D3sTr0Y3R-v4.20.
     Defeat your enemies and save humans to get that sweet space money.
@@ -25,5 +31,7 @@
     -Now go, be the hero this planet needs. Protect those who are lost, be the light that leads!
 
 ###Try out Defenders yourself!
+
+
     -https://archive.org/details/arcade_defender    
     
