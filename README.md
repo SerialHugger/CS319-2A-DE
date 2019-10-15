@@ -13,7 +13,8 @@
     
 ## Important Links
 
-- Meetings Docs File: https://docs.google.com/document/d/1zeWo-Df9CeECRolOwVGbqbqAvG_ak9uLmEf99sCBRCY/edit?usp=sharing
+- Meetings Docs File: https://docs.google.com/document/d/1zeWo-Df9CeECRolOwVGbqbqAvG_ak9uLmEf99sCBRCY/edit?usp=sharing   
+
 ## Description of the Project
 
 
@@ -33,4 +34,3 @@ Since this is the newest version of the D3sTr0Y3R, its hard to find proper parts
 - Now go, be the hero this planet needs. Protect those who are lost, be the light that leads!
 
 ### [Try out Defenders yourself!](https://archive.org/details/arcade_defender) 
-    
