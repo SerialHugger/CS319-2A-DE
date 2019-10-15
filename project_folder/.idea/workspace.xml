@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Assets/bg-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Defenders Map.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/bgSprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/bgSprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/Assets/bg-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +48,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

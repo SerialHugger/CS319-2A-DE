@@ -37,8 +37,8 @@ public class App extends Application {
         private double t_2 = 0;
         private int livesCount = 3;
         private int count = 0;
-        private int width = 800; // (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-        private int height = 600; // (int)Screen.getPrimary().getVisualBounds().getMaxY(); // default screen height // adjust here manually for now
+        private int width = 1920; // (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+        private int height = 1080; // (int)Screen.getPrimary().getVisualBounds().getMaxY(); // default screen height // adjust here manually for now
         private playerSprite player = new playerSprite(400, 750, 40, 40, Color.PURPLE, root);
         private bgSprite bgSprite = new bgSprite(width*2, 0, width*4, height, root, width, height); // default bgSprite, creates more content inside its class
         private BooleanProperty upPressed = new SimpleBooleanProperty();
@@ -52,6 +52,9 @@ public class App extends Application {
         private boolean rush = true;
 
         private Parent createContent(){
+            File currentDirFile = new File(".");
+            String helper = currentDirFile.getAbsolutePath();
+            System.out.println(helper);
             System.out.println(width);
             System.out.println(height);
             root.setPrefSize(width, height);

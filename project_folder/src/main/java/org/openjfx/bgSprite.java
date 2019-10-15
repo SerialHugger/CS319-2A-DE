@@ -28,7 +28,7 @@ public class bgSprite extends Sprite{
         int changeFactor = width / 2;
         for(int i = 0; i < 8; i++)
         {
-            mainBgSprites[i] = new mainBgSprite(x, 0, changeFactor+1, height, root, "C:\\Users\\mberk\\Desktop\\cs319\\Github-Proje\\project_folder\\Assets\\bg-" + (i+1) + ".jpg" );
+            mainBgSprites[i] = new mainBgSprite(x, 0, changeFactor+1, height, root, "Assets\\bg-" + (i+1) + ".jpg" );
             x = x + changeFactor;
         }
         for(int i = 0; i < 8; i++)
