@@ -14,6 +14,7 @@
 ## Important Links
 
 - Meetings Docs File: https://docs.google.com/document/d/1zeWo-Df9CeECRolOwVGbqbqAvG_ak9uLmEf99sCBRCY/edit?usp=sharing   
+- Project Analysis Report: https://docs.google.com/document/d/1Bv1IZ1SiVZTj329LOISnvVXalLLCWvErX_CbTyTBd8g/edit?usp=sharing
 
 ## Description of the Project
 
