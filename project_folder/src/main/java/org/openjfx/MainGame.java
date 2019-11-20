@@ -16,7 +16,7 @@ public class MainGame {
     }
     public Parent createContent(){
         //create and set content and controller
-        gameRoot.setPrefSize(width, height);
+        gameRoot.setMaxSize(width, height);
         gameController = new GameController(gameRoot , width, height);
         gameController.createContent();
         return gameRoot;

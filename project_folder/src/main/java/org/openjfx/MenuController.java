@@ -199,6 +199,13 @@ public class MenuController {
         settingButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
     }
 
+    // returns the fullscreenity
+    public boolean isFullscreen(){
+        if(fullscreen == 1)
+            return true;
+        return false;
+    }
+    // Set buttons for give control over menu
     public void setButtonHandler(Scene scene) {
         scene.setOnKeyPressed(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {

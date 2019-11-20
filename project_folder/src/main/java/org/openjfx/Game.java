@@ -3,6 +3,7 @@ package org.openjfx;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.*;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -52,14 +53,14 @@ public class Game extends Application {
         onMenu = false; // set menu to no update
         onGame = true; // set game to update
         menuRoot.setVisible(false); // make menu invisible
-        gameRoot.setVisible(true); // make
+        gameRoot.setVisible(true); // make game visible
         mainGame = new MainGame(gameRoot, width, height);
         gameScene = new Scene(mainGame.createContent());
         mainScene = gameScene;
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
         theStage.setScene(mainScene);
-        theStage.setFullScreen(true);
+        theStage.setFullScreen(mainMenu.isFullscreen());
         theStage.show();
         // todo do stuff here yes hehe
         // todo make menu to game smoother
@@ -76,6 +77,7 @@ public class Game extends Application {
         mainScene = menuScene;
         mainScene.setCursor(Cursor.NONE);
         theStage.setFullScreen(true);
+        //theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         theStage.setScene(mainScene); // set the stage to scene
         theStage.show(); // show it
     }

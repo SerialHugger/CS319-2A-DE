@@ -8,13 +8,13 @@ import javafx.scene.shape.Rectangle;
 import java.io.FileInputStream;
 
 public class Hud{
-    private SceneComponent topHud;
-    private ImagePattern[] topHudLight = new ImagePattern[26];
-    private double width;
-    private double height;
-    private int currentState = 0;
-    boolean delay = true;
-    int delayTimer = 0;
+    private SceneComponent topHud; // top part of the Hud
+    private ImagePattern[] topHudLight = new ImagePattern[26]; // the imagepatterns for animation
+    private double width; // width of the game
+    private double height; // height of the game
+    private int currentState = 0; // currentState of the animation
+    boolean delay = true; // delay for animation
+    int delayTimer = 0; // timer for delay
     Hud (double width, double height, String type, Pane gameRoot){
         topHud = new SceneComponent(width/7.5,height/3.686, "topHud", "Assets\\Scenery\\hud\\hud_nolight.png");
         this.width = width;
@@ -42,18 +42,19 @@ public class Hud{
         }
         gameRoot.getChildren().add(topHud);
     }
+    /*
+     * Updates animation for the hud
+     */
     public void update(){
-        if(!delay)
-        {
+        if(!delay) {
             delayTimer += 25;
-            if(delayTimer == 100)
+            if(delayTimer == 50)
             {
                 delay = true;
                 delayTimer = 0;
             }
         }
-        if(delay)
-        {
+        if(delay) { // loops states
             currentState = currentState + 1;
             if(currentState == 25)
                 currentState = 1;

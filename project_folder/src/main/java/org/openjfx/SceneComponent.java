@@ -6,15 +6,19 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 
+/*
+ * Component for Scenery elements.
+ * Makes it easier to control background/middleground/foregorund elements in menu.
+ */
 public class SceneComponent extends Rectangle {
     String type;
-    String url;
-    SceneComponent(double width, double height, String type, String url){
+    String assetLocation;
+    SceneComponent(double width, double height, String type, String assetLocation){
         super(width,height,null);
         this.type = type;
-        this.url = url;
+        this.assetLocation = assetLocation;
         try {
-            FileInputStream inputstream = new FileInputStream(url);
+            FileInputStream inputstream = new FileInputStream(assetLocation);
             Image image = new Image(inputstream);
             ImagePattern imagePattern = new ImagePattern(image);
             this.setFill(imagePattern);

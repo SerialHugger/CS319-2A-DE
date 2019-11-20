@@ -5,105 +5,81 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import java.util.ArrayList;
-
 public class Player extends GameComponent{
 
 
     int attackDelayTimer = 0;
     boolean attackDelay = false;
-    Player(double width, double height, String url){
+    int lifeCount = 3;
+    Player(double width, double height, String assetLocation){
         super(width, height, "player");
         hitBoxes = new Shape[2];
-        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hitbox
-        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hitbox
+        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
+        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
-        fillImage(url);
-        speed = 25;
-        body.setTranslateX(width*1.5);
-        body.setTranslateY(height*7.5);
-        hitBoxes[0].setTranslateX(width*1.5);
-        hitBoxes[0].setTranslateY(height*7.5 + height/4.20);
-        hitBoxes[1].setTranslateX(width*1.5 + width/4);
-        hitBoxes[1].setTranslateY(height*7.5 + height/2.5);
+        fillImage(assetLocation); // insert image to body
+        speed = 25; // set initial speed
+        body.setTranslateX(width*1.5 - width*12.8); // set X for body
+        body.setTranslateY(height*7.5); // set Y for body
+        hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
+        hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
+        hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
+        hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
     public void update(BooleanProperty[] keyInputs, GameComponentFactory GCF, Pane gameRoot){
         if(keyInputs[3].get()) { // D is pressed
-            updateHitBoxes(true, true); // update the hitboxes
+            moveX(1,speed); // move right
             facingLeft = true; // make it face left
-            body.setTranslateX(body.getTranslateX() + speed); // Move
         }
-        if(keyInputs[1].get()) {
-            updateHitBoxes(true, false);
-            facingLeft = false;
-            body.setTranslateX(body.getTranslateX() - speed);
+        if(keyInputs[1].get()) { // a pressed
+            moveX(-1,speed); // move left
+            facingLeft = false; // make it face right
         }
-        if(keyInputs[0].get()) {
-            updateHitBoxes(false, false);
-            body.setTranslateY(body.getTranslateY() - speed);
+        if(keyInputs[0].get() && getY() >= 0 + height/6) { // w pressed
+            moveY(-1,speed/2); // move up
         }
-        if(keyInputs[2].get()) {
-            updateHitBoxes(false, true);
-            body.setTranslateY(body.getTranslateY() + speed);
+        if(keyInputs[2].get() && getY() <= gameRoot.getHeight() - height*1.3) { // s pressed
+            moveY(1,speed/2); // move up
         }
-        if(keyInputs[4].get()) {
+        if(keyInputs[4].get()) { // enter pressed
             //body.setTranslateX(body.getTranslateX() + 60);
             //delay = true;
         }
-        if(keyInputs[5].get()) {
+        if(keyInputs[5].get()) { // space pressed
             if(!attackDelay) {
-                PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet");
-                playerBullet.toLeft = facingLeft;
-                playerBullet.setX(body.getTranslateX());
-                playerBullet.setY(body.getTranslateY());
-                playerBullet.addShapes(gameRoot);
-                attackDelay = true;
-                attackDelayTimer = 100;
+                PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
+                playerBullet.toLeft = facingLeft; // make it faceleft
+                playerBullet.setX(body.getTranslateX() + width/1.1); // set X
+                playerBullet.setY(body.getTranslateY() + height/2.5); // set Y
+                playerBullet.addShapes(gameRoot); // add shapes of bullet to gameRoot
+                attackDelay = true; // make delay true
+                attackDelayTimer = 100; // start delay timer
             } else {
-                if(attackDelayTimer == 0)
-                    attackDelay = false;
-                attackDelayTimer -= 25;
+                if(attackDelayTimer == 0) // if timer ends
+                    attackDelay = false; // make delay false
+                attackDelayTimer -= 25; // decrease delay
             }
         }
+        for(int i = 0; i < hitBoxes.length; i++){
+            if(hitBoxes[i] instanceof ComponentHitBoxCircle){
+                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
+                if(temp.isDead()){
+                    lifeCount -=1;
+                    temp.dead = false;
+                }
+            } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle){
+                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle)hitBoxes[i]);
+                if(temp.isDead()){
+                    lifeCount -=1;
+                    temp.dead = false;
+                }
+            }
+            if(lifeCount == 0){
+                dead = true;
+                break;
+            }
+        }
+    }
 
-//        if(delay) {
-//            delayTimer += 15;
-//            if (delayTimer % 15 == 0){
-//                body.setTranslateX(body.getTranslateX() + speed);
-//                if(delayTimer > 2000 && speed > 300)
-//                    speed -= 30;
-//                else if(delayTimer > 2200 && speed > 100)
-//                    speed -= 10;
-//                else if (speed < 200)
-//                    speed += 5;
-//                else if(speed < 700)
-//                    speed += 60;
-//            }
-//            if(delayTimer == 3000) {
-//                delay = false;
-//                speed = 60;
-//                delayTimer = 0;
-//            }
-//        }
-    }
-    private void updateHitBoxes(boolean x, boolean positive){
-        int movement = 25;
-        for(int i = 0; i < hitBoxes.length; i ++) {
-            if (!positive) {
-                movement = -25;
-            } else {
-                movement = 25;
-            }
-            if (x) {
-                    hitBoxes[i].setTranslateX(hitBoxes[i].getTranslateX() + movement);
-            } else {
-                    hitBoxes[i].setTranslateY(hitBoxes[i].getTranslateY() + movement);
-            }
-        }
-    }
-    public double getX(){
-        return body.getTranslateX();
-    }
-    public double getY(){ return body.getTranslateY(); }
     public double getWidth() { return width; }
 }

@@ -33,6 +33,7 @@ public class BackGround {
     }
 
     void update(boolean left, Player player){
+        // loops the background so the world seems infinte
         if(left) { // if button to go left, "A", is pressed
             if(background_2.getTranslateX() + (width * 4) > player.getX() + (width * 2))
             {

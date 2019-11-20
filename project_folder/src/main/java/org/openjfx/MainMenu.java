@@ -189,17 +189,12 @@ public class MainMenu {
         menuController.update(game, menuRoot);
     }
 
-    /*
-     * Setup buttonHandler to control menu
-     */
+    //Setup buttonHandler to control menu
     public void setButtonHandler(Scene scene) {
         menuController.setButtonHandler(scene);
     }
 
-    /*
-     * Sets the image from url to button and return imagePattern, if fill is true, else just opens it and returns.
-     * view part of MVC?
-     */
+    // Sets the image from url to button and return imagePattern, if fill is true, else just opens it and returns.
     public ImagePattern insertImage(Rectangle button, String url, boolean fill) {
         ImagePattern imagePattern;
         try {
@@ -215,6 +210,9 @@ public class MainMenu {
             return null;
         }
         return  imagePattern;
+    }
+    public boolean isFullscreen(){
+        return menuController.isFullscreen();
     }
 
 }

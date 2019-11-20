@@ -6,12 +6,14 @@ import javafx.scene.shape.Circle;
 public class ComponentHitBoxCircle extends Circle {
     public String type;
     private double radius;
-    public boolean dead;
+    public boolean dead = false;
     ComponentHitBoxCircle(double radius, String type){
-        super(radius, Color.ORANGE);
+        super(radius, Color.YELLOW);
         this.radius = radius;
         this.type = type;
-        dead = false;
     }
-
+    public String getType(){
+        return type;
+    }
+    public boolean isDead(){ return dead;}
 }

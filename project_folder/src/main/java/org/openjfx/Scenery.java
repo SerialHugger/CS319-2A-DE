@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
@@ -17,11 +18,14 @@ public class Scenery {
     double height; // Games height/resolution
     Hud hud;
     BackGround backGround; // background of the game
+    MiddleGround middleGround; // middleground of the game
     ForeGround foreGround; // foreground of the game
-    Scenery (Pane gameRoot, double width, double height){
+    double speed;
+    Scenery (Pane gameRoot, double width, double height, double speed){
         this.width = width;
         this.height = height;
         this.gameRoot = gameRoot;
+        this.speed = speed;
     }
 
     /*
@@ -29,17 +33,19 @@ public class Scenery {
      */
     public void createContent(){
         backGround = new BackGround(width, height, "background", gameRoot);
+        middleGround = new MiddleGround(width,height, "middleground", gameRoot, speed);
         foreGround = new ForeGround(width, height, "foreground", gameRoot);
-        hud = new Hud(width, height, "hud", gameRoot);
+        //hud = new Hud(width, height, "hud", gameRoot);
     }
     /*
      * Update game
      */
-    public void update(boolean left, Player player){
+    public void update(BooleanProperty[] keyInputs, Player player){
         //Update all elements of scenery
-        hud.update();
-        backGround.update(left, player);
-        foreGround.update(left, player);
+        //hud.update();
+        backGround.update(keyInputs[1].get(), player);
+        middleGround.update(keyInputs[1].get(), keyInputs[3].get(), player);
+        foreGround.update(keyInputs[1].get(), player);
     }
 
     /*

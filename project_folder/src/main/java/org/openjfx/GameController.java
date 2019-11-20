@@ -9,29 +9,44 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 public class GameController {
-    private Scenery scenery;
-    private Pane gameRoot;
-    private GameComponentFactory gameComponentFactory;
-    private ArrayList<GameComponent> gameComponents;
-    private double width;
-    private double height;
-    private Player player;
+    private Scenery scenery; // scenery of the game
+    private Pane gameRoot; // root of the game
+    private GameComponentFactory gameComponentFactory; // Factory for components
+    private ArrayList<GameComponent> gameComponents; // array list for updating components
+    private InteractionHandler interactionHandler; // interaction handler for controller
+    private double width; // width of the game
+    private double height; // height of the game
+    private Player player; // player variable for easier access
     private int delayTimer = 0; // todo
-    private int speed = 5; //todo
     boolean delay = false; //todo
-    boolean toLeft = false;
+    private int speed = 15; // similar to players speed
+    // Necessary attiributes for changing directions with the ship
+    boolean toLeft = false; // if facing left true else false. Starts with false;
+    boolean startSlidingLeft = false; // slides background to left
+    boolean startSlidingRight = false; // slides background to right
+    double slidingLimit; // sliding limit for bacground
+    double slidingCounter; // sliding counter for background
+    double slidingSpeed; // sliding speed for background
+    // level counter
     int level = 1;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty[] keyInputs = new BooleanProperty[6];
     /*
     For key inputs
-    index --- key
-    0     --- w
-    1     --- a
-    2     --- s
-    3     --- d
-    4     --- enter
-    5     --- space
+    index — key
+    0 — w
+    1 — a
+    2 — s
+    3 — d
+    4 — enter
+    5 — space
+    6 — q
+    7 — e
+    8 — y
+    9 — u
+    10 — h
+    11 — j
+    12 — k
      */
     GameController(Pane root, double width, double height) {
         this.gameRoot = root;
@@ -40,79 +55,131 @@ public class GameController {
     }
 
     void createContent(){
-        scenery = new Scenery(gameRoot, width,height);
-        scenery.createContent();
-        gameComponents = new ArrayList<>();
-        gameComponentFactory = new GameComponentFactory(width,height, gameComponents);
-        player = (Player)gameComponentFactory.createComponent("player");
-        player.addShapes(gameRoot);
-        createLevel(level);
-        // create booleans for key inputs
+        scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
+        scenery.createContent(); // create its content
+        gameComponents = new ArrayList<>(); // create arraylist for gameComponents
+        gameComponentFactory = new GameComponentFactory(width,height, gameComponents); // Initiate factory
+        player = (Player)gameComponentFactory.createComponent("player"); // first game component is Player
+        player.setSpeed(speed); // set speed for player.
+        player.addShapes(gameRoot); // add player to root
+        interactionHandler = new InteractionHandler(gameComponents, gameComponentFactory, gameRoot);
+        gameRoot.setTranslateX(width); // set starting camera
+        createLevel(level); // create the level with enemies
+        slidingLimit = width - player.getWidth() * 4;
+        slidingCounter = slidingLimit * -1;
+        slidingSpeed = (width - player.getWidth() * 4) / 88;
     }
 
     void update(){
         // update scenery
-        scenery.update(keyInputs[1].get(), player);
+        scenery.update(keyInputs, player);
+        //update interaction
+        interactionHandler.update();
         // update game components
-        for(int i = 0; i < gameComponents.size(); i++){
-            if(gameComponents.get(i) instanceof Player) {
-                ((Player) gameComponents.get(i)).update(keyInputs,gameComponentFactory, gameRoot);
-            } else if(gameComponents.get(i) instanceof PlayerBullet) {
-                ((PlayerBullet) gameComponents.get(i)).update();
-            } else if (gameComponents.get(i) instanceof  EnemyType1) {
-                ((EnemyType1) gameComponents.get(i)).update(gameComponentFactory, gameRoot, player, keyInputs[1].get());
-            } else if (gameComponents.get(i) instanceof  EnemyBulletType1) {
-                ((EnemyBulletType1) gameComponents.get(i)).update();
+        int size = gameComponents.size();
+        for(int i = 0; i < size; i++){ // for every component in gameComponents.
+            if(gameComponents.get(i) instanceof Player) { // if its an instance class of Player.
+                ((Player) gameComponents.get(i)).update(keyInputs,gameComponentFactory, gameRoot); // update it.
+                if(player.dead){ // if player is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    player.die(); // kill it, remove it from root.
+                }
+            } else if(gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
+                PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
+                playerBullet.update(player); // update it.
+                // If its outside of the current camera/root location.
+                if(playerBullet.getX() > (gameRoot.getTranslateX()*-1) + width + playerBullet.width ||
+                    playerBullet.getX() < (gameRoot.getTranslateX()*-1) - playerBullet.width) {
+                    gameComponents.remove(i--); // remove it from gameComponents.
+                    size -= 1; // decrease size.
+                    playerBullet.die(); // kill it, remove it from root.
+                } else if(playerBullet.dead){
+                    gameComponents.remove(i--); // remove it from gameComponents.
+                    size -= 1; // decrease size.
+                    playerBullet.die(); // kill it, remove it from root.
+                }
+            } else if (gameComponents.get(i) instanceof  EnemyType1) { // else if its an instance class of EmenyType1.
+                EnemyType1 enemyType1 = ((EnemyType1) gameComponents.get(i));
+                enemyType1.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if(enemyType1.dead){ // if player is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    enemyType1.die(); // kill it, remove it from root.
+                }
+            } else if (gameComponents.get(i) instanceof  EnemyBulletType1) { // else if its an instance class of EnemyBulletType1.
+                EnemyBulletType1 enemyBulletType1 = (EnemyBulletType1) gameComponents.get(i); // cast it to a temporary variable.
+                enemyBulletType1.update(); // update it.
+                // if its not in the boundaries of camera/root remove it.
+                // first check for X then check for Y.
+                if(enemyBulletType1.getX() > (gameRoot.getTranslateX()*-1) + width + enemyBulletType1.width || enemyBulletType1.getX() < (gameRoot.getTranslateX()*-1) + enemyBulletType1.width) {
+                    gameComponents.remove(i--); // remove it from components and decrease i.
+                    size -= 1; // decrease size.
+                    enemyBulletType1.die(); // kill it, remove it from root.
+                } else if(enemyBulletType1.getY() >= gameRoot.getHeight() + enemyBulletType1.width || enemyBulletType1.getY() < 0 - enemyBulletType1.width) {
+                    gameComponents.remove(i--); // remove it from components and decrease i.
+                    size -= 1; // decrease size.
+                    enemyBulletType1.die(); // kill it, remove it from root.
+                }
+                if(enemyBulletType1.dead){
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    enemyBulletType1.die();
+                }
             }
         }
         // update root
-        if(keyInputs[3].get()) {
-            if(toLeft) {
-                double newX = gameRoot.getTranslateX()-(width-4*player.getWidth()); // limit x
-                gameRoot.setTranslateX(newX); // limit
-            } else
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - 25);
-            toLeft = false;
+        if(keyInputs[3].get()) { // if the key D pressed
+            if(toLeft) { // if it was toLeft, change camera and bring it to limit x.
+                startSlidingLeft = true;
+                startSlidingRight = false;
+                toLeft = false;
+            } else // if it was already not toLeft, just move it.
+                gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
+
         }
-        if(keyInputs[1].get()) {
-            if(!toLeft) {
-                double newX = gameRoot.getTranslateX()+(width-4*player.getWidth()); // limit x
-                gameRoot.setTranslateX(newX); // limit
-            } else
-                gameRoot.setTranslateX(gameRoot.getTranslateX() + 25);
-            toLeft = true;
+        if(keyInputs[1].get()) { // if the key A pressed
+            if(!toLeft) { // if it was not toLeft, change camera and bring it to limit x.
+                startSlidingRight = true;
+                startSlidingLeft = false;
+                toLeft = true;
+            } else // if it was already to left, just move it
+                gameRoot.setTranslateX(gameRoot.getTranslateX() + speed);
         }
-        if(keyInputs[4].get())
-            delay = true;
-//        if(delay) {
-//            delayTimer += 15;
-//            if (delayTimer % 15 == 0){
-//                gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
-//                if(delayTimer > 2000 && speed > 300)
-//                    speed -= 30;
-//                else if(delayTimer > 2200 && speed > 100)
-//                    speed -= 10;
-//                else if (speed < 200)
-//                    speed += 5;
-//                else if(speed < 700)
-//                    speed += 60;
-//            }
-//            if(delayTimer == 3000) {
-//                delay = false;
-//                speed = 60;
-//                delayTimer = 0;
-//            }
-//        }
+        if(keyInputs[4].get()) { // if enter is pressed.
+            //todo
+        }
+        if(startSlidingLeft){ // if the background sliding left
+            if(slidingLimit * -1 != slidingCounter) {// until sliding limit is reached
+                gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+                slidingCounter -= slidingSpeed;
+            } else {
+                startSlidingLeft = false; // finish the execution when the limit is reached.
+            }
+        }
+        if(startSlidingRight) { // if the background sliding right
+            if(slidingCounter != 0) {// until counter hits the 0
+                gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                slidingCounter += slidingSpeed;
+            } else {
+                startSlidingRight = false; // finish the execution when the limit is reached.
+            }
+        }
     }
 
-    public void createLevel(int lvll){
+    /*
+     * This creates levels
+     * adds enemies
+     * todo
+     */
+    public void createLevel(int lvl){
         for(int i = 0; i < 10; i ++){
-            System.out.println("enemy created");
             EnemyType1 eT1 =  (EnemyType1)gameComponentFactory.createComponent("enemyType1");
             eT1.addShapes(gameRoot);
         }
     }
 
+    // Sets buttons to play
     public void setButtonHandler(Scene scene) {
         for(int i = 0 ; i < keyInputs.length; i++)
             keyInputs[i] = new SimpleBooleanProperty();

@@ -7,15 +7,15 @@ public class ComponentHitBoxRectangle extends Rectangle {
     public String type;
     private double width;
     private double height;
-    public boolean dead;
+    public boolean dead = false;
     ComponentHitBoxRectangle(double width, double height, String type){
-        super(width,height, Color.PURPLE);
+        super(width,height, Color.RED);
         this.width = width;
         this.height = height;
         this.type = type;
-        dead = false;
     }
     public String getType(){
         return type;
     }
+    public boolean isDead(){ return dead;}
 }

@@ -5,31 +5,63 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class EnemyType1 extends Enemy {
-    EnemyType1(double width, double height, String url){
+    double directionCheckX; // X direction decider for this type of enemy
+    double directionCheckY; // Y direction decider for this type of enemy
+    int directionX = 1; // if this is 1 it goes right else left
+    int directionY = 1; // if this is 1 it goes down else up
+    EnemyType1(double width, double height, String assetLocation){
         super(width, height, "player");
-        hitBoxes = new Shape[1];
-        hitBoxes[0] = new ComponentHitBoxRectangle(width,height,"enemyHitBoxRectangle"); // setup the Rectangle hitbox
+        hitBoxes = new Shape[1]; // there is only 1 hit box --- for now
+        hitBoxes[0] = new ComponentHitBoxRectangle(width,height,"enemyHitBoxRectangleType1"); // setup the Rectangle hit box
         body = new Rectangle(width, height, null); //setup the body
-        fillImage(url);
-        speed = 25;
-        double startingX = (width * 38.4 * -2) + Math.random() * (width * 38.4 * 4);
-        double startingY = Math.random() * (height * 36);
-        body.setTranslateX(startingX);
-        body.setTranslateY(startingY);
-        hitBoxes[0].setTranslateX(startingX);
-        hitBoxes[0].setTranslateY(startingY);
+        fillImage(assetLocation); // fill the body with image at assetLocation
+        double startingX = (width * 38.4 * -2) + Math.random() * (width * 38.4 * 4); // starting X of the enemy, randomly selected
+        double startingY = (Math.random() * ((height * 36) - height*2)); // starting Y of the enemy, randomly selected
+        body.setTranslateX(startingX); // setX
+        body.setTranslateY(startingY); // setY
+        hitBoxes[0].setTranslateX(startingX); // setX for hit box
+        hitBoxes[0].setTranslateY(startingY); // setY for hit box
+        speed_x = Math.random() * 7; // initial speed of x, random
+        speed_y = Math.random() * 7; // initial speed of y, random
     }
     public void update( GameComponentFactory GCF, Pane gameRoot, Player player, boolean left){
-        double random = Math.random()*1000;
-        if(random < 30){
-            EnemyBulletType1 enemyBullet = (EnemyBulletType1) GCF.createComponent("enemyBulletType1");
-            enemyBullet.toLeft = facingLeft;
-            enemyBullet.setX(body.getTranslateX());
-            enemyBullet.setY(body.getTranslateY());
-            enemyBullet.addShapes(gameRoot);
+        double random = Math.random()*10000; // random for chance based updates
+        if(delay) { // delay for shooting bullets pew pew
+            if (random < 150) { // %1.5 chance
+                if(getX() <= width * 38.4 - gameRoot.getTranslateX()  && getX() > gameRoot.getTranslateX() * -1) { // if the enemy is in the view of the player
+                    delay = false; // make delay false
+                    EnemyBulletType1 enemyBullet = (EnemyBulletType1) GCF.createComponent("enemyBulletType1"); // create the bullet
+                    enemyBullet.toLeft = facingLeft; // make it face left
+                    enemyBullet.setX(body.getTranslateX()); // set its X
+                    enemyBullet.setY(body.getTranslateY()); // set its Y
+                    enemyBullet.addShapes(gameRoot); // add its shapes to Root
+                    delayTimer = 500; // start delay timer
+                }
+            }
+        } else { // if delay is on
+            if(delayTimer == 0) // if delay timer finished
+                delay = true; // make delay true
+            delayTimer -= 5; // decrease delay timer
         }
+        if(random < 30){ // delay for changing directions and speed, %0.3 chance
+            speed_x = Math.random() * 6 + 1; // set speed x, randomly
+            speed_y = Math.random() * 6 + 1; // set speed y, randomly
+            directionCheckX = Math.random() * 2;
+            directionCheckY = Math.random() * 2;
+            if (directionCheckX < 1) // %50 chance
+                directionX = -1; // it goes left
+            if (directionCheckY < 1) // %50 chance
+                directionY = -1; // it goes up
+        }
+        if (getY() >= gameRoot.getHeight() - height * 2 || getY() < 0) { // if the height boundaries reached
+            directionY *= -1; // change direction
+        }
+        moveX(directionX,speed_x); // move X with given inputs
+        moveY(directionY,speed_y); // move Y with given inputs
+
+        //updates the space ships so they loop around map
         if(left) { // if button to go left, "A", is pressed
-            if(body.getTranslateX() > player.getX() + (2 * GCF.getWidth())){
+            if(body.getTranslateX() > player.getX() + (2 * GCF.getWidth())){ // if he enemy ship is width * 2 away from the ship teleport it to other side
                 for(int i = 0; i < hitBoxes.length; i ++) {
                     hitBoxes[i].setTranslateX(hitBoxes[i].getTranslateX() - (4 * GCF.getWidth()));
                 }
@@ -37,26 +69,22 @@ public class EnemyType1 extends Enemy {
             }
         }
         else { // if button to go right, "D", is pressed
-            if(body.getTranslateX() < player.getX() - (2 * GCF.getWidth())){
+            if(body.getTranslateX() < player.getX() - (2 * GCF.getWidth())){ // if he enemy ship is width * 2 away from the ship teleport it to other side
                 for(int i = 0; i < hitBoxes.length; i ++) {
                     hitBoxes[i].setTranslateX(hitBoxes[i].getTranslateX() + (4 * GCF.getWidth()));
                 }
                 body.setTranslateX(body.getTranslateX() + (4 * GCF.getWidth()));
             }
         }
-    }
-    private void updateHitBoxes(boolean x, boolean positive){
-        int movement = 25;
-        for(int i = 0; i < hitBoxes.length; i ++) {
-            if (!positive) {
-                movement = -25;
-            } else {
-                movement = 25;
-            }
-            if (x) {
-                hitBoxes[i].setTranslateX(hitBoxes[i].getTranslateX() + movement);
-            } else {
-                hitBoxes[i].setTranslateY(hitBoxes[i].getTranslateY() + movement);
+        for(int i = 0; i < hitBoxes.length; i++){
+            if(hitBoxes[i] instanceof ComponentHitBoxCircle){
+                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
+                if(temp.isDead())
+                    dead = true;
+            } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle){
+                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle)hitBoxes[i]);
+                if(temp.isDead())
+                    dead = true;
             }
         }
     }
