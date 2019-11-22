@@ -55,8 +55,7 @@ public class Game extends Application {
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
         mainGame = new MainGame(gameRoot, width, height);
-        gameScene = new Scene(mainGame.createContent());
-        mainScene = gameScene;
+        mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
         theStage.setScene(mainScene);

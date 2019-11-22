@@ -19,7 +19,7 @@ public class GameController {
     private Player player; // player variable for easier access
     private int delayTimer = 0; // todo
     boolean delay = false; //todo
-    private int speed = 15; // similar to players speed
+    private double speed = 15; // similar to players speed
     // Necessary attiributes for changing directions with the ship
     boolean toLeft = false; // if facing left true else false. Starts with false;
     boolean startSlidingLeft = false; // slides background to left
@@ -67,7 +67,8 @@ public class GameController {
         createLevel(level); // create the level with enemies
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
-        slidingSpeed = (width - player.getWidth() * 4) / 88;
+        slidingSpeed = (width - player.getWidth() * 4) / 66;
+        speed = width / 128; // If width = 1920 then speed = 15.
     }
 
     void update(){
@@ -102,7 +103,7 @@ public class GameController {
             } else if (gameComponents.get(i) instanceof  EnemyType1) { // else if its an instance class of EmenyType1.
                 EnemyType1 enemyType1 = ((EnemyType1) gameComponents.get(i));
                 enemyType1.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
-                if(enemyType1.dead){ // if player is dead.
+                if(enemyType1.dead){ // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     enemyType1.die(); // kill it, remove it from root.
