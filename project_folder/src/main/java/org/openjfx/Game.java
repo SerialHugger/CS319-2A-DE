@@ -45,6 +45,7 @@ public class Game extends Application {
                 update();
             }
         };
+
         timer.start();
         //timer start
     }

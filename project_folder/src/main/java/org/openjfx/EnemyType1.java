@@ -5,10 +5,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class EnemyType1 extends Enemy {
-    double directionCheckX; // X direction decider for this type of enemy
-    double directionCheckY; // Y direction decider for this type of enemy
-    int directionX = 1; // if this is 1 it goes right else left
-    int directionY = 1; // if this is 1 it goes down else up
+
     EnemyType1(double width, double height, String assetLocation){
         super(width, height, "player");
         hitBoxes = new Shape[1]; // there is only 1 hit box --- for now

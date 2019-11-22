@@ -15,6 +15,7 @@ org\openjfx\ComponentHitBoxRectangle.class
 org\openjfx\GameController.class
 org\openjfx\MenuController.class
 org\openjfx\InteractionHandler.class
+org\openjfx\EnemyType2.class
 org\openjfx\ForeGround.class
 org\openjfx\Hud.class
 org\openjfx\MainMenu.class
