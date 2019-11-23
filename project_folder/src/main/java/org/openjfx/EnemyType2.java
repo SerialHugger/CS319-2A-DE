@@ -52,7 +52,7 @@ public class EnemyType2 extends Enemy {
         moveY(directionY, speed_y); // move Y with given inputs
 
         //updates the space ships so they loop around map
-        loopAroundTheMap(GCF, player, left);
+        loopAroundTheMap(GCF.getWidth(), player, left);
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
