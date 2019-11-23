@@ -107,25 +107,25 @@ public class Enemy extends GameComponent{
     /**
      * Transports the objects at one end of the map to the another map to simulate infinite map
      * Briefly, objects loop around the map when they reach an end of the map
-     * @param GCF: TODO: explain
+     * @param bgWidth: TODO: explain // Width of the screen.
      * @param player: TODO: explain
      * @param left: TODO: explain
      */
-    public void loopAroundTheMap(GameComponentFactory GCF,Player player,boolean left) {
+    public void loopAroundTheMap(double bgWidth,Player player,boolean left) {
         //updates the space ships so they loop around map
         if (left) { // if button to go left, "A", is pressed
-            if (body.getTranslateX() > player.getX() + (2 * GCF.getWidth())) { // if he enemy ship is width * 2 away from the ship teleport it to other side
+            if (body.getTranslateX() > player.getX() + (2 * bgWidth)) { // if he enemy ship is width * 2 away from the ship teleport it to other side
                 for (Shape hitBox : hitBoxes) {
-                    hitBox.setTranslateX(hitBox.getTranslateX() - (4 * GCF.getWidth()));
+                    hitBox.setTranslateX(hitBox.getTranslateX() - (4 * bgWidth));
                 }
-                body.setTranslateX(body.getTranslateX() - (4 * GCF.getWidth()));
+                body.setTranslateX(body.getTranslateX() - (4 * bgWidth));
             }
         } else { // if button to go right, "D", is pressed
-            if (body.getTranslateX() < player.getX() - (2 * GCF.getWidth())) { // if he enemy ship is width * 2 away from the ship teleport it to other side
+            if (body.getTranslateX() < player.getX() - (2 * bgWidth)) { // if he enemy ship is width * 2 away from the ship teleport it to other side
                 for (Shape hitBox : hitBoxes) {
-                    hitBox.setTranslateX(hitBox.getTranslateX() + (4 * GCF.getWidth()));
+                    hitBox.setTranslateX(hitBox.getTranslateX() + (4 * bgWidth));
                 }
-                body.setTranslateX(body.getTranslateX() + (4 * GCF.getWidth()));
+                body.setTranslateX(body.getTranslateX() + (4 * bgWidth));
             }
         }
     }
