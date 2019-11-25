@@ -35,17 +35,18 @@ public class Scenery {
         backGround = new BackGround(width, height, "background", gameRoot);
         middleGround = new MiddleGround(width,height, "middleground", gameRoot, speed);
         foreGround = new ForeGround(width, height, "foreground", gameRoot);
-        //hud = new Hud(width, height, "hud", gameRoot);
+        hud = new Hud(width, height, "hud", gameRoot);
     }
     /*
      * Update game
      */
     public void update(BooleanProperty[] keyInputs, Player player){
         //Update all elements of scenery
-        //hud.update();
         backGround.update(keyInputs[1].get(), player);
+        hud.update();
         middleGround.update(keyInputs[1].get(), keyInputs[3].get(), player);
         foreGround.update(keyInputs[1].get(), player);
+        hud.update();
     }
 
     /*
