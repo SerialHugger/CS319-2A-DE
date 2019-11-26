@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="" />
+    <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_1_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_2_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_3_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/first_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/first_deactive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/fourth_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/fourth_deactive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_1_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_2_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_3_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_12.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_13.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_14.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_15.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_16.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_17.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_17.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_18.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_19.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_20.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_21.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_22.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_22.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_23.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_23.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_nolight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/second_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/second_deactive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/third_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/third_deactive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/top_right_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -16,11 +74,23 @@
     </option>
   </component>
   <component name="ProjectId" id="1RuUTOkwtLRH4mtj5PvX6WZkl6X" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../javafx-sdk-11.0.2/lib/javafx-swt.jar!/" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Assets" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\Assets" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -40,7 +110,7 @@
       <module name="FirstFxApp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="PATTERN" value="org.openjfx.Game" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,5 +167,18 @@
       <updated>1570516481400</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
