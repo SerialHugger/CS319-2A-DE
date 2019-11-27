@@ -27,51 +27,13 @@ public class Game extends Application {
     private double width =  1920; // (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
     private double height = 1080; // (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
-    private final double UPDATE_CAP = 1.0/60.0;
-    double firstTime = 0; // hold the initial time.
-    double lastTime = System.nanoTime() / 1000000000.0; // helps calculate fps
-    double passedTime = 0; // helps calculate fps
-    double unprocessedTime = 0; // hold unprocessed time of the game.
-    boolean render = false; // render check
-    double frameTime = 0; // hold the frameTime
-    int frames = 0; // frame count
-    int fps = 0; // fps count
-
     private void update() {
+
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
         }
         if(onGame){
-            // i probably miss commended this cuz reasons.
-            render = false;
-            firstTime = System.nanoTime() / 1000000000.0; // set time
-            passedTime = firstTime - lastTime; // calculate passedTime
-            lastTime = firstTime; // reset last time.
-            unprocessedTime += passedTime; // calculate unprocessedTime
-            frameTime += passedTime; // calculate frameTime
-
-            while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
-                unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
-                render = true; // make render true
-                mainGame.updateInteraction(this); // update Game
-                if(frameTime >= 1.0){ //keeping track of the frames
-                    frameTime = 0;
-                    fps = frames;
-                    frames = 0;
-                    System.out.println("FPS: " + fps); // print frame count
-                }
-            }
-            if(render){ // if the game updated Render it
-                mainGame.update(this); // render game.
-                frames++;
-            } else {
-                try{
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            mainGame.update(this);
         }
     }
 
