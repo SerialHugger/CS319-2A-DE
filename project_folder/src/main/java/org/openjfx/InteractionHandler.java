@@ -136,7 +136,7 @@ public class InteractionHandler {
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status.
                                     }
                                 }
-                            } else if (rectangleTemp2.getType().equals("enemyHitBoxRectangleType1")) { // rectangleTemp2 is enemyBulletType1
+                            } else if (rectangleTemp2.getType().equals("enemyHitBoxRectangle")) { // rectangleTemp2 is enemyBulletType1
                                 if (rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {
                                     if (!isDead.get()) { // if the player is not dead, kill it.
                                         System.out.println("PlayerBullet to enemy 1");
