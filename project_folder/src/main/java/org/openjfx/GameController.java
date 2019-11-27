@@ -71,15 +71,12 @@ public class GameController {
         slidingSpeed = (width - player.getWidth() * 4) / 66;
         speed = width / 128; // If width = 1920 then speed = 15.
     }
-    void updateInteraction(){
-        //update interaction
-        interactionHandler.update();
-    }
+
     void update() {
         // update scenery
         scenery.update(keyInputs, player);
-//        //update interaction
-//        interactionHandler.update();
+        //update interaction
+        interactionHandler.update();
         // update game components
         int size = gameComponents.size();
         for (int i = 0; i < size; i++) { // for every component in gameComponents.
