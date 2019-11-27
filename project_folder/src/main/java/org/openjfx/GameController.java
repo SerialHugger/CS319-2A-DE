@@ -27,6 +27,8 @@ public class GameController {
     double slidingLimit; // sliding limit for bacground
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
+    private int counter = 0;
+    private int counter_interaction = 0;
     // level counter
     int level = 1;
     // BooleanProperties for smoother control on ui.
@@ -56,6 +58,7 @@ public class GameController {
     }
 
     void createContent() {
+        speed = width / 128; // If width = 1920 then speed = 15.
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
@@ -69,15 +72,17 @@ public class GameController {
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
         slidingSpeed = (width - player.getWidth() * 4) / 66;
-        speed = width / 128; // If width = 1920 then speed = 15.
+        scenery.setSliding(slidingLimit, slidingCounter, slidingSpeed);
     }
     void updateInteraction(){
         //update interaction
         interactionHandler.update();
+        counter_interaction++;
     }
-    void update() {
+    void update(int fps) {
+        counter++;
         // update scenery
-        scenery.update(keyInputs, player);
+        scenery.update(keyInputs, player, fps);
 //        //update interaction
 //        interactionHandler.update();
         // update game components
