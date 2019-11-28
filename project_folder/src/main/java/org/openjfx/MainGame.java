@@ -24,9 +24,7 @@ public class MainGame {
     public void update(Game game, int fps){
         gameController.update(fps);
     }
-    public void updateInteraction(Game game){
-        gameController.updateInteraction();
-    }
+
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}
 
 }
