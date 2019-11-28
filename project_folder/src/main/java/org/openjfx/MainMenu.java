@@ -127,31 +127,31 @@ public class MainMenu {
         ///////////////setting images for buttons///////////////////
         ////////////////////////////////////////////////////////////
         // for main menu
-        insertImage(background, "Assets\\mainMenu\\Main_Menu.jpg", true );
-        insertImage(buttonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
-        insertImage(controlImage, "Assets\\mainMenu\\controls.jpg", true);
-        buttonImages[0] = insertImage(startGameButton ,"Assets\\mainMenu\\startButton_White.png", false);
-        buttonImages[1] = insertImage(startGameButton ,"Assets\\mainMenu\\startButton_Black.png", true);
-        buttonImages[2] = insertImage(howToPlayButton, "Assets\\mainMenu\\howToPlayButton_White.png", true);
-        buttonImages[3] = insertImage(howToPlayButton, "Assets\\mainMenu\\howToPlayButton_Black.png", false);
-        buttonImages[4] = insertImage(settingsButton ,"Assets\\mainMenu\\settingsButton_White.png", true);
-        buttonImages[5] = insertImage(settingsButton ,"Assets\\mainMenu\\settingsButton_Black.png", false);
-        buttonImages[6] = insertImage(creditsButton ,"Assets\\mainMenu\\creditsButton_White.png", true);
-        buttonImages[7] = insertImage(creditsButton ,"Assets\\mainMenu\\creditsButton_Black.png", false);
-        buttonImages[8] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_White.png", true);
-        buttonImages[9] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_Black.png", false);
+        insertImage(background, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/Main_Menu.jpg", true );
+        insertImage(buttonHighlight, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/buttonHighlight.png", true);
+        insertImage(controlImage, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/controls.jpg", true);
+        buttonImages[0] = insertImage(startGameButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/startButton_White.png", false);
+        buttonImages[1] = insertImage(startGameButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/startButton_Black.png", true);
+        buttonImages[2] = insertImage(howToPlayButton, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/howToPlayButton_White.png", true);
+        buttonImages[3] = insertImage(howToPlayButton, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/howToPlayButton_Black.png", false);
+        buttonImages[4] = insertImage(settingsButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/settingsButton_White.png", true);
+        buttonImages[5] = insertImage(settingsButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/settingsButton_Black.png", false);
+        buttonImages[6] = insertImage(creditsButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/creditsButton_White.png", true);
+        buttonImages[7] = insertImage(creditsButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/creditsButton_Black.png", false);
+        buttonImages[8] = insertImage(quitButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/quitButton_White.png", true);
+        buttonImages[9] = insertImage(quitButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/quitButton_Black.png", false);
         // for settings menu
-        insertImage(settingsButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
-        settingsButtonImages[0] = insertImage(videoResolutionButton ,"Assets\\mainMenu\\videoResolution_White.png", false);
-        settingsButtonImages[1] = insertImage(videoResolutionButton ,"Assets\\mainMenu\\videoResolution_Black.png", true);
-        settingsButtonImages[2] = insertImage(fullScreenButton, "Assets\\mainMenu\\fullscreenButton_White.png", true);
-        settingsButtonImages[3] = insertImage(fullScreenButton, "Assets\\mainMenu\\fullScreenButton_Black.png", false);
-        settingsButtonImages[4] = insertImage(soundButton ,"Assets\\mainMenu\\soundButton_White.png", true);
-        settingsButtonImages[5] = insertImage(soundButton ,"Assets\\mainMenu\\soundButton_Black.png", false);
-        settingsButtonImages[6] = insertImage(changeShipButton ,"Assets\\mainMenu\\changeShipButton_White.png", true);
-        settingsButtonImages[7] = insertImage(changeShipButton ,"Assets\\mainMenu\\changeShipButton_Black.png", false);
-        settingsButtonImages[8] = insertImage(goBackButton,"Assets\\mainMenu\\goBackButton_White.png", true);
-        settingsButtonImages[9] = insertImage(goBackButton,"Assets\\mainMenu\\goBackButton_Black.png", false);
+        insertImage(settingsButtonHighlight, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/buttonHighlight.png", true);
+        settingsButtonImages[0] = insertImage(videoResolutionButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/videoResolution_White.png", false);
+        settingsButtonImages[1] = insertImage(videoResolutionButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/videoResolution_Black.png", true);
+        settingsButtonImages[2] = insertImage(fullScreenButton, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/fullscreenButton_White.png", true);
+        settingsButtonImages[3] = insertImage(fullScreenButton, "/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/fullScreenButton_Black.png", false);
+        settingsButtonImages[4] = insertImage(soundButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/soundButton_White.png", true);
+        settingsButtonImages[5] = insertImage(soundButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/soundButton_Black.png", false);
+        settingsButtonImages[6] = insertImage(changeShipButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/changeShipButton_White.png", true);
+        settingsButtonImages[7] = insertImage(changeShipButton ,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/changeShipButton_Black.png", false);
+        settingsButtonImages[8] = insertImage(goBackButton,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/goBackButton_White.png", true);
+        settingsButtonImages[9] = insertImage(goBackButton,"/Users/cemalardakizilkaya/Desktop/Assets/mainMenu/goBackButton_Black.png", false);
         ////////////////////////////////////////////////////////////
         //////////////add necessary elements to root////////////////
         ////////////////////////////////////////////////////////////

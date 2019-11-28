@@ -22,10 +22,10 @@ public class BackGround {
         this.type = type;
         this.width = width;
         this.height = height;
-        background_1 = new SceneComponent(width * 4,height,type,"Assets\\Scenery\\mainBackground.jpg");
+        background_1 = new SceneComponent(width * 4,height,type,"/Users/cemalardakizilkaya/Desktop/Assets/Scenery/mainBackground.jpg");
         background_1.setTranslateX(-1 * (width * 2));
         background_1.setTranslateY(0);
-        background_2 = new SceneComponent(width * 4,height,type, "Assets\\Scenery\\mainBackground.jpg");
+        background_2 = new SceneComponent(width * 4,height,type, "/Users/cemalardakizilkaya/Desktop/Assets/Scenery/mainBackground.jpg");
         background_2.setTranslateX(width * 2);
         background_2.setTranslateY(0);
         gameRoot.getChildren().add(background_1);

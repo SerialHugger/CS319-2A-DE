@@ -12,7 +12,7 @@ public class EnemyType2 extends Enemy {
     EnemyType2(double width, double height, String assetLocation) {
         super(width, height, "player");
 
-        String enemyType = "enemyHitBoxRectangleType1";
+        String enemyType = "enemyHitBoxRectangle"; // todo change to 2
         super.initBody(assetLocation, enemyType);
     }
 

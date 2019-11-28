@@ -17,13 +17,15 @@ public class SceneComponent extends Rectangle {
         super(width,height,null);
         this.type = type;
         this.assetLocation = assetLocation;
-        try {
-            FileInputStream inputstream = new FileInputStream(assetLocation);
-            Image image = new Image(inputstream);
-            ImagePattern imagePattern = new ImagePattern(image);
-            this.setFill(imagePattern);
-        } catch ( Exception e ) {
-            System.out.println(e.toString());
+        if(!assetLocation.equals("empty")){
+            try {
+                FileInputStream inputstream = new FileInputStream(assetLocation);
+                Image image = new Image(inputstream);
+                ImagePattern imagePattern = new ImagePattern(image);
+                this.setFill(imagePattern);
+            } catch ( Exception e ) {
+                System.out.println(e.toString());
+            }
         }
     }
 }

@@ -21,8 +21,8 @@ public class MainGame {
         gameController.createContent();
         return gameRoot;
     }
-    public void update(Game game){
-        gameController.update();
+    public void update(Game game, int fps){
+        gameController.update(fps);
     }
 
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}

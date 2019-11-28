@@ -27,6 +27,8 @@ public class GameController {
     double slidingLimit; // sliding limit for bacground
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
+    private int counter = 0;
+    private int counter_interaction = 0;
     // level counter
     int level = 1;
     // BooleanProperties for smoother control on ui.
@@ -56,6 +58,7 @@ public class GameController {
     }
 
     void createContent() {
+        speed = width / 128; // If width = 1920 then speed = 15.
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
@@ -69,14 +72,19 @@ public class GameController {
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
         slidingSpeed = (width - player.getWidth() * 4) / 66;
-        speed = width / 128; // If width = 1920 then speed = 15.
+        scenery.setSliding(slidingLimit, slidingCounter, slidingSpeed);
     }
-
-    void update() {
-        // update scenery
-        scenery.update(keyInputs, player);
+    void updateInteraction(){
         //update interaction
         interactionHandler.update();
+        counter_interaction++;
+    }
+    void update(int fps) {
+        counter++;
+        // update scenery
+        scenery.update(keyInputs, player, fps);
+//        //update interaction
+//        interactionHandler.update();
         // update game components
         int size = gameComponents.size();
         for (int i = 0; i < size; i++) { // for every component in gameComponents.
@@ -116,6 +124,14 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     enemyType2.die(); // kill it, remove it from root.
+                }
+            } else if (gameComponents.get(i) instanceof EnemyType3) { // else if its an instance class of EmenyType3.
+                EnemyType3 enemyType3 = ((EnemyType3) gameComponents.get(i));
+                enemyType3.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (enemyType3.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    enemyType3.die(); // kill it, remove it from root.
                 }
             } else if (gameComponents.get(i) instanceof EnemyBulletType1) { // else if its an instance class of EnemyBulletType1.
                 EnemyBulletType1 enemyBulletType1 = (EnemyBulletType1) gameComponents.get(i); // cast it to a temporary variable.
@@ -192,6 +208,12 @@ public class GameController {
             EnemyType2 eT2 = (EnemyType2) gameComponentFactory.createComponent("enemyType2");
             eT2.addShapes(gameRoot);
         }
+
+        for (int i = 0; i < 2; i++) {
+            EnemyType3 eT3 = (EnemyType3) gameComponentFactory.createComponent("enemyType3");
+            eT3.addShapes(gameRoot);
+        }
+
     }
 
     // Sets buttons to play
