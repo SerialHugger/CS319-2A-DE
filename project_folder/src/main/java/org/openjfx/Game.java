@@ -6,7 +6,7 @@ import javafx.scene.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
+import javafx.stage.Screen;
 /**
  * JavaFX App
  * Class name: Game
@@ -24,8 +24,8 @@ public class Game extends Application {
     private boolean onMenu = true;
     private boolean onGame = false;
 
-    private double width =  1920; // (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-    private double height = 1080; // (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
+private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+    private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
     private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
@@ -95,7 +95,7 @@ public class Game extends Application {
         mainGame = new MainGame(gameRoot, width, height);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
-        mainScene.setCursor(Cursor.NONE);
+        //mainScene.setCursor(Cursor.NONE);
         theStage.setScene(mainScene);
         theStage.setFullScreen(mainMenu.isFullscreen());
         theStage.show();

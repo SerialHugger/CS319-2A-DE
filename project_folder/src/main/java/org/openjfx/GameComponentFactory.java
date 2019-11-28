@@ -21,15 +21,17 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width / 12.8, height / 15.4, "Assets\\spaceship");
+            temp = new Player(width / 12.8, height / 15.4, "/Users/cemalardakizilkaya/Desktop/Assets/spaceship");
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width / 96, height / 216, "empty", true);
         } else if (type.equals("enemyType1")) {
-            temp = new EnemyType1(width / 38.4, height / 36, "Assets\\spaceship.png");
+            temp = new EnemyType1(width / 38.4, height / 36, "/Users/cemalardakizilkaya/Desktop/Assets/spaceship.png");
         } else if (type.equals("enemyType2")) {
-            temp = new EnemyType2(width / 38.4, height / 36, "Assets\\pacman.png");
+            temp = new EnemyType2(width / 38.4, height / 36, "/Users/cemalardakizilkaya/Desktop/Assets/pacman.png");
         } else if (type.equals("enemyBulletType1")) {
             temp = new EnemyBulletType1(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
+        } else if (type.equals("enemyType3")) {
+            temp = new EnemyType3(width / 19.2, height / 72, "/Users/cemalardakizilkaya/Desktop/Assets/pacman.png");
         }
         gameComponents.add(temp);
         return temp;

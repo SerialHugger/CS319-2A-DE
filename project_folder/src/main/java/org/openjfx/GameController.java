@@ -125,6 +125,14 @@ public class GameController {
                     size -= 1; // decrease size.
                     enemyType2.die(); // kill it, remove it from root.
                 }
+            } else if (gameComponents.get(i) instanceof EnemyType3) { // else if its an instance class of EmenyType3.
+                EnemyType3 enemyType3 = ((EnemyType3) gameComponents.get(i));
+                enemyType3.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (enemyType3.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    enemyType3.die(); // kill it, remove it from root.
+                }
             } else if (gameComponents.get(i) instanceof EnemyBulletType1) { // else if its an instance class of EnemyBulletType1.
                 EnemyBulletType1 enemyBulletType1 = (EnemyBulletType1) gameComponents.get(i); // cast it to a temporary variable.
                 enemyBulletType1.update(); // update it.
@@ -200,6 +208,12 @@ public class GameController {
             EnemyType2 eT2 = (EnemyType2) gameComponentFactory.createComponent("enemyType2");
             eT2.addShapes(gameRoot);
         }
+
+        for (int i = 0; i < 2; i++) {
+            EnemyType3 eT3 = (EnemyType3) gameComponentFactory.createComponent("enemyType3");
+            eT3.addShapes(gameRoot);
+        }
+
     }
 
     // Sets buttons to play

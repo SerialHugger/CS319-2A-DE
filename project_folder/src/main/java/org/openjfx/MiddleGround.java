@@ -29,10 +29,10 @@ public class MiddleGround {
         //Setup mountains
         mt_Left_Width = width * 1.65;
         mt_Right_Width = width * 2.035;
-        left_mountains_4 = new SceneComponent(mt_Left_Width,height,type,"Assets\\Scenery\\leftMountains.png");
+        left_mountains_4 = new SceneComponent(mt_Left_Width,height,type,"/Users/cemalardakizilkaya/Desktop/Assets/Scenery/leftMountains.png");
         left_mountains_4.setTranslateX((width / 3.2 + width * 1.427 + width / 10.21) * -1);
         left_mountains_4.setTranslateY(0);
-        right_mountains_4 = new SceneComponent(mt_Right_Width,height,type, "Assets\\Scenery\\rightMountains.png");
+        right_mountains_4 = new SceneComponent(mt_Right_Width,height,type, "/Users/cemalardakizilkaya/Desktop/Assets/Scenery/rightMountains.png");
         right_mountains_4.setTranslateX(width / 3.2 + width / 10.21);
         right_mountains_4.setTranslateY(0);
         //add mountains
@@ -42,13 +42,13 @@ public class MiddleGround {
         /////////////////////////////////////////////
         /////////////////////////////////
         //setup temple
-        temple_back = new SceneComponent(width/2.795,height/4.372,type,"Assets\\Scenery\\temple_back.png");
+        temple_back = new SceneComponent(width/2.795,height/4.372,type,"/Users/cemalardakizilkaya/Desktop/Assets/Scenery/temple_back.png");
         temple_back.setTranslateX((width/2.795/2 - width/6.66) * -1);
         temple_back.setTranslateY(height - height/4.372);
-        temple_middle = new SceneComponent(width/1.95,height/3.05,type,"Assets\\Scenery\\temple_middle.png");
+        temple_middle = new SceneComponent(width/1.95,height/3.05,type,"/Users/cemalardakizilkaya/Desktop/Assets/Scenery/temple_middle.png");
         temple_middle.setTranslateX((width/1.95/2 - width/5) * -1);
         temple_middle.setTranslateY(height  - height/3.05);
-        temple_front = new SceneComponent(width/2.412,height/3.313,type,"Assets\\Scenery\\temple_front.png");
+        temple_front = new SceneComponent(width/2.412,height/3.313,type,"/Users/cemalardakizilkaya/Desktop/Assets/Scenery/temple_front.png");
         temple_front.setTranslateX((width/2.412/2 - width/4) * -1);
         temple_front.setTranslateY(height - height/3.313);
         //add temple

@@ -35,7 +35,7 @@ public class Hud{
 
     Hud (double width, double height, String type, Pane gameRoot){
         this.gameRoot = gameRoot;
-        healthHud = new SceneComponent(width/3.96,height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
+        healthHud = new SceneComponent(width/3.96,height / 5.684, "topHud", "/Users/cemalardakizilkaya/Desktop/Assets/Scenery/hud/hud_0.png");
         this.width = width;
         this.height = height;
         healthHud.setTranslateX( -1 * width);
@@ -51,7 +51,7 @@ public class Hud{
 
         try {
             for(int i = 0; i < 36; i++) {
-                FileInputStream inputstream = new FileInputStream("Assets\\Scenery\\hud\\hud_" + i + ".png");
+                FileInputStream inputstream = new FileInputStream("/Users/cemalardakizilkaya/Desktop/Assets/Scenery/hud/hud_" + i + ".png");
                 Image image = new Image(inputstream);
                 healthHudFrames[i] = new ImagePattern(image);
             }
