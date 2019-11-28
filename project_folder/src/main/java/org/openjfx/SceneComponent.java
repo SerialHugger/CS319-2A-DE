@@ -24,7 +24,14 @@ public class SceneComponent extends Rectangle {
                 ImagePattern imagePattern = new ImagePattern(image);
                 this.setFill(imagePattern);
             } catch ( Exception e ) {
-                System.out.println(e.toString());
+                try{
+                    FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\","/"));
+                    Image image = new Image(inputstream);
+                    ImagePattern imagePattern = new ImagePattern(image);
+                    this.setFill(imagePattern);
+                } catch ( Exception e2 ){
+                    System.out.println(e.toString());
+                }
             }
         }
     }

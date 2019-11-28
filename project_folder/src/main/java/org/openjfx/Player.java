@@ -24,7 +24,7 @@ public class Player extends GameComponent{
         speed = 25; // set initial speed
         body.setTranslateX(width*1.5 - width*12.8); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        facingLeft = false;
+        facingLeft = true;
         hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box

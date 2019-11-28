@@ -10,7 +10,7 @@ public class PlayerBullet extends PlayerEquipment {
         this.toLeft = toLeft;
         hitBoxes = new Rectangle[1];
         speed = 20;
-        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "playerBullet");
+        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "playerBulletHitbox");
         body = new Rectangle(width,height, Color.ORANGE);
     }
 

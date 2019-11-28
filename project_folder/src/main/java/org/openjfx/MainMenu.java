@@ -206,8 +206,18 @@ public class MainMenu {
                 button.setFill(imagePattern);
             inputstream.close();
         } catch ( Exception e ) {
-            System.out.println(e.toString());
-            return null;
+            try{
+                // set background image
+                FileInputStream inputstream = new FileInputStream(url.replace("\\","/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                if(fill)
+                    button.setFill(imagePattern);
+                inputstream.close();
+            } catch ( Exception e2) {
+                System.out.println(e.toString());
+                return null;
+            }
         }
         return  imagePattern;
     }

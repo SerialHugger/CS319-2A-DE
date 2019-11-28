@@ -43,10 +43,10 @@ public class Hud{
         fpsPane = new StackPane();
         fpsPane.setMaxHeight(height/54);
         fpsPane.setMaxWidth(width/48);
-        fpsPane.setTranslateX(-1 * width/48);
+        fpsPane.setTranslateX(-1 * width/24);
         fpsPane.setTranslateY(height/200);
         fpsText = new Text("fps: ");
-        fpsText.setFont(Font.font ("Verdana", 10));
+        fpsText.setFont(Font.font ("Verdana", width/128));
         fpsText.setFill(Color.ORANGERED);
 
         try {

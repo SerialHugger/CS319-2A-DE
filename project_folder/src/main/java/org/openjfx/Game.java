@@ -114,7 +114,7 @@ public class Game extends Application {
         mainScene = menuScene;
         mainScene.setCursor(Cursor.NONE);
         theStage.setFullScreen(true);
-        //theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         theStage.setScene(mainScene); // set the stage to scene
         theStage.show(); // show it
     }

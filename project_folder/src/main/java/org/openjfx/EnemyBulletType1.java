@@ -9,7 +9,7 @@ public class EnemyBulletType1 extends EnemyBullet{
         this.toLeft = toLeft;
         hitBoxes = new Rectangle[1];
         speed = 7;
-        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "enemyBulletType1");
+        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "enemyBulletHitbox");
         body = new Rectangle(width,height, Color.RED);
         //fillImage(assetLocation);
         x_player = player.getX() + player.width/2;

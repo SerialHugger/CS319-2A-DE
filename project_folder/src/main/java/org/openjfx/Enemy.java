@@ -96,11 +96,13 @@ public class Enemy extends GameComponent{
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
      */
     public void initBullet(GameComponentFactory GCF, String bulletType) {
-        EnemyBulletType1 enemyBullet = (EnemyBulletType1) GCF.createComponent(bulletType); // create the bullet
-        enemyBullet.toLeft = facingLeft; // make it face left
-        enemyBullet.setX(body.getTranslateX()); // set its X
-        enemyBullet.setY(body.getTranslateY()); // set its Y
-        enemyBullet.addShapes(gameRoot); // add its shapes to Root
+        if(bulletType.equals("enemyBulletType1")) {
+            EnemyBulletType1 enemyBullet = (EnemyBulletType1) GCF.createComponent(bulletType); // create the bullet
+            enemyBullet.toLeft = facingLeft; // make it face left
+            enemyBullet.setX(body.getTranslateX()); // set its X
+            enemyBullet.setY(body.getTranslateY()); // set its Y
+            enemyBullet.addShapes(gameRoot); // add its shapes to Root
+        }
     }
 
 

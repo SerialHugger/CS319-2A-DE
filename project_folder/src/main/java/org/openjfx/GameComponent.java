@@ -52,8 +52,16 @@ public class GameComponent {
             body.setFill(imagePattern);
             inputstream.close();
         } catch ( Exception e ) {
-            System.out.println(e.toString());
-            return null;
+            try{
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\","/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                body.setFill(imagePattern);
+                inputstream.close();
+            } catch ( Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
         }
         return  imagePattern;
     }

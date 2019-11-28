@@ -8,7 +8,7 @@ public class EnemyType1 extends Enemy {
     EnemyType1(double width, double height, String assetLocation) {
         super(width, height, "player");
 
-        String enemyType = "enemyHitBoxRectangle";
+        String enemyType = "enemyHitBox";
         super.initBody(assetLocation, enemyType);
     }
 
