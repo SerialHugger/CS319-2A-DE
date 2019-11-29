@@ -1,10 +1,10 @@
 org\openjfx\Game.class
 org\openjfx\Equipment.class
-org\openjfx\Dividus.class
 org\openjfx\MainGame.class
 org\openjfx\EnemyBulletType1.class
 module-info.class
 org\openjfx\BackGround.class
+org\openjfx\EnemyType1.class
 org\openjfx\GameComponent.class
 org\openjfx\EnemyEquipment.class
 org\openjfx\ComponentHitBoxCircle.class
@@ -17,7 +17,6 @@ org\openjfx\MenuController.class
 org\openjfx\InteractionHandler.class
 org\openjfx\EnemyType2.class
 org\openjfx\ForeGround.class
-org\openjfx\Atlas.class
 org\openjfx\Hud.class
 org\openjfx\MainMenu.class
 org\openjfx\PlayerEquipment.class
