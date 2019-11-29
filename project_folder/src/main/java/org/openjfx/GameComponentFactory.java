@@ -29,7 +29,9 @@ public class GameComponentFactory {
             temp = new EnemyType2(width, height, "Assets\\pacman.png");
         } else if (type.equals("dividus")) {
             temp = new Dividus(width, height, "Assets\\pacman.png" );
-        } else if (type.equals("enemyBulletType1")) {
+        } else if (type.equals("dienamite")) {
+            temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
+        }else if (type.equals("enemyBulletType1")) {
             temp = new EnemyBulletType1(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
         }
         gameComponents.add(temp);
