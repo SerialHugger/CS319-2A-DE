@@ -10,10 +10,11 @@ public class EnemyType2 extends Enemy {
     private int countdown = 0;
 
     EnemyType2(double width, double height, String assetLocation) {
-        super(width, height, "player");
+        super(width / 38.4, height / 36, "enemyType2");
 
-        String enemyType = "enemyHitBox"; // todo change to 2
-        super.initBody(assetLocation, enemyType);
+        this.width = width / 38.4;
+        this.height = height / 36;
+        super.initBody(assetLocation, width, height);
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {

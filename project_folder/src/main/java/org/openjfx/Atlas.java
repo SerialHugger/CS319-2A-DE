@@ -3,13 +3,15 @@ package org.openjfx;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
+//enemyType1
+
 public class Atlas extends Enemy {
 
     Atlas(double width, double height, String assetLocation) {
-        super(width, height, "player");
-
-        String enemyType = "enemyHitBox";
-        super.initBody(assetLocation, enemyType);
+        super(width / 60.95, height / 18, "atlas");
+        this.width = width / 60.95;
+        this.height = height / 18;
+        super.initBody(assetLocation, width, height);
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -59,8 +61,9 @@ public class Atlas extends Enemy {
                     dead = true;
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead())
+                if (temp.isDead()) {
                     dead = true;
+                }
             }
         }
     }

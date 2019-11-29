@@ -58,7 +58,6 @@ public class Game extends Application {
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-                    System.out.println("FPS: " + fps); // print frame count
                 }
             }
             if(render){ // if the game updated Render it
