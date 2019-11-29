@@ -3,9 +3,9 @@ package org.openjfx;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
-public class EnemyType1 extends Enemy {
+public class Atlas extends Enemy {
 
-    EnemyType1(double width, double height, String assetLocation) {
+    Atlas(double width, double height, String assetLocation) {
         super(width, height, "player");
 
         String enemyType = "enemyHitBox";
