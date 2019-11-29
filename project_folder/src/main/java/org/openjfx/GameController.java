@@ -133,6 +133,14 @@ public class GameController {
                     size -= 1; // decrease size.
                     dividus.die(); // kill it, remove it from root.
                 }
+            } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
+                Dienamite dienamite = ((Dienamite) gameComponents.get(i));
+                dienamite.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (dienamite.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    dienamite.die(); // kill it, remove it from root.
+                }
             } else if (gameComponents.get(i) instanceof EnemyBulletType1) { // else if its an instance class of EnemyBulletType1.
                 EnemyBulletType1 enemyBulletType1 = (EnemyBulletType1) gameComponents.get(i); // cast it to a temporary variable.
                 enemyBulletType1.update(); // update it.
@@ -212,6 +220,11 @@ public class GameController {
         for (int i = 0; i < 3; i++) {
             Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
             dividus.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
+            dienamite.addShapes(gameRoot);
         }
 
     }
