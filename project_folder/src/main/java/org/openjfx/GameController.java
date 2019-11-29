@@ -199,17 +199,17 @@ public class GameController {
      * todo
      */
     public void createLevel(int lvl) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             EnemyType2 eT2 = (EnemyType2) gameComponentFactory.createComponent("enemyType2");
             eT2.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 3; i++) {
             Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
             dividus.addShapes(gameRoot);
         }
