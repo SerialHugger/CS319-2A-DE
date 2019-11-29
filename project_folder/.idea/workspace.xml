@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2f1b19b4-32bc-4cbc-b5c2-4ac49f8c6bd5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />

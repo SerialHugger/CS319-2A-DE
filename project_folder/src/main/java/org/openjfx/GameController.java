@@ -109,13 +109,13 @@ public class GameController {
                     size -= 1; // decrease size.
                     playerBullet.die(); // kill it, remove it from root.
                 }
-            } else if (gameComponents.get(i) instanceof EnemyType1) { // else if its an instance class of EmenyType1.
-                EnemyType1 enemyType1 = ((EnemyType1) gameComponents.get(i));
-                enemyType1.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
-                if (enemyType1.dead) { // if enemyType1 is dead.
+            } else if (gameComponents.get(i) instanceof Atlas) { // else if its an instance class of EmenyType1.
+                Atlas atlas = ((Atlas) gameComponents.get(i));
+                atlas.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (atlas.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
-                    enemyType1.die(); // kill it, remove it from root.
+                    atlas.die(); // kill it, remove it from root.
                 }
             } else if (gameComponents.get(i) instanceof EnemyType2) { // else if its an instance class of EmenyType1.
                 EnemyType2 enemyType2 = ((EnemyType2) gameComponents.get(i));
@@ -200,8 +200,8 @@ public class GameController {
      */
     public void createLevel(int lvl) {
         for (int i = 0; i < 3; i++) {
-            EnemyType1 eT1 = (EnemyType1) gameComponentFactory.createComponent("enemyType1");
-            eT1.addShapes(gameRoot);
+            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
+            atlas.addShapes(gameRoot);
         }
 
         for (int i = 0; i < 3; i++) {

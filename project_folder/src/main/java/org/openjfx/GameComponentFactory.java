@@ -1,7 +1,5 @@
 package org.openjfx;
 
-import javafx.scene.shape.Shape;
-
 import java.util.ArrayList;
 
 public class GameComponentFactory {
@@ -24,8 +22,8 @@ public class GameComponentFactory {
             temp = new Player(width / 12.8, height / 15.4, "Assets\\spaceship");
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width / 96, height / 216, "empty", true);
-        } else if (type.equals("enemyType1")) {
-            temp = new EnemyType1(width / 38.4, height / 36, "Assets\\spaceship.png");
+        } else if (type.equals("atlas")) {
+            temp = new Atlas(width / 60.95, height / 18, "Assets\\Enemies\\atlas.png");
         } else if (type.equals("enemyType2")) {
             temp = new EnemyType2(width / 38.4, height / 36, "Assets\\pacman.png");
         } else if (type.equals("dividus")) {
