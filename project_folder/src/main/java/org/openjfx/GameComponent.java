@@ -99,4 +99,17 @@ public class GameComponent {
 
     public double getX(){ return body.getTranslateX(); } // returns the X position of the component
     public double getY(){ return body.getTranslateY(); } // returns the Y position of the component
+
+    public void setX(double newX){
+        for(int i = 0; i < hitBoxes.length; i ++) {
+            hitBoxes[i].setTranslateX(newX);
+        }
+        body.setTranslateX(newX);
+    }
+    public void setY(double newY){
+        for(int i = 0; i < hitBoxes.length; i ++) {
+            hitBoxes[i].setTranslateY(newY);
+        }
+        body.setTranslateY(newY);
+    }
 }

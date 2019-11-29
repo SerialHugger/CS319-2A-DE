@@ -26,6 +26,8 @@ public class GameComponentFactory {
             temp = new Atlas(width / 60.95, height / 18, "Assets\\Enemies\\atlas.png");
         } else if (type.equals("enemyType2")) {
             temp = new EnemyType2(width / 38.4, height / 36, "Assets\\pacman.png");
+        } else if (type.equals("dividus")) {
+            temp = new Dividus(width / 9.6, height / 18, "Assets\\pacman.png" );
         } else if (type.equals("enemyBulletType1")) {
             temp = new EnemyBulletType1(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
         }
