@@ -36,8 +36,9 @@ public class Game extends Application {
     double frameTime = 0; // hold the frameTime
     int frames = 0; // frame count
     int fps = 0; // fps count
-
+  
     private void update() {
+
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
         }
@@ -70,7 +71,6 @@ public class Game extends Application {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
