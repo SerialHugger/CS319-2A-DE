@@ -38,7 +38,7 @@ public class Hud{
         healthHud = new SceneComponent(width/3.96,height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
         this.width = width;
         this.height = height;
-        healthHud.setTranslateX( -1 * width);
+        healthHud.setTranslateX( -1 * width );
         healthHud.setTranslateY( height / 200);
         fpsPane = new StackPane();
         fpsPane.setMaxHeight(height/54);

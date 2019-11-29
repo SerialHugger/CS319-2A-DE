@@ -32,7 +32,7 @@ public class GameController {
     // level counter
     int level = 1;
     // BooleanProperties for smoother control on ui.
-    private BooleanProperty[] keyInputs = new BooleanProperty[7];
+    private BooleanProperty[] keyInputs = new BooleanProperty[14];
 
     /*
     For key inputs
@@ -47,9 +47,10 @@ public class GameController {
     7 — e
     8 — y
     9 — u
-    10 — h
-    11 — j
-    12 — k
+    10 — i
+    11 — h
+    12 — j
+    13 — k
      */
     GameController(Pane root, double width, double height) {
         this.gameRoot = root;
@@ -217,7 +218,7 @@ public class GameController {
             eT2.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
             dividus.addShapes(gameRoot);
         }
@@ -255,6 +256,27 @@ public class GameController {
             if (e.getCode() == KeyCode.Q) {
                 keyInputs[6].set(true);
             }
+            if (e.getCode() == KeyCode.E) {
+                keyInputs[7].set(true);
+            }
+            if (e.getCode() == KeyCode.Y) {
+                keyInputs[8].set(true);
+            }
+            if (e.getCode() == KeyCode.U) {
+                keyInputs[9].set(true);
+            }
+            if (e.getCode() == KeyCode.I) {
+                keyInputs[10].set(true);
+            }
+            if (e.getCode() == KeyCode.H) {
+                keyInputs[11].set(true);
+            }
+            if (e.getCode() == KeyCode.J) {
+                keyInputs[12].set(true);
+            }
+            if (e.getCode() == KeyCode.K) {
+                keyInputs[13].set(true);
+            }
         });
         scene.setOnKeyReleased(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -277,6 +299,27 @@ public class GameController {
             }
             if (e.getCode() == KeyCode.Q) {
                 keyInputs[6].set(false);
+            }
+            if (e.getCode() == KeyCode.E) {
+                keyInputs[7].set(false);
+            }
+            if (e.getCode() == KeyCode.Y) {
+                keyInputs[8].set(false);
+            }
+            if (e.getCode() == KeyCode.U) {
+                keyInputs[9].set(false);
+            }
+            if (e.getCode() == KeyCode.I) {
+                keyInputs[10].set(false);
+            }
+            if (e.getCode() == KeyCode.H) {
+                keyInputs[11].set(false);
+            }
+            if (e.getCode() == KeyCode.J) {
+                keyInputs[12].set(false);
+            }
+            if (e.getCode() == KeyCode.K) {
+                keyInputs[13].set(false);
             }
         });
     }

@@ -127,7 +127,6 @@ public class InteractionHandler {
 
                         } else if( rectangleTemp.getType().equals("playerBulletHitbox")) { // rectangleTemp is playerBullet
                             if(rectangleTemp2.getType().equals("enemyHitBox")){
-                                System.out.println("wow");
                             }
                             if (rectangleTemp2.getType().equals("enemyBulletHitbox")) { // rectangleTemp2 is enemyBulletType1
                                 if (rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {

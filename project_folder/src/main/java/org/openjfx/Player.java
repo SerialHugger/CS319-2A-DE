@@ -7,7 +7,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Player extends GameComponent{
-
+    private final int TELEPORTCOOLDOWN = 180;
+    private boolean teleportAvailable = true;
+    private int teleportCountdown = 0;
+    boolean toggleHealth = false;
 
     int attackDelayTimer = 0;
     boolean attackDelay = false;
@@ -60,9 +63,49 @@ public class Player extends GameComponent{
         if(keyInputs[5].get()) { // space pressed
             shoot(GCF);
         }
-        if(keyInputs[6].get()) { // enter pressed
-            teleport();
+        if(keyInputs[6].get()) { // Q pressed
+            if(teleportAvailable) {
+                teleport(keyInputs[0].get(), keyInputs[2].get());
+                teleportAvailable = false;
+            } 
         }
+        if(keyInputs[7].get()) { // E pressed
+            //todo add skill here
+        }
+        if(keyInputs[8].get()) { // Y pressed
+            //todo add skill here
+        }
+        if(keyInputs[9].get()) { // U pressed
+            //todo add skill here
+        }
+        if(keyInputs[10].get()) { // I pressed
+            //todo add skill here
+        }
+        if(keyInputs[11].get()) { // H pressed
+            //todo add skill here
+        }
+        if(keyInputs[12].get()) { // J pressed
+            //todo add skill here
+        }
+        if(keyInputs[13].get()) { // K pressed
+            //todo add skill here
+            //for now it activates immortal mode.
+            toggleHealth = !toggleHealth;
+        }
+        if(!toggleHealth)
+            checkDeath();
+        else
+            lifeCount = 3;
+        if(!teleportAvailable){
+            teleportCountdown++;
+            if(teleportCountdown >= TELEPORTCOOLDOWN){
+                teleportAvailable = true;
+                teleportCountdown = 0;
+            }
+        }
+    }
+
+    private void checkDeath() {
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
@@ -84,13 +127,19 @@ public class Player extends GameComponent{
         }
     }
 
-    private void teleport(){
-        // gives player ptsd
-        int rndm = (int)(Math.random() * 2);
-        if(rndm < 1)
-            moveY(1, 150);
-        else
+    private void teleport(boolean up, boolean down){
+        // currently it gives player ptsd
+        if(up && !down){
             moveY(-1,150);
+        } else if (!up && down) {
+            moveY(1,150);
+        } else {
+            int random = (int) (Math.random() * 2);
+            if (random < 1)
+                moveY(1, 150);
+            else
+                moveY(-1, 150);
+        }
     }
 
     private void shoot(GameComponentFactory GCF){
