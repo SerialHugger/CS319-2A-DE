@@ -1,66 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="">
+    <list default="true" id="2f1b19b4-32bc-4cbc-b5c2-4ac49f8c6bd5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyBulletType1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyBulletType1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyType1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyType1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyType2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyType2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/SceneComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/SceneComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_1_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_2_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/bomb_3_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/first_active.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/first_deactive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/fourth_active.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/fourth_deactive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_1_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_2_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/health_3_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_12.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_13.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_14.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_14.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_15.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_15.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_16.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_17.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_17.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_18.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_18.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_19.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_19.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_20.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_20.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_21.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_21.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_22.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_22.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_23.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_23.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenery/hud/hud_9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_light.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/hud_nolight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/second_active.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/second_deactive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/third_active.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/third_deactive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenery/hud/top_right_text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
