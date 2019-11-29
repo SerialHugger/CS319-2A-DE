@@ -1,6 +1,5 @@
 org\openjfx\Game.class
 org\openjfx\Equipment.class
-org\openjfx\Dividus.class
 org\openjfx\MainGame.class
 org\openjfx\EnemyBulletType1.class
 module-info.class

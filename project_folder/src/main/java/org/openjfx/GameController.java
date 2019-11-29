@@ -32,7 +32,7 @@ public class GameController {
     // level counter
     int level = 1;
     // BooleanProperties for smoother control on ui.
-    private BooleanProperty[] keyInputs = new BooleanProperty[6];
+    private BooleanProperty[] keyInputs = new BooleanProperty[7];
 
     /*
     For key inputs
@@ -125,6 +125,14 @@ public class GameController {
                     size -= 1; // decrease size.
                     enemyType2.die(); // kill it, remove it from root.
                 }
+            } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
+                Dividus dividus = ((Dividus) gameComponents.get(i));
+                dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (dividus.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    dividus.die(); // kill it, remove it from root.
+                }
             } else if (gameComponents.get(i) instanceof EnemyBulletType1) { // else if its an instance class of EnemyBulletType1.
                 EnemyBulletType1 enemyBulletType1 = (EnemyBulletType1) gameComponents.get(i); // cast it to a temporary variable.
                 enemyBulletType1.update(); // update it.
@@ -191,7 +199,7 @@ public class GameController {
      * todo
      */
     public void createLevel(int lvl) {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 3; i++) {
             EnemyType1 eT1 = (EnemyType1) gameComponentFactory.createComponent("enemyType1");
             eT1.addShapes(gameRoot);
         }
@@ -200,6 +208,12 @@ public class GameController {
             EnemyType2 eT2 = (EnemyType2) gameComponentFactory.createComponent("enemyType2");
             eT2.addShapes(gameRoot);
         }
+
+        for (int i = 0; i < 15; i++) {
+            Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
+            dividus.addShapes(gameRoot);
+        }
+
     }
 
     // Sets buttons to play
@@ -225,6 +239,9 @@ public class GameController {
             if (e.getCode() == KeyCode.SPACE) {
                 keyInputs[5].set(true);
             }
+            if (e.getCode() == KeyCode.Q) {
+                keyInputs[6].set(true);
+            }
         });
         scene.setOnKeyReleased(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -244,6 +261,9 @@ public class GameController {
             }
             if (e.getCode() == KeyCode.SPACE) {
                 keyInputs[5].set(false);
+            }
+            if (e.getCode() == KeyCode.Q) {
+                keyInputs[6].set(false);
             }
         });
     }

@@ -58,22 +58,10 @@ public class Player extends GameComponent{
             //delay = true;
         }
         if(keyInputs[5].get()) { // space pressed
-            if(!attackDelay) {
-                PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
-                playerBullet.toLeft = facingLeft; // make it faceleft
-                if(!facingLeft)
-                    playerBullet.setX(body.getTranslateX());
-                else
-                    playerBullet.setX(body.getTranslateX() + width/1.1); // set X
-                playerBullet.setY(body.getTranslateY() + height/2.5); // set Y
-                playerBullet.addShapes(gameRoot); // add shapes of bullet to gameRoot
-                attackDelay = true; // make delay true
-                attackDelayTimer = 100; // start delay timer
-            } else {
-                if(attackDelayTimer == 0) // if timer ends
-                    attackDelay = false; // make delay false
-                attackDelayTimer -= 25; // decrease delay
-            }
+            shoot(GCF);
+        }
+        if(keyInputs[6].get()) { // enter pressed
+            teleport();
         }
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
@@ -96,5 +84,32 @@ public class Player extends GameComponent{
         }
     }
 
+    private void teleport(){
+        // gives player ptsd
+        int rndm = (int)(Math.random() * 2);
+        if(rndm < 1)
+            moveY(1, 150);
+        else
+            moveY(-1,150);
+    }
+
+    private void shoot(GameComponentFactory GCF){
+        if(!attackDelay) {
+            PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
+            playerBullet.toLeft = facingLeft; // make it faceleft
+            if(!facingLeft)
+                playerBullet.setX(body.getTranslateX());
+            else
+                playerBullet.setX(body.getTranslateX() + width/1.1); // set X
+            playerBullet.setY(body.getTranslateY() + height/2.5); // set Y
+            playerBullet.addShapes(gameRoot); // add shapes of bullet to gameRoot
+            attackDelay = true; // make delay true
+            attackDelayTimer = 100; // start delay timer
+        } else {
+            if(attackDelayTimer == 0) // if timer ends
+                attackDelay = false; // make delay false
+            attackDelayTimer -= 25; // decrease delay
+        }
+    }
     public double getWidth() { return width; }
 }
