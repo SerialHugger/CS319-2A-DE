@@ -192,8 +192,8 @@ public class GameController {
      */
     public void createLevel(int lvl) {
         for (int i = 0; i < 3; i++) {
-            Atlas eT1 = (Atlas) gameComponentFactory.createComponent("atlas");
-            eT1.addShapes(gameRoot);
+            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
+            atlas.addShapes(gameRoot);
         }
 
         for (int i = 0; i < 3; i++) {
