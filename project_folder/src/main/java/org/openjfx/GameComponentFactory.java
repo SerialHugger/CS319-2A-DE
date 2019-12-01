@@ -25,20 +25,16 @@ public class GameComponentFactory {
         } else if (type.equals("atlas")) {
             System.out.println("atlas created");
             temp = new Atlas(width, height, "Assets\\Enemies\\atlas.png");
-        } else if (type.equals("enemyType2")) {
-            temp = new EnemyType2(width, height, "Assets\\pacman.png");
+        } else if (type.equals("dodger")) {
+            temp = new Dodger(width, height, "Assets\\pacman.png");
         } else if (type.equals("dividus")) {
             temp = new Dividus(width, height, "Assets\\pacman.png" );
         } else if (type.equals("dienamite")) {
             temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
         }else if (type.equals("enemyBulletType1")) {
-            temp = new EnemyBulletType1(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
+            temp = new laserBullet(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
         }
         gameComponents.add(temp);
         return temp;
     }
-
-    public double getWidth() {
-        return width;
-    } // return the width of the game.
 }

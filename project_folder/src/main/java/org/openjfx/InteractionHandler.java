@@ -7,15 +7,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 public class InteractionHandler {
-    private Pane gameRoot; // root of the game
-    private GameComponentFactory gameComponentFactory; // Factory for components
-    private ArrayList<GameComponent> gameComponents; // array list for updating components
-    InteractionHandler(ArrayList<GameComponent> gameComponents, GameComponentFactory gameComponentFactory, Pane gameRoot){
-        this.gameRoot = gameRoot;
-        this.gameComponentFactory = gameComponentFactory;
-        this.gameComponents = gameComponents;
-    }
-    public boolean update(){
+    public boolean handleInteraction(Pane gameRoot){
         BooleanProperty isDead = new SimpleBooleanProperty(false);
         gameRoot.getChildren().forEach( i -> { // first loop
             ComponentHitBoxCircle circleTemp; // first temp circle hit box

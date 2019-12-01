@@ -7,15 +7,18 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Player extends GameComponent{
-    private final int TELEPORTCOOLDOWN = 180;
+    //Necessary attiributes for teleport ability cooldown.
+    private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
+    //immortal mode //todo delete this when needed
     boolean toggleHealth = false;
 
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
-    ImagePattern[] shipStatus = new ImagePattern[2];
+    ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
+
     Player(double width, double height, String assetLocation){
         super(width, height, "player");
         hitBoxes = new Shape[2];
@@ -33,7 +36,22 @@ public class Player extends GameComponent{
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
-    public void update(BooleanProperty[] keyInputs, GameComponentFactory GCF, Pane gameRoot){
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF, Pane gameRoot){
+
+        firstTime = System.nanoTime() / 1000000000.0; // get time
+        passedTime = firstTime - lastTime; // calculate passedTime
+        lastTime = firstTime; // reset last time.
+        totalPassedTime += passedTime; // calculate total passed time
+        if(totalPassedTime > 1.0) { // if 1 second is passed
+            totalPassedTime = 0; // reset timer
+            if(!teleportAvailable){ // if teleport is on cooldown
+                teleportCountdown += 1; // increase teleport countdown
+                if(teleportCountdown >= TELEPORT_COOLDOWN) { // if the cooldown limit is reached
+                    teleportAvailable = true; // make teleport available
+                    teleportCountdown = 0; // set teleport cooldown to 0
+                }
+            }
+        }
         if(keyInputs[3].get()) { // D is pressed
             moveX(1,speed); // move right
             if(!facingLeft) {
@@ -96,13 +114,13 @@ public class Player extends GameComponent{
             checkDeath();
         else
             lifeCount = 3;
-        if(!teleportAvailable){
-            teleportCountdown++;
-            if(teleportCountdown >= TELEPORTCOOLDOWN){
-                teleportAvailable = true;
-                teleportCountdown = 0;
-            }
-        }
+//        if(!teleportAvailable){
+//            teleportCountdown++;
+//            if(teleportCountdown >= TELEPORT_COOLDOWN){
+//                teleportAvailable = true;
+//                teleportCountdown = 0;
+//            }
+//        }
     }
 
     private void checkDeath() {
@@ -145,7 +163,7 @@ public class Player extends GameComponent{
     private void shoot(GameComponentFactory GCF){
         if(!attackDelay) {
             PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
-            playerBullet.toLeft = facingLeft; // make it faceleft
+            playerBullet.facingLeft = facingLeft; // make it faceleft
             if(!facingLeft)
                 playerBullet.setX(body.getTranslateX());
             else

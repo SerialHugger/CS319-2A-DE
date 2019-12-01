@@ -52,34 +52,20 @@ public class Dividus extends Enemy {
         moveY(directionY, speed_y); // move Y with given inputs
 
         //updates the space ships so they loop around map
-        loopAroundTheMap(GCF.getWidth(), player, left);
+        loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
             if (hitBox instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
                 if (temp.isDead()) {
-                    Atlas temp1 = (Atlas) GCF.createComponent("atlas");
-                    Atlas temp2 = (Atlas) GCF.createComponent("atlas");
-                    temp1.addShapes(gameRoot);
-                    temp2.addShapes(gameRoot);
-                    temp1.setX(body.getTranslateX());
-                    temp1.setY(body.getTranslateY());
-                    temp2.setX(body.getTranslateX());
-                    temp2.setY(body.getTranslateY());
+                    createAtlases(GCF);
                     dead = true;
                 }
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
-                    Atlas temp1 = (Atlas) GCF.createComponent("atlas");
-                    Atlas temp2 = (Atlas) GCF.createComponent("atlas");
-                    temp1.addShapes(gameRoot);
-                    temp2.addShapes(gameRoot);
-                    temp1.setX(body.getTranslateX());
-                    temp1.setY(body.getTranslateY());
-                    temp2.setX(body.getTranslateX());
-                    temp2.setY(body.getTranslateY());
+                    createAtlases(GCF);
                     dead = true;
                 }
             }
@@ -109,5 +95,15 @@ public class Dividus extends Enemy {
         return new int[]{directionX, directionY, (int)speed_x, (int)speed_y};
     }
 
+    public void createAtlases(GameComponentFactory GCF){
+        Atlas temp1 = (Atlas) GCF.createComponent("atlas");
+        Atlas temp2 = (Atlas) GCF.createComponent("atlas");
+        temp1.addShapes(gameRoot);
+        temp2.addShapes(gameRoot);
+        temp1.setX(body.getTranslateX());
+        temp1.setY(body.getTranslateY());
+        temp2.setX(body.getTranslateX());
+        temp2.setY(body.getTranslateY());
+    }
 
 }

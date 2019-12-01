@@ -3,13 +3,13 @@ package org.openjfx;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
-public class EnemyType2 extends Enemy {
+public class Dodger extends Enemy {
 
     final private int teleport_cooldown = 1000;
     private boolean is_skill_active = true;
     private int countdown = 0;
 
-    EnemyType2(double width, double height, String assetLocation) {
+    Dodger(double width, double height, String assetLocation) {
         super(width / 38.4, height / 36, "enemyType2");
 
         this.width = width / 38.4;
@@ -52,8 +52,8 @@ public class EnemyType2 extends Enemy {
         moveX(directionX, speed_x); // move X with given inputs
         moveY(directionY, speed_y); // move Y with given inputs
 
-        //updates the space ships so they loop around map
-        loopAroundTheMap(GCF.getWidth(), player, left);
+        //updates the space ships/enemyShips so they loop around map
+        loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
