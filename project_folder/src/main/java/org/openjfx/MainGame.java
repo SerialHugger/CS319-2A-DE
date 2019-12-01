@@ -22,7 +22,7 @@ public class MainGame {
         return gameRoot;
     }
     public void update(Game game, int fps){
-        gameController.update(fps);
+        gameController.updateGame(fps);
     }
 
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}

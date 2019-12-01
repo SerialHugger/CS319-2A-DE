@@ -1,6 +1,5 @@
 package org.openjfx;
 
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -34,7 +33,7 @@ public class Enemy extends GameComponent{
         double startingX = (Math.random() * (width  * 4)) + (width * -2) ;
 
         // starting Y of the enemy, randomly selected
-        double startingY = (Math.random() * height) - this.height*2;
+        double startingY = this.height*2 + ((Math.random() * height) - this.height*4);
 
         // TODO: there is only 1 hit box --- for now. Change it if necessary
         hitBoxes = new Shape[1];
@@ -94,8 +93,8 @@ public class Enemy extends GameComponent{
      */
     public void initBullet(GameComponentFactory GCF, String bulletType) {
         if(bulletType.equals("enemyBulletType1")) {
-            EnemyBulletType1 enemyBullet = (EnemyBulletType1) GCF.createComponent(bulletType); // create the bullet
-            enemyBullet.toLeft = facingLeft; // make it face left
+            laserBullet enemyBullet = (laserBullet) GCF.createComponent(bulletType); // create the bullet
+            enemyBullet.facingLeft = facingLeft; // make it face left
             enemyBullet.setX(body.getTranslateX()); // set its X
             enemyBullet.setY(body.getTranslateY()); // set its Y
             enemyBullet.addShapes(gameRoot); // add its shapes to Root

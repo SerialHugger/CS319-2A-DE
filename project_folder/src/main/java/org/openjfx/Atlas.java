@@ -14,7 +14,7 @@ public class Atlas extends Enemy {
         super.initBody(assetLocation, width, height);
     }
 
-    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -51,7 +51,7 @@ public class Atlas extends Enemy {
         moveY(directionY, speed_y); // move Y with given inputs
 
         //updates the space ships so they loop around map
-        loopAroundTheMap(GCF.getWidth(), player, left);
+        loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
