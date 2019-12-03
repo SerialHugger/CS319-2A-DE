@@ -9,7 +9,7 @@ public class ComponentHitBoxRectangle extends Rectangle {
     private double height;
     public boolean dead = false;
     ComponentHitBoxRectangle(double width, double height, String type){
-        super(width,height, Color.ORANGE ); //Color.TRANSPARENT
+        super(width,height, Color.TRANSPARENT ); //Color.TRANSPARENT
         this.width = width;
         this.height = height;
         this.type = type;

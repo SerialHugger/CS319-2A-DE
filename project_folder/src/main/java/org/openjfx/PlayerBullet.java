@@ -4,11 +4,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerBullet extends PlayerEquipment {
+    int rotation = 0;
     PlayerBullet(double width, double height, String assetLocation, boolean toLeft){
         super(width,height,assetLocation);
         this.facingLeft = toLeft;
         hitBoxes = new Rectangle[1];
-        speed = 20;
+        speed = 5;
         hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "playerBulletHitbox");
         body = new Rectangle(width,height, Color.ORANGE);
     }
@@ -17,9 +18,15 @@ public class PlayerBullet extends PlayerEquipment {
         if(facingLeft){ // If player was looking at left go left
             hitBoxes[0].setTranslateX(hitBoxes[0].getTranslateX() + speed  + player.speed);
             body.setTranslateX(body.getTranslateX() + speed + player.speed);
+            body.setRotate(rotation);
+            hitBoxes[0].setRotate(rotation);
+            rotation += 5;
         } else { // else go right
             hitBoxes[0].setTranslateX(hitBoxes[0].getTranslateX() - speed -  player.speed);
             body.setTranslateX(body.getTranslateX() - speed -  player.speed);
+            body.setRotate(rotation);
+            hitBoxes[0].setRotate(rotation*-1);
+            rotation += 5;
         }
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){

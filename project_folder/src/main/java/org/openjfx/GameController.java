@@ -25,6 +25,7 @@ public class GameController {
     boolean startSlidingLeft = false; // slides background to left
     boolean startSlidingRight = false; // slides background to right
     double slidingLimit; // sliding limit for bacground
+    double slidingSpeedAcceleration = 0.02; // sliding aceleration
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
     // level counter
@@ -43,12 +44,10 @@ public class GameController {
     5 — space
     6 — q
     7 — e
-    8 — y
-    9 — u
-    10 — i
-    11 — h
-    12 — j
-    13 — k
+    8 — h
+    9 — j
+    10 — k
+    11 — l
      */
     GameController(Pane root, double width, double height) {
         this.gameRoot = root;
@@ -57,8 +56,9 @@ public class GameController {
     }
 
     void createContent() {
-        speed = width / 384; // If width = 1920 then speed = 5.
+        speed = 15;//width / 384; // If width = 1920 then speed = 5.
         maxSpeed = width / 76.8; // If width = 1920 then maxSpeed = 25.
+        acceleration = 0.3;
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
@@ -72,7 +72,6 @@ public class GameController {
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
         slidingSpeed = (width - player.getWidth() * 4) / 66;
-        scenery.setSliding(slidingLimit, slidingCounter, slidingSpeed);
     }
     void updateInteraction(){
         //update interaction
@@ -80,12 +79,12 @@ public class GameController {
     }
     void updateGame(int fps) {
         // update scenery
-        scenery.update(keyInputs, player, fps);
+        scenery.update(keyInputs, player, fps, speed);
         // update game components
         int size = gameComponents.size();
         for (int i = 0; i < size; i++) { // for every component in gameComponents.
             if (gameComponents.get(i) instanceof Player) { // if its an instance class of Player.
-                ((Player) gameComponents.get(i)).movePlayer(keyInputs, gameComponentFactory, gameRoot); // update it.
+                ((Player) gameComponents.get(i)).movePlayer(keyInputs, gameComponentFactory); // update it.
                 if (player.dead) { // if player is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -164,15 +163,16 @@ public class GameController {
                 startSlidingLeft = true;
                 startSlidingRight = false;
                 toLeft = false;
+                slidingSpeedAcceleration += 0.1;
             } else // if it was already not toLeft, just move it.
                 gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
-
         }
         if (keyInputs[1].get()) { // if the key A pressed
             if (!toLeft) { // if it was not toLeft, change camera and bring it to limit x.
                 startSlidingRight = true;
                 startSlidingLeft = false;
                 toLeft = true;
+                slidingSpeedAcceleration += 0.1;
             } else // if it was already to left, just move it
                 gameRoot.setTranslateX(gameRoot.getTranslateX() + speed);
         }
@@ -180,8 +180,9 @@ public class GameController {
             //todo
         }
         if (startSlidingLeft) { // if the background sliding left
-            if (slidingLimit * -1 != slidingCounter) {// until sliding limit is reached
+            if (slidingLimit * -1 != slidingCounter ) {// until sliding limit is reached or hits the player to screen limit
                 gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+                scenery.slideScenery(false,slidingSpeed);
                 slidingCounter -= slidingSpeed;
             } else {
                 startSlidingLeft = false; // finish the execution when the limit is reached.
@@ -190,6 +191,7 @@ public class GameController {
         if (startSlidingRight) { // if the background sliding right
             if (slidingCounter != 0) {// until counter hits the 0
                 gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                scenery.slideScenery(true,slidingSpeed);
                 slidingCounter += slidingSpeed;
             } else {
                 startSlidingRight = false; // finish the execution when the limit is reached.
@@ -200,7 +202,7 @@ public class GameController {
     /*
      * This creates levels
      * adds enemies
-     * todo
+     * todo make it more complex
      */
     public void createLevel(int lvl) {
         for (int i = 0; i < 5; i++) {
@@ -213,7 +215,7 @@ public class GameController {
             dodger.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
             dividus.addShapes(gameRoot);
         }
@@ -254,23 +256,20 @@ public class GameController {
             if (e.getCode() == KeyCode.E) {
                 keyInputs[7].set(true);
             }
-            if (e.getCode() == KeyCode.Y) {
+            if (e.getCode() == KeyCode.H) {
                 keyInputs[8].set(true);
             }
-            if (e.getCode() == KeyCode.U) {
+            if (e.getCode() == KeyCode.J) {
                 keyInputs[9].set(true);
             }
-            if (e.getCode() == KeyCode.I) {
+            if (e.getCode() == KeyCode.K) {
                 keyInputs[10].set(true);
             }
-            if (e.getCode() == KeyCode.H) {
+            if (e.getCode() == KeyCode.L) {
                 keyInputs[11].set(true);
             }
-            if (e.getCode() == KeyCode.J) {
+            if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(true);
-            }
-            if (e.getCode() == KeyCode.K) {
-                keyInputs[13].set(true);
             }
         });
         scene.setOnKeyReleased(e -> {
@@ -298,23 +297,20 @@ public class GameController {
             if (e.getCode() == KeyCode.E) {
                 keyInputs[7].set(false);
             }
-            if (e.getCode() == KeyCode.Y) {
+            if (e.getCode() == KeyCode.H) {
                 keyInputs[8].set(false);
             }
-            if (e.getCode() == KeyCode.U) {
+            if (e.getCode() == KeyCode.J) {
                 keyInputs[9].set(false);
             }
-            if (e.getCode() == KeyCode.I) {
+            if (e.getCode() == KeyCode.K) {
                 keyInputs[10].set(false);
             }
-            if (e.getCode() == KeyCode.H) {
+            if (e.getCode() == KeyCode.L) {
                 keyInputs[11].set(false);
             }
-            if (e.getCode() == KeyCode.J) {
+            if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(false);
-            }
-            if (e.getCode() == KeyCode.K) {
-                keyInputs[13].set(false);
             }
         });
     }

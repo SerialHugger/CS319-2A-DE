@@ -11,14 +11,11 @@ public class laserBullet extends EnemyBullet{
         speed = 7;
         hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "enemyBulletHitbox");
         body = new Rectangle(width,height, Color.RED);
-        //fillImage(assetLocation);
+        fillImage(assetLocation);
         x_player = player.getX() + player.width/2;
         y_player = player.getY() + player.height/2;
     }
     public void updateLaserBullet() {
-        hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y,2)); // hipotenus of x and y
-        speed_x = dist_x / hipo * speed; // calculate speed of x
-        speed_y =  dist_y / hipo * speed;
         if( x_player > x_initial && y_player == y_initial) // if the player is directly on the right side
             moveX(1, speed);
         else if (x_player < x_initial && y_player == y_initial) // if the player is directly on the left side

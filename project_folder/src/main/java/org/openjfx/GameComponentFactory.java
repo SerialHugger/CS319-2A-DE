@@ -32,7 +32,7 @@ public class GameComponentFactory {
         } else if (type.equals("dienamite")) {
             temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
         }else if (type.equals("enemyBulletType1")) {
-            temp = new laserBullet(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
+            temp = new laserBullet(width / 35, height / 35, "Assets\\Nyan.png", true, gameComponents.get(0)); // 0 is player //274 //154
         }
         gameComponents.add(temp);
         return temp;

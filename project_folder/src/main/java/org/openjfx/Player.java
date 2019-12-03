@@ -27,7 +27,9 @@ public class Player extends GameComponent{
         body = new Rectangle(width, height, null); //setup the body
         shipStatus[1] = fillImage(assetLocation + "_left.png"); // insert facing left image to body
         shipStatus[0] = fillImage(assetLocation + "_right.png"); // insert facing right image to body
-        speed = 25; // set initial speed
+        speed = 5; // set initial speed
+        acceleration = 0.4;
+        maxSpeed = 25;
         body.setTranslateX(width*1.5 - width*12.8); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
         facingLeft = true;
@@ -36,7 +38,7 @@ public class Player extends GameComponent{
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
-    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF, Pane gameRoot){
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
 
         firstTime = System.nanoTime() / 1000000000.0; // get time
         passedTime = firstTime - lastTime; // calculate passedTime
@@ -85,42 +87,30 @@ public class Player extends GameComponent{
             if(teleportAvailable) {
                 teleport(keyInputs[0].get(), keyInputs[2].get());
                 teleportAvailable = false;
+                toggleHealth = !toggleHealth;
             } 
         }
         if(keyInputs[7].get()) { // E pressed
-            //todo add skill here
+            //todo add hyperjump here
         }
-        if(keyInputs[8].get()) { // Y pressed
-            //todo add skill here
+        if(keyInputs[8].get()) { // H pressed
+            //todo add bomb here
         }
-        if(keyInputs[9].get()) { // U pressed
-            //todo add skill here
+        if(keyInputs[9].get()) { // J pressed
+            //todo add skill 1
+            //  for now its shield
+            activateShield(GCF);
         }
-        if(keyInputs[10].get()) { // I pressed
-            //todo add skill here
+        if(keyInputs[10].get()) { // K pressed
+            //todo add skill 2
         }
-        if(keyInputs[11].get()) { // H pressed
-            //todo add skill here
-        }
-        if(keyInputs[12].get()) { // J pressed
-            //todo add skill here
-        }
-        if(keyInputs[13].get()) { // K pressed
-            //todo add skill here
-            //for now it activates immortal mode.
-            toggleHealth = !toggleHealth;
+        if(keyInputs[11].get()) { // L pressed
+            //todo add skill 3
         }
         if(!toggleHealth)
             checkDeath();
         else
             lifeCount = 3;
-//        if(!teleportAvailable){
-//            teleportCountdown++;
-//            if(teleportCountdown >= TELEPORT_COOLDOWN){
-//                teleportAvailable = true;
-//                teleportCountdown = 0;
-//            }
-//        }
     }
 
     private void checkDeath() {
@@ -177,6 +167,8 @@ public class Player extends GameComponent{
                 attackDelay = false; // make delay false
             attackDelayTimer -= 25; // decrease delay
         }
+    }
+    public void activateShield(GameComponentFactory GCF){
     }
     public double getWidth() { return width; }
 }

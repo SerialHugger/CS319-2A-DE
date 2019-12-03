@@ -61,40 +61,38 @@ public class MiddleGround {
 
     }
 
-    void update(boolean left, boolean right, Player player){
+    void update(boolean left, boolean right, Player player, double speed){
         // loops the background so the world seems infinte
         if(left) { // if button to go left, "A", is pressed
-//            if(right_mountains_4.getTranslateX() + (width * 4) > player.getX() + (width * 2))
-//            {
-//                middleGround_1.setTranslateX(middleGround_2.getTranslateX() - (width * 4));
-//            }
-//            if(middleGround_1.getTranslateX() + (width * 4) > player.getX() + (width * 2))
-//            {
-//                middleGround_2.setTranslateX(middleGround_1.getTranslateX() - (width * 4));
-//            }
-            left_mountains_4.setTranslateX(left_mountains_4.getTranslateX() + speed/5);
-            right_mountains_4.setTranslateX(right_mountains_4.getTranslateX() + speed/5);
-            temple_back.setTranslateX(temple_back.getTranslateX() + speed*3/10);
-            temple_middle.setTranslateX(temple_middle.getTranslateX() + speed*2/5);
-            temple_front.setTranslateX(temple_front.getTranslateX() + speed*1/2);
+            moveX(1,speed);
+            checkLoop(true);
         }
         if(right) { // if button to go right, "D", is pressed
-//            if(middleGround_1.getTranslateX() < player.getX() - (width * 2))
-//            {
-//                middleGround_2.setTranslateX(middleGround_1.getTranslateX() + (width *4));
-//            }
-//            if(middleGround_2.getTranslateX() < player.getX() - (width * 2))
-//            {
-//                middleGround_1.setTranslateX(middleGround_2.getTranslateX() + (width * 4));
-//            }
-            left_mountains_4.setTranslateX(left_mountains_4.getTranslateX() - speed/5);
-            right_mountains_4.setTranslateX(right_mountains_4.getTranslateX() - speed/5);
-            temple_back.setTranslateX(temple_back.getTranslateX() - speed*3/10);
-            temple_middle.setTranslateX(temple_middle.getTranslateX() - speed*2/5);
-            temple_front.setTranslateX(temple_front.getTranslateX() - speed*1/2);
+            moveX(-1,speed);
+            checkLoop(false);
         }
         if(right){
             if(gameRoot.getTranslateX() * -1 > 0) ; //todo
         }
+    }
+
+    public void slide(boolean toLeft,double slidingSpeed) {
+        if(toLeft){
+            moveX(1,slidingSpeed);
+        } else {
+            moveX(-1,slidingSpeed);
+        }
+    }
+
+    private void moveX(int direction, double speed){
+        left_mountains_4.setTranslateX(left_mountains_4.getTranslateX() + (direction*speed/5));
+        right_mountains_4.setTranslateX(right_mountains_4.getTranslateX() + (direction*speed/5));
+        temple_back.setTranslateX(temple_back.getTranslateX() + (direction*speed*3/10));
+        temple_middle.setTranslateX(temple_middle.getTranslateX() + (direction*speed*2/5));
+        temple_front.setTranslateX(temple_front.getTranslateX() + (direction*speed*1/2));
+    }
+
+    private void checkLoop(boolean left){
+
     }
 }
