@@ -16,6 +16,7 @@ public class Hud{
     private StackPane fpsPane; // stackpane for fps display
     private ImagePattern[] healthHudFrames = new ImagePattern[36]; // the imagepatterns for animation
     private Text fpsText;
+    private String type;
     private double width; // width of the game
     private double height; // height of the game
     private int currentState = 0; // currentState of the animation
@@ -26,18 +27,15 @@ public class Hud{
     ///////////////
     // Necessary attiributes for changing directions with the ship
     boolean toLeft = false; // if facing left true else false. Starts with false;
-    boolean startSlidingLeft = false; // slides background to left
-    boolean startSlidingRight = false; // slides background to right
-    double slidingLimit; // sliding limit for bacground
-    double slidingCounter; // sliding counter for background
-    double slidingSpeed; // sliding speed for background
     ////////////////
 
     Hud (double width, double height, String type, Pane gameRoot){
         this.gameRoot = gameRoot;
         healthHud = new SceneComponent(width/3.96,height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
         this.width = width;
+        this.type = type;
         this.height = height;
+        toLeft = false;
         healthHud.setTranslateX( -1 * width );
         healthHud.setTranslateY( height / 200);
         fpsPane = new StackPane();
@@ -61,46 +59,23 @@ public class Hud{
         gameRoot.getChildren().add(healthHud);
         fpsPane.getChildren().add(fpsText);
         gameRoot.getChildren().add(fpsPane);
-        System.out.println("Hud added");
     }
 
     /*
      * Updates animation for the hud
      */
-    public void update(BooleanProperty[] keyInputs, double speed, int fps){
+    public void update(boolean right, boolean left, double speed, int fps){
         fpsText.setText("FPS: " + fps);
-        if (keyInputs[3].get()) { // if the key D pressed
-            if (toLeft) { // if it was toLeft, change camera and bring it to limit x.
-                startSlidingLeft = true;
-                startSlidingRight = false;
-                toLeft = false;
-            } else // if it was already not toLeft, just move it.
+        if (left) { // if the key D pressed
+            if(!toLeft)
                 moveX(1, speed);
+            toLeft = false;
 
         }
-        if (keyInputs[1].get()) { // if the key A pressed
-            if (!toLeft) { // if it was not toLeft, change camera and bring it to limit x.
-                startSlidingRight = true;
-                startSlidingLeft = false;
-                toLeft = true;
-            } else // if it was already to left, just move it
+        if (right) { // if the key A pressed
+            if(toLeft)
                 moveX(-1, speed);
-        }
-        if (startSlidingLeft) { // if the background sliding left
-            if (slidingLimit * -1 != slidingCounter) {// until sliding limit is reached
-                moveX(1, slidingSpeed); // change background with sliding speed
-                slidingCounter -= slidingSpeed;
-            } else {
-                startSlidingLeft = false; // finish the execution when the limit is reached.
-            }
-        }
-        if (startSlidingRight) { // if the background sliding right
-            if (slidingCounter != 0) {// until counter hits the 0
-                moveX(-1, slidingSpeed); // change background with sliding speed
-                slidingCounter += slidingSpeed;
-            } else {
-                startSlidingRight = false; // finish the execution when the limit is reached.
-            }
+            toLeft = true;
         }
         if(!delay) {
             delayTimer += 25;
@@ -119,10 +94,12 @@ public class Hud{
         }
     }
 
-    public void setSliding(double slidingLimit, double slidingCounter, double slidingSpeed){
-        this.slidingLimit = slidingLimit;
-        this.slidingCounter = slidingCounter;
-        this.slidingSpeed = slidingSpeed;
+    public void slide(boolean toLeft,double slidingSpeed) {
+        if(toLeft){
+            moveX(-1,slidingSpeed);
+        } else {
+            moveX(1,slidingSpeed);
+        }
     }
 
     private void moveX(int direction, double moveSpeed){

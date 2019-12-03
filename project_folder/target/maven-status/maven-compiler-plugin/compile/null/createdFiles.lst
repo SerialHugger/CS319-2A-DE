@@ -1,4 +1,5 @@
 module-info.class
 org\openjfx\Dienamite.class
 org\openjfx\laserBullet.class
+org\openjfx\Shield.class
 org\openjfx\Dodger.class
