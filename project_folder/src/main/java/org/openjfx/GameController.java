@@ -19,13 +19,12 @@ public class GameController {
     private Player player; // player variable for easier access
     private double speed = 15; // players speed
     private double maxSpeed = 25; // players maximum speed
-    private double acceleration = 0; // screens acceleration todo add acceleration
+    private double acceleration = 0.3; // screens acceleration todo add acceleration
     // Necessary attiributes for changing directions with the ship
-    boolean toLeft = false; // if facing left true else false. Starts with false;
+    boolean toLeft = true; // if facing left true else false. Starts with false;
     boolean startSlidingLeft = false; // slides background to left
     boolean startSlidingRight = false; // slides background to right
     double slidingLimit; // sliding limit for bacground
-    double slidingSpeedAcceleration = 0.02; // sliding aceleration
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
     // level counter
@@ -56,7 +55,7 @@ public class GameController {
     }
 
     void createContent() {
-        speed = 15;//width / 384; // If width = 1920 then speed = 5.
+        speed = 0; // If width = 1920 then speed = 5.
         maxSpeed = width / 76.8; // If width = 1920 then maxSpeed = 25.
         acceleration = 0.3;
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
@@ -68,18 +67,16 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        createLevel(level); // create the level with enemies
+        //createLevel(level); // create the level with enemies // blo
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
-        slidingSpeed = (width - player.getWidth() * 4) / 66;
+        slidingSpeed = (width - player.getWidth() * 4) / 66; // some numbers yes.
     }
     void updateInteraction(){
         //update interaction
         interactionHandler.handleInteraction(gameRoot);
     }
     void updateGame(int fps) {
-        // update scenery
-        scenery.update(keyInputs, player, fps, speed);
         // update game components
         int size = gameComponents.size();
         for (int i = 0; i < size; i++) { // for every component in gameComponents.
@@ -92,7 +89,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
                 PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
-                playerBullet.movePlayerBullet(player); // update it.
+                playerBullet.movePlayerBullet(); // update it.
                 // If its outside of the current camera/root location.
                 if (playerBullet.getX() > (gameRoot.getTranslateX() * -1) + width + playerBullet.width ||
                         playerBullet.getX() < (gameRoot.getTranslateX() * -1) - playerBullet.width) {
@@ -159,44 +156,76 @@ public class GameController {
         }
         // update root
         if (keyInputs[3].get()) { // if the key D pressed
-            if (toLeft) { // if it was toLeft, change camera and bring it to limit x.
-                startSlidingLeft = true;
-                startSlidingRight = false;
-                toLeft = false;
-                slidingSpeedAcceleration += 0.1;
-            } else // if it was already not toLeft, just move it.
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
-        }
-        if (keyInputs[1].get()) { // if the key A pressed
+            //handle the acceleration with scenery!
+            if(speed < maxSpeed)
+                speed += acceleration;
+            if(speed < 0)
+                speed += acceleration;
+            //check for sliding
             if (!toLeft) { // if it was not toLeft, change camera and bring it to limit x.
                 startSlidingRight = true;
                 startSlidingLeft = false;
                 toLeft = true;
-                slidingSpeedAcceleration += 0.1;
-            } else // if it was already to left, just move it
-                gameRoot.setTranslateX(gameRoot.getTranslateX() + speed);
+            }
+        }
+        if (keyInputs[1].get()) { // if the key A pressed
+            //handle the acceleration with scenery!
+            if(speed > -1*maxSpeed)
+                speed -= acceleration;
+            if(speed > 0)
+                speed -= acceleration;
+            //check for sliding
+            if (toLeft) { // if it was toLeft, change camera and bring it to limit x.
+                startSlidingLeft = true;
+                startSlidingRight = false;
+                toLeft = false;
+            }
         }
         if (keyInputs[4].get()) { // if enter is pressed.
             //todo
         }
         if (startSlidingLeft) { // if the background sliding left
-            if (slidingLimit * -1 != slidingCounter ) {// until sliding limit is reached or hits the player to screen limit
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
-                scenery.slideScenery(false,slidingSpeed);
-                slidingCounter -= slidingSpeed;
-            } else {
-                startSlidingLeft = false; // finish the execution when the limit is reached.
+//            (player.getX() - player.getWidth()*1.5) > gameRoot.getTranslateX()*-1
+            if (true){
+                if (slidingCounter != 0) {// until sliding limit is reached or hits the player to screen limit
+                    gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                    scenery.slideScenery(true, slidingSpeed);
+                    slidingCounter += slidingSpeed;
+                } else {
+                    startSlidingLeft = false; // finish the execution when the limit is reached.
+                    System.out.println(player.getX() + gameRoot.getTranslateX());
+                }
             }
         }
         if (startSlidingRight) { // if the background sliding right
-            if (slidingCounter != 0) {// until counter hits the 0
-                gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
-                scenery.slideScenery(true,slidingSpeed);
-                slidingCounter += slidingSpeed;
-            } else {
-                startSlidingRight = false; // finish the execution when the limit is reached.
+//            (player.getX() + player.getWidth() * 2.5) > (gameRoot.getTranslateX() + width) * -1
+            if(true)
+            {
+                if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
+                gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+                scenery.slideScenery(false,slidingSpeed);
+                slidingCounter -= slidingSpeed;
+                } else {
+                    startSlidingRight = false; // finish the execution when the limit is reached.
+                    System.out.println( player.getX() + gameRoot.getTranslateX());
+                }
             }
         }
+        if(!keyInputs[1].get() && !keyInputs[3].get()){ // if the movement keys not pressed
+            //handle the acceleration
+            if(speed > 0) {
+                speed -= acceleration;
+                if (speed < 0)
+                    speed = 0;
+            } else {
+                speed += acceleration;
+                if(speed > 0)
+                    speed = 0;
+            }
+        }
+        gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
+        // update scenery
+        scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
     }
 
     /*

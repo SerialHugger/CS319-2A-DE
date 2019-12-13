@@ -11,7 +11,7 @@ public class laserBullet extends EnemyBullet{
         speed = 7;
         hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "enemyBulletHitbox");
         body = new Rectangle(width,height, Color.RED);
-        fillImage(assetLocation);
+        //fillImage(assetLocation);
         x_player = player.getX() + player.width/2;
         y_player = player.getY() + player.height/2;
     }

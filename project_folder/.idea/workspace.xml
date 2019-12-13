@@ -2,19 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxCircle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxRectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemyBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Hud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MiddleGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MiddleGround.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Scenery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/laserBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/laserBullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,9 +51,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Assets" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.29425287" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
@@ -129,7 +130,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2f1b19b4-32bc-4cbc-b5c2-4ac49f8c6bd5" name="Default Changelist" comment="" />
+      <changelist id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="" />
       <created>1570516481400</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
