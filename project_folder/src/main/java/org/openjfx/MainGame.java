@@ -27,5 +27,5 @@ public class MainGame {
 
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}
 
-    public void updateInteraction(Game game) { gameController.updateInteraction(); }
+    public void updateInteraction() { gameController.updateInteraction(); }
 }

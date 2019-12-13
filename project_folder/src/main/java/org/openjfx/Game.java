@@ -53,7 +53,7 @@ public class Game extends Application {
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
-                mainGame.updateInteraction(this); // update Game
+                mainGame.updateInteraction(); // update Interaction/Game
                 if(frameTime >= 1.0){ //keeping track of the frames
                     frameTime = 0;
                     fps = frames;

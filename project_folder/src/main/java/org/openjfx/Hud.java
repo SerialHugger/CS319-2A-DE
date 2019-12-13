@@ -64,19 +64,8 @@ public class Hud{
     /*
      * Updates animation for the hud
      */
-    public void update(boolean right, boolean left, double speed, int fps){
+    public void update(double speed, int fps){
         fpsText.setText("FPS: " + fps);
-        if (left) { // if the key D pressed
-            if(!toLeft)
-                moveX(1, speed);
-            toLeft = false;
-
-        }
-        if (right) { // if the key A pressed
-            if(toLeft)
-                moveX(-1, speed);
-            toLeft = true;
-        }
         if(!delay) {
             delayTimer += 25;
             if(delayTimer == 75)
@@ -92,6 +81,7 @@ public class Hud{
             healthHud.setFill(healthHudFrames[currentState]);
             delay = false;
         }
+        moveX(1, speed);
     }
 
     public void slide(boolean toLeft,double slidingSpeed) {
@@ -103,7 +93,7 @@ public class Hud{
     }
 
     private void moveX(int direction, double moveSpeed){
-        healthHud.setTranslateX(healthHud.getTranslateX() + ( direction * moveSpeed));
-        fpsText.setTranslateX(fpsText.getTranslateX() + ( direction * moveSpeed));
+        healthHud.setTranslateX(healthHud.getTranslateX() + (direction * moveSpeed));
+        fpsText.setTranslateX(fpsText.getTranslateX() + (direction * moveSpeed));
     }
 }
