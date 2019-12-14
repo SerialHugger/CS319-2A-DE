@@ -5,22 +5,22 @@ import javafx.scene.shape.Shape;
 
 //enemyType1
 
-public class Dienamite extends Enemy {
+public class SpeedRunner extends Enemy {
 
-    Dienamite(double width, double height, String assetLocation) {
-        super(width / 38, height / 36, "dienamite");
-        this.width = width / 38;
-        this.height = height / 36;
+    SpeedRunner(double width, double height, String assetLocation) {
+        super(width / 30, height / 10, "speedRunner");
+        this.width = width / 30;
+        this.height = height / 10;
         super.initBody(assetLocation, width, height);
     }
 
-    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveSpeedRunner(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
 
         if (delay) { // delay: a boolean value to delay shoots
-            if (random < 150) { // %1.5 chance TODO: Constant problem for 150
+            if (random < 9000) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
                 boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
@@ -30,7 +30,7 @@ public class Dienamite extends Enemy {
                     initBullet(GCF, bulletType);
 
                     delay = false; // make delay false
-                    delayTimer = 500; // start delay timer TODO: Constant problem for 500
+                    delayTimer = 50; // start delay timer TODO: Constant problem for 500
                 }
             }
         } else { // if delay is on
@@ -44,11 +44,11 @@ public class Dienamite extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2];
-        speed_y = moveValues[3];
+        speed_x = moveValues[2] ;
+        speed_y = moveValues[3] ;
 
-        moveX(directionX, speed_x); // move X with given inputs
-        moveY(directionY, speed_y); // move Y with given inputs
+        moveX(directionX, speed_x * 5); // move X with given inputs
+        moveY(directionY, speed_y ); // move Y with given inputs
 
         //updates the space ships so they loop around map
         loopAroundTheMap(GCF.width, player, left);
@@ -65,13 +65,6 @@ public class Dienamite extends Enemy {
                     dead = true;
                 }
             }
-        }
-
-        if (dead) {
-            EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
-            selfDest.setX(this.getX() + width / 2);
-            selfDest.setY(this.getY() - height / 2);
-            selfDest.addShapes(gameRoot);
         }
     }
 }
