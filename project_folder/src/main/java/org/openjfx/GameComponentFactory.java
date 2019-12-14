@@ -34,6 +34,8 @@ public class GameComponentFactory {
             temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedbullet")) {
             temp = new GuidedBullet(width / 384, height / 108, "empty", true, gameComponents.get(0));
+        } else if( type.equals("speedRunner")){
+            temp = new SpeedRunner( width , height , "Assets\\alpaka.png");
         }
         gameComponents.add(temp);
         return temp;

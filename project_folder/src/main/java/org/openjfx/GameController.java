@@ -172,6 +172,15 @@ public class GameController {
                     guidedBullet.die();
                 }
             }
+            else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
+                SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
+                speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (speedRunner.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    speedRunner.die(); // kill it, remove it from root.
+                }
+            }
         }
         // update root
         if (keyInputs[3].get()) { // if the key D pressed
@@ -269,6 +278,11 @@ public class GameController {
         for (int i = 0; i < 3; i++) {
             Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
             dienamite.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
+            speedRunner.addShapes(gameRoot);
         }
 
     }

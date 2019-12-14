@@ -1,6 +1,8 @@
+org\openjfx\Dividus.class
 module-info.class
 org\openjfx\Dienamite.class
 org\openjfx\laserBullet.class
+org\openjfx\SpeedRunner.class
 org\openjfx\Shield.class
 org\openjfx\Atlas.class
 org\openjfx\Dodger.class
