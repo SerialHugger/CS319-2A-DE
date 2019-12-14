@@ -32,6 +32,8 @@ public class GameComponentFactory {
             temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
         }else if (type.equals("laserBullet")) {
             temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
+        } else if (type.equals("enemySelfDestruct")) {
+            temp = new EnemySelfDestruct(75, 75, "");
         }
         gameComponents.add(temp);
         return temp;
