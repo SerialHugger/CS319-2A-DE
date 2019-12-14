@@ -152,6 +152,13 @@ public class GameController {
                     size -= 1;
                     laserBullet.die();
                 }
+            } else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
+                EnemySelfDestruct selfDest = ((EnemySelfDestruct) gameComponents.get(i));
+                selfDest.updateSelfDestruct(); // update it.
+                if (selfDest.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    selfDest.die(); // kill it, remove it from root.
             } else if (gameComponents.get(i) instanceof GuidedBullet) { // else if its an instance class of GuidedBullet
                 GuidedBullet guidedBullet = (GuidedBullet) gameComponents.get(i); // cast it to a temporary variable.
                 guidedBullet.moveGuidedBullet(player); // update it.
@@ -251,7 +258,7 @@ public class GameController {
      * todo make it more complex
      */
     public void createLevel(int lvl) {
-        for (int i = 0; i < 5; i++) {
+        /*for (int i = 0; i < 5; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
@@ -264,7 +271,7 @@ public class GameController {
         for (int i = 0; i < 3; i++) {
             Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
             dividus.addShapes(gameRoot);
-        }
+        }*/
 
         for (int i = 0; i < 3; i++) {
             Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
