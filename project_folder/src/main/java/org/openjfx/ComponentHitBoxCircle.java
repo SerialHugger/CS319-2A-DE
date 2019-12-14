@@ -8,7 +8,7 @@ public class ComponentHitBoxCircle extends Circle {
     private double radius;
     public boolean dead = false;
     ComponentHitBoxCircle(double radius, String type){
-        super(radius, Color.RED ); //Color.TRANSPARENT
+        super(radius, Color.TRANSPARENT ); //Color.TRANSPARENT
         this.radius = radius;
         this.type = type;
     }

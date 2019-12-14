@@ -45,7 +45,7 @@ public class Game extends Application {
         if(onGame){
             // I probably miss commended this cuz reasons.
             render = false;
-            firstTime = System.nanoTime() / 1000000000.0; // set time
+            firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
@@ -53,15 +53,14 @@ public class Game extends Application {
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
+                mainGame.updateInteraction(); // update Interaction/Game
                 if(frameTime >= 1.0){ //keeping track of the frames
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-                    System.out.println("FPS: " + fps); // print frame count
                 }
             }
             if(render){ // if the game updated Render it
-                mainGame.updateInteraction(this); // update Game
                 mainGame.update(this, fps); // render game.
                 frames++;
             } else {

@@ -9,10 +9,10 @@ import javafx.scene.shape.Shape;
 public class Dividus extends Enemy {
 
     Dividus(double width, double height, String assetLocation) {
-        super(width, height, "player");
-
-        String enemyType = "enemyHitBox";
-        super.initBody(assetLocation, enemyType);
+        super(width / 9.6, height / 9, "dividus");
+        this.width = width / 9.6; // width of dividus
+        this.height = height / 9; // height of dividus
+        super.initBody(assetLocation, width, height);
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -27,7 +27,7 @@ public class Dividus extends Enemy {
                 boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
-                    String bulletType = "enemyBulletType1";
+                    String bulletType = "laserBullet";
                     initBullet(GCF, bulletType);
 
                     delay = false; // make delay false
@@ -52,34 +52,20 @@ public class Dividus extends Enemy {
         moveY(directionY, speed_y); // move Y with given inputs
 
         //updates the space ships so they loop around map
-        loopAroundTheMap(GCF.getWidth(), player, left);
+        loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
             if (hitBox instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
                 if (temp.isDead()) {
-                    EnemyType2 temp1 = (EnemyType2) GCF.createComponent("enemyType2");
-                    EnemyType2 temp2 = (EnemyType2) GCF.createComponent("enemyType2");
-                    temp1.addShapes(gameRoot);
-                    temp2.addShapes(gameRoot);
-                    temp1.setX(body.getTranslateX());
-                    temp1.setY(body.getTranslateY());
-                    temp2.setX(body.getTranslateX());
-                    temp2.setY(body.getTranslateY());
+                    createAtlases(GCF);
                     dead = true;
                 }
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
-                    EnemyType2 temp1 = (EnemyType2) GCF.createComponent("enemyType2");
-                    EnemyType2 temp2 = (EnemyType2) GCF.createComponent("enemyType2");
-                    temp1.addShapes(gameRoot);
-                    temp2.addShapes(gameRoot);
-                    temp1.setX(body.getTranslateX() - width/2);
-                    temp1.setY(body.getTranslateY() - height/2);
-                    temp2.setX(body.getTranslateX() - width/2);
-                    temp2.setY(body.getTranslateY() - height/2);
+                    createAtlases(GCF);
                     dead = true;
                 }
             }
@@ -109,5 +95,15 @@ public class Dividus extends Enemy {
         return new int[]{directionX, directionY, (int)speed_x, (int)speed_y};
     }
 
+    public void createAtlases(GameComponentFactory GCF){
+        Atlas temp1 = (Atlas) GCF.createComponent("atlas");
+        Atlas temp2 = (Atlas) GCF.createComponent("atlas");
+        temp1.addShapes(gameRoot);
+        temp2.addShapes(gameRoot);
+        temp1.setX(body.getTranslateX());
+        temp1.setY(body.getTranslateY());
+        temp2.setX(body.getTranslateX());
+        temp2.setY(body.getTranslateY());
+    }
 
 }

@@ -1,7 +1,5 @@
 package org.openjfx;
 
-import javafx.scene.shape.Shape;
-
 import java.util.ArrayList;
 
 public class GameComponentFactory {
@@ -23,21 +21,19 @@ public class GameComponentFactory {
         if (type.equals("player")) {
             temp = new Player(width / 12.8, height / 15.4, "Assets\\spaceship");
         } else if (type.equals("playerBullet")) {
-            temp = new PlayerBullet(width / 96, height / 216, "empty", true);
-        } else if (type.equals("enemyType1")) {
-            temp = new EnemyType1(width / 38.4, height / 36, "Assets\\spaceship.png");
-        } else if (type.equals("enemyType2")) {
-            temp = new EnemyType2(width / 38.4, height / 36, "Assets\\pacman.png");
+            temp = new PlayerBullet(width / 96, height / 216, "empty", true, gameComponents.get(0).speed);
+        } else if (type.equals("atlas")) {
+            temp = new Atlas(width, height, "Assets\\Enemies\\atlas.png");
+        } else if (type.equals("dodger")) {
+            temp = new Dodger(width, height, "Assets\\pacman.png");
         } else if (type.equals("dividus")) {
-            temp = new Dividus(width / 9.6, height / 18, "Assets\\pacman.png" );
-        } else if (type.equals("enemyBulletType1")) {
-            temp = new EnemyBulletType1(width / 274, height / 154, "empty", true, gameComponents.get(0)); // 0 is player
+            temp = new Dividus(width, height, "Assets\\pacman.png" );
+        } else if (type.equals("dienamite")) {
+            temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
+        }else if (type.equals("laserBullet")) {
+            temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
         }
         gameComponents.add(temp);
         return temp;
     }
-
-    public double getWidth() {
-        return width;
-    } // return the width of the game.
 }

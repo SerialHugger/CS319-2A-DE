@@ -7,15 +7,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 public class InteractionHandler {
-    private Pane gameRoot; // root of the game
-    private GameComponentFactory gameComponentFactory; // Factory for components
-    private ArrayList<GameComponent> gameComponents; // array list for updating components
-    InteractionHandler(ArrayList<GameComponent> gameComponents, GameComponentFactory gameComponentFactory, Pane gameRoot){
-        this.gameRoot = gameRoot;
-        this.gameComponentFactory = gameComponentFactory;
-        this.gameComponents = gameComponents;
-    }
-    public boolean update(){
+    public boolean handleInteraction(Pane gameRoot){
         BooleanProperty isDead = new SimpleBooleanProperty(false);
         gameRoot.getChildren().forEach( i -> { // first loop
             ComponentHitBoxCircle circleTemp; // first temp circle hit box
@@ -63,7 +55,7 @@ public class InteractionHandler {
                             } else if(rectangleTemp2.getType().equals("enemyHitBox")){ // rectangleTemp2 is enemy
                                 if(circleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {
                                     if (!isDead.get()) { // if the player is not dead, kill it.
-                                        System.out.println("Player Circle to enemy Type 1");
+                                        System.out.println("Player Circle to enemy Type");
                                         isDead.set(true); // make return value true
                                         circleTemp.dead = true; // change circleTemp to dead status.
                                         rectangleTemp2.dead = true;
@@ -112,13 +104,12 @@ public class InteractionHandler {
                                         isDead.set(true); // make return value true
                                         rectangleTemp.dead = true; // change rectangleTemp to dead status.
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status.
-                                        System.out.println(rectangleTemp2.dead);
                                     }
                                 }
                             } else if(rectangleTemp2.getType().equals("enemyHitBox")){ // rectangleTemp2 is enemyBulletType1
                                 if(rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {
                                     if (!isDead.get()) { // if the player is not dead, kill it.
-                                        System.out.println("Player Rect to enemy 1");
+                                        System.out.println("Player Rect to enemy");
                                         isDead.set(true); // make return value true
                                         rectangleTemp.dead = true; // change rectangleTemp to dead status.
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status.
@@ -127,10 +118,12 @@ public class InteractionHandler {
                             }
 
                         } else if( rectangleTemp.getType().equals("playerBulletHitbox")) { // rectangleTemp is playerBullet
+                            if(rectangleTemp2.getType().equals("enemyHitBox")){
+                            }
                             if (rectangleTemp2.getType().equals("enemyBulletHitbox")) { // rectangleTemp2 is enemyBulletType1
                                 if (rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {
                                     if (!isDead.get()) { // if the player is not dead, kill it.
-                                        System.out.println("PlayerBullet to enemy Bullet Type 1");
+                                        System.out.println("Player Bullet to enemy Bullet");
                                         isDead.set(true); // make return value true
                                         rectangleTemp.dead = true; // change rectangleTemp to dead status.
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status.
@@ -139,7 +132,7 @@ public class InteractionHandler {
                             } else if (rectangleTemp2.getType().equals("enemyHitBox")) { // rectangleTemp2 is enemyBulletType1
                                 if (rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) {
                                     if (!isDead.get()) { // if the player is not dead, kill it.
-                                        System.out.println("PlayerBullet to enemy 1");
+                                        System.out.println("PlayerBullet to enemy");
                                         isDead.set(true); // make return value true
                                         rectangleTemp.dead = true; // change rectangleTemp to dead status.
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status.

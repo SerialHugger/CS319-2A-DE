@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+
 public class MenuController {
     // necessary buttons.
     private Rectangle buttonHighlight;
@@ -43,6 +44,7 @@ public class MenuController {
         this.settingButtons = settingButtons;
         this.settingsButtonImages = settingsButtonImages;
         this.settingButtonHighlight = settingButtonHighlight;
+        //Assets\Music\destiny2_journey.mp3
     }
     public void update(Game game, Pane root) {
         // initiate delay timer.
