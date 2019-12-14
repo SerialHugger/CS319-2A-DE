@@ -152,6 +152,25 @@ public class GameController {
                     size -= 1;
                     laserBullet.die();
                 }
+            } else if (gameComponents.get(i) instanceof GuidedBullet) { // else if its an instance class of GuidedBullet
+                GuidedBullet guidedBullet = (GuidedBullet) gameComponents.get(i); // cast it to a temporary variable.
+                guidedBullet.moveGuidedBullet(player); // update it.
+                // if its not in the boundaries of camera/root remove it.
+                // first check for X then check for Y.
+                if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.width || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.width) {
+                    gameComponents.remove(i--); // remove it from components and decrease i.
+                    size -= 1; // decrease size.
+                    guidedBullet.die(); // kill it, remove it from root.
+                } else if (guidedBullet.getY() >= gameRoot.getHeight() + guidedBullet.width || guidedBullet.getY() < 0 - guidedBullet.width) {
+                    gameComponents.remove(i--); // remove it from components and decrease i.
+                    size -= 1; // decrease size.
+                    guidedBullet.die(); // kill it, remove it from root.
+                }
+                if (guidedBullet.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    guidedBullet.die();
+                }
             }
         }
         // update root
