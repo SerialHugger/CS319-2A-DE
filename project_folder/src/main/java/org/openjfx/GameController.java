@@ -55,9 +55,9 @@ public class GameController {
     }
 
     void createContent() {
-        speed = 0; // If width = 1920 then speed = 5.
-        maxSpeed = width / 76.8; // If width = 1920 then maxSpeed = 25.
-        acceleration = 0.3;
+        speed = 0;
+        maxSpeed = magicConverter(25); // If width = 1920 then maxSpeed = 25.
+        acceleration = magicConverter(0.3);
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
@@ -366,5 +366,9 @@ public class GameController {
                 keyInputs[12].set(false);
             }
         });
+    }
+
+    public double magicConverter(double wantedInteger){
+        return width/(1920/wantedInteger);
     }
 }

@@ -19,7 +19,7 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width / 12.8, height / 15.4, "Assets\\spaceship");
+            temp = new Player(width, height / 15.4, "Assets\\spaceship");
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width / 96, height / 216, "empty", true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
