@@ -16,12 +16,20 @@ public class GameComponent {
     double width; // width of the component
     double height; // height of the component
     boolean dead = false; // if true then the component will be removed from the root in the next update
-    double speed = 5; // current speed of the component.
+    double speed = 5; // components speed
+    double maxSpeed = 25; // components maximum speed
+    double acceleration = 0; // screens acceleration
     int delayTimer = 0; // provides timer for delay
     boolean delay = false; // provides delays for certain component actions
     boolean facingLeft = true; // this controls where the component is facing.
     double speed_x = 0; // speed of the component at x direction
     double speed_y = 0; // speed of the component at y direction
+
+    double firstTime = 0; // hold the initial time.
+    double lastTime = System.nanoTime() / 1000000000.0; // helps calculate time
+    double passedTime = 0; // helps calculate fps
+    double totalPassedTime = 0; // hold unprocessed time of the game.
+
     GameComponent(double width, double height, String type){
         this.type = type;
         this.width = width;
@@ -52,11 +60,20 @@ public class GameComponent {
             body.setFill(imagePattern);
             inputstream.close();
         } catch ( Exception e ) {
-            System.out.println(e.toString());
-            return null;
+            try{
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\","/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                body.setFill(imagePattern);
+                inputstream.close();
+            } catch ( Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
         }
         return  imagePattern;
     }
+
     public void die(){ // if called the component will be removed from game.
         for(int i = 0; i < hitBoxes.length; i++ ){
             gameRoot.getChildren().remove(hitBoxes[i]);
@@ -74,6 +91,7 @@ public class GameComponent {
         }
         body.setTranslateX(body.getTranslateX() + (direction * newSpeed));
     }
+
     /*
      Moves both hitboxes and rectangles with the given inputs.
      if 1 then down, if -1 then up
@@ -85,10 +103,24 @@ public class GameComponent {
         body.setTranslateY(body.getTranslateY() + (direction * newSpeed));
     }
 
-    public void setSpeed(double speed){
-        this.speed = speed;
+    public double getX(){ return body.getTranslateX(); } // returns the X position of the component
+
+    public double getY(){ return body.getTranslateY(); } // returns the Y position of the component
+
+    public void setX(double newX){
+        for(int i = 0; i < hitBoxes.length; i ++) {
+            hitBoxes[i].setTranslateX(newX);
+        }
+        body.setTranslateX(newX);
+    }
+    public void setY(double newY){
+        for(int i = 0; i < hitBoxes.length; i ++) {
+            hitBoxes[i].setTranslateY(newY);
+        }
+        body.setTranslateY(newY);
     }
 
-    public double getX(){ return body.getTranslateX(); } // returns the X position of the component
-    public double getY(){ return body.getTranslateY(); } // returns the Y position of the component
+    public double magicConverter(double wantedInteger){
+        return width/(1920/wantedInteger);
+    }
 }

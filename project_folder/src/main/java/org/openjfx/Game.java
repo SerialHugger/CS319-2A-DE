@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -24,8 +25,8 @@ public class Game extends Application {
     private boolean onMenu = true;
     private boolean onGame = false;
 
-    private double width =  1920; // (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-    private double height = 1080; // (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
+    private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+    private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
     private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
@@ -36,15 +37,16 @@ public class Game extends Application {
     double frameTime = 0; // hold the frameTime
     int frames = 0; // frame count
     int fps = 0; // fps count
-
+  
     private void update() {
+
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
         }
         if(onGame){
             // I probably miss commended this cuz reasons.
             render = false;
-            firstTime = System.nanoTime() / 1000000000.0; // set time
+            firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
@@ -52,15 +54,14 @@ public class Game extends Application {
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
+                mainGame.updateInteraction(); // update Interaction/Game
                 if(frameTime >= 1.0){ //keeping track of the frames
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-                    System.out.println("FPS: " + fps); // print frame count
                 }
             }
             if(render){ // if the game updated Render it
-                mainGame.updateInteraction(this); // update Game
                 mainGame.update(this, fps); // render game.
                 frames++;
             } else {
@@ -70,7 +71,6 @@ public class Game extends Application {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
@@ -114,7 +114,7 @@ public class Game extends Application {
         mainScene = menuScene;
         mainScene.setCursor(Cursor.NONE);
         theStage.setFullScreen(true);
-        //theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         theStage.setScene(mainScene); // set the stage to scene
         theStage.show(); // show it
     }

@@ -40,12 +40,16 @@ public class Scenery {
     /*
      * Update game
      */
-    public void update(BooleanProperty[] keyInputs, Player player, int fps){
+    public void update(BooleanProperty[] keyInputs, Player player, int fps, double speed){
         //Update all elements of scenery
         backGround.update(keyInputs[1].get(), player);
-        hud.update(keyInputs, speed, fps);
-        middleGround.update(keyInputs[1].get(), keyInputs[3].get(), player);
+        hud.update(speed, fps);
+        middleGround.update(keyInputs[1].get(), keyInputs[3].get(), player, speed);
         foreGround.update(keyInputs[1].get(), player);
+    }
+    public void slideScenery(boolean toLeft, double slidingSpeed){
+        middleGround.slide(toLeft, slidingSpeed);
+        hud.slide(toLeft, slidingSpeed);
     }
 
     /*
@@ -67,8 +71,5 @@ public class Scenery {
             return null;
         }
         return  imagePattern;
-    }
-    public void setSliding(double slidingLimit, double slidingCounter, double slidingSpeed){
-        hud.setSliding(slidingLimit,slidingCounter,slidingSpeed);
     }
 }

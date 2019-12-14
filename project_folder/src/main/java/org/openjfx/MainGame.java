@@ -22,11 +22,10 @@ public class MainGame {
         return gameRoot;
     }
     public void update(Game game, int fps){
-        gameController.update(fps);
+        gameController.updateGame(fps);
     }
-    public void updateInteraction(Game game){
-        gameController.updateInteraction();
-    }
+
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}
 
+    public void updateInteraction() { gameController.updateInteraction(); }
 }
