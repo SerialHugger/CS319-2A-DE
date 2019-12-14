@@ -1,7 +1,4 @@
-org\openjfx\Game.class
-org\openjfx\Equipment.class
-org\openjfx\Dividus.class
-org\openjfx\MainGame.class
+
 module-info.class
 org\openjfx\BackGround.class
 org\openjfx\EnemySelfDestruct.class
