@@ -133,6 +133,14 @@ public class GameController {
                     size -= 1; // decrease size.
                     dienamite.die(); // kill it, remove it from root.
                 }
+            } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
+                DivingWind divingWind = ((DivingWind) gameComponents.get(i));
+                divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (divingWind.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    divingWind.die(); // kill it, remove it from root.
+                }
             } else if (gameComponents.get(i) instanceof laserBullet) { // else if its an instance class of EnemyBulletType1.
                 laserBullet laserBullet = (laserBullet) gameComponents.get(i); // cast it to a temporary variable.
                 laserBullet.updateLaserBullet(); // update it.
@@ -280,6 +288,10 @@ public class GameController {
             dienamite.addShapes(gameRoot);
         }
 
+        for (int i = 0; i < 3; i++) {
+            DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
+            divingWind.addShapes(gameRoot);
+        }
         for (int i = 0; i < 3; i++) {
             SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
             speedRunner.addShapes(gameRoot);
