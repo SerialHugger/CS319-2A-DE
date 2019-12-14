@@ -10,6 +10,7 @@ public class Player extends GameComponent{
     private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
+    private double teleportDistance = 0;
     int maxAcc = 60;
     int accCount = 0;
     double acceleration;
@@ -22,20 +23,27 @@ public class Player extends GameComponent{
     int lifeCount = 3;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
-    Player(double width, double height, String assetLocation){
-        super(width, height, "player");
+    Player(double givenWidth, double givenHeight, String assetLocation){
+        super(givenWidth, givenHeight, "player");
         hitBoxes = new Shape[2];
+        acceleration = magicConverter(0.3);
+        maxSpeed = magicConverter(25);
+        facingLeft = true;
+        innerAcc = 3;
+        teleportDistance = magicConverter(150);
+        //update width and height
+        double tempWidth = magicConverter(150);
+        double tempHeight = magicConverter(70);
+        width = tempWidth;
+        height = tempHeight;
+        //do the calculations with width and height.
         hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
         hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
         shipStatus[1] = fillImage(assetLocation + "_left.png"); // insert facing left image to body
         shipStatus[0] = fillImage(assetLocation + "_right.png"); // insert facing right image to body
-        acceleration = 0.3;
-        innerAcc = 3;
-        maxSpeed = 25;
         body.setTranslateX(width*1.5 - width*12.8); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        facingLeft = true;
         hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
@@ -191,15 +199,15 @@ public class Player extends GameComponent{
     private void teleport(boolean up, boolean down){
         // currently it gives player ptsd
         if(up && !down){
-            moveY(-1,150);
+            moveY(-1,teleportDistance);
         } else if (!up && down) {
-            moveY(1,150);
+            moveY(1,teleportDistance);
         } else {
             int random = (int) (Math.random() * 2);
             if (random < 1)
-                moveY(1, 150);
+                moveY(1, teleportDistance);
             else
-                moveY(-1, 150);
+                moveY(-1, teleportDistance);
         }
     }
 

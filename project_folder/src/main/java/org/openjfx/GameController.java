@@ -55,9 +55,9 @@ public class GameController {
     }
 
     void createContent() {
-        speed = 0; // If width = 1920 then speed = 5.
-        maxSpeed = width / 76.8; // If width = 1920 then maxSpeed = 25.
-        acceleration = 0.3;
+        speed = 0;
+        maxSpeed = magicConverter(25); // If width = 1920 then maxSpeed = 25.
+        acceleration = magicConverter(0.3);
         scenery = new Scenery(gameRoot, width, height, speed); // first create scenery
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
@@ -67,7 +67,7 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        //createLevel(level); // create the level with enemies // blo
+        createLevel(level); // create the level with enemies // blo
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
         slidingSpeed = (width - player.getWidth() * 4) / 66; // some numbers yes.
@@ -340,5 +340,9 @@ public class GameController {
                 keyInputs[12].set(false);
             }
         });
+    }
+
+    public double magicConverter(double wantedInteger){
+        return width/(1920/wantedInteger);
     }
 }
