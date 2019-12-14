@@ -29,6 +29,9 @@ public class GameController {
     double slidingSpeed; // sliding speed for background
     // level counter
     int level = 1;
+    int deadCounter = 0;
+    long score = 0;
+    int noOfEnemies = 0;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty[] keyInputs = new BooleanProperty[14];
 
@@ -67,7 +70,7 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        createLevel(level); // create the level with enemies // blo
+        //createLevel(level); // create the level with enemies // blo
         slidingLimit = width - player.getWidth() * 4;
         slidingCounter = slidingLimit * -1;
         slidingSpeed = (width - player.getWidth() * 4) / 66; // some numbers yes.
@@ -108,6 +111,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     atlas.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                 Dodger dodger = ((Dodger) gameComponents.get(i));
@@ -116,6 +121,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dodger.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                 Dividus dividus = ((Dividus) gameComponents.get(i));
@@ -124,6 +131,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dividus.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                 Dienamite dienamite = ((Dienamite) gameComponents.get(i));
@@ -132,6 +141,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dienamite.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof laserBullet) { // else if its an instance class of EnemyBulletType1.
                 laserBullet laserBullet = (laserBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -179,8 +190,11 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     speedRunner.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             }
+           createLevel();
         }
         // update root
         if (keyInputs[3].get()) { // if the key D pressed
@@ -254,37 +268,78 @@ public class GameController {
         scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
     }
 
+
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
+        for (int i = 0; i < atlasNumber; i++) {
+            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
+            atlas.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dodgernumber; i++) {
+            Dodger dodger = (Dodger) gameComponentFactory.createComponent("dodger");
+            dodger.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dividusNumber; i++) {
+            Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
+            dividus.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dienamiteNumber; i++) {
+            Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
+            dienamite.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < speedRunnerNumber; i++) {
+            SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
+            speedRunner.addShapes(gameRoot);
+        }
+
+        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber);
+    }
     /*
      * This creates levels
      * adds enemies
      * todo make it more complex
      */
-    public void createLevel(int lvl) {
-        for (int i = 0; i < 5; i++) {
-            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
-            atlas.addShapes(gameRoot);
+    public void createLevel() {
+        if ( level == 1 ) {
+            if ( noOfEnemies == 0 )
+            noOfEnemies = createEnemies(3 ,3 ,3 ,3 ,3 );
+
+            if( noOfEnemies == deadCounter ){
+                System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+                level = 2;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
+
+
+        }
+        else if ( level == 2 ){
+            if ( noOfEnemies == 0)
+            noOfEnemies = createEnemies(5 , 0 , 0 , 0 , 0);
+
+            if( noOfEnemies == deadCounter ){
+                level = 3;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
         }
 
-        for (int i = 0; i < 5; i++) {
-            Dodger dodger = (Dodger) gameComponentFactory.createComponent("dodger");
-            dodger.addShapes(gameRoot);
-        }
+        else if ( level == 3 ){
+            if ( noOfEnemies == 0)
+                noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0);
 
-        for (int i = 0; i < 3; i++) {
-            Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
-            dividus.addShapes(gameRoot);
+            if( noOfEnemies == deadCounter ){
+                level = 4;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
         }
-
-        for (int i = 0; i < 3; i++) {
-            Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
-            dienamite.addShapes(gameRoot);
+        else if( level == 4 ){
+            //eray hoca boss olarak gelcek
         }
-
-        for (int i = 0; i < 3; i++) {
-            SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
-            speedRunner.addShapes(gameRoot);
-        }
-
     }
 
     // Sets buttons to play
