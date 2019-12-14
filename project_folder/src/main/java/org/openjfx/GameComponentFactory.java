@@ -34,6 +34,8 @@ public class GameComponentFactory {
             temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedbullet")) {
             temp = new GuidedBullet(width / 384, height / 108, "empty", true, gameComponents.get(0));
+        } else if (type.equals("enemySelfDestruct")) {
+            temp = new EnemySelfDestruct(75, 75, "empty");
         }
         gameComponents.add(temp);
         return temp;
