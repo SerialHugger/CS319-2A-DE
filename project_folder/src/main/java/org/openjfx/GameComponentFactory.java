@@ -36,6 +36,8 @@ public class GameComponentFactory {
             temp = new GuidedBullet(width / 384, height / 108, "empty", true, gameComponents.get(0));
         } else if( type.equals("speedRunner")){
             temp = new SpeedRunner( width , height , "Assets\\alpaka.png");
+        } else if (type.equals("enemySelfDestruct")) {
+            temp = new EnemySelfDestruct(75, 75, "empty");
         }
         gameComponents.add(temp);
         return temp;

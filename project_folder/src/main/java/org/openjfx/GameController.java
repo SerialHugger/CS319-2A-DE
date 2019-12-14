@@ -331,6 +331,9 @@ public class GameController {
             if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(true);
             }
+            if (e.getCode() == KeyCode.TAB) {
+                keyInputs[13].set(true);
+            }
         });
         scene.setOnKeyReleased(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -371,6 +374,9 @@ public class GameController {
             }
             if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(false);
+            }
+            if (e.getCode() == KeyCode.TAB) {
+                keyInputs[13].set(false);
             }
         });
     }
