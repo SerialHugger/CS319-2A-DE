@@ -26,7 +26,7 @@ public class InteractionHandler {
                         //////////////////////
                         circleTemp2 = (ComponentHitBoxCircle)j; // cast second circle
                         if(circleTemp.getType().equals("playerHitBoxCircle")){ // circleTemp is player
-                            if(circleTemp2.getType().equals("enemyBulletHitbox")){ // circleTemp2 is enemyBulletType2
+                            if(circleTemp2.getType().equals("enemyBulletHitboxCircle")){ // circleTemp2 is enemyBulletType2
                                 if(circleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
                                     if (!isDead.get()) { // if the player is not dead, kill it.
                                         System.out.println("Player Circle to enemy Bullet");
@@ -36,6 +36,18 @@ public class InteractionHandler {
                                     }
                                 }
                             }
+
+                            if(circleTemp2.getType().equals("selfDestructHitbox")){ // circleTemp2 is enemyBulletType2
+                                if(circleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                    if (!isDead.get()) { // if the player is not dead, kill it.
+                                        System.out.println("Player Circle to EnemySelfDestruct");
+                                        isDead.set(true); // make return value true
+                                        circleTemp.dead = true; // change circleTemp to dead status.
+                                    }
+                                }
+                            }
+
+
                         }
                     } else if(j instanceof  ComponentHitBoxRectangle){ // for rectangles
                         //////////////////////
@@ -87,6 +99,16 @@ public class InteractionHandler {
                                         isDead.set(true); // make return value true
                                         rectangleTemp.dead = true; // change circleTemp to dead status.
                                         circleTemp2.dead = true; // change circleTemp2 to dead status
+                                    }
+                                }
+
+                                if(circleTemp2.getType().equals("selfDestructHitbox")){ // circleTemp2 is enemyBulletType2
+                                    if(rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                        if (!isDead.get()) { // if the player is not dead, kill it.
+                                            System.out.println("Player Circle to EnemySelfDestruct");
+                                            isDead.set(true); // make return value true
+                                            rectangleTemp.dead = true; // change circleTemp to dead status.
+                                        }
                                     }
                                 }
                             }

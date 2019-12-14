@@ -66,5 +66,12 @@ public class Dienamite extends Enemy {
                 }
             }
         }
+
+        if (dead) {
+            EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
+            selfDest.setX(this.getX() + width / 2);
+            selfDest.setY(this.getY() - height / 2);
+            selfDest.addShapes(gameRoot);
+        }
     }
 }

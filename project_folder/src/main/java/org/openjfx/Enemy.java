@@ -98,6 +98,12 @@ public class Enemy extends GameComponent{
             enemyBullet.setX(body.getTranslateX()); // set its X
             enemyBullet.setY(body.getTranslateY()); // set its Y
             enemyBullet.addShapes(gameRoot); // add its shapes to Root
+        } else if(bulletType.equals("guidedbullet")) {
+            GuidedBullet enemyBullet = (GuidedBullet) GCF.createComponent(bulletType); // create the bullet
+            enemyBullet.facingLeft = facingLeft; // make it face left
+            enemyBullet.setX(body.getTranslateX()); // set its X
+            enemyBullet.setY(body.getTranslateY()); // set its Y
+            enemyBullet.addShapes(gameRoot); // add its shapes to Root
         }
     }
 

@@ -30,8 +30,12 @@ public class GameComponentFactory {
             temp = new Dividus(width, height, "Assets\\pacman.png" );
         } else if (type.equals("dienamite")) {
             temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
-        }else if (type.equals("laserBullet")) {
+        } else if (type.equals("laserBullet")) {
             temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
+        } else if (type.equals("enemySelfDestruct")) {
+            temp = new EnemySelfDestruct(75, 75, "");
+        } else if (type.equals("guidedbullet")) {
+            temp = new GuidedBullet(width / 384, height / 108, "empty", true, gameComponents.get(0));
         }
         gameComponents.add(temp);
         return temp;
