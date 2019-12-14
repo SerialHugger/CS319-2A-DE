@@ -28,7 +28,7 @@ public class Dodger extends Enemy {
                 boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
-                    String bulletType = "enemyBulletType1"; // TODO: change to enemybullettype2 when implemented
+                    String bulletType = "laserBullet"; // TODO: change to enemybullettype2 when implemented
                     initBullet(GCF, bulletType);
 
                     delay = false; // make delay false

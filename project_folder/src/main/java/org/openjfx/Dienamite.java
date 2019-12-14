@@ -26,7 +26,7 @@ public class Dienamite extends Enemy {
                 boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
-                    String bulletType = "enemyBulletType1";
+                    String bulletType = "laserBullet";
                     initBullet(GCF, bulletType);
 
                     delay = false; // make delay false
@@ -65,6 +65,13 @@ public class Dienamite extends Enemy {
                     dead = true;
                 }
             }
+        }
+
+        if (dead) {
+            EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
+            selfDest.setX(this.getX() + width / 2);
+            selfDest.setY(this.getY() - height / 2);
+            selfDest.addShapes(gameRoot);
         }
     }
 }

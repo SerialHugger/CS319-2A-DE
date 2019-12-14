@@ -69,7 +69,7 @@ public class Enemy extends GameComponent{
     public int[] getMoveValues(double random) {
         // TODO: 30 value should be constant
         if (random < 30) { // delay for changing directions and speed, %0.3 chance
-            speed_x = Math.random() * 6 + 1; // set speed x, randomly TODO: constant
+                speed_x = Math.random() * 6 + 1; // set speed x, randomly TODO: constant
             speed_y = Math.random() * 6 + 1; // set speed y, randomly TODO: constant
             directionCheckX = Math.random() * 2;
             directionCheckY = Math.random() * 2;
@@ -92,8 +92,14 @@ public class Enemy extends GameComponent{
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
      */
     public void initBullet(GameComponentFactory GCF, String bulletType) {
-        if(bulletType.equals("enemyBulletType1")) {
+        if(bulletType.equals("laserbullet")) {
             laserBullet enemyBullet = (laserBullet) GCF.createComponent(bulletType); // create the bullet
+            enemyBullet.facingLeft = facingLeft; // make it face left
+            enemyBullet.setX(body.getTranslateX()); // set its X
+            enemyBullet.setY(body.getTranslateY()); // set its Y
+            enemyBullet.addShapes(gameRoot); // add its shapes to Root
+        } else if(bulletType.equals("guidedbullet")) {
+            GuidedBullet enemyBullet = (GuidedBullet) GCF.createComponent(bulletType); // create the bullet
             enemyBullet.facingLeft = facingLeft; // make it face left
             enemyBullet.setX(body.getTranslateX()); // set its X
             enemyBullet.setY(body.getTranslateY()); // set its Y

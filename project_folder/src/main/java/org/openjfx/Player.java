@@ -1,7 +1,6 @@
 package org.openjfx;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -11,35 +10,47 @@ public class Player extends GameComponent{
     private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
+    private double teleportDistance = 0;
+    int maxAcc = 60;
+    int accCount = 0;
+    double acceleration;
+    double innerAcc;
+    double innerSpeed = 0;
     //immortal mode //todo delete this when needed
     boolean toggleHealth = false;
-
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
-    Player(double width, double height, String assetLocation){
-        super(width, height, "player");
+    Player(double givenWidth, double givenHeight, String assetLocation){
+        super(givenWidth, givenHeight, "player");
         hitBoxes = new Shape[2];
+        acceleration = magicConverter(0.3);
+        maxSpeed = magicConverter(25);
+        facingLeft = true;
+        innerAcc = 3;
+        teleportDistance = magicConverter(150);
+        //update width and height
+        double tempWidth = magicConverter(150);
+        double tempHeight = magicConverter(70);
+        width = tempWidth;
+        height = tempHeight;
+        //do the calculations with width and height.
         hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
         hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
         shipStatus[1] = fillImage(assetLocation + "_left.png"); // insert facing left image to body
         shipStatus[0] = fillImage(assetLocation + "_right.png"); // insert facing right image to body
-        speed = 5; // set initial speed
-        acceleration = 0.4;
-        maxSpeed = 25;
         body.setTranslateX(width*1.5 - width*12.8); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        facingLeft = true;
         hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
-
+        innerSpeed = 0;
         firstTime = System.nanoTime() / 1000000000.0; // get time
         passedTime = firstTime - lastTime; // calculate passedTime
         lastTime = firstTime; // reset last time.
@@ -55,7 +66,21 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[3].get()) { // D is pressed
-            moveX(1,speed); // move right
+            //handle the acceleration with scenery!
+            if(speed < maxSpeed)
+                speed += acceleration;
+            if(speed < 0)
+                speed += acceleration;
+            //handle inner acceleration
+            if(accCount < maxAcc) {
+                accCount += 1;
+                innerSpeed += innerAcc;
+            }
+            if(accCount < 0) {
+                accCount +=1;
+                innerSpeed += innerAcc;
+            }
+//            moveX(1,speed); // move right
             if(!facingLeft) {
                 body.setFill(shipStatus[0]); // make it face left in image form
                 facingLeft = true; // make it face left
@@ -63,7 +88,21 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[1].get()) { // a pressed
-            moveX(-1,speed); // move left
+            //handle the acceleration with scenery!
+            if(speed > -1*maxSpeed)
+                speed -= acceleration;
+            if(speed > 0)
+                speed -= acceleration;
+            //handle inner acceleration
+            if(accCount > -1*maxAcc) {
+                accCount -= 1;
+                innerSpeed -= innerAcc;
+            }
+            if(accCount > 0) {
+                accCount -=1;
+                innerSpeed -= innerAcc;
+            }
+            // turn faces
             if(facingLeft) {
                 body.setFill(shipStatus[1]); // make it face left in image form
                 facingLeft = false; // make it face left
@@ -71,10 +110,10 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[0].get() && getY() >= 0 + height/6) { // w pressed
-            moveY(-1,speed/2); // move up
+            moveY(-1,10); // move up
         }
         if(keyInputs[2].get() && getY() <= gameRoot.getHeight() - height*1.3) { // s pressed
-            moveY(1,speed/2); // move up
+            moveY(1,10); // move up
         }
         if(keyInputs[4].get()) { // enter pressed
             //body.setTranslateX(body.getTranslateX() + 60);
@@ -111,6 +150,28 @@ public class Player extends GameComponent{
             checkDeath();
         else
             lifeCount = 3;
+
+        if(!keyInputs[1].get() && !keyInputs[3].get()){ //if keys are not pressed
+            //handle the acceleration with scenery!
+            if(speed > 0) {
+                speed -= acceleration;
+                if (speed < 0)
+                    speed = 0;
+            } else {
+                speed += acceleration;
+                if(speed > 0)
+                    speed = 0;
+            }
+            //handle inner acceleration
+            if(accCount > 0){
+                innerSpeed -= innerAcc;
+                accCount -= 1;
+            } else if (accCount < 0){
+                innerSpeed += innerAcc;
+                accCount += 1;
+            }
+        }
+        moveX(1,speed + innerSpeed); // move!
     }
 
     private void checkDeath() {
@@ -138,15 +199,15 @@ public class Player extends GameComponent{
     private void teleport(boolean up, boolean down){
         // currently it gives player ptsd
         if(up && !down){
-            moveY(-1,150);
+            moveY(-1,teleportDistance);
         } else if (!up && down) {
-            moveY(1,150);
+            moveY(1,teleportDistance);
         } else {
             int random = (int) (Math.random() * 2);
             if (random < 1)
-                moveY(1, 150);
+                moveY(1, teleportDistance);
             else
-                moveY(-1, 150);
+                moveY(-1, teleportDistance);
         }
     }
 

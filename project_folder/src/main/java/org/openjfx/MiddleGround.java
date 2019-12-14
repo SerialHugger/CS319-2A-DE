@@ -15,8 +15,6 @@ public class MiddleGround {
     private SceneComponent temple_middle;
     private SceneComponent temple_front;
 
-    private double mt_Left_Width;
-    private double mt_Right_Width;
     double speed;
 
 
@@ -27,8 +25,8 @@ public class MiddleGround {
         this.gameRoot = gameRoot;
         this.speed = speed;
         //Setup mountains
-        mt_Left_Width = width * 1.65;
-        mt_Right_Width = width * 2.035;
+        double mt_Left_Width = width * 1.65;
+        double mt_Right_Width = width * 2.035;
         left_mountains_4 = new SceneComponent(mt_Left_Width,height,type,"Assets\\Scenery\\leftMountains.png");
         left_mountains_4.setTranslateX((width / 3.2 + width * 1.427 + width / 10.21) * -1);
         left_mountains_4.setTranslateY(0);
@@ -63,17 +61,14 @@ public class MiddleGround {
 
     void update(boolean left, boolean right, Player player, double speed){
         // loops the background so the world seems infinte
-        if(left) { // if button to go left, "A", is pressed
-            moveX(1,speed);
-            checkLoop(true);
-        }
-        if(right) { // if button to go right, "D", is pressed
-            moveX(-1,speed);
-            checkLoop(false);
-        }
         if(right){
             if(gameRoot.getTranslateX() * -1 > 0) ; //todo
         }
+        moveX(-1,speed);
+        if(speed < -1)
+            checkLoop(false);
+        else
+            checkLoop(true);
     }
 
     public void slide(boolean toLeft,double slidingSpeed) {
@@ -85,11 +80,11 @@ public class MiddleGround {
     }
 
     private void moveX(int direction, double speed){
-        left_mountains_4.setTranslateX(left_mountains_4.getTranslateX() + (direction*speed/5));
-        right_mountains_4.setTranslateX(right_mountains_4.getTranslateX() + (direction*speed/5));
-        temple_back.setTranslateX(temple_back.getTranslateX() + (direction*speed*3/10));
-        temple_middle.setTranslateX(temple_middle.getTranslateX() + (direction*speed*2/5));
-        temple_front.setTranslateX(temple_front.getTranslateX() + (direction*speed*1/2));
+        left_mountains_4.setTranslateX(left_mountains_4.getTranslateX() + (direction * speed/5));
+        right_mountains_4.setTranslateX(right_mountains_4.getTranslateX() + (direction * speed/5));
+        temple_back.setTranslateX(temple_back.getTranslateX() + (direction * speed*3/10));
+        temple_middle.setTranslateX(temple_middle.getTranslateX() + (direction * speed*2/5));
+        temple_front.setTranslateX(temple_front.getTranslateX() + (direction * speed*1/2));
     }
 
     private void checkLoop(boolean left){
