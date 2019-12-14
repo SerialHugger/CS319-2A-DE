@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,30 +23,15 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
+        <option name="jdkForImporter" value="13" />
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1RuUTOkwtLRH4mtj5PvX6WZkl6X" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="1Uy7RSpWQZ1K0TSBRlmtM56X80C" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Assets" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.29425287" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\Assets" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -59,21 +45,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.Maven Run">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.openjfx.App" />
-      <module name="FirstFxApp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.openjfx.Game" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Maven Run" type="MavenRunConfiguration" factoryName="Maven">
+  <component name="RunManager">
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -96,31 +69,20 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
-      <method v="2">
-        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="javafx:compile" />
-      </method>
+      <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Application.App" />
-      <item itemvalue="Maven.Maven Run" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ac6da54a-7caf-45aa-9b6e-7764a7b4761a" name="Default Changelist" comment="" />
-      <created>1570516481400</created>
+      <changelist id="6a4711bd-4794-43bf-9cfd-ec49ce9cbabf" name="Default Changelist" comment="" />
+      <created>1576316972191</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1570516481400</updated>
-      <workItem from="1575029366158" duration="376000" />
+      <updated>1576316972191</updated>
+      <workItem from="1576316973557" duration="3846000" />
     </task>
     <servers />
   </component>
@@ -132,9 +94,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
