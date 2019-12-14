@@ -193,7 +193,6 @@ public class GameController {
                     slidingCounter += slidingSpeed;
                 } else {
                     startSlidingLeft = false; // finish the execution when the limit is reached.
-                    System.out.println(player.getX() + gameRoot.getTranslateX());
                 }
             }
         }
@@ -207,7 +206,6 @@ public class GameController {
                 slidingCounter -= slidingSpeed;
                 } else {
                     startSlidingRight = false; // finish the execution when the limit is reached.
-                    System.out.println( player.getX() + gameRoot.getTranslateX());
                 }
             }
         }
