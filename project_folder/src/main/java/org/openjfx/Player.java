@@ -5,6 +5,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
+
 public class Player extends GameComponent{
     //Necessary attiributes for teleport ability cooldown.
     private final int TELEPORT_COOLDOWN = 3;
@@ -214,6 +219,11 @@ public class Player extends GameComponent{
 
     private void shoot(GameComponentFactory GCF){
         if(!attackDelay) {
+
+            String mainMenuMusicUrl = new File("Assets/Music/playerFire.m4a").toURI().toString();
+            MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+            mediaPlayer.play();
+
             PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
             playerBullet.facingLeft = facingLeft; // make it faceleft
             if(!facingLeft)
