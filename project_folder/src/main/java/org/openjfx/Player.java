@@ -21,6 +21,7 @@ public class Player extends GameComponent{
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
+    private final double bulletRainDuration = 10.0;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
     Player(double givenWidth, double givenHeight, String assetLocation){
@@ -130,7 +131,7 @@ public class Player extends GameComponent{
             } 
         }
         if(keyInputs[7].get()) { // E pressed
-            //todo add hyperjump here
+            activateBulletRain(GCF);
         }
         if(keyInputs[8].get()) { // H pressed
             //todo add bomb here
@@ -229,7 +230,46 @@ public class Player extends GameComponent{
             attackDelayTimer -= 25; // decrease delay
         }
     }
+
     public void activateShield(GameComponentFactory GCF){
     }
+
+    private void activateBulletRain(GameComponentFactory GCF) {
+        // creating bullets in north and south directions
+        for (int i = 0; i < 2; i++) {
+            PlayerBullet vertical = (PlayerBullet) GCF.createComponent("playerBullet");
+            vertical.horizEq = true;
+
+            if (i % 2 == 0)
+                vertical.facingUp = true;
+            else
+                vertical.facingDown = true;
+
+            vertical.setX(body.getTranslateX() + width/2);
+            vertical.setY(body.getTranslateY() + height/2.5);
+            vertical.addShapes(gameRoot);
+        }
+        // creating bullets in remaining 6 directions
+        for (int j = 0; j < 2; j++) { // facing east or west
+            for (int i = 3; i < 8; i+=2) { // vertical direction
+                PlayerBullet bullet = (PlayerBullet) GCF.createComponent("playerBullet");
+
+                double widthCoeff = j != 0 ? 1 / 1.1 : -1 / 5.0;
+                double heightCoeff = j != 0 ? 1 / 2.5 : 1 / 3.5;
+
+                bullet.facingLeft = j != 0;
+
+                if (i % 3 == 0)
+                    bullet.facingDown = true;
+                else if (i % 5 == 0)
+                    bullet.facingUp = true;
+
+                bullet.setX(body.getTranslateX() + width * widthCoeff);
+                bullet.setY(body.getTranslateY() + height * heightCoeff);
+                bullet.addShapes(gameRoot);
+            }
+        }
+    }
+
     public double getWidth() { return width; }
 }
