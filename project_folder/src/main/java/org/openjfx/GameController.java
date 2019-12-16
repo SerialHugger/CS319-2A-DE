@@ -202,6 +202,11 @@ public class GameController {
                     score = score + 100;
                 }
             }
+            else if (gameComponents.get(i) instanceof Shield) {
+                Shield shield = ((Shield) gameComponents.get(i));
+                shield.moveShield(player);
+            }
+
            createLevel();
         }
         // update root

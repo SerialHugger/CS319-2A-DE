@@ -40,6 +40,8 @@ public class GameComponentFactory {
             temp = new SpeedRunner( width , height , "Assets\\alpaka.png");
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(75, 75, "empty");
+        } else if (type.equals("Shield")) {
+            temp = new Shield( 200, 200, "empty");
         }
         gameComponents.add(temp);
         return temp;
