@@ -8,6 +8,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -41,7 +55,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1465083b-f806-4dbe-b894-a46db78e61b9" name="Default Changelist" comment="" />
+      <changelist id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="" />
       <created>1576593869471</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -49,6 +63,7 @@
       <workItem from="1576593872788" duration="55000" />
       <workItem from="1576593930728" duration="11000" />
       <workItem from="1576594285296" duration="319000" />
+      <workItem from="1576602619239" duration="143000" />
     </task>
     <servers />
   </component>
