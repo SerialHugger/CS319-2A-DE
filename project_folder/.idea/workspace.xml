@@ -8,44 +8,21 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
+        <option name="jdkForImporter" value="13" />
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1RuUTOkwtLRH4mtj5PvX6WZkl6X" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="1V7AgLhrYf9kZgq1h8VDhEFpoNI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.29425287" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\Assets" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -59,72 +36,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.Maven Run">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.openjfx.App" />
-      <module name="FirstFxApp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.openjfx.Game" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Maven Run" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="javafx:run" />
-              </list>
-            </option>
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2">
-        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="javafx:compile" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.App" />
-      <item itemvalue="Maven.Maven Run" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="" />
-      <created>1570516481400</created>
+      <changelist id="1465083b-f806-4dbe-b894-a46db78e61b9" name="Default Changelist" comment="" />
+      <created>1576593869471</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1570516481400</updated>
-      <workItem from="1575029366158" duration="376000" />
-      <workItem from="1576349763707" duration="3951000" />
-      <workItem from="1576504021657" duration="2630000" />
-      <workItem from="1576507977826" duration="8432000" />
-      <workItem from="1576575651913" duration="1230000" />
+      <updated>1576593869471</updated>
+      <workItem from="1576593872788" duration="55000" />
+      <workItem from="1576593930728" duration="11000" />
+      <workItem from="1576594285296" duration="319000" />
     </task>
     <servers />
   </component>
