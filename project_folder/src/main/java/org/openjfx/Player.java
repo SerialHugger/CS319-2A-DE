@@ -232,4 +232,5 @@ public class Player extends GameComponent{
     public void activateShield(GameComponentFactory GCF){
     }
     public double getWidth() { return width; }
+    public double getHeight() { return height; }
 }
