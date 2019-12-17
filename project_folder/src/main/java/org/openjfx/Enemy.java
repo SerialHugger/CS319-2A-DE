@@ -1,8 +1,12 @@
 package org.openjfx;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+
+import java.io.File;
 
 public class Enemy extends GameComponent{
 
@@ -87,7 +91,7 @@ public class Enemy extends GameComponent{
     }
 
 
-    /**
+    /**  
      * initialize bullets for the enemy
      * @param GCF TODO: explain what is this and what is its purpose
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
@@ -135,4 +139,19 @@ public class Enemy extends GameComponent{
         }
     }
 
+    void explode(String explodeType, GameComponentFactory GCF) {
+        EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent(explodeType);
+        selfDest.setX(this.getX() + width / 2);
+        selfDest.setY(this.getY() + height / 2);
+        selfDest.addShapes(gameRoot);
+        if(explodeType.equals("explode")){
+            String mainMenuMusicUrl = new File("Assets/Music/explodeNormal.mp3").toURI().toString();
+            MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+            mediaPlayer.play();
+        } else {
+            String mainMenuMusicUrl = new File("Assets/Music/explodeSelfDestruct.mp3").toURI().toString();
+            MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+            mediaPlayer.play();
+        }
+    }
 }
