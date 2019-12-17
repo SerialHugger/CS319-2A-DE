@@ -66,6 +66,8 @@ public class GameComponentFactory {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explosionImage, false);
+        } else if (type.equals("Shield")) {
+            temp = new Shield( 200, 200, "empty");
         }
         gameComponents.add(temp);
         return temp;
