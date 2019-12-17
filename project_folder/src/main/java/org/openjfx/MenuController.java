@@ -5,8 +5,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 
 
 public class MenuController {
@@ -36,6 +40,10 @@ public class MenuController {
     private int whatImageSettings = 1; // Same purpose but for setting
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
 
+
+    private MediaPlayer mediaPlayer;
+
+
     MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight){
         this.buttons = buttons;
         this.buttonImages = buttonImages;
@@ -44,9 +52,14 @@ public class MenuController {
         this.settingButtons = settingButtons;
         this.settingsButtonImages = settingsButtonImages;
         this.settingButtonHighlight = settingButtonHighlight;
-        //Assets\Music\destiny2_journey.mp3
+
+        String mainMenuMusicUrl = new File("Assets/Music/destiny2_Journey.mp3").toURI().toString();
+        mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+        mediaPlayer.play();
+
     }
     public void update(Game game, Pane root) {
+
         // initiate delay timer.
         if(!delay) {
             delayTimer += 10;
@@ -77,11 +90,13 @@ public class MenuController {
                 if(enter_Pressed.get()) {
                     if(currentButton == 0) { // Start Game
                         System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
+                        mediaPlayer.stop();
                         game.startGame();
                     }
                     else if(currentButton == 1) { // How To Play
                         currentScreen = 1;
                         root.getChildren().add(controlImage);
+                        controlImage.setVisible(true);
                     }
                     else if(currentButton == 2) { // Settings
                         currentScreen = 2;
@@ -107,6 +122,7 @@ public class MenuController {
             } else if (currentScreen == 1) {
                 if(enter_Pressed.get()) {
                     root.getChildren().remove(controlImage);
+                    controlImage.setVisible(false);
                     currentScreen = 0;
                     delay = false;
                 }

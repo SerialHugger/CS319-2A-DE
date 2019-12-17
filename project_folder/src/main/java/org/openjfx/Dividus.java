@@ -1,6 +1,7 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 
@@ -8,11 +9,11 @@ import javafx.scene.shape.Shape;
 
 public class Dividus extends Enemy {
 
-    Dividus(double width, double height, String assetLocation) {
-        super(width / 9.6, height / 9, "dividus");
-        this.width = width / 9.6; // width of dividus
-        this.height = height / 9; // height of dividus
-        super.initBody(assetLocation, width, height);
+    Dividus(double width, double height, ImagePattern asset) {
+        super(width, height, "dividus");
+        this.height = magicConverter(120); // height of dividus
+        this.width = magicConverter(200); // width of dividus
+        super.initBody(asset, width, height);
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -24,7 +25,7 @@ public class Dividus extends Enemy {
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
-                boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
+                boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "guidedbullet";
@@ -69,6 +70,12 @@ public class Dividus extends Enemy {
                     dead = true;
                 }
             }
+        }
+        if (dead) {
+            EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("explode");
+            selfDest.setX(this.getX() + width / 2);
+            selfDest.setY(this.getY() + height / 2);
+            selfDest.addShapes(gameRoot);
         }
     }
     /**

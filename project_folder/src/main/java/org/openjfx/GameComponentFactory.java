@@ -1,16 +1,40 @@
 package org.openjfx;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class GameComponentFactory {
     double width; // width of the game
     double height; // height of the game
     ArrayList<GameComponent> gameComponents; // game components of the game.
+    /*
+   ////////////////////////
+    Name imagePatterns Here
+   ////////////////////////
+    */
+    /// ARRAYS
+    ImagePattern[] playerImage = new ImagePattern[2];
+    ImagePattern[] playerBulletImage = new ImagePattern[2];
+    ImagePattern[] selfDestructImage = new ImagePattern[8];
+    ImagePattern[] explosionImage = new ImagePattern[8];
+    ImagePattern[] atlasImage = new ImagePattern[3];
+    ImagePattern[] dienamiteImage = new ImagePattern[9];
+    /// SINGLES
+    ImagePattern dodgerImage;
+    ImagePattern dividusImage;
+    ImagePattern divingWindImage;
+    ImagePattern speedRunnerImage;
+    ImagePattern laserBulletImage;
+    ImagePattern guidedBulletImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
         this.height = height;
         this.gameComponents = gameComponents;
+        openAssets();
     }
 
     /*
@@ -19,29 +43,84 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width, height / 15.4, "Assets\\spaceship");
+            temp = new Player(width, height / 15.4, playerImage);
         } else if (type.equals("playerBullet")) {
-            temp = new PlayerBullet(width / 96, height / 216, "empty", true, gameComponents.get(0).speed);
+            temp = new PlayerBullet(width, height, "empty", true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
-            temp = new Atlas(width, height, "Assets\\Enemies\\atlas.png");
+            temp = new Atlas(width, height, atlasImage);
         } else if (type.equals("dodger")) {
-            temp = new Dodger(width, height, "Assets\\pacman.png");
+            temp = new Dodger(width, height, dodgerImage);
         } else if (type.equals("dividus")) {
-            temp = new Dividus(width, height, "Assets\\pacman.png" );
+            temp = new Dividus(width, height, dividusImage );
         } else if (type.equals("dienamite")) {
-            temp = new Dienamite(width, height, "Assets\\Spaceship.png" );
+            temp = new Dienamite(width, height, dienamiteImage );
         } else if (type.equals("divingWind")) {
-            temp = new DivingWind(width, height, "Assets\\pacman.png" );
-        } else if (type.equals("laserBullet")) {
-            temp = new laserBullet(width / 384, height / 108, "empty", true, gameComponents.get(0)); // 0 is player //274 //154
-        } else if (type.equals("guidedbullet")) {
-            temp = new GuidedBullet(width / 384, height / 108, "empty", true, gameComponents.get(0));
+            temp = new DivingWind(width, height, divingWindImage );
         } else if( type.equals("speedRunner")){
-            temp = new SpeedRunner( width , height , "Assets\\alpaka.png");
+            temp = new SpeedRunner(width , height , speedRunnerImage);
+        } else if (type.equals("laserBullet")) {
+            temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
+        } else if (type.equals("guidedbullet")) {
+            temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
-            temp = new EnemySelfDestruct(75, 75, "empty");
+            temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
+        } else if(type.equals("explode")) {
+            temp = new EnemySelfDestruct(width, height, explosionImage, false);
         }
         gameComponents.add(temp);
         return temp;
+    }
+    private void openAssets(){
+        //Open arrays
+        playerImage[0] = openAsset("Assets\\spaceship_right.png");
+        playerImage[1] = openAsset("Assets\\spaceship_left.png");
+        playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
+        playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
+        for(int i = 0; i < 8; i++) {
+            selfDestructImage[i] = openAsset("Assets\\Enemies\\enemySelfDestruct\\selfDestruct_" + (i+1)+ ".png");
+        }
+        for(int i = 0; i < 8; i++) {
+            explosionImage[i] = openAsset("Assets\\Enemies\\explosion\\explosion_" + (i+1) + ".png");
+        }
+        atlasImage[0] = openAsset("Assets\\Enemies\\atlas\\atlas.png");
+        atlasImage[1] = openAsset("Assets\\Enemies\\atlas\\atlas_toLeft.png");
+        atlasImage[2] = openAsset("Assets\\Enemies\\atlas\\atlas_toRight.png");
+        for(int i = 0; i < 9; i++){
+            dienamiteImage[i] = openAsset("Assets\\Enemies\\dienamite\\dienamite_" + (i+1) + ".png");
+        }
+
+        //Open singles
+        dodgerImage = openAsset("Assets\\pacman.png");
+        dividusImage = openAsset("Assets\\pacman.png");
+        divingWindImage = openAsset("Assets\\pacman.png");
+        speedRunnerImage = openAsset("Assets\\alpaka.png");
+        laserBulletImage = openAsset("empty");
+        guidedBulletImage = openAsset("empty");
+
+    }
+
+    /*
+     * Inserts image in assetLocation to body and returns the imagepattern.
+     */
+    public ImagePattern openAsset(String assetLocation){
+        ImagePattern imagePattern;
+        try {
+            // set background image
+            FileInputStream inputstream = new FileInputStream(assetLocation);
+            Image image = new Image(inputstream);
+            imagePattern = new ImagePattern(image);
+            inputstream.close();
+        } catch ( Exception e ) {
+            try{
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\","/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                inputstream.close();
+            } catch ( Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
+        }
+        return  imagePattern;
     }
 }
