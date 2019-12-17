@@ -120,6 +120,7 @@ public class GameComponent {
         body.setTranslateY(newY);
     }
 
+
     public double magicConverter(double wantedInteger){
         return width/(1920/wantedInteger);
     }

@@ -278,7 +278,7 @@ public class GameController {
 
 
     public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
-        for (int i = 0; i < atlasNumber; i++) {
+        /*for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
@@ -305,7 +305,7 @@ public class GameController {
         for (int i = 0; i < speedRunnerNumber; i++) {
             SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
             speedRunner.addShapes(gameRoot);
-        }
+        }*/
 
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber);
     }
@@ -446,6 +446,10 @@ public class GameController {
                 keyInputs[13].set(false);
             }
         });
+    }
+
+    public void slideScenery(boolean toLeft, double slidingSpeed) {
+        scenery.slideScenery(toLeft, slidingSpeed);
     }
 
     public double magicConverter(double wantedInteger){
