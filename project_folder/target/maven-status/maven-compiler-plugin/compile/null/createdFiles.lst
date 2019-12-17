@@ -1,3 +1,6 @@
+org\openjfx\Game.class
+org\openjfx\Dividus.class
+org\openjfx\MainGame.class
 module-info.class
 org\openjfx\BackGround.class
 org\openjfx\EnemySelfDestruct.class
@@ -6,7 +9,6 @@ org\openjfx\GameComponent.class
 org\openjfx\EnemyEquipment.class
 org\openjfx\ComponentHitBoxCircle.class
 org\openjfx\GameComponentFactory.class
-org\openjfx\laserBullet.class
 org\openjfx\PlayerBullet.class
 org\openjfx\EnemyBullet.class
 org\openjfx\ComponentHitBoxRectangle.class
@@ -23,6 +25,7 @@ org\openjfx\Game$1.class
 org\openjfx\SceneComponent.class
 org\openjfx\MiddleGround.class
 org\openjfx\Dodger.class
+org\openjfx\LaserBullet.class
 org\openjfx\GuidedBullet.class
 org\openjfx\Player.class
 org\openjfx\Enemy.class
