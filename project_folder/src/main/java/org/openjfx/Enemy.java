@@ -1,7 +1,12 @@
 package org.openjfx;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+
+import java.io.File;
 
 public class Enemy extends GameComponent{
 
@@ -24,11 +29,11 @@ public class Enemy extends GameComponent{
 
     /**
      * Initializes a body, its hitboxes for the enemy object.
-     * @param assetLocation The location of the asset/image for the enemy
+     * @param asset The image of enemy
      * @param width Width of the screen, helps choosing starting location
      * @param height Height of the screen, helps choosing starting location
      */
-    public void initBody(String assetLocation, double width, double height){
+    public void initBody(ImagePattern asset, double width, double height){
         // starting X of the enemy, randomly selected
         double startingX = (Math.random() * (width  * 4)) + (width * -2) ;
 
@@ -44,7 +49,7 @@ public class Enemy extends GameComponent{
         body = new Rectangle(this.width, this.height, null);
 
         // fill the body with image at assetLocation
-        fillImage(assetLocation);
+        body.setFill(asset);
 
         // set X and Y
         body.setTranslateX(startingX);
@@ -69,8 +74,8 @@ public class Enemy extends GameComponent{
     public int[] getMoveValues(double random) {
         // TODO: 30 value should be constant
         if (random < 30) { // delay for changing directions and speed, %0.3 chance
-                speed_x = Math.random() * 6 + 1; // set speed x, randomly TODO: constant
-            speed_y = Math.random() * 6 + 1; // set speed y, randomly TODO: constant
+                speed_x = Math.random() * magicConverter(7) + magicConverter(1); // set speed x, randomly TODO: constant
+            speed_y = Math.random() * magicConverter(7) + magicConverter(1); // set speed y, randomly TODO: constant
             directionCheckX = Math.random() * 2;
             directionCheckY = Math.random() * 2;
             if (directionCheckX < 1) // %50 chance
@@ -86,14 +91,14 @@ public class Enemy extends GameComponent{
     }
 
 
-    /**
+    /**  
      * initialize bullets for the enemy
      * @param GCF TODO: explain what is this and what is its purpose
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
      */
     public void initBullet(GameComponentFactory GCF, String bulletType) {
         if(bulletType.equals("laserbullet")) {
-            laserBullet enemyBullet = (laserBullet) GCF.createComponent(bulletType); // create the bullet
+            LaserBullet enemyBullet = (LaserBullet) GCF.createComponent(bulletType); // create the bullet
             enemyBullet.facingLeft = facingLeft; // make it face left
             enemyBullet.setX(body.getTranslateX()); // set its X
             enemyBullet.setY(body.getTranslateY()); // set its Y
@@ -131,6 +136,22 @@ public class Enemy extends GameComponent{
                 }
                 body.setTranslateX(body.getTranslateX() + (4 * bgWidth));
             }
+        }
+    }
+
+    void explode(String explodeType, GameComponentFactory GCF) {
+        EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent(explodeType);
+        selfDest.setX(this.getX() + width / 2);
+        selfDest.setY(this.getY() + height / 2);
+        selfDest.addShapes(gameRoot);
+        if(explodeType.equals("explode")){
+            String mainMenuMusicUrl = new File("Assets/Music/explodeNormal.mp3").toURI().toString();
+            MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+            mediaPlayer.play();
+        } else {
+            String mainMenuMusicUrl = new File("Assets/Music/explodeSelfDestruct.mp3").toURI().toString();
+            MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+            mediaPlayer.play();
         }
     }
 }

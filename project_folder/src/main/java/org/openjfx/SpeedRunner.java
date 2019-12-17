@@ -1,17 +1,18 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 //enemyType1
 
 public class SpeedRunner extends Enemy {
 
-    SpeedRunner(double width, double height, String assetLocation) {
-        super(width / 30, height / 10, "speedRunner");
-        this.width = width / 30;
-        this.height = height / 10;
-        super.initBody(assetLocation, width, height);
+    SpeedRunner(double width, double height, ImagePattern asset) {
+        super(width, height, "speedRunner");
+        this.height = magicConverter(108);
+        this.width = magicConverter(64);
+        super.initBody(asset, width, height);
     }
 
     public void moveSpeedRunner(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -23,7 +24,7 @@ public class SpeedRunner extends Enemy {
             if (random < 9000) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
-                boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
+                boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
@@ -65,6 +66,9 @@ public class SpeedRunner extends Enemy {
                     dead = true;
                 }
             }
+        }
+        if (dead) {
+            explode("explode", GCF);
         }
     }
 }

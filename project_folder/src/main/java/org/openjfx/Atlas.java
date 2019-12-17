@@ -1,17 +1,19 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 //enemyType1
 
 public class Atlas extends Enemy {
 
-    Atlas(double width, double height, String assetLocation) {
-        super(width / 60.95, height / 18, "atlas");
-        this.width = width / 60.95;
-        this.height = height / 18;
-        super.initBody(assetLocation, width, height);
+    Atlas(double width, double height, ImagePattern[] assets) {
+        super(width, height, "atlas");
+        this.height = magicConverter(60);
+        this.width = magicConverter(30);
+        animationFrames = assets;
+        super.initBody(assets[0], width, height);
     }
 
     public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -23,7 +25,7 @@ public class Atlas extends Enemy {
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
-                boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
+                boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
@@ -46,7 +48,10 @@ public class Atlas extends Enemy {
         directionY = moveValues[1];
         speed_x = moveValues[2];
         speed_y = moveValues[3];
-
+        if(directionX == 1)
+            body.setFill(animationFrames[2]);
+        else
+            body.setFill(animationFrames[1]);
         moveX(directionX, speed_x); // move X with given inputs
         moveY(directionY, speed_y); // move Y with given inputs
 
@@ -65,6 +70,9 @@ public class Atlas extends Enemy {
                     dead = true;
                 }
             }
+        }
+        if (dead) {
+            explode("explode", GCF);
         }
     }
 }

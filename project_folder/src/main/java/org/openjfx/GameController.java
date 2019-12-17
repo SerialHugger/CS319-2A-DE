@@ -136,7 +136,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                 Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                dienamite.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
                 if (dienamite.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -151,9 +151,11 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     divingWind.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
-            } else if (gameComponents.get(i) instanceof laserBullet) { // else if its an instance class of EnemyBulletType1.
-                laserBullet laserBullet = (laserBullet) gameComponents.get(i); // cast it to a temporary variable.
+            } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
+                LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
                 laserBullet.updateLaserBullet(); // update it.
                 // if its not in the boundaries of camera/root remove it.
                 // first check for X then check for Y.
@@ -200,6 +202,15 @@ public class GameController {
                     speedRunner.die(); // kill it, remove it from root.
                     deadCounter++;
                     score = score + 100;
+                }
+            }
+            else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
+                EnemySelfDestruct enemySelfDestruct = ((EnemySelfDestruct) gameComponents.get(i));
+                enemySelfDestruct.updateSelfDestruct(); // update it.
+                if (enemySelfDestruct.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    enemySelfDestruct.die(); // kill it, remove it from root.
                 }
             }
            createLevel();
@@ -278,7 +289,7 @@ public class GameController {
 
 
     public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
-        /*for (int i = 0; i < atlasNumber; i++) {
+        for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
@@ -305,9 +316,12 @@ public class GameController {
         for (int i = 0; i < speedRunnerNumber; i++) {
             SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
             speedRunner.addShapes(gameRoot);
-        }*/
-
-        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber);
+        }
+        for (int i = 0; i < divingWindNumber; i++) {
+            DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
+            divingWind.addShapes(gameRoot);
+        }
+        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
     }
     /*
      * This creates levels
@@ -317,7 +331,7 @@ public class GameController {
     public void createLevel() {
         if ( level == 1 ) {
             if ( noOfEnemies == 0 )
-            noOfEnemies = createEnemies(3 ,3 ,3 ,3 ,3 );
+            noOfEnemies = createEnemies(3 ,3 ,3 ,12 ,3, 3 );
 
             if( noOfEnemies == deadCounter ){
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
@@ -330,7 +344,7 @@ public class GameController {
         }
         else if ( level == 2 ){
             if ( noOfEnemies == 0)
-            noOfEnemies = createEnemies(5 , 0 , 0 , 0 , 0);
+            noOfEnemies = createEnemies(5 , 0 , 0 , 0 , 0,0 );
 
             if( noOfEnemies == deadCounter ){
                 level = 3;
@@ -341,7 +355,7 @@ public class GameController {
 
         else if ( level == 3 ){
             if ( noOfEnemies == 0)
-                noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0);
+                noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0, 0);
 
             if( noOfEnemies == deadCounter ){
                 level = 4;
