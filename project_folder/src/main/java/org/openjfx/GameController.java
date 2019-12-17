@@ -213,6 +213,11 @@ public class GameController {
                     enemySelfDestruct.die(); // kill it, remove it from root.
                 }
             }
+            else if (gameComponents.get(i) instanceof Shield) {
+                Shield shield = ((Shield) gameComponents.get(i));
+                shield.moveShield(player);
+            }
+
            createLevel();
         }
         // update root
@@ -288,7 +293,7 @@ public class GameController {
     }
 
 
-    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber){
         for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
@@ -309,7 +314,7 @@ public class GameController {
             dienamite.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < divingWindNumber; i++) {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
         }
@@ -468,5 +473,11 @@ public class GameController {
 
     public double magicConverter(double wantedInteger){
         return width/(1920/wantedInteger);
+    }
+    public void setLevel(int levelNum ){
+        level = levelNum;
+    }
+    public int getLevel(){
+        return level;
     }
 }

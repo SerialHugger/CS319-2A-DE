@@ -32,6 +32,8 @@ public class Player extends GameComponent{
     private boolean bulletRainOnGoing = false;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
+    boolean isShieldActive = false;
+
     Player(double givenWidth, double givenHeight, ImagePattern[] asset){
         super(givenWidth, givenHeight, "player");
         hitBoxes = new Shape[2];
@@ -165,7 +167,7 @@ public class Player extends GameComponent{
         if(keyInputs[9].get()) { // J pressed
             //todo add skill 1
             //  for now its shield
-            activateShield(GCF);
+            activateShield(GCF, this);
         }
         if(keyInputs[10].get()) { // K pressed
             //todo add skill 2
@@ -267,7 +269,16 @@ public class Player extends GameComponent{
         attackDelayTimer = 100; // start delay timer
     }
 
-    public void activateShield(GameComponentFactory GCF){
+    public void activateShield(GameComponentFactory GCF, Player player){
+
+        if (!isShieldActive) {
+        Shield shield = (Shield) GCF.createComponent("Shield");
+        shield.setX(body.getTranslateX() + width/2);
+        shield.setY(body.getTranslateY() + height/2.5);
+        shield.addShapes(gameRoot);
+        isShieldActive = true;
+        }
+
     }
 
     private void activateBulletRain(GameComponentFactory GCF) {
