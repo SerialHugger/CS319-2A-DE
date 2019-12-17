@@ -10,8 +10,8 @@ public class EnemyBullet extends EnemyEquipment {
     double direction_x = 0;
     double direction_y = 0;
     double hipo = 0;
-    EnemyBullet(double width, double height, String assetLocation){
-        super(width, height, assetLocation);
+    EnemyBullet(double width, double height, String type){
+        super(width, height, type);
     }
     public void setX(double x){ // temporary setX method
         body.setTranslateX(x);

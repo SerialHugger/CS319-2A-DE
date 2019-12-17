@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,6 +129,9 @@
       <updated>1570516481400</updated>
       <workItem from="1575029366158" duration="376000" />
       <workItem from="1576349763707" duration="3951000" />
+      <workItem from="1576504021657" duration="2630000" />
+      <workItem from="1576507977826" duration="8432000" />
+      <workItem from="1576575651913" duration="1230000" />
     </task>
     <servers />
   </component>

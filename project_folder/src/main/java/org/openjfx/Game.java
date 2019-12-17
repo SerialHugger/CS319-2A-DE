@@ -25,8 +25,8 @@ public class Game extends Application {
     private boolean onMenu = true;
     private boolean onGame = false;
 
-    private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-    private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
+    private double width =  1920; //(int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+    private double height = 1080; //(int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
     private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
@@ -93,6 +93,23 @@ public class Game extends Application {
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
         mainGame = new MainGame(gameRoot, width, height);
+        mainScene.setRoot(mainGame.createContent());
+        mainGame.setButtonHandler(mainScene);
+        mainScene.setCursor(Cursor.NONE);
+        theStage.setScene(mainScene);
+        theStage.setFullScreen(mainMenu.isFullscreen());
+        theStage.show();
+        // todo do stuff here yes hehe
+        // todo make menu to game smoother
+    }
+    // start game from a level
+    public void startGame(int level){
+        onMenu = false; // set menu to no update
+        onGame = true; // set game to update
+        menuRoot.setVisible(false); // make menu invisible
+        gameRoot.setVisible(true); // make game visible
+        mainGame = new MainGame(gameRoot, width, height);
+        mainGame.setlevel(level);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
