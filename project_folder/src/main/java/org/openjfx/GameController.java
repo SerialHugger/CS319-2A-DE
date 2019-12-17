@@ -293,7 +293,7 @@ public class GameController {
     }
 
 
-    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber){
         for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
