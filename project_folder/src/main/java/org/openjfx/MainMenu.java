@@ -33,10 +33,12 @@ public class MainMenu {
         ////////////////////////////////////////////////////////////
         /////////////creating buttons and its holders///////////////
         ////////////////////////////////////////////////////////////
-        Rectangle[] buttons = new Rectangle[5]; // will hold start/howToPlay/setting/credits/quit buttons
+        Rectangle[] buttons = new Rectangle[6]; // will hold start/howToPlay/setting/credits/quit buttons
         Rectangle[] settingButtons = new Rectangle[5]; // will hold videoResolution/fullScreen/sound/changeShip/goBack buttons
+        Rectangle[] levelButtons = new Rectangle[3];
         ImagePattern[] buttonImages = new ImagePattern[buttons.length * 2];// Image patterns to store asset information, and make it easier to use dynamically.
         ImagePattern[] settingsButtonImages = new ImagePattern[settingButtons.length * 2]; // same purpose but for settings
+        ImagePattern[] levelButtonImages = new ImagePattern[levelButtons.length * 2];
         Rectangle background;
         Rectangle startGameButton;
         Rectangle howToPlayButton;
@@ -52,6 +54,12 @@ public class MainMenu {
         Rectangle changeShipButton;
         Rectangle goBackButton;
         Rectangle settingsButtonHighlight; // for background of the buttons at settings.
+        Rectangle selectLevelButton;
+        // for level select buttons
+        Rectangle levelButton1;
+        Rectangle levelButton2;
+        Rectangle levelButton3;
+        Rectangle levelButtonHighlight;
         // set root width and height
         menuRoot.setPrefSize(width, height);
         ////////////////////////////////////////////////////////////
@@ -80,12 +88,17 @@ public class MainMenu {
         quitButton = new Rectangle(width/3.5, height/18, Color.WHITE);
         quitButton.setTranslateX(width/16);
         quitButton.setTranslateY(height/2.8- (3 * ((height/3.5)-(height/2.8))));
+        //set selectlevelButton
+        selectLevelButton = new Rectangle(width/3.5, height/18, Color.WHITE);
+        selectLevelButton.setTranslateX(width/16);
+        selectLevelButton.setTranslateY(height/2.8- (4 * ((height/3.5)-(height/2.8))));
         // set buttons array to make life easier.
         buttons[0] = startGameButton;
         buttons[1] = howToPlayButton;
         buttons[2] = settingsButton;
         buttons[3] = creditsButton;
         buttons[4] = quitButton;
+        buttons[5] = selectLevelButton;
         // set backgroundButton for cool effect.
         buttonHighlight = new Rectangle(width/3.5, height/18,null);
         buttonHighlight.setTranslateX(width/16);
@@ -123,6 +136,27 @@ public class MainMenu {
         settingsButtonHighlight = new Rectangle(width/3.5, height/18,null);
         settingsButtonHighlight.setTranslateX(width/16);
         settingsButtonHighlight.setTranslateY(height/3.5);
+        ///////////// level select button //////////////////////////
+        // level 1 button
+        levelButton1 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        levelButton1.setTranslateX(width/16);
+        levelButton1.setTranslateY(height/3.5);
+        // level 2 button
+        levelButton2 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        levelButton2.setTranslateX(width/16);
+        levelButton2.setTranslateY(height/2.8);
+        // level 3 button
+        levelButton3 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        levelButton3.setTranslateX(width/16);
+        levelButton3.setTranslateY(height/2.8-((height/3.5)-(height/2.8)));
+        // set buttons array to make life easier.
+        levelButtons[0] = levelButton1;
+        levelButtons[1] = levelButton2;
+        levelButtons[2] = levelButton3;
+        // background
+        levelButtonHighlight = new Rectangle(width/3.5, height/18,null);
+        levelButtonHighlight.setTranslateX(width/16);
+        levelButtonHighlight.setTranslateY(height/3.5);
         ////////////////////////////////////////////////////////////
         ///////////////setting images for buttons///////////////////
         ////////////////////////////////////////////////////////////
@@ -140,6 +174,8 @@ public class MainMenu {
         buttonImages[7] = insertImage(creditsButton ,"Assets\\mainMenu\\creditsButton_Black.png", false);
         buttonImages[8] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_White.png", true);
         buttonImages[9] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_Black.png", false);
+        buttonImages[10] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", true );
+        buttonImages[11] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", false );
         // for settings menu
         insertImage(settingsButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
         settingsButtonImages[0] = insertImage(videoResolutionButton ,"Assets\\mainMenu\\videoResolution_White.png", false);
@@ -152,6 +188,14 @@ public class MainMenu {
         settingsButtonImages[7] = insertImage(changeShipButton ,"Assets\\mainMenu\\changeShipButton_Black.png", false);
         settingsButtonImages[8] = insertImage(goBackButton,"Assets\\mainMenu\\goBackButton_White.png", true);
         settingsButtonImages[9] = insertImage(goBackButton,"Assets\\mainMenu\\goBackButton_Black.png", false);
+        // for level selection menu
+        insertImage(levelButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
+        levelButtonImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        levelButtonImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        levelButtonImages[2] = insertImage(levelButton2 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        levelButtonImages[3] = insertImage(levelButton2 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        levelButtonImages[4] = insertImage(levelButton3 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        levelButtonImages[5] = insertImage(levelButton3,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
         ////////////////////////////////////////////////////////////
         //////////////add necessary elements to root////////////////
         ////////////////////////////////////////////////////////////
@@ -161,6 +205,7 @@ public class MainMenu {
         menuRoot.getChildren().add(howToPlayButton);
         menuRoot.getChildren().add(settingsButton);
         menuRoot.getChildren().add(creditsButton);
+        menuRoot.getChildren().add(selectLevelButton);
         menuRoot.getChildren().add(quitButton);
         menuRoot.getChildren().add(settingsButtonHighlight);
         menuRoot.getChildren().add(videoResolutionButton);
@@ -168,6 +213,9 @@ public class MainMenu {
         menuRoot.getChildren().add(soundButton);
         menuRoot.getChildren().add(changeShipButton);
         menuRoot.getChildren().add(goBackButton);
+        menuRoot.getChildren().add(levelButton1);
+        menuRoot.getChildren().add(levelButton2);
+        menuRoot.getChildren().add(levelButton3);
         // make settings invisible.
         goBackButton.setVisible(false);
         changeShipButton.setVisible(false);
@@ -175,11 +223,14 @@ public class MainMenu {
         fullScreenButton.setVisible(false);
         videoResolutionButton.setVisible(false);
         settingsButtonHighlight.setVisible(false);
-
+        levelButtonHighlight.setVisible(false);
+        levelButton1.setVisible(false);
+        levelButton2.setVisible(false);
+        levelButton3.setVisible(false);
 
 
         // create the controller and return
-        menuController = new MenuController(buttons, buttonImages,  buttonHighlight, controlImage, settingButtons, settingsButtonImages, settingsButtonHighlight);
+        menuController = new MenuController(buttons, buttonImages,  buttonHighlight, controlImage, settingButtons, settingsButtonImages, settingsButtonHighlight , levelButtons , levelButtonImages, levelButtonHighlight);
         return menuRoot;
     }
 
