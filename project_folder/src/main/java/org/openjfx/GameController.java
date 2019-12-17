@@ -314,7 +314,7 @@ public class GameController {
             dienamite.addShapes(gameRoot);
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < divingWindNumber; i++) {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
         }
@@ -473,5 +473,11 @@ public class GameController {
 
     public double magicConverter(double wantedInteger){
         return width/(1920/wantedInteger);
+    }
+    public void setLevel(int levelNum ){
+        level = levelNum;
+    }
+    public int getLevel(){
+        return level;
     }
 }

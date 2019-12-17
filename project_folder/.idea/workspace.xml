@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Music/playerFire.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Atlas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Atlas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dienamite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dienamite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dividus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dividus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/DivingWind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/DivingWind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dodger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dodger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/SpeedRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/SpeedRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
