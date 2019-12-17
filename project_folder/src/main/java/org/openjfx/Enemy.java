@@ -91,7 +91,7 @@ public class Enemy extends GameComponent{
     }
 
 
-    /**  
+    /**
      * initialize bullets for the enemy
      * @param GCF TODO: explain what is this and what is its purpose
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
