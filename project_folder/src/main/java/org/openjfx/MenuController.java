@@ -96,6 +96,7 @@ public class MenuController {
                     else if(currentButton == 1) { // How To Play
                         currentScreen = 1;
                         root.getChildren().add(controlImage);
+                        controlImage.setVisible(true);
                     }
                     else if(currentButton == 2) { // Settings
                         currentScreen = 2;
@@ -121,6 +122,7 @@ public class MenuController {
             } else if (currentScreen == 1) {
                 if(enter_Pressed.get()) {
                     root.getChildren().remove(controlImage);
+                    controlImage.setVisible(false);
                     currentScreen = 0;
                     delay = false;
                 }
