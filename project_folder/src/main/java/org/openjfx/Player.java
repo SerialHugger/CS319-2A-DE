@@ -59,7 +59,8 @@ public class Player extends GameComponent{
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
-    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF) {
+  
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
         if(!teleportAvailable || bulletRainOnGoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
@@ -159,7 +160,7 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[8].get()) { // H pressed
-            //todo add bomb here
+            activateHyperJump();
         }
         if(keyInputs[9].get()) { // J pressed
             //todo add skill 1
@@ -304,6 +305,27 @@ public class Player extends GameComponent{
                 bullet.addShapes(gameRoot);
             }
         }
+    }
+
+    private void activateHyperJump() {
+        double chance = 100 * Math.random();
+
+        /*if (chance <= 10.0)
+            lifeCount--;*/
+
+        int vertDist = (int) (Math.random() * magicConverter(100.0));
+        int horizDist = (int) (Math.random() * magicConverter(1000.0));
+
+        int vert = Math.random() > 0.5 ? 1 : -1;
+        int horiz = Math.random() > 0.5 ? 1: -1;
+
+        //facingLeft = horiz == 1;
+
+        moveX(horiz, horizDist);
+        moveY(vert, vertDist);
+        gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
+
+
     }
 
     public double getWidth() { return width; }
