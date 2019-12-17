@@ -14,6 +14,7 @@ public class DivingWind extends Enemy {
         this.height = magicConverter(60);
         this.width = magicConverter(30);
         super.initBody(asset, width, height);
+        setShootBehaviour(new ShootWithLaserBullet());
     }
 
     public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {

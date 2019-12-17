@@ -14,6 +14,7 @@ public class Atlas extends Enemy {
         this.width = magicConverter(30);
         animationFrames = assets;
         super.initBody(assets[0], width, height);
+        setShootBehaviour(new ShootWithLaserBullet());
     }
 
     public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -29,7 +30,7 @@ public class Atlas extends Enemy {
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    initBullet(GCF, bulletType);
+                    shootBehaviour.shoot(GCF , this , gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500
