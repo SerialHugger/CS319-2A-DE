@@ -172,7 +172,7 @@ public class Player extends GameComponent{
         if(keyInputs[11].get()) { // L pressed
             //todo add skill 3
         }
-        if(!toggleHealth)
+        if(false)
             checkDeath();
         else
             lifeCount = 3;
@@ -250,7 +250,7 @@ public class Player extends GameComponent{
     }
 
     private void shoot(GameComponentFactory GCF){
-        String mainMenuMusicUrl = new File("Assets/Music/playerFire.m4a").toURI().toString();
+        String mainMenuMusicUrl = new File("Assets/Music/playerFire.mp3").toURI().toString();
         MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
         mediaPlayer.play();
 

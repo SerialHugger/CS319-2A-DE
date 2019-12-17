@@ -45,7 +45,7 @@ public class GameComponentFactory {
         if (type.equals("player")) {
             temp = new Player(width, height / 15.4, playerImage);
         } else if (type.equals("playerBullet")) {
-            temp = new PlayerBullet(width, height, "empty", true, gameComponents.get(0).speed);
+            temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
             temp = new Atlas(width, height, atlasImage);
         } else if (type.equals("dodger")) {
@@ -88,7 +88,8 @@ public class GameComponentFactory {
         for(int i = 0; i < 9; i++){
             dienamiteImage[i] = openAsset("Assets\\Enemies\\dienamite\\dienamite_" + (i+1) + ".png");
         }
-
+        playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
+        playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
         //Open singles
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");

@@ -72,10 +72,7 @@ public class Dividus extends Enemy {
             }
         }
         if (dead) {
-            EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("explode");
-            selfDest.setX(this.getX() + width / 2);
-            selfDest.setY(this.getY() + height / 2);
-            selfDest.addShapes(gameRoot);
+            explode("explode", GCF);
         }
     }
     /**
