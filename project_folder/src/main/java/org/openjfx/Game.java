@@ -102,6 +102,23 @@ public class Game extends Application {
         // todo do stuff here yes hehe
         // todo make menu to game smoother
     }
+    // start game from a level
+    public void startGame(int level){
+        onMenu = false; // set menu to no update
+        onGame = true; // set game to update
+        menuRoot.setVisible(false); // make menu invisible
+        gameRoot.setVisible(true); // make game visible
+        mainGame = new MainGame(gameRoot, width, height);
+        mainGame.setlevel(level);
+        mainScene.setRoot(mainGame.createContent());
+        mainGame.setButtonHandler(mainScene);
+        mainScene.setCursor(Cursor.NONE);
+        theStage.setScene(mainScene);
+        theStage.setFullScreen(mainMenu.isFullscreen());
+        theStage.show();
+        // todo do stuff here yes hehe
+        // todo make menu to game smoother
+    }
 
     @Override
     public void start(Stage theStage) throws Exception{
