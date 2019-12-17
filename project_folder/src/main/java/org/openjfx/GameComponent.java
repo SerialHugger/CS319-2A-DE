@@ -122,6 +122,7 @@ public class GameComponent {
         body.setTranslateY(newY);
     }
 
+
     public double magicConverter(double wantedInteger){
         if(gameRoot == null)
             return width/(1920/wantedInteger);

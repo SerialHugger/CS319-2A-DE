@@ -288,7 +288,7 @@ public class GameController {
     }
 
 
-    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber ){
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber ){
         for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
@@ -321,7 +321,6 @@ public class GameController {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
         }
-
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
     }
     /*
@@ -461,6 +460,10 @@ public class GameController {
                 keyInputs[13].set(false);
             }
         });
+    }
+
+    public void slideScenery(boolean toLeft, double slidingSpeed) {
+        scenery.slideScenery(toLeft, slidingSpeed);
     }
 
     public double magicConverter(double wantedInteger){
