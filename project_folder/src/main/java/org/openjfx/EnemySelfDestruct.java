@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 
 public class EnemySelfDestruct extends EnemyEquipment{
 
-    private final int totalLifetime = 1;
+    private final int TOTAL_LIFETIME = 1;
     private double wantedTime = 0;
     private int lifetime = 0;
     private boolean harmful;
@@ -44,7 +44,7 @@ public class EnemySelfDestruct extends EnemyEquipment{
 
     public void updateSelfDestruct() {
 
-        if (lifetime > totalLifetime) {
+        if (lifetime > TOTAL_LIFETIME) {
             dead = true;
         }
         if(delay)

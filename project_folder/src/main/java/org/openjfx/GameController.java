@@ -217,7 +217,16 @@ public class GameController {
                 Shield shield = ((Shield) gameComponents.get(i));
                 shield.moveShield(player);
             }
-
+            else if (gameComponents.get(i) instanceof Bomb) {
+                Bomb bomb = ((Bomb) gameComponents.get(i));
+                bomb.moveBomb();
+                if (bomb.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    bomb.explode(gameComponentFactory);
+                    bomb.die();
+                }
+            }
            createLevel();
         }
         // update root

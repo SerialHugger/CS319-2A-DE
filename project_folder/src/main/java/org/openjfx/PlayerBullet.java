@@ -59,8 +59,6 @@ public class PlayerBullet extends PlayerEquipment {
             }
         }
 
-
-
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
