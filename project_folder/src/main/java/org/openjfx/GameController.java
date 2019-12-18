@@ -222,7 +222,16 @@ public class GameController {
                     shield.die(); // kill it, remove it from root.
                 }
             }
-
+            else if (gameComponents.get(i) instanceof Bomb) {
+                Bomb bomb = ((Bomb) gameComponents.get(i));
+                bomb.moveBomb();
+                if (bomb.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    bomb.explode(gameComponentFactory);
+                    bomb.die();
+                }
+            }
            createLevel();
         }
         // update root
