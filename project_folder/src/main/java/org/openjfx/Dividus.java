@@ -14,6 +14,7 @@ public class Dividus extends Enemy {
         this.height = magicConverter(120); // height of dividus
         this.width = magicConverter(200); // width of dividus
         super.initBody(asset, width, height);
+        setShootBehaviour(new ShootWithGuidedBullet() );
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -29,7 +30,7 @@ public class Dividus extends Enemy {
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "guidedbullet";
-                    initBullet(GCF, bulletType);
+                    shootBehaviour.shoot(GCF,this,gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500

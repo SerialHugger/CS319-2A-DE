@@ -21,14 +21,14 @@ public class SpeedRunner extends Enemy {
         double random = Math.random() * 10000; // random for chance based updates
 
         if (delay) { // delay: a boolean value to delay shoots
-            if (random < 9000) { // %1.5 chance TODO: Constant problem for 150
+            if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
                 boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    initBullet(GCF, bulletType);
+                    //shootBehaviour.shoot(GCF , this , gameRoot);//speedrunner should not attack
 
                     delay = false; // make delay false
                     delayTimer = 50; // start delay timer TODO: Constant problem for 500
