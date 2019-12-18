@@ -11,7 +11,7 @@ public class Dodger extends Enemy {
     private int countdown = 0;
 
     Dodger(double width, double height, ImagePattern asset) {
-        super(width, height, "enemyType2");
+        super(width, height, "dodger");
 
         this.height = magicConverter(60);
         this.width = magicConverter(30);

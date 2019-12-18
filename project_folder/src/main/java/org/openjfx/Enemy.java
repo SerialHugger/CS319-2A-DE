@@ -44,7 +44,7 @@ public class Enemy extends GameComponent{
         hitBoxes = new Shape[1];
 
         // setup the Rectangle hit box
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyHitBox");
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemy", type);
         //setup the body
         body = new Rectangle(this.width, this.height, null);
 
