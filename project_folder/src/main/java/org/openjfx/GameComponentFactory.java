@@ -55,12 +55,12 @@ public class GameComponentFactory {
         } else if (type.equals("dienamite")) {
             temp = new Dienamite(width, height, dienamiteImage );
         } else if (type.equals("divingWind")) {
-            temp = new DivingWind(width, height, divingWindImage );
+            temp = new DivingWind(width, height, divingWindImage);
         } else if( type.equals("speedRunner")){
             temp = new SpeedRunner(width , height , speedRunnerImage);
         } else if (type.equals("laserBullet")) {
             temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
-        } else if (type.equals("guidedbullet")) {
+        } else if (type.equals("guidedBullet")) {
             temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
@@ -95,7 +95,7 @@ public class GameComponentFactory {
         //Open singles
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
-        divingWindImage = openAsset("Assets\\pacman.png");
+        divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
