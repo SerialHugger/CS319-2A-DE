@@ -334,7 +334,7 @@ public class GameController {
     public void createLevel() {
         if ( level == 1 ) {
             if ( noOfEnemies == 0 )
-            noOfEnemies = createEnemies(30 ,5 ,5 ,1 ,7, 3 );
+            noOfEnemies = createEnemies(5 ,5 ,5 ,5 ,5, 5 );
 
             if( noOfEnemies == deadCounter ){
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");

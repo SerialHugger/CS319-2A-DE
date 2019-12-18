@@ -10,17 +10,18 @@ import java.net.CookieHandler;
 public class DivingWind extends Enemy {
     private double x_dest;
     private double y_dest;
-    DivingWind(double width, double height, String assetLocation) {
+    DivingWind(double width, double height, ImagePattern asset) {
         super(width / 60.95, height / 18, "divingWind");
-        this.width = width / 60.95;
-        this.height = height / 18;
-        super.initBody(assetLocation, width, height);
+        super.initBody(asset, width, height);
+        this.height = magicConverter( 60);
+        this.width = magicConverter( 31.5);
         speed = 0;
         speed_x = 0;
         speed_y = 0;
         x_dest = 0;
         y_dest = 0;
         acceleration = magicConverter(5);
+        body.setFill(asset);
     }
 
     public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {

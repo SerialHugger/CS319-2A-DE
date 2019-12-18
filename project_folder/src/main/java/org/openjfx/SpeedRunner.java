@@ -28,7 +28,7 @@ public class SpeedRunner extends Enemy {
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    shootBehaviour.shoot(GCF , this , gameRoot);//speedrunner should not attack
+                    //shootBehaviour.shoot(GCF , this , gameRoot);//speedrunner should not attack
 
                     delay = false; // make delay false
                     delayTimer = 50; // start delay timer TODO: Constant problem for 500
