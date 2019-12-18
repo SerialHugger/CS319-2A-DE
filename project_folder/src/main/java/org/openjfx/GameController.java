@@ -70,10 +70,10 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        //createLevel(level); // create the level with enemies // blo
-        slidingLimit = width - player.getWidth() * 4;
+        //createLevel(level); // create the level with enemies
+        slidingLimit = width - player.getWidth() * 5;
         slidingCounter = slidingLimit * -1;
-        slidingSpeed = (width - player.getWidth() * 4) / 66; // some numbers yes.
+        slidingSpeed = (width - player.getWidth() * 5) / 65; // some numbers yes.
     }
     void updateInteraction(){
         //update interaction
@@ -216,6 +216,11 @@ public class GameController {
             else if (gameComponents.get(i) instanceof Shield) {
                 Shield shield = ((Shield) gameComponents.get(i));
                 shield.moveShield(player);
+                if(shield.dead) {
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    shield.die(); // kill it, remove it from root.
+                }
             }
 
            createLevel();
@@ -251,28 +256,21 @@ public class GameController {
             //todo
         }
         if (startSlidingLeft) { // if the background sliding left
-//            (player.getX() - player.getWidth()*1.5) > gameRoot.getTranslateX()*-1
-            if (true){
-                if (slidingCounter != 0) {// until sliding limit is reached or hits the player to screen limit
-                    gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
-                    scenery.slideScenery(true, slidingSpeed);
-                    slidingCounter += slidingSpeed;
-                } else {
-                    startSlidingLeft = false; // finish the execution when the limit is reached.
-                }
+            if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
+                gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                scenery.slideScenery(true, slidingSpeed);
+                slidingCounter += slidingSpeed;
+            } else {
+                startSlidingLeft = false; // finish the execution when the limit is reached.
             }
         }
         if (startSlidingRight) { // if the background sliding right
-//            (player.getX() + player.getWidth() * 2.5) > (gameRoot.getTranslateX() + width) * -1
-            if(true)
-            {
-                if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
-                scenery.slideScenery(false,slidingSpeed);
-                slidingCounter -= slidingSpeed;
-                } else {
-                    startSlidingRight = false; // finish the execution when the limit is reached.
-                }
+            if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
+            gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+            scenery.slideScenery(false,slidingSpeed);
+            slidingCounter -= slidingSpeed;
+            } else {
+                startSlidingRight = false; // finish the execution when the limit is reached.
             }
         }
         if(!keyInputs[1].get() && !keyInputs[3].get()){ // if the movement keys not pressed
@@ -336,7 +334,7 @@ public class GameController {
     public void createLevel() {
         if ( level == 1 ) {
             if ( noOfEnemies == 0 )
-            noOfEnemies = createEnemies(30 ,5 ,5 ,1 ,7, 3 );
+            noOfEnemies = createEnemies(5 ,5 ,5 ,5 ,5, 5 );
 
             if( noOfEnemies == deadCounter ){
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");

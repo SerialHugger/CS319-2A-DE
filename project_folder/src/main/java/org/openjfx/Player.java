@@ -41,24 +41,24 @@ public class Player extends GameComponent{
         maxSpeed = magicConverter(25);
         facingLeft = true;
         innerAcc = 3;
-        teleportDistance = magicConverter(150);
+        teleportDistance = magicConverter(110);
         //update width and height
-        double tempWidth = magicConverter(150);
-        double tempHeight = magicConverter(70);
+        double tempWidth = magicConverter(110);
+        double tempHeight = magicConverter(50);
         width = tempWidth;
         height = tempHeight;
         //do the calculations with width and height.
-        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
-        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
+        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"player", "player"); // setup the Rectangle hit box
+        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"player", "player"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
         shipStatus[1] = asset[1];
         shipStatus[0] = asset[0];
         body.setFill(shipStatus[0]);
-        body.setTranslateX(width*1.5 - width*12.8); // set X for body
+        body.setTranslateX(width*2 - givenWidth); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
+        hitBoxes[0].setTranslateX(width*2 - givenWidth); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
-        hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
+        hitBoxes[1].setTranslateX(width*2 + width/4 - givenWidth); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
   
@@ -272,11 +272,11 @@ public class Player extends GameComponent{
     public void activateShield(GameComponentFactory GCF, Player player){
 
         if (!isShieldActive) {
-        Shield shield = (Shield) GCF.createComponent("Shield");
-        shield.setX(body.getTranslateX() + width/2);
-        shield.setY(body.getTranslateY() + height/2.5);
-        shield.addShapes(gameRoot);
-        isShieldActive = true;
+            Shield shield = (Shield) GCF.createComponent("shield");
+            shield.setX(body.getTranslateX() + width/2);
+            shield.setY(body.getTranslateY() + height/2);
+            shield.addShapes(gameRoot);
+            isShieldActive = true;
         }
 
     }
@@ -340,4 +340,5 @@ public class Player extends GameComponent{
     }
 
     public double getWidth() { return width; }
+    public double getHeight() { return height; }
 }
