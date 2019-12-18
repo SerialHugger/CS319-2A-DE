@@ -16,6 +16,7 @@ public class Dodger extends Enemy {
         this.height = magicConverter(60);
         this.width = magicConverter(30);
         super.initBody(asset, width, height);
+        setShootBehaviour(new ShootWithLaserBullet());
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -30,7 +31,7 @@ public class Dodger extends Enemy {
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet"; // TODO: change to enemybullettype2 when implemented
-                    initBullet(GCF, bulletType);
+                    shootBehaviour.shoot(GCF , this , gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500
