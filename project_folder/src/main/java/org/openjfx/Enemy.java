@@ -14,7 +14,7 @@ public class Enemy extends GameComponent{
     double directionCheckY; // Y direction decider for this type of enemy
     int directionX = 1; // if this is 1 it goes right else left
     int directionY = 1; // if this is 1 it goes down else up
-
+    Shootable shootBehaviour;
 
     /**
      * Constructor
@@ -96,7 +96,7 @@ public class Enemy extends GameComponent{
      * @param GCF TODO: explain what is this and what is its purpose
      * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
      */
-    public void initBullet(GameComponentFactory GCF, String bulletType) {
+    /*public void initBullet(GameComponentFactory GCF, String bulletType) {
         if(bulletType.equals("laserbullet")) {
             LaserBullet enemyBullet = (LaserBullet) GCF.createComponent(bulletType); // create the bullet
             enemyBullet.facingLeft = facingLeft; // make it face left
@@ -111,6 +111,7 @@ public class Enemy extends GameComponent{
             enemyBullet.addShapes(gameRoot); // add its shapes to Root
         }
     }
+    */
 
 
     /**
@@ -139,7 +140,7 @@ public class Enemy extends GameComponent{
         }
     }
 
-    void explode(String explodeType, GameComponentFactory GCF) {
+    public void explode(String explodeType, GameComponentFactory GCF) {
         EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent(explodeType);
         selfDest.setX(this.getX() + width / 2);
         selfDest.setY(this.getY() + height / 2);
@@ -153,5 +154,13 @@ public class Enemy extends GameComponent{
             MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
             mediaPlayer.play();
         }
+    }
+
+    public void setShootBehaviour(Shootable shootBehaviour ){
+        this.shootBehaviour = shootBehaviour;
+    }
+
+    public void performShoot( GameComponentFactory GCF ){
+        shootBehaviour.shoot(GCF,this , gameRoot);
     }
 }

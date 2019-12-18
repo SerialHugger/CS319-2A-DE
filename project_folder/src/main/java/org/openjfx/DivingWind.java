@@ -8,7 +8,6 @@ import java.net.CookieHandler;
 
 
 public class DivingWind extends Enemy {
-
     private double x_dest;
     private double y_dest;
     DivingWind(double width, double height, String assetLocation) {
