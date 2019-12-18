@@ -1,6 +1,7 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 import java.net.CookieHandler;
@@ -135,6 +136,9 @@ public class DivingWind extends Enemy {
                     dead = true;
                 }
             }
+        }
+        if (dead) {
+            explode("explode", GCF);
         }
     }
 }

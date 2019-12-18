@@ -1,36 +1,66 @@
 package org.openjfx;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerBullet extends PlayerEquipment {
-    int rotation = 0;
-    PlayerBullet(double width, double height, String assetLocation, boolean toLeft, double speed){
-        super(width,height,assetLocation);
+    boolean facingDown = false;
+    boolean facingUp = false;
+    boolean horizEq = false;
+    PlayerBullet(double width, double height, ImagePattern[] assets, boolean toLeft, double speed){
+        super(width,height,"playerBulleet");
+        this.speed = Math.abs(speed) + magicConverter(25);
+        this.height = magicConverter(20);
+        this.width = magicConverter(60);
         this.facingLeft = toLeft;
+        animationFrames = assets;
         hitBoxes = new Rectangle[1];
-        if(!facingLeft)
-            this.speed = speed - width;
-        else
-            this.speed = speed + width;
-        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "playerBulletHitbox");
-        body = new Rectangle(width,height, Color.ORANGE);
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerBulletHitbox");
+        body = new Rectangle(this.width,this.height, animationFrames[0]);
     }
 
     public void movePlayerBullet() {
-        if(facingLeft){ // If player was looking at left go left
-            hitBoxes[0].setTranslateX(hitBoxes[0].getTranslateX() + speed);
-            body.setTranslateX(body.getTranslateX() + speed);
-            body.setRotate(rotation);
-            hitBoxes[0].setRotate(rotation);
-            rotation += 20;
-        } else { // else go right
-            hitBoxes[0].setTranslateX(hitBoxes[0].getTranslateX() - speed);
-            body.setTranslateX(body.getTranslateX() - speed);
-            body.setRotate(rotation);
-            hitBoxes[0].setRotate(rotation*-1);
-            rotation += 20;
+        counter += 1;
+        counter = counter % 2;
+        body.setFill(animationFrames[counter]);
+        if (horizEq) {
+            if (facingDown) {
+                moveY(1, speed);
+                rotate(90);
+            } else {
+                moveY(-1, speed);
+                rotate(-90);
+            }
+
+        } else {
+            if(facingLeft){ // If player was looking at left go left
+                moveX(1, speed);
+                if (facingDown) {
+                    moveY(1, speed);
+                    rotate(45);
+                }
+                else if (facingUp) {
+                    moveY(-1, speed);
+                    rotate(-45);
+                }
+
+            } else { // else go right
+                moveX(-1, speed);
+                rotate(180);
+                if (facingDown) {
+                    moveY(1, speed);
+                    rotate(135);
+                }
+                else if (facingUp) {
+                    moveY(-1, speed);
+                    rotate(-135);
+                }
+            }
         }
+
+
+
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
@@ -44,5 +74,10 @@ public class PlayerBullet extends PlayerEquipment {
                 }
             }
         }
+
+    }
+    public void rotate(double rotateValue){
+        hitBoxes[0].setRotate(rotateValue);
+        body.setRotate(rotateValue);
     }
 }

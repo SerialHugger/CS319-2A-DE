@@ -5,12 +5,20 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
+
 public class Player extends GameComponent{
     //Necessary attiributes for teleport ability cooldown.
     private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
     private double teleportDistance = 0;
+    private boolean bulletRainActive = false;
+    private int totalBulletRainWave = 3;
+    private int bulletRainCount = 0;
     int maxAcc = 60;
     int accCount = 0;
     double acceleration;
@@ -21,9 +29,12 @@ public class Player extends GameComponent{
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
+    private boolean bulletRainOnGoing = false;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
-    Player(double givenWidth, double givenHeight, String assetLocation){
+    boolean isShieldActive = false;
+
+    Player(double givenWidth, double givenHeight, ImagePattern[] asset){
         super(givenWidth, givenHeight, "player");
         hitBoxes = new Shape[2];
         acceleration = magicConverter(0.3);
@@ -40,8 +51,9 @@ public class Player extends GameComponent{
         hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
         hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
-        shipStatus[1] = fillImage(assetLocation + "_left.png"); // insert facing left image to body
-        shipStatus[0] = fillImage(assetLocation + "_right.png"); // insert facing right image to body
+        shipStatus[1] = asset[1];
+        shipStatus[0] = asset[0];
+        body.setFill(shipStatus[0]);
         body.setTranslateX(width*1.5 - width*12.8); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
         hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
@@ -49,19 +61,31 @@ public class Player extends GameComponent{
         hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
+  
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
-        firstTime = System.nanoTime() / 1000000000.0; // get time
-        passedTime = firstTime - lastTime; // calculate passedTime
-        lastTime = firstTime; // reset last time.
-        totalPassedTime += passedTime; // calculate total passed time
-        if(totalPassedTime > 1.0) { // if 1 second is passed
-            totalPassedTime = 0; // reset timer
-            if(!teleportAvailable){ // if teleport is on cooldown
-                teleportCountdown += 1; // increase teleport countdown
-                if(teleportCountdown >= TELEPORT_COOLDOWN) { // if the cooldown limit is reached
-                    teleportAvailable = true; // make teleport available
-                    teleportCountdown = 0; // set teleport cooldown to 0
+        if(!teleportAvailable || bulletRainOnGoing) {
+            firstTime = System.nanoTime() / 1000000000.0; // get time
+            passedTime = firstTime - lastTime; // calculate passedTime
+            lastTime = firstTime; // reset last time.
+            totalPassedTime += passedTime; // calculate total passed time
+            if (totalPassedTime > 1.0) { // if 1 second is passed
+                totalPassedTime = 0; // reset timer
+                if (!teleportAvailable) { // if teleport is on cooldown
+                    teleportCountdown += 1; // increase teleport countdown
+                    if (teleportCountdown >= TELEPORT_COOLDOWN) { // if the cooldown limit is reached
+                        teleportAvailable = true; // make teleport available
+                        teleportCountdown = 0; // set teleport cooldown to 0
+                    }
+                }
+                if (bulletRainOnGoing) {
+                    if (bulletRainCount > totalBulletRainWave) {
+                        bulletRainActive = false;
+                        bulletRainCount = 0;
+                        bulletRainOnGoing = false;
+                    }
+                    bulletRainCount += 1;
+                    bulletRainActive = true;
                 }
             }
         }
@@ -120,7 +144,8 @@ public class Player extends GameComponent{
             //delay = true;
         }
         if(keyInputs[5].get()) { // space pressed
-            shoot(GCF);
+            if(!attackDelay)
+                shoot(GCF);
         }
         if(keyInputs[6].get()) { // Q pressed
             if(teleportAvailable) {
@@ -130,15 +155,19 @@ public class Player extends GameComponent{
             } 
         }
         if(keyInputs[7].get()) { // E pressed
-            //todo add hyperjump here
+            if(!bulletRainOnGoing) {
+                bulletRainOnGoing = true;
+                bulletRainActive = true;
+                bulletRainCount = 0;
+            }
         }
         if(keyInputs[8].get()) { // H pressed
-            //todo add bomb here
+            activateHyperJump();
         }
         if(keyInputs[9].get()) { // J pressed
             //todo add skill 1
             //  for now its shield
-            activateShield(GCF);
+            activateShield(GCF, this);
         }
         if(keyInputs[10].get()) { // K pressed
             //todo add skill 2
@@ -146,7 +175,7 @@ public class Player extends GameComponent{
         if(keyInputs[11].get()) { // L pressed
             //todo add skill 3
         }
-        if(!toggleHealth)
+        if(false)
             checkDeath();
         else
             lifeCount = 3;
@@ -171,7 +200,19 @@ public class Player extends GameComponent{
                 accCount += 1;
             }
         }
+        if(attackDelay) {
+            if (attackDelayTimer == 0) // if timer ends
+                attackDelay = false; // make delay false
+            attackDelayTimer -= 25; // decrease delay
+        }
+        if(bulletRainOnGoing) {
+            if (bulletRainActive){
+                    activateBulletRain(GCF);
+                    bulletRainActive = false;
+            }
+        }
         moveX(1,speed + innerSpeed); // move!
+
     }
 
     private void checkDeath() {
@@ -212,25 +253,92 @@ public class Player extends GameComponent{
     }
 
     private void shoot(GameComponentFactory GCF){
-        if(!attackDelay) {
-            PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
-            playerBullet.facingLeft = facingLeft; // make it faceleft
-            if(!facingLeft)
-                playerBullet.setX(body.getTranslateX());
+        String mainMenuMusicUrl = new File("Assets/Music/playerFire.mp3").toURI().toString();
+        MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+        mediaPlayer.play();
+
+        PlayerBullet playerBullet = (PlayerBullet) GCF.createComponent("playerBullet"); // create bullet
+        playerBullet.facingLeft = facingLeft; // make it faceleft
+        if(!facingLeft)
+            playerBullet.setX(body.getTranslateX());
+        else
+            playerBullet.setX(body.getTranslateX() + width/1.1); // set X
+        playerBullet.setY(body.getTranslateY() + height/2.5); // set Y
+        playerBullet.addShapes(gameRoot); // add shapes of bullet to gameRoot
+        attackDelay = true; // make delay true
+        attackDelayTimer = 100; // start delay timer
+    }
+
+    public void activateShield(GameComponentFactory GCF, Player player){
+
+        if (!isShieldActive) {
+        Shield shield = (Shield) GCF.createComponent("Shield");
+        shield.setX(body.getTranslateX() + width/2);
+        shield.setY(body.getTranslateY() + height/2.5);
+        shield.addShapes(gameRoot);
+        isShieldActive = true;
+        }
+
+    }
+
+    private void activateBulletRain(GameComponentFactory GCF) {
+        // creating bullets in north and south directions
+        for (int i = 0; i < 2; i++) {
+            PlayerBullet vertical = (PlayerBullet) GCF.createComponent("playerBullet");
+            vertical.horizEq = true;
+
+            if (i % 2 == 0)
+                vertical.facingUp = true;
             else
-                playerBullet.setX(body.getTranslateX() + width/1.1); // set X
-            playerBullet.setY(body.getTranslateY() + height/2.5); // set Y
-            playerBullet.addShapes(gameRoot); // add shapes of bullet to gameRoot
-            attackDelay = true; // make delay true
-            attackDelayTimer = 100; // start delay timer
-        } else {
-            if(attackDelayTimer == 0) // if timer ends
-                attackDelay = false; // make delay false
-            attackDelayTimer -= 25; // decrease delay
+                vertical.facingDown = true;
+
+            vertical.setX(body.getTranslateX() + width/2);
+            vertical.setY(body.getTranslateY() + height/2.5);
+            vertical.addShapes(gameRoot);
+        }
+        // creating bullets in remaining 6 directions
+        for (int j = 0; j < 2; j++) { // facing east or west
+            for (int i = 3; i < 8; i+=2) { // vertical direction
+                PlayerBullet bullet = (PlayerBullet) GCF.createComponent("playerBullet");
+
+                double widthCoeff = j != 0 ? 1 / 1.1 : -1 / 5.0;
+                double heightCoeff = j != 0 ? 1 / 2.5 : 1 / 3.5;
+
+                bullet.facingLeft = j != 0;
+
+                if (i % 3 == 0)
+                    bullet.facingDown = true;
+                else if (i % 5 == 0)
+                    bullet.facingUp = true;
+
+                bullet.setX(body.getTranslateX() + width * widthCoeff);
+                bullet.setY(body.getTranslateY() + height * heightCoeff);
+                bullet.addShapes(gameRoot);
+            }
         }
     }
-    public void activateShield(GameComponentFactory GCF){
+
+    private void activateHyperJump() {
+        double chance = 100 * Math.random();
+
+        /*if (chance <= 10.0)
+            lifeCount--;*/
+
+        int vertDist = (int) (Math.random() * magicConverter(100.0));
+        int horizDist = (int) (Math.random() * magicConverter(1000.0));
+
+        int vert = Math.random() > 0.5 ? 1 : -1;
+        int horiz = Math.random() > 0.5 ? 1: -1;
+
+        //facingLeft = horiz == 1;
+
+        moveX(horiz, horizDist);
+        moveY(vert, vertDist);
+        gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
+
+
     }
+
     public double getWidth() { return width; }
     public double getHeight() { return height; }
 }

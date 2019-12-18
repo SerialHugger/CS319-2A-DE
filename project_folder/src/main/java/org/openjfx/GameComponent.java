@@ -29,7 +29,9 @@ public class GameComponent {
     double lastTime = System.nanoTime() / 1000000000.0; // helps calculate time
     double passedTime = 0; // helps calculate fps
     double totalPassedTime = 0; // hold unprocessed time of the game.
-
+    ImagePattern[] animationFrames; // frames for animation
+    int currentState = 0; // state of animation
+    int counter = 0; // counter for animation state
     GameComponent(double width, double height, String type){
         this.type = type;
         this.width = width;
@@ -120,7 +122,11 @@ public class GameComponent {
         body.setTranslateY(newY);
     }
 
+
     public double magicConverter(double wantedInteger){
-        return width/(1920/wantedInteger);
+        if(gameRoot == null)
+            return width/(1920/wantedInteger);
+        else
+            return gameRoot.getWidth()/(1920/wantedInteger);
     }
 }
