@@ -29,6 +29,7 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern civilianImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -66,9 +67,12 @@ public class GameComponentFactory {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explosionImage, false);
-        } else if (type.equals("shield")) {
-            temp = new Shield( width, height, "empty");
+        } else if (type.equals("Shield")) {
+            temp = new Shield( 200, 200, "empty");
+        } else if (type.equals("civilian")) {
+            temp = new Civilian( width, height, civilianImage);
         }
+
         gameComponents.add(temp);
         return temp;
     }
@@ -99,6 +103,7 @@ public class GameComponentFactory {
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
+        civilianImage = openAsset("Assets\\Civilian.png");
 
     }
 

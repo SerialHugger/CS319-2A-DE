@@ -11,5 +11,6 @@ public class ShootWithLaserBullet implements Shootable {
         enemyBullet.setX(enemy.body.getTranslateX()); // set its X
         enemyBullet.setY(enemy.body.getTranslateY()); // set its Y
         enemyBullet.addShapes(gameRoot); // add its shapes to Root
+
     }
 }

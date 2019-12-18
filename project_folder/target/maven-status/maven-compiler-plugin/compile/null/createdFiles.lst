@@ -18,6 +18,7 @@ org\openjfx\MenuController.class
 org\openjfx\InteractionHandler.class
 org\openjfx\Shield.class
 org\openjfx\ShootWithGuidedBullet.class
+org\openjfx\Civilian.class
 org\openjfx\ForeGround.class
 org\openjfx\Atlas.class
 org\openjfx\Hud.class
