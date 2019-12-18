@@ -9,7 +9,7 @@ public class Bomb extends PlayerEquipment {
     Bomb(double width, double height,  String assetLocation) {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "bombHitbox");
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "bomb");
 
         body = new Rectangle(this.width, this.height);
         body.setFill(Color.RED);

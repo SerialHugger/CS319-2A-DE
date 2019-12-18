@@ -112,6 +112,8 @@ public class InteractionHandler {
                                     if(circleTemp2.getSpecificType().equals("playerBullet")) { // if second one is player bullet
                                         circleTemp2.dead = true;
                                         circleTemp.dead = true;
+                                    } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bullet
+                                        circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
                                 }
@@ -358,6 +360,8 @@ public class InteractionHandler {
                                     System.out.println("Enemy Rectangle to playerEquipment Circle");
                                     if(circleTemp2.getSpecificType().equals("playerBullet")) { // if second one is player bullet
                                         circleTemp2.dead = true;
+                                        rectangleTemp.dead = true;
+                                    } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bullet
                                         rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
