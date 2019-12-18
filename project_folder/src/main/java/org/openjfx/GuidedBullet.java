@@ -15,7 +15,7 @@ public class GuidedBullet extends EnemyBullet{
         speed = magicConverter(7);
         this.height = magicConverter(30);
         this.width = magicConverter(30);
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBulletHitbox");
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "guidedBullet");
         body = new Rectangle(this.width,this.height, Color.RED);
         body.setFill(asset);
     }

@@ -3,14 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Atlas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Atlas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dienamite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dienamite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dividus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dividus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/DivingWind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/DivingWind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxCircle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/ComponentHitBoxRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Dodger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Dodger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemySelfDestruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/EnemySelfDestruct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/SpeedRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/SpeedRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/LaserBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/LaserBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/MiddleGround.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/MiddleGround.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/PlayerBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Shield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Shield.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
     </list>
