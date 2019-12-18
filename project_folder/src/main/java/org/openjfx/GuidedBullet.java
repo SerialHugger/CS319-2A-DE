@@ -21,8 +21,8 @@ public class GuidedBullet extends EnemyBullet{
     }
     public void moveGuidedBullet(Player player) {
         if (guidable) {
-            x_player = player.getX() + player.width / 2;
-            y_player = player.getY() + player.height / 2;
+            x_player = player.getX() + player.getWidth() / 2;
+            y_player = player.getY() + player.getHeight() / 2;
             dist_x = Math.abs(x_player - this.getX()); // calculate distance x
             dist_y = Math.abs(y_player - this.getY()); // calculate distance y
             hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
