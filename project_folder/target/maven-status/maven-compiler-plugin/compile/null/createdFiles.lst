@@ -1,4 +1,15 @@
-org\openjfx\DivingWind.class
+org/openjfx/DivingWind.class
+org/openjfx/Dienamite.class
+org/openjfx/GuidedBullet.class
+org/openjfx/PlayerBullet.class
+org/openjfx/MainMenu.class
+org/openjfx/GameComponentFactory.class
+org/openjfx/GameController.class
+org/openjfx/ComponentHitBoxCircle.class
+org/openjfx/Scenery.class
+org/openjfx/MiddleGround.class
+org/openjfx/InteractionHandler.class
+org/openjfx/Enemy.class
 module-info.class
 org\openjfx\BackGround.class
 org\openjfx\EnemySelfDestruct.class
@@ -10,6 +21,7 @@ org\openjfx\GameComponentFactory.class
 org\openjfx\PlayerBullet.class
 org\openjfx\ShootWithLaserBullet.class
 org\openjfx\EnemyBullet.class
+org\openjfx\SpeedRunner.class
 org\openjfx\ComponentHitBoxRectangle.class
 org\openjfx\GameController.class
 org\openjfx\MenuController.class
