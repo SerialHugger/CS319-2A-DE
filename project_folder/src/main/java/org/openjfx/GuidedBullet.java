@@ -15,14 +15,14 @@ public class GuidedBullet extends EnemyBullet{
         speed = magicConverter(7);
         this.height = magicConverter(30);
         this.width = magicConverter(30);
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBulletHitbox");
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "guidedBullet");
         body = new Rectangle(this.width,this.height, Color.RED);
         body.setFill(asset);
     }
     public void moveGuidedBullet(Player player) {
         if (guidable) {
-            x_player = player.getX() + player.width / 2;
-            y_player = player.getY() + player.height / 2;
+            x_player = player.getX() + player.getWidth() / 2;
+            y_player = player.getY() + player.getHeight() / 2;
             dist_x = Math.abs(x_player - this.getX()); // calculate distance x
             dist_y = Math.abs(y_player - this.getY()); // calculate distance y
             hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y

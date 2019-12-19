@@ -9,14 +9,14 @@ public class PlayerBullet extends PlayerEquipment {
     boolean facingUp = false;
     boolean horizEq = false;
     PlayerBullet(double width, double height, ImagePattern[] assets, boolean toLeft, double speed){
-        super(width,height,"playerBulleet");
+        super(width,height,"playerBullet");
         this.speed = Math.abs(speed) + magicConverter(25);
         this.height = magicConverter(20);
         this.width = magicConverter(60);
         this.facingLeft = toLeft;
         animationFrames = assets;
         hitBoxes = new Rectangle[1];
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerBulletHitbox");
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "playerBullet");
         body = new Rectangle(this.width,this.height, animationFrames[0]);
     }
 
