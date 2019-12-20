@@ -1,6 +1,4 @@
-org\openjfx\Game.class
-org\openjfx\Dividus.class
-org\openjfx\MainGame.class
+org\openjfx\DivingWind.class
 module-info.class
 org\openjfx\BackGround.class
 org\openjfx\EnemySelfDestruct.class
@@ -22,6 +20,7 @@ org\openjfx\ForeGround.class
 org\openjfx\Atlas.class
 org\openjfx\Hud.class
 org\openjfx\MainMenu.class
+org\openjfx\Bomb.class
 org\openjfx\ShootNoWay.class
 org\openjfx\PlayerEquipment.class
 org\openjfx\Game$1.class
