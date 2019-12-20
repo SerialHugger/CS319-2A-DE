@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 
 public class EnemySelfDestruct extends EnemyEquipment{
 
-    private final int totalLifetime = 1;
+    private final int TOTAL_LIFETIME = 1;
     private double wantedTime = 0;
     private int lifetime = 0;
     private boolean harmful;
@@ -21,14 +21,14 @@ public class EnemySelfDestruct extends EnemyEquipment{
 
         this.harmful = harmful;
         if(harmful) {
-            this.width = magicConverter(350);
+            hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(250), "enemySelfDestruct", "selfDestruct");
             this.height = magicConverter(350);
-            hitBoxes[0] = new ComponentHitBoxCircle(this.width, "selfDestructHitbox");
+            this.width = magicConverter(350);
             wantedTime = 0.5;
         } else {
+            hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(30), "harmless", "selfDestruct");
             this.height = magicConverter( 50);
             this.width = magicConverter(50);
-            hitBoxes[0] = new ComponentHitBoxCircle(this.width, "explosionHarmless");
             wantedTime = 0.2;
         }
 
@@ -44,7 +44,7 @@ public class EnemySelfDestruct extends EnemyEquipment{
 
     public void updateSelfDestruct() {
 
-        if (lifetime > totalLifetime) {
+        if (lifetime > TOTAL_LIFETIME) {
             dead = true;
         }
         if(delay)

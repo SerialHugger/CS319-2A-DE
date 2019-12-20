@@ -18,6 +18,10 @@ public class Player extends GameComponent{
     private double teleportDistance = 0;
     private boolean bulletRainActive = false;
     private int totalBulletRainWave = 3;
+    private final int TOTAL_BOMB_DROPS = 4;
+    private boolean bombingOngoing = false;
+    private boolean bombingActive = false;
+    private int bombDropCount = 0;
     private int bulletRainCount = 0;
     int maxAcc = 60;
     int accCount = 0;
@@ -41,30 +45,30 @@ public class Player extends GameComponent{
         maxSpeed = magicConverter(25);
         facingLeft = true;
         innerAcc = 3;
-        teleportDistance = magicConverter(150);
+        teleportDistance = magicConverter(110);
         //update width and height
-        double tempWidth = magicConverter(150);
-        double tempHeight = magicConverter(70);
+        double tempWidth = magicConverter(110);
+        double tempHeight = magicConverter(50);
         width = tempWidth;
         height = tempHeight;
         //do the calculations with width and height.
-        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"playerHitBoxRectangle"); // setup the Rectangle hit box
-        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"playerHitBoxCircle"); // setup the Circle hit box
+        hitBoxes[0] = new ComponentHitBoxRectangle(width,height/2.3,"player", "player"); // setup the Rectangle hit box
+        hitBoxes[1] = new ComponentHitBoxCircle(width/6,"player", "player"); // setup the Circle hit box
         body = new Rectangle(width, height, null); //setup the body
         shipStatus[1] = asset[1];
         shipStatus[0] = asset[0];
         body.setFill(shipStatus[0]);
-        body.setTranslateX(width*1.5 - width*12.8); // set X for body
+        body.setTranslateX(width*2 - givenWidth); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        hitBoxes[0].setTranslateX(width*1.5 - width*12.8); // set X for hit box
+        hitBoxes[0].setTranslateX(width*2 - givenWidth); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
-        hitBoxes[1].setTranslateX(width*1.5 + width/4 - width*12.8); // set X for hit box
+        hitBoxes[1].setTranslateX(width*2 + width/4 - givenWidth); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
   
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
-        if(!teleportAvailable || bulletRainOnGoing) {
+        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
@@ -79,13 +83,23 @@ public class Player extends GameComponent{
                     }
                 }
                 if (bulletRainOnGoing) {
-                    if (bulletRainCount > totalBulletRainWave) {
+                    if (bulletRainCount >= totalBulletRainWave) {
                         bulletRainActive = false;
                         bulletRainCount = 0;
                         bulletRainOnGoing = false;
                     }
                     bulletRainCount += 1;
                     bulletRainActive = true;
+                }
+
+                if(bombingOngoing) {
+                    if (bombDropCount >= TOTAL_BOMB_DROPS) {
+                        bombingActive = false;
+                        bombDropCount = 0;
+                        bombingOngoing = false;
+                    }
+                    bombDropCount += 1;
+                    bombingActive = true;
                 }
             }
         }
@@ -137,7 +151,7 @@ public class Player extends GameComponent{
             moveY(-1,10); // move up
         }
         if(keyInputs[2].get() && getY() <= gameRoot.getHeight() - height*1.3) { // s pressed
-            moveY(1,10); // move up
+            moveY(1,10); // move down
         }
         if(keyInputs[4].get()) { // enter pressed
             //body.setTranslateX(body.getTranslateX() + 60);
@@ -170,10 +184,14 @@ public class Player extends GameComponent{
             activateShield(GCF, this);
         }
         if(keyInputs[10].get()) { // K pressed
-            //todo add skill 2
+            // todo some stuff
         }
         if(keyInputs[11].get()) { // L pressed
-            //todo add skill 3
+            if (!bombingOngoing) {
+                bombingActive = true;
+                bombingOngoing = true;
+                bombDropCount = 0;
+            }
         }
         if(false)
             checkDeath();
@@ -207,8 +225,14 @@ public class Player extends GameComponent{
         }
         if(bulletRainOnGoing) {
             if (bulletRainActive){
-                    activateBulletRain(GCF);
-                    bulletRainActive = false;
+                activateBulletRain(GCF);
+                bulletRainActive = false;
+            }
+        }
+        if (bombingOngoing) {
+            if (bombingActive) {
+                dropBomb(GCF);
+                bombingActive = false;
             }
         }
         moveX(1,speed + innerSpeed); // move!
@@ -272,11 +296,11 @@ public class Player extends GameComponent{
     public void activateShield(GameComponentFactory GCF, Player player){
 
         if (!isShieldActive) {
-        Shield shield = (Shield) GCF.createComponent("Shield");
-        shield.setX(body.getTranslateX() + width/2);
-        shield.setY(body.getTranslateY() + height/2.5);
-        shield.addShapes(gameRoot);
-        isShieldActive = true;
+            Shield shield = (Shield) GCF.createComponent("shield");
+            shield.setX(body.getTranslateX() + width/2);
+            shield.setY(body.getTranslateY() + height/2);
+            shield.addShapes(gameRoot);
+            isShieldActive = true;
         }
 
     }
@@ -318,6 +342,13 @@ public class Player extends GameComponent{
         }
     }
 
+    private void dropBomb(GameComponentFactory GCF) {
+        Bomb bomb = (Bomb) GCF.createComponent("bomb");
+        bomb.setX(body.getTranslateX());
+        bomb.setY(body.getTranslateY());
+        bomb.addShapes(gameRoot);
+    }
+
     private void activateHyperJump() {
         double chance = 100 * Math.random();
 
@@ -335,9 +366,8 @@ public class Player extends GameComponent{
         moveX(horiz, horizDist);
         moveY(vert, vertDist);
         gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
-
-
     }
 
     public double getWidth() { return width; }
+    public double getHeight() { return height; }
 }
