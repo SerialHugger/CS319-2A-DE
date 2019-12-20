@@ -72,6 +72,8 @@ public class GameComponentFactory {
             temp = new Shield( width, height, "empty");
         } else if (type.equals("engineBlast")) {
             temp = new EngineBlast(40,50, "empty");
+        } else if (type.equals("collectible")) {
+            temp = new Collectible(40, 50, "empty");
         }
         gameComponents.add(temp);
         return temp;

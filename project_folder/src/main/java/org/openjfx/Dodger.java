@@ -85,6 +85,7 @@ public class Dodger extends Enemy {
         }
 
         if (dead) {
+            dropAbility(GCF);
             explode("explode", GCF);
         }
     }
