@@ -70,6 +70,8 @@ public class GameComponentFactory {
             temp = new Bomb(40, 50, "empty");
         } else if (type.equals("shield")) {
             temp = new Shield( width, height, "empty");
+        } else if (type.equals("engineBlast")) {
+            temp = new EngineBlast(40,50, "empty");
         }
         gameComponents.add(temp);
         return temp;

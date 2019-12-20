@@ -18,13 +18,20 @@ public class Player extends GameComponent{
     private double teleportDistance = 0;
     private boolean bulletRainActive = false;
     private int totalBulletRainWave = 3;
-    private final int TOTAL_BOMB_DROPS = 4;
+    private boolean bulletRainOnGoing = false;
+    private int bulletRainCount = 0;
+    private final int TOTAL_BOMB_DROPS = 3;
     private boolean bombingOngoing = false;
     private boolean bombingActive = false;
     private int bombDropCount = 0;
-    private int bulletRainCount = 0;
+    private final int TOTAL_ENGINE_BLASTS = 1;
+    private boolean engineBlastActive = false;
+    private boolean engineBlastOngoing = false;
+    private int engineBlastCount = 0;
     int maxAcc = 60;
     int accCount = 0;
+    int dirX;
+    int dirY;
     double acceleration;
     double innerAcc;
     double innerSpeed = 0;
@@ -33,7 +40,6 @@ public class Player extends GameComponent{
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
-    private boolean bulletRainOnGoing = false;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
     boolean isShieldActive = false;
@@ -45,6 +51,7 @@ public class Player extends GameComponent{
         maxSpeed = magicConverter(25);
         facingLeft = true;
         innerAcc = 3;
+        speed_x = 0;
         teleportDistance = magicConverter(110);
         //update width and height
         double tempWidth = magicConverter(110);
@@ -68,7 +75,7 @@ public class Player extends GameComponent{
   
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
-        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing) {
+        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing || engineBlastOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
@@ -100,6 +107,16 @@ public class Player extends GameComponent{
                     }
                     bombDropCount += 1;
                     bombingActive = true;
+                }
+
+                if(engineBlastOngoing) {
+                    if (engineBlastCount >= TOTAL_ENGINE_BLASTS) {
+                        engineBlastActive = false;
+                        engineBlastCount = 0;
+                        engineBlastOngoing = false;
+                    }
+                    engineBlastCount += 1;
+                    engineBlastActive = true;
                 }
             }
         }
@@ -144,16 +161,25 @@ public class Player extends GameComponent{
             if(facingLeft) {
                 body.setFill(shipStatus[1]); // make it face left in image form
                 facingLeft = false; // make it face left
+                speed_x = 1;
                 hitBoxes[1].setTranslateX(body.getTranslateX() + width - width/4); // set X for hit box
             }
         }
         if(keyInputs[0].get() && getY() >= 0 + height/6) { // w pressed
             moveY(-1,10); // move up
+            speed_y = -1;
         }
         if(keyInputs[2].get() && getY() <= gameRoot.getHeight() - height*1.3) { // s pressed
             moveY(1,10); // move down
+            speed_y = 1;
         }
         if(keyInputs[4].get()) { // enter pressed
+            if (!engineBlastOngoing) {
+                engineBlastOngoing = true;
+                engineBlastActive = true;
+                engineBlastCount = 0;
+
+            }
             //body.setTranslateX(body.getTranslateX() + 60);
             //delay = true;
         }
@@ -235,8 +261,13 @@ public class Player extends GameComponent{
                 bombingActive = false;
             }
         }
+        if (engineBlastOngoing) {
+            if (engineBlastActive && engineBlastCount >= TOTAL_ENGINE_BLASTS) {
+                activateEngineBlast(GCF);
+                engineBlastActive = false;
+            }
+        }
         moveX(1,speed + innerSpeed); // move!
-
     }
 
     private void checkDeath() {
@@ -349,6 +380,29 @@ public class Player extends GameComponent{
         bomb.addShapes(gameRoot);
     }
 
+    private void activateEngineBlast(GameComponentFactory GCF) {
+        EngineBlast blast = (EngineBlast) GCF.createComponent("engineBlast");
+
+        if (facingLeft) {
+            blast.setX(body.getTranslateX() - width/2.7);
+            if (accCount - 10 > -1 * maxAcc) {
+                accCount -= 10;
+                innerSpeed = innerAcc * 10;
+            }
+        }
+        else {
+            blast.setX(body.getTranslateX() + width/0.9);
+            if (accCount + 10 < maxAcc) {
+                accCount += 10;
+                innerSpeed = innerAcc * 10;
+            }
+        }
+
+
+        blast.setY(body.getTranslateY());
+        blast.addShapes(gameRoot);
+    }
+
     private void activateHyperJump() {
         double chance = 100 * Math.random();
 
@@ -360,8 +414,6 @@ public class Player extends GameComponent{
 
         int vert = Math.random() > 0.5 ? 1 : -1;
         int horiz = Math.random() > 0.5 ? 1: -1;
-
-        //facingLeft = horiz == 1;
 
         moveX(horiz, horizDist);
         moveY(vert, vertDist);

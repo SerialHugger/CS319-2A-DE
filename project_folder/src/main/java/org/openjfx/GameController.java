@@ -231,6 +231,14 @@ public class GameController {
                     bomb.explode(gameComponentFactory);
                     bomb.die();
                 }
+            } else if (gameComponents.get(i) instanceof EngineBlast) {
+                EngineBlast blast = ((EngineBlast) gameComponents.get(i));
+                blast.moveEngineBlast(player);
+                if (blast.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    blast.die();
+                }
             }
            createLevel();
         }
