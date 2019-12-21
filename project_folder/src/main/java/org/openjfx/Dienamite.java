@@ -72,6 +72,7 @@ public class Dienamite extends Enemy {
         }
 
         if (dead) {
+            dropAbility(GCF);
             explode("enemySelfDestruct", GCF);
         }
 
