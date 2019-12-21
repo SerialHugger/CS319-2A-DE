@@ -74,6 +74,8 @@ public class GameComponentFactory {
             temp = new EngineBlast(40,50, "empty");
         } else if (type.equals("collectible")) {
             temp = new Collectible(40, 50, "empty");
+        } else if (type.equals("barrier")) {
+            temp = new Barrier(700, 700, "empty");
         }
         gameComponents.add(temp);
         return temp;

@@ -336,6 +336,13 @@ public class Player extends GameComponent{
 
     }
 
+    public void activateBarrier(GameComponentFactory GCF){
+        Barrier barrier = (Barrier) GCF.createComponent("barrier");
+        barrier.setX(this.body.getTranslateX() + this.width / 2);
+        barrier.setY(this.body.getTranslateY() + this.height/ 2);
+        barrier.addShapes(gameRoot);
+    }
+
     private void activateBulletRain(GameComponentFactory GCF) {
         // creating bullets in north and south directions
         for (int i = 0; i < 2; i++) {
@@ -458,6 +465,7 @@ public class Player extends GameComponent{
                         engineBlastCount = 0;
                     }
                 } else if (abilityType.equals("barrier")) {
+                    activateBarrier(GCF);
 
                 } else if (abilityType.equals("bulletRain")) {
                     if(!bulletRainOnGoing) {

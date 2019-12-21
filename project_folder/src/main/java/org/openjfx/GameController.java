@@ -247,6 +247,9 @@ public class GameController {
                     size -= 1;
                     item.die();
                 }
+            } else if (gameComponents.get(i) instanceof Barrier) {
+                Barrier item = ((Barrier) gameComponents.get(i));
+                item.moveBarrier(scenery);
             }
            createLevel();
         }
