@@ -73,6 +73,7 @@ public class Atlas extends Enemy {
             }
         }
         if (dead) {
+            dropAbility(GCF);
             explode("explode", GCF);
         }
     }
