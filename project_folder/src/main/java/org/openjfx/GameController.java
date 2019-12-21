@@ -77,7 +77,7 @@ public class GameController {
     }
     void updateInteraction(){
         //update interaction
-        interactionHandler.handleInteraction(gameRoot);
+        interactionHandler.handleInteraction(gameRoot, player);
     }
     void updateGame(int fps) {
         // update game components
@@ -231,6 +231,25 @@ public class GameController {
                     bomb.explode(gameComponentFactory);
                     bomb.die();
                 }
+            } else if (gameComponents.get(i) instanceof EngineBlast) {
+                EngineBlast blast = ((EngineBlast) gameComponents.get(i));
+                blast.moveEngineBlast(player);
+                if (blast.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    blast.die();
+                }
+            } else if (gameComponents.get(i) instanceof Collectible) {
+                Collectible item = ((Collectible) gameComponents.get(i));
+                item.moveCollectible();
+                if (item.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    item.die();
+                }
+            } else if (gameComponents.get(i) instanceof Barrier) {
+                Barrier item = ((Barrier) gameComponents.get(i));
+                item.moveBarrier(scenery);
             }
            createLevel();
         }
