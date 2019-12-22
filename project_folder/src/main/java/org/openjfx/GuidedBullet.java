@@ -40,7 +40,9 @@ public class GuidedBullet extends EnemyBullet{
                guidable = false;
             }
         }
-        if( x_player > x_initial && y_player == y_initial) // if the player is directly on the right side
+        this.setX(this.getX() + speed_x);
+        this.setY(this.getY() +speed_y);
+        /*if( x_player > x_initial && y_player == y_initial) // if the player is directly on the right side
             moveX(1, speed);
         else if (x_player < x_initial && y_player == y_initial) // if the player is directly on the left side
             moveX(-1, speed);
@@ -59,7 +61,7 @@ public class GuidedBullet extends EnemyBullet{
         }
         else if(x_player < x_initial && y_player > y_initial) { // if the player is at the bottom-right of the ship
             moveX(-1,speed_x); moveY(1,speed_y); // left and down
-        }
+        }*/
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
