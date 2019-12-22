@@ -29,6 +29,7 @@ public class MenuController {
     private ImagePattern[] settingsButtonImages; // todo will hold  images for settings
     private ImagePattern[] levelButtonImages;
     private ImagePattern[] selectShipImages;
+    private ImagePattern[] shipAssets = new ImagePattern[6];
     // BooleanProperties for smoother control on ui.
     private BooleanProperty w_Pressed = new SimpleBooleanProperty();
     private BooleanProperty a_Pressed = new SimpleBooleanProperty();
@@ -233,13 +234,16 @@ public class MenuController {
                 }
                 if(enter_Pressed.get()){
                     if(currentButtonSettings == 0) { // level1
+                        mediaPlayer.stop();
                         game.startGame(1);
                         System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
                     }
                     else if(currentButtonSettings == 1) { // level2
+                        mediaPlayer.stop();
                         game.startGame(2);
                     }
                     else if(currentButtonSettings == 2) { // level3
+                        mediaPlayer.stop();
                         game.startGame(3);
                     }
 
@@ -265,14 +269,21 @@ public class MenuController {
                     delay = false;
                 }
                 if(enter_Pressed.get()){
-                    if(currentButtonSettings == 0) { // level1
-                        game.startGame(1);
-                        System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
+                    if(currentButtonSettings == 0) { // ship1
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+                        currentScreen = 0;
                     }
-                    else if(currentButtonSettings == 1) { // level2
+                    else if(currentButtonSettings == 1) { // ship2
                         game.startGame(2);
                     }
-                    else if(currentButtonSettings == 2) { // level3
+                    else if(currentButtonSettings == 2) { // ship3
                         game.startGame(3);
                     }
 
