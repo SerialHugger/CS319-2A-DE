@@ -15,12 +15,12 @@ public class GuidedBullet extends EnemyBullet{
     GuidedBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"guidedBullet");
         this.facingLeft = toLeft;
-        hitBoxes = new Rectangle[1];
+        hitBoxes = new Circle[1];
         speed = magicConverter(2.5);
         this.height = magicConverter(60);
         this.width = magicConverter(60);
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "guidedBullet");
-        body = new Rectangle(this.width,this.height, Color.RED);
+        hitBoxes[0] = new ComponentHitBoxCircle(this.width/2, "enemyBullet", "guidedBullet");
+        body = new Circle(this.width / 2, Color.RED);
         body.setFill(asset);
     }
     public void moveGuidedBullet(Player player) {
@@ -48,26 +48,7 @@ public class GuidedBullet extends EnemyBullet{
         }
         this.setX(this.getX() + speed_x);
         this.setY(this.getY() +speed_y);
-        /*if( x_player > x_initial && y_player == y_initial) // if the player is directly on the right side
-            moveX(1, speed);
-        else if (x_player < x_initial && y_player == y_initial) // if the player is directly on the left side
-            moveX(-1, speed);
-        else if(x_player == x_initial && y_player < y_initial) // if the player is at the top of the ship
-            moveY(-1, speed);
-        else if(x_player == x_initial && y_player > y_initial) // if the player is at the bottom of the ship
-            moveY(1, speed);
-        else if(x_player > x_initial && y_player < y_initial) { // if the player is at the top-right of the ship
-            moveX(1, speed_x); moveY(-1,speed_y); // right and up
-        }
-        else if(x_player > x_initial && y_player > y_initial) { // if the player is at the bottom-right of the ship
-            moveX(1,speed_x); moveY(1,speed_y);
-        }
-        else if(x_player < x_initial && y_player < y_initial) { // if the player is at the top-left of the ship
-            moveX(-1,speed_x); moveY(-1,speed_y); // left and up
-        }
-        else if(x_player < x_initial && y_player > y_initial) { // if the player is at the bottom-right of the ship
-            moveX(-1,speed_x); moveY(1,speed_y); // left and down
-        }*/
+
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
