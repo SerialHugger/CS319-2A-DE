@@ -18,7 +18,7 @@ public class Dienamite extends Enemy {
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
-    public void moveDienamite(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveDienamite(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -46,7 +46,7 @@ public class Dienamite extends Enemy {
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 
-        directionX = moveValues[0];
+        directionX = moveValues[0] * speedFactor;
         directionY = moveValues[1];
         speed_x = moveValues[2];
         speed_y = moveValues[3];
@@ -61,6 +61,7 @@ public class Dienamite extends Enemy {
         dead = updateDeath();
 
         if (dead) {
+            dropAbility(GCF);
             explode("enemySelfDestruct", GCF);
         }
 
