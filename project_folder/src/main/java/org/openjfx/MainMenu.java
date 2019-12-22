@@ -18,6 +18,7 @@ public class MainMenu {
     private double height;
     // set menu controller
     private MenuController menuController;
+    private int shipSelected;
 
     /*
      * todo -> Insert setting,  make it good to go before start coding the game part.
@@ -210,8 +211,8 @@ public class MainMenu {
         buttonImages[9] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_Black.png", false);
         buttonImages[10] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", true );
         buttonImages[11] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", false );
-        buttonImages[12] = insertImage(selectShipButton, "Assets\\mainMenu\\howToPlayButton_White.png", true);
-        buttonImages[13] = insertImage(selectShipButton, "Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        buttonImages[12] = insertImage(selectShipButton, "Assets\\mainMenu\\changeShipButton_White.png", true);
+        buttonImages[13] = insertImage(selectShipButton, "Assets\\mainMenu\\changeShipButton_Black.png", false);
         // for settings menu
         insertImage(settingsButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
         settingsButtonImages[0] = insertImage(videoResolutionButton ,"Assets\\mainMenu\\videoResolution_White.png", false);
@@ -226,20 +227,20 @@ public class MainMenu {
         settingsButtonImages[9] = insertImage(goBackButton,"Assets\\mainMenu\\goBackButton_Black.png", false);
         // for level selection menu
         insertImage(levelButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
-        levelButtonImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
-        levelButtonImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        levelButtonImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", false);
+        levelButtonImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\level1-removebg-preview.png", true);
         levelButtonImages[2] = insertImage(levelButton2 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
-        levelButtonImages[3] = insertImage(levelButton2 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        levelButtonImages[3] = insertImage(levelButton2 ,"Assets\\mainMenu\\level2-removebg-preview.png", false);
         levelButtonImages[4] = insertImage(levelButton3 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
-        levelButtonImages[5] = insertImage(levelButton3,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        levelButtonImages[5] = insertImage(levelButton3,"Assets\\mainMenu\\level3-removebg-preview.png", false);
         // for ship selection
         insertImage(selectShipHighlight ,"Assets\\mainMenu\\buttonHighlight.png", true );
-        shipSelectImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
-        shipSelectImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
-        shipSelectImages[2] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
-        shipSelectImages[3] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
-        shipSelectImages[4] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
-        shipSelectImages[5] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        shipSelectImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShipButton_White.png", false);
+        shipSelectImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShip1_black.png", true);
+        shipSelectImages[2] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShipButton_White.png", true);
+        shipSelectImages[3] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShip2_black.png", false);
+        shipSelectImages[4] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShipButton_White.png", true);
+        shipSelectImages[5] = insertImage(levelButton1 ,"Assets\\mainMenu\\changeShip3_black.png", false);
         ////////////////////////////////////////////////////////////
         //////////////add necessary elements to root////////////////
         ////////////////////////////////////////////////////////////
@@ -292,6 +293,7 @@ public class MainMenu {
     public void update(Game game)
     {
         menuController.update(game, menuRoot);
+        shipSelected = menuController.getShipSelected();
     }
 
     //Setup buttonHandler to control menu
@@ -325,6 +327,10 @@ public class MainMenu {
             }
         }
         return  imagePattern;
+    }
+    public int getShipSelected(){
+        shipSelected = menuController.getShipSelected();
+        return shipSelected;
     }
     public boolean isFullscreen(){
         return menuController.isFullscreen();

@@ -37,11 +37,12 @@ public class Game extends Application {
     double frameTime = 0; // hold the frameTime
     int frames = 0; // frame count
     int fps = 0; // fps count
-  
+    int shipSelected = 0;
     private void update() {
 
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
+            shipSelected = mainMenu.getShipSelected();
         }
         if(onGame){
             // I probably miss commended this cuz reasons.
@@ -51,6 +52,7 @@ public class Game extends Application {
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
             frameTime += passedTime; // calculate frameTime
+            shipSelected = mainMenu.getShipSelected();
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
@@ -94,6 +96,7 @@ public class Game extends Application {
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
         mainGame = new MainGame(gameRoot, width, height, this);
+        mainGame.setShipSelected(mainMenu.getShipSelected());
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
@@ -143,6 +146,11 @@ public class Game extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public int getShipSelected(){
+        shipSelected = mainMenu.getShipSelected();
+        return shipSelected;
     }
 
     public void backToMainMenu() {

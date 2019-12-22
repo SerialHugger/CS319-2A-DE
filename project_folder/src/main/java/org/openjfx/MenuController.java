@@ -45,10 +45,9 @@ public class MenuController {
     private int whatImageSettings = 1; // Same purpose but for setting
     private int whatImagelevel = 1; // Same purpose but for level selection
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
-
+    private int shipSelected = 0; // check the selected ship's appereance
 
     private MediaPlayer mediaPlayer;
-
 
     MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight, Rectangle[] levelButtons , ImagePattern[] levelButtonImages , Rectangle levelButtonHighlight,Rectangle[] selectShipButtons,ImagePattern[] selectShipImages, Rectangle shipButtonHighlight  ){
         this.buttons = buttons;
@@ -233,13 +232,16 @@ public class MenuController {
                 }
                 if(enter_Pressed.get()){
                     if(currentButtonSettings == 0) { // level1
+                        mediaPlayer.stop();
                         game.startGame(1);
                         System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
                     }
                     else if(currentButtonSettings == 1) { // level2
+                        mediaPlayer.stop();
                         game.startGame(2);
                     }
                     else if(currentButtonSettings == 2) { // level3
+                        mediaPlayer.stop();
                         game.startGame(3);
                     }
 
@@ -265,15 +267,44 @@ public class MenuController {
                     delay = false;
                 }
                 if(enter_Pressed.get()){
-                    if(currentButtonSettings == 0) { // level1
-                        game.startGame(1);
-                        System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
+                    shipSelected = 1;
+                    if(currentButtonSettings == 0) { // ship1
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
-                    else if(currentButtonSettings == 1) { // level2
-                        game.startGame(2);
+                    else if(currentButtonSettings == 1) { // ship2
+                        shipSelected = 2;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
-                    else if(currentButtonSettings == 2) { // level3
-                        game.startGame(3);
+                    else if(currentButtonSettings == 2) { // ship3
+                        shipSelected = 3;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
 
                     delay = false;
@@ -389,5 +420,8 @@ public class MenuController {
                 enter_Pressed.set(false);
             }
         });
+    }
+    public int getShipSelected(){
+        return shipSelected;
     }
 }
