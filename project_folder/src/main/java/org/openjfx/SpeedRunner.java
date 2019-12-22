@@ -55,18 +55,7 @@ public class SpeedRunner extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead())
-                    dead = true;
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             explode("explode", GCF);
         }

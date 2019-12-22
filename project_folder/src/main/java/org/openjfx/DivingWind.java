@@ -11,16 +11,16 @@ public class DivingWind extends Enemy {
     private double x_dest;
     private double y_dest;
     DivingWind(double width, double height, ImagePattern asset) {
-        super(width / 60.95, height / 18, "divingWind");
-        super.initBody(asset, width, height);
+        super(width, height, "divingWind");
         this.height = magicConverter( 60);
-        this.width = magicConverter( 31.5);
+        acceleration = magicConverter(0.3);
+        this.width = magicConverter( 32);
+        super.initBody(asset, width, height);
         speed = 0;
         speed_x = 0;
         speed_y = 0;
         x_dest = 0;
         y_dest = 0;
-        acceleration = magicConverter(5);
         body.setFill(asset);
     }
 
@@ -44,7 +44,7 @@ public class DivingWind extends Enemy {
             y_dest = yCoord;
         }
         else if ((int)speed == 0){
-            acceleration = magicConverter(5);
+            acceleration = magicConverter(0.3);
             //System.out.println(acceleration);
         }
         speed = speed + acceleration;
@@ -125,18 +125,7 @@ public class DivingWind extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead())
-                    dead = true;
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             explode("explode", GCF);
         }

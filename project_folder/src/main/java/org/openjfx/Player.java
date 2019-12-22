@@ -44,7 +44,7 @@ public class Player extends GameComponent{
         acceleration = magicConverter(0.3);
         maxSpeed = magicConverter(25);
         facingLeft = true;
-        innerAcc = 3;
+        innerAcc = 5;
         teleportDistance = magicConverter(110);
         //update width and height
         double tempWidth = magicConverter(110);
@@ -58,11 +58,11 @@ public class Player extends GameComponent{
         shipStatus[1] = asset[1];
         shipStatus[0] = asset[0];
         body.setFill(shipStatus[0]);
-        body.setTranslateX(width*2 - givenWidth); // set X for body
+        body.setTranslateX(width*3 - givenWidth); // set X for body
         body.setTranslateY(height*7.5); // set Y for body
-        hitBoxes[0].setTranslateX(width*2 - givenWidth); // set X for hit box
+        hitBoxes[0].setTranslateX(width*3 - givenWidth); // set X for hit box
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
-        hitBoxes[1].setTranslateX(width*2 + width/4 - givenWidth); // set X for hit box
+        hitBoxes[1].setTranslateX(width*3 + width/4 - givenWidth); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
     }
   
@@ -344,8 +344,8 @@ public class Player extends GameComponent{
 
     private void dropBomb(GameComponentFactory GCF) {
         Bomb bomb = (Bomb) GCF.createComponent("bomb");
-        bomb.setX(body.getTranslateX());
-        bomb.setY(body.getTranslateY());
+        bomb.setX(body.getTranslateX() + width/2);
+        bomb.setY(body.getTranslateY() - height/2);
         bomb.addShapes(gameRoot);
     }
 

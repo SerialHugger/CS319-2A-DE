@@ -2,7 +2,9 @@ package org.openjfx;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class GuidedBullet extends EnemyBullet{
     private final int guideLimit = 5;
@@ -11,15 +13,17 @@ public class GuidedBullet extends EnemyBullet{
     GuidedBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"guidedBullet");
         this.facingLeft = toLeft;
-        hitBoxes = new Rectangle[1];
+        hitBoxes = new Shape[1];
         speed = magicConverter(7);
         this.height = magicConverter(30);
         this.width = magicConverter(30);
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "guidedBullet");
-        body = new Rectangle(this.width,this.height, Color.RED);
+        hitBoxes[0] = new ComponentHitBoxCircle(this.width/2, "enemyBullet", "guidedBullet");
+        body = new Circle(this.width/2, Color.RED);
         body.setFill(asset);
     }
     public void moveGuidedBullet(Player player) {
+        body.setRotate(rotate);
+        rotate+=15;
         if (guidable) {
             x_player = player.getX() + player.getWidth() / 2;
             y_player = player.getY() + player.getHeight() / 2;
