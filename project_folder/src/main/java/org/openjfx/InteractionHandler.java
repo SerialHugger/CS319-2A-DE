@@ -8,7 +8,7 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 
 public class InteractionHandler {
-    public boolean handleInteraction(Pane gameRoot){
+    public boolean handleInteraction(Pane gameRoot, Player player){
         BooleanProperty isDead = new SimpleBooleanProperty(false);
         /*
          * + means it collides in its own loop
@@ -228,7 +228,12 @@ public class InteractionHandler {
                             } else if(rectangleTemp2.getType().equals("collectible")){ // second is Collectible
                                 if(circleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) { // if they intersect
                                     System.out.println("Player Circle to Collectible Rectangle");
-                                    //TODO ADD COLLECTIBLE INTERACTION HERE
+                                    String abilityType = rectangleTemp2.getSpecificType();
+                                    if (player.addAbility(abilityType)) {
+                                        System.out.println("Destroying rectangle " + rectangleTemp2.getSpecificType());
+                                        rectangleTemp2.dead = true;
+                                    }
+
                                 }
                             }
                         } else if(circleTemp.getType().equals("enemy")) { // first one is enemy
@@ -237,6 +242,8 @@ public class InteractionHandler {
                                     System.out.println("Enemy Circle to playerEquipment Rectangle");
                                     if(rectangleTemp2.getSpecificType().equals("playerBullet")) { // if second one is player bullet
                                         rectangleTemp2.dead = true;
+                                        circleTemp.dead = true;
+                                    } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) {
                                         circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
@@ -351,7 +358,12 @@ public class InteractionHandler {
                             } else if(circleTemp2.getType().equals("collectible")){ // second is Collectible
                                 if(rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
                                     System.out.println("Player Rectangle to Collectible Circle");
-                                    //TODO ADD COLLECTIBLE INTERACTION HERE
+                                    String abilityType = circleTemp2.getSpecificType();
+                                    if (player.addAbility(abilityType)) {
+                                        System.out.println("Destroying circle " + circleTemp2.getSpecificType());
+                                        circleTemp2.dead = true;
+                                    }
+
                                 }
                             }
                         } else if(rectangleTemp.getType().equals("enemy")) { // first one is enemy
@@ -432,7 +444,11 @@ public class InteractionHandler {
                             } else if(rectangleTemp2.getType().equals("collectible")){ // second is Collectible
                                 if(rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) { // if they intersect
                                     System.out.println("Player Rectangle to Collectible Rectangle");
-                                    //TODO ADD COLLECTIBLE INTERACTION HERE
+                                    if (player.addAbility(rectangleTemp2.getSpecificType())) {
+                                        System.out.println("Destroying rectangle " + rectangleTemp2.getSpecificType());
+                                        rectangleTemp2.dead = true;
+                                    }
+
                                 }
                             }
                         } else if(rectangleTemp.getType().equals("enemy")) { // first one is enemy
@@ -441,6 +457,8 @@ public class InteractionHandler {
                                     System.out.println("Enemy Rectangle to playerEquipment Rectangle");
                                     if(rectangleTemp2.getSpecificType().equals("playerBullet")) { // if second one is player bullet
                                         rectangleTemp2.dead = true;
+                                        rectangleTemp.dead = true;
+                                    } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) { // if second one is engine blast
                                         rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here

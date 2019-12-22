@@ -10,7 +10,7 @@ public class Bomb extends PlayerEquipment {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "bomb");
-
+        System.out.println("Some bomb cheese!!!");
         body = new Rectangle(this.width, this.height);
         body.setFill(Color.RED);
 

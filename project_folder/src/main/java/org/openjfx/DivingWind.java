@@ -138,6 +138,7 @@ public class DivingWind extends Enemy {
             }
         }
         if (dead) {
+            dropAbility(GCF);
             explode("explode", GCF);
         }
     }

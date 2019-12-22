@@ -10,6 +10,7 @@ import java.io.File;
 
 public class Enemy extends GameComponent{
 
+    private boolean canDropItem;
     double directionCheckX; // X direction decider for this type of enemy
     double directionCheckY; // Y direction decider for this type of enemy
     int directionX = 1; // if this is 1 it goes right else left
@@ -24,6 +25,7 @@ public class Enemy extends GameComponent{
      */
     Enemy(double width, double height, String type){
         super(width, height, type);
+        canDropItem = ((10000 * Math.random()) < 3000) ? true : false;
     }
 
 
@@ -153,6 +155,15 @@ public class Enemy extends GameComponent{
             String mainMenuMusicUrl = new File("Assets/Music/explodeSelfDestruct.mp3").toURI().toString();
             MediaPlayer mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
             mediaPlayer.play();
+        }
+    }
+
+    public void dropAbility(GameComponentFactory GCF) {
+        if (canDropItem) {
+            Collectible item = (Collectible) GCF.createComponent("collectible");
+            item.setX(this.body.getTranslateX());
+            item.setY(this.body.getTranslateY());
+            item.addShapes(gameRoot);
         }
     }
 
