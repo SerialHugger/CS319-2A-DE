@@ -107,12 +107,12 @@ public class GameComponentFactory {
         //Open arrays
         playerImage1[0] = openAsset("Assets\\spaceship_right.png");
         playerImage1[1] = openAsset("Assets\\spaceship_left.png");
-        playerImage2[0] = openAsset("Assets\\alternativespaceship1_right.png");
-        playerImage2[1] = openAsset("Assets\\alternativespaceship1_left.png");
-        playerImage3[0] = openAsset("Assets\\alternativeSpaceship2_right.png");
-        playerImage3[1] = openAsset("Assets\\alternativeSpaceship2_left.png");
-        playerImage4[0] = openAsset("Assets\\alternativeSpaceship3.png");
-        playerImage4[1] = openAsset("Assets\\alternativeSpaceship3.png");
+        playerImage2[0] = openAsset("Assets\\Nyan.png");
+        playerImage2[1] = openAsset("Assets\\Nyan.png");
+        playerImage3[0] = openAsset("Assets\\images-removebg-preview.png");
+        playerImage3[1] = openAsset("Assets\\images-removebg-preview.png");
+        playerImage4[0] = openAsset("Assets\\alternativeSpaceship3-removebg-preview.png");
+        playerImage4[1] = openAsset("Assets\\alternativeSpaceship3-removebg-preview.png");
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
         for(int i = 0; i < 8; i++) {
@@ -135,11 +135,11 @@ public class GameComponentFactory {
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        //civilianImage = openAsset("Assest\\civilian");
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       
-        bossImage = openAsset("Assets\\array_tuezuen.png");
+        civilianImage = openAsset("Assets\\Civilian.png");
+        bossImage = openAsset("Assets\\WhatsApp_Image_2019-12-22_at_08-removebg-preview.png");
 
     }
 
