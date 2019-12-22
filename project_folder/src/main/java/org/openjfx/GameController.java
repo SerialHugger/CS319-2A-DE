@@ -273,6 +273,15 @@ public class GameController {
                         deadCounter++;
                         score = score + 100;
                     }
+                } else if (gameComponents.get(i) instanceof GuidedRocket) {
+                    GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
+                    gRocket.chooseTarget(this.gameComponents);
+                    gRocket.moveGuidedRocket();
+                    if (gRocket.dead) {
+                        gameComponents.remove(i--);
+                        size -= 1;
+                        gRocket.die();
+                    }
                 } else if (gameComponents.get(i) instanceof Boss) { // else if its an instance class of EmenyType1.
                     Boss boss = ((Boss) gameComponents.get(i));
                     boss.moveBoss(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.

@@ -1,3 +1,6 @@
+org\openjfx\Game.class
+org\openjfx\DivingWind.class
+org\openjfx\MainGame.class
 org\openjfx\InGameMenu.class
 module-info.class
 org\openjfx\EngineBlast.class

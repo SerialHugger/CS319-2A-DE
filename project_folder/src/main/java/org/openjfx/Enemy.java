@@ -174,4 +174,6 @@ public class Enemy extends GameComponent{
     public void performShoot( GameComponentFactory GCF ){
         shootBehaviour.shoot(GCF,this , gameRoot);
     }
+    public double getWidth() { return width; }
+    public double getHeight() { return height; }
 }
