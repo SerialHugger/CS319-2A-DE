@@ -12,6 +12,7 @@ public class GuidedBullet extends EnemyBullet{
     private int guideTime = 0;
     private boolean guidable = true;
     private int rotate = 5;
+    private final double miss = magicConverter(50);
     GuidedBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"guidedBullet");
         this.facingLeft = toLeft;
@@ -25,15 +26,26 @@ public class GuidedBullet extends EnemyBullet{
     }
     public void moveGuidedBullet(Player player) {
         rotate += 25;
+        double missChance = Math.random() * 10000;
         body.setRotate(rotate);
         if (guidable) {
-            x_player = player.getX() + player.getWidth() / 2;
-            y_player = player.getY() + player.getHeight() / 2;
-            dist_x = x_player - this.getX(); // calculate distance x
-            dist_y = y_player - this.getY(); // calculate distance y
-            hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
-            speed_x = dist_x / hipo * speed; // calculate speed of x
-            speed_y = dist_y / hipo * speed; // calculate speed of y
+            if (missChance < 200) {
+                x_player = player.getX() + player.getWidth() / 2 - miss;
+                y_player = player.getY() + player.getHeight() / 2 - miss;
+                dist_x = x_player - this.getX(); // calculate distance x
+                dist_y = y_player - this.getY(); // calculate distance y
+                hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
+                speed_x = dist_x / hipo * speed; // calculate speed of x
+                speed_y = dist_y / hipo * speed; // calculate speed of y
+            } else {
+                x_player = player.getX() + player.getWidth() / 2;
+                y_player = player.getY() + player.getHeight() / 2;
+                dist_x = x_player - this.getX(); // calculate distance x
+                dist_y = y_player - this.getY(); // calculate distance y
+                hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
+                speed_x = dist_x / hipo * speed; // calculate speed of x
+                speed_y = dist_y / hipo * speed; // calculate speed of y
+            }
         }
         firstTime = System.nanoTime() / 1000000000.0;
         passedTime = firstTime - lastTime;
