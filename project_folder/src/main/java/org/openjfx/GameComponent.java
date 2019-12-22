@@ -80,7 +80,9 @@ public class GameComponent {
     public void die(){ // if called the component will be removed from game.
         for(int i = 0; i < hitBoxes.length; i++ ){
             gameRoot.getChildren().remove(hitBoxes[i]);
+            System.out.println("Killin tha mothefucka!!!");
         }
+        System.out.println("Dead mothafucka!");
         gameRoot.getChildren().remove(body);
     }
 
@@ -145,5 +147,8 @@ public class GameComponent {
             }
         }
         return false;
+    public void rotate(double rotateValue){
+        hitBoxes[0].setRotate(rotateValue);
+        body.setRotate(rotateValue);
     }
 }

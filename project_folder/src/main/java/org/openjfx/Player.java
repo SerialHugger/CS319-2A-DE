@@ -9,22 +9,37 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class Player extends GameComponent{
-    //Necessary attiributes for teleport ability cooldown.
+    //Necessary attributes for teleport ability cooldown.
     private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
     private double teleportDistance = 0;
     private boolean bulletRainActive = false;
     private int totalBulletRainWave = 3;
-    private final int TOTAL_BOMB_DROPS = 4;
+    private boolean bulletRainOnGoing = false;
+    private int bulletRainCount = 0;
+    private final int TOTAL_BOMB_DROPS = 3;
     private boolean bombingOngoing = false;
     private boolean bombingActive = false;
     private int bombDropCount = 0;
-    private int bulletRainCount = 0;
+    private final int TOTAL_ENGINE_BLASTS = 1;
+    private boolean engineBlastActive = false;
+    private boolean engineBlastOngoing = false;
+    private int engineBlastCount = 0;
+    private final int TOTAL_MELEES = 1;
+    private boolean meleeActive = false;
+    private boolean meleeOngoing = false;
+    private int meleeCount = 0;
+    private final int MAX_NO_OF_ABILITIES = 3;
+    private int noOfAbilities;
     int maxAcc = 60;
     int accCount = 0;
+    int dirX;
+    int dirY;
+    private String[] abilities;
     double acceleration;
     double innerAcc;
     double innerSpeed = 0;
@@ -33,7 +48,6 @@ public class Player extends GameComponent{
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
-    private boolean bulletRainOnGoing = false;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
     boolean isShieldActive = false;
@@ -45,6 +59,7 @@ public class Player extends GameComponent{
         maxSpeed = magicConverter(25);
         facingLeft = true;
         innerAcc = 5;
+        speed_x = 0;
         teleportDistance = magicConverter(110);
         //update width and height
         double tempWidth = magicConverter(110);
@@ -64,11 +79,15 @@ public class Player extends GameComponent{
         hitBoxes[0].setTranslateY(height*7.5 + height/4.20); // set Y for hit box
         hitBoxes[1].setTranslateX(width*3 + width/4 - givenWidth); // set X for hit box
         hitBoxes[1].setTranslateY(height*7.5 + height/2.5); // set Y for hit box
+        // initialize abilities
+        noOfAbilities = 0;
+        abilities = new String[MAX_NO_OF_ABILITIES];
+        Arrays.fill(abilities, "empty");
     }
   
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
-        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing) {
+        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing || engineBlastOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
@@ -100,6 +119,26 @@ public class Player extends GameComponent{
                     }
                     bombDropCount += 1;
                     bombingActive = true;
+                }
+
+                if(engineBlastOngoing) {
+                    if (engineBlastCount >= TOTAL_ENGINE_BLASTS) {
+                        engineBlastActive = false;
+                        engineBlastCount = 0;
+                        engineBlastOngoing = false;
+                    }
+                    engineBlastCount += 1;
+                    engineBlastActive = true;
+                }
+
+                if (meleeOngoing) {
+                    if (meleeCount >= TOTAL_MELEES) {
+                        meleeActive = false;
+                        meleeCount = 0;
+                        meleeOngoing = false;
+                    }
+                    meleeCount += 1;
+                    meleeActive = true;
                 }
             }
         }
@@ -144,16 +183,20 @@ public class Player extends GameComponent{
             if(facingLeft) {
                 body.setFill(shipStatus[1]); // make it face left in image form
                 facingLeft = false; // make it face left
+                speed_x = 1;
                 hitBoxes[1].setTranslateX(body.getTranslateX() + width - width/4); // set X for hit box
             }
         }
         if(keyInputs[0].get() && getY() >= 0 + height/6) { // w pressed
             moveY(-1,10); // move up
+            speed_y = -1;
         }
         if(keyInputs[2].get() && getY() <= gameRoot.getHeight() - height*1.3) { // s pressed
             moveY(1,10); // move down
+            speed_y = 1;
         }
         if(keyInputs[4].get()) { // enter pressed
+
             //body.setTranslateX(body.getTranslateX() + 60);
             //delay = true;
         }
@@ -169,29 +212,30 @@ public class Player extends GameComponent{
             } 
         }
         if(keyInputs[7].get()) { // E pressed
-            if(!bulletRainOnGoing) {
-                bulletRainOnGoing = true;
-                bulletRainActive = true;
-                bulletRainCount = 0;
-            }
-        }
-        if(keyInputs[8].get()) { // H pressed
-            activateHyperJump();
-        }
-        if(keyInputs[9].get()) { // J pressed
-            //todo add skill 1
-            //  for now its shield
-            activateShield(GCF, this);
-        }
-        if(keyInputs[10].get()) { // K pressed
-            // todo some stuff
-        }
-        if(keyInputs[11].get()) { // L pressed
             if (!bombingOngoing) {
                 bombingActive = true;
                 bombingOngoing = true;
                 bombDropCount = 0;
             }
+        }
+        if(keyInputs[8].get()) { // H pressed
+            if (!meleeOngoing) {
+                meleeOngoing = true;
+                meleeActive = true;
+                meleeCount = 0;
+            }
+        }
+        if(keyInputs[9].get()) { // J pressed
+            //todo add skill 1
+            //  for now its shield
+            useAbility(0, GCF);
+        }
+        if(keyInputs[10].get()) { // K pressed
+            // todo some stuff
+            useAbility(1, GCF);
+        }
+        if(keyInputs[11].get()) { // L pressed
+            useAbility(2, GCF);
         }
         if(false)
             checkDeath();
@@ -235,8 +279,19 @@ public class Player extends GameComponent{
                 bombingActive = false;
             }
         }
+        if (engineBlastOngoing) {
+            if (engineBlastActive && engineBlastCount >= TOTAL_ENGINE_BLASTS) {
+                activateEngineBlast(GCF);
+                engineBlastActive = false;
+            }
+        }
+        if (meleeOngoing) {
+            if (meleeActive && meleeCount >= TOTAL_MELEES) {
+                activateMelee(GCF);
+                meleeActive = false;
+            }
+        }
         moveX(1,speed + innerSpeed); // move!
-
     }
 
     private void checkDeath() {
@@ -305,6 +360,13 @@ public class Player extends GameComponent{
 
     }
 
+    public void activateBarrier(GameComponentFactory GCF){
+        Barrier barrier = (Barrier) GCF.createComponent("barrier");
+        barrier.setX(this.body.getTranslateX() + this.width / 2);
+        barrier.setY(this.body.getTranslateY() + this.height/ 2);
+        barrier.addShapes(gameRoot);
+    }
+
     private void activateBulletRain(GameComponentFactory GCF) {
         // creating bullets in north and south directions
         for (int i = 0; i < 2; i++) {
@@ -349,6 +411,41 @@ public class Player extends GameComponent{
         bomb.addShapes(gameRoot);
     }
 
+    private void activateEngineBlast(GameComponentFactory GCF) {
+        EngineBlast blast = (EngineBlast) GCF.createComponent("engineBlast");
+
+        if (facingLeft) {
+            blast.setX(body.getTranslateX() - width/2.7);
+            if (accCount - 10 > -1 * maxAcc) {
+                accCount -= 10;
+                innerSpeed = innerAcc * 10;
+            }
+        }
+        else {
+            blast.setX(body.getTranslateX() + width/0.9);
+            if (accCount + 10 < maxAcc) {
+                accCount += 10;
+                innerSpeed = innerAcc * 10;
+            }
+        }
+
+        blast.setY(body.getTranslateY());
+        blast.addShapes(gameRoot);
+    }
+
+    private void activateMelee(GameComponentFactory GCF) {
+        Melee melee = (Melee) GCF.createComponent("melee");
+
+        // setting the initial position of the arm according to the player's position and movement
+        if (facingLeft)
+            melee.setX(body.getTranslateX() + width);
+        else
+            melee.setX(body.getTranslateX());
+
+        melee.setY(body.getTranslateY() - height * 1.5);
+        melee.addShapes(gameRoot);
+    }
+
     private void activateHyperJump() {
         double chance = 100 * Math.random();
 
@@ -361,11 +458,73 @@ public class Player extends GameComponent{
         int vert = Math.random() > 0.5 ? 1 : -1;
         int horiz = Math.random() > 0.5 ? 1: -1;
 
-        //facingLeft = horiz == 1;
-
         moveX(horiz, horizDist);
         moveY(vert, vertDist);
         gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
+    }
+
+    public boolean addAbility(String abilityType) {
+        if (noOfAbilities < MAX_NO_OF_ABILITIES && !hasAbility(abilityType)) {
+            for (int i = 0; i < MAX_NO_OF_ABILITIES; i++) {
+                if ("empty".equals(abilities[i])) {
+                    abilities[i] = abilityType;
+                    break;
+                }
+            }
+            noOfAbilities++;
+            System.out.println("Added ability to inventory: " + abilityType);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasAbility(String abilityType) {
+        for (String ability: abilities) {
+            if (ability.equals(abilityType))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean useAbility(int index, GameComponentFactory GCF) {
+        if (index < MAX_NO_OF_ABILITIES && index >= 0) {
+            if (!"empty".equals(abilities[index])) {
+                String abilityType = abilities[index];
+
+                if (abilityType.equals("shield")) {
+                    activateShield(GCF, this);
+                } else if (abilityType.equals("hyperJump")) {
+                    activateHyperJump();
+                } else if (abilityType.equals("engineBlast")) {
+                    if (!engineBlastOngoing) {
+                        engineBlastOngoing = true;
+                        engineBlastActive = true;
+                        engineBlastCount = 0;
+                    }
+                } else if (abilityType.equals("barrier")) {
+                    activateBarrier(GCF);
+
+                } else if (abilityType.equals("bulletRain")) {
+                    if(!bulletRainOnGoing) {
+                        bulletRainOnGoing = true;
+                        bulletRainActive = true;
+                        bulletRainCount = 0;
+                    }
+                } else if (abilityType.equals("guidedRocket")) {
+
+                } else if (abilityType.equals("melee")) {
+                    if (!meleeOngoing) {
+                        meleeOngoing = true;
+                        meleeActive = true;
+                        meleeCount = 0;
+                    }
+                }
+                abilities[index] = "empty";
+                noOfAbilities--;
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getWidth() { return width; }
