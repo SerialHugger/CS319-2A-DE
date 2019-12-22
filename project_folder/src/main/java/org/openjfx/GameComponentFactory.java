@@ -30,6 +30,7 @@ public class GameComponentFactory {
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
     ImagePattern guidedRocketImage;
+    ImagePattern civilianImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -80,6 +81,7 @@ public class GameComponentFactory {
         } else if (type.equals("guidedRocket")) {
             temp = new GuidedRocket(width, height, guidedRocketImage);
         }
+
         gameComponents.add(temp);
         return temp;
     }
@@ -112,6 +114,7 @@ public class GameComponentFactory {
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
+        civilianImage = openAsset("Assets\\Civilian.png");
 
     }
 
