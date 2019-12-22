@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+
     <list default="true" id="d0b6f6df-982b-488f-9a98-e350b204bd4c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponentFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/InteractionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Melee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Melee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedRocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GuidedRocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
@@ -126,7 +125,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="" />
+      <changelist id="67f3a3a9-cdd3-497d-902a-25078cd9f2dd" name="Default Changelist" comment="" />
       <created>1570516481400</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
