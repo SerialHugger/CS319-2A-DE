@@ -352,10 +352,6 @@ public class GameController {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
         }
-        for ( int i = 0 ; i < 3 ; i ++ ){
-            Civilian civilian = (Civilian) gameComponentFactory.createComponent("civilian");
-            civilian.addShapes(gameRoot);
-        }
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
     }
     /*
@@ -375,6 +371,7 @@ public class GameController {
                 noOfEnemies = 0;
             }
 
+
         }
         else if ( level == 2 ){
             if ( noOfEnemies == 0)
@@ -392,7 +389,7 @@ public class GameController {
                 noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0, 0);
 
             if( noOfEnemies == deadCounter ){
-                level = 3; // infinite loop for now
+                level = 4;
                 deadCounter = 0;
                 noOfEnemies = 0;
             }

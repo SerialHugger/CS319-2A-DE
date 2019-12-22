@@ -6,10 +6,5 @@ org\openjfx\ShootWithLaserBullet.class
 org\openjfx\ShootWithGuidedBullet.class
 org\openjfx\Collectible$Ability.class
 org\openjfx\Collectible$1.class
-org\openjfx\Civilian.class
-org\openjfx\ForeGround.class
-org\openjfx\Atlas.class
-org\openjfx\Hud.class
-org\openjfx\MainMenu.class
 org\openjfx\ShootNoWay.class
 org\openjfx\Shootable.class
