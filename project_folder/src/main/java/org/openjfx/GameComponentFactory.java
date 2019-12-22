@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class GameComponentFactory {
     double width; // width of the game
     double height; // height of the game
+    int shipNum;
     ArrayList<GameComponent> gameComponents; // game components of the game.
     /*
    ////////////////////////
@@ -16,7 +17,10 @@ public class GameComponentFactory {
    ////////////////////////
     */
     /// ARRAYS
-    ImagePattern[] playerImage = new ImagePattern[2];
+    ImagePattern[] playerImage1 = new ImagePattern[2];
+    ImagePattern[] playerImage2 = new ImagePattern[2];
+    ImagePattern[] playerImage3 = new ImagePattern[2];
+    ImagePattern[] playerImage4 = new ImagePattern[2];
     ImagePattern[] playerBulletImage = new ImagePattern[2];
     ImagePattern[] selfDestructImage = new ImagePattern[8];
     ImagePattern[] explosionImage = new ImagePattern[8];
@@ -30,8 +34,10 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
-
+    ImagePattern bossImage;
+  
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
         this.height = height;
@@ -45,7 +51,14 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width, height / 15.4, playerImage);
+            if ( shipNum == 0 )
+                temp = new Player(width, height / 15.4, playerImage1);
+            else if(shipNum == 1 )
+                temp = new Player(width, height / 15.4, playerImage2);
+            else if(shipNum == 2 )
+                temp = new Player(width, height / 15.4, playerImage3);
+            else if(shipNum == 3 )
+                temp = new Player(width, height / 15.4, playerImage4);
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
@@ -61,33 +74,45 @@ public class GameComponentFactory {
         } else if( type.equals("speedRunner")){
             temp = new SpeedRunner(width , height , speedRunnerImage);
         } else if (type.equals("laserBullet")) {
-            temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
+            temp = new LaserBullet(width, height, laserBulletImage, true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedBullet")) {
-            temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
+            temp = new GuidedBullet(width, height, guidedBulletImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explosionImage, false);
         } else if (type.equals("bomb")) {
-            temp = new Bomb(40, 50, "empty");
+            temp = new Bomb(width, height, null, (Player)gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield( width, height, "empty");
         } else if (type.equals("engineBlast")) {
             temp = new EngineBlast(40,50, "empty");
         } else if (type.equals("collectible")) {
             temp = new Collectible(40, 50, "empty");
+        } else if (type.equals("melee")) {
+            temp = new Melee(5, 150, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
         } else if (type.equals("civilian")) {
             temp = new Civilian(60, 100, civilianImage);
+        }  else if (type.equals("boss")) {
+            temp = new Boss(width, height, bossImage);
+        } else if (type.equals("guidedRocket")) {
+            temp = new GuidedRocket(width, height, guidedRocketImage);
         }
         gameComponents.add(temp);
         return temp;
     }
     private void openAssets(){
         //Open arrays
-        playerImage[0] = openAsset("Assets\\spaceship_right.png");
-        playerImage[1] = openAsset("Assets\\spaceship_left.png");
+        playerImage1[0] = openAsset("Assets\\spaceship_right.png");
+        playerImage1[1] = openAsset("Assets\\spaceship_left.png");
+        playerImage2[0] = openAsset("Assets\\alternativespaceship1_right.png");
+        playerImage2[1] = openAsset("Assets\\alternativespaceship1_left.png");
+        playerImage3[0] = openAsset("Assets\\alternativeSpaceship2_right.png");
+        playerImage3[1] = openAsset("Assets\\alternativeSpaceship2_left.png");
+        playerImage4[0] = openAsset("Assets\\alternativeSpaceship3.png");
+        playerImage4[1] = openAsset("Assets\\alternativeSpaceship3.png");
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
         for(int i = 0; i < 8; i++) {
@@ -110,9 +135,12 @@ public class GameComponentFactory {
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        laserBulletImage = openAsset("empty");
-        guidedBulletImage = openAsset("empty");
-        civilianImage = openAsset("Assest\\civilian");
+        //civilianImage = openAsset("Assest\\civilian");
+        guidedBulletImage = openAsset("Assets\\guided_ball.png");
+        guidedRocketImage = openAsset("Assets\\light_saber.png");
+        laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       
+        bossImage = openAsset("Assets\\array_tuezuen.png");
+
     }
 
     /*
@@ -138,5 +166,11 @@ public class GameComponentFactory {
             }
         }
         return  imagePattern;
+    }
+    public int getSelectShip(){
+        return shipNum;
+    }
+    public void setSelectShip(int shipNum){
+        this.shipNum = shipNum;
     }
 }

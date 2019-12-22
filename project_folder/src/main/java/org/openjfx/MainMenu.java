@@ -18,6 +18,7 @@ public class MainMenu {
     private double height;
     // set menu controller
     private MenuController menuController;
+    private int shipSelected;
 
     /*
      * todo -> Insert setting,  make it good to go before start coding the game part.
@@ -33,12 +34,14 @@ public class MainMenu {
         ////////////////////////////////////////////////////////////
         /////////////creating buttons and its holders///////////////
         ////////////////////////////////////////////////////////////
-        Rectangle[] buttons = new Rectangle[6]; // will hold start/howToPlay/setting/credits/quit buttons
+        Rectangle[] buttons = new Rectangle[7]; // will hold start/howToPlay/setting/credits/quit buttons
         Rectangle[] settingButtons = new Rectangle[5]; // will hold videoResolution/fullScreen/sound/changeShip/goBack buttons
         Rectangle[] levelButtons = new Rectangle[3];
+        Rectangle[] shipSelectButtons = new Rectangle[3];
         ImagePattern[] buttonImages = new ImagePattern[buttons.length * 2];// Image patterns to store asset information, and make it easier to use dynamically.
         ImagePattern[] settingsButtonImages = new ImagePattern[settingButtons.length * 2]; // same purpose but for settings
         ImagePattern[] levelButtonImages = new ImagePattern[levelButtons.length * 2];
+        ImagePattern[] shipSelectImages = new ImagePattern[shipSelectButtons.length * 2 ];
         Rectangle background;
         Rectangle startGameButton;
         Rectangle howToPlayButton;
@@ -47,6 +50,8 @@ public class MainMenu {
         Rectangle quitButton;
         Rectangle buttonHighlight; // for background of the buttons.
         Rectangle controlImage; // for how to play button
+        Rectangle selectLevelButton;
+        Rectangle selectShipButton;
         //for settings buttons
         Rectangle videoResolutionButton;
         Rectangle fullScreenButton;
@@ -54,12 +59,17 @@ public class MainMenu {
         Rectangle changeShipButton;
         Rectangle goBackButton;
         Rectangle settingsButtonHighlight; // for background of the buttons at settings.
-        Rectangle selectLevelButton;
+
         // for level select buttons
         Rectangle levelButton1;
         Rectangle levelButton2;
         Rectangle levelButton3;
         Rectangle levelButtonHighlight;
+        // for change ship buttons
+        Rectangle selectShip1;
+        Rectangle selectShip2;
+        Rectangle selectShip3;
+        Rectangle selectShipHighlight;
         // set root width and height
         menuRoot.setPrefSize(width, height);
         ////////////////////////////////////////////////////////////
@@ -92,6 +102,10 @@ public class MainMenu {
         selectLevelButton = new Rectangle(width/3.5, height/18, Color.WHITE);
         selectLevelButton.setTranslateX(width/16);
         selectLevelButton.setTranslateY(height/2.8- (4 * ((height/3.5)-(height/2.8))));
+
+        selectShipButton = new Rectangle(width/3.5, height/18, Color.WHITE);
+        selectShipButton.setTranslateX(width/16);
+        selectShipButton.setTranslateY(height/2.8- (5 * ((height/3.5)-(height/2.8))));
         // set buttons array to make life easier.
         buttons[0] = startGameButton;
         buttons[1] = howToPlayButton;
@@ -99,6 +113,7 @@ public class MainMenu {
         buttons[3] = creditsButton;
         buttons[4] = quitButton;
         buttons[5] = selectLevelButton;
+        buttons[6] = selectShipButton;
         // set backgroundButton for cool effect.
         buttonHighlight = new Rectangle(width/3.5, height/18,null);
         buttonHighlight.setTranslateX(width/16);
@@ -157,6 +172,26 @@ public class MainMenu {
         levelButtonHighlight = new Rectangle(width/3.5, height/18,null);
         levelButtonHighlight.setTranslateX(width/16);
         levelButtonHighlight.setTranslateY(height/3.5);
+        // ship selection
+        selectShip1 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        selectShip1.setTranslateX(width/16);
+        selectShip1.setTranslateY(height/3.5);
+
+        selectShip2 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        selectShip2.setTranslateX(width/16);
+        selectShip2.setTranslateY(height/2.8- (2 * ((height/3.5)-(height/2.8))));
+
+        selectShip3 = new Rectangle(width/3.5, height/18, Color.WHITE);
+        selectShip3.setTranslateX(width/16);
+        selectShip3.setTranslateY(height/2.8- (3 * ((height/3.5)-(height/2.8))));
+        // set buttons to array to make life easier
+        shipSelectButtons[0] = levelButton1;
+        shipSelectButtons[1] = levelButton2;
+        shipSelectButtons[2] = levelButton3;
+
+        selectShipHighlight = new Rectangle(width/3.5, height/18,null);
+        selectShipHighlight.setTranslateX(width/16);
+        selectShipHighlight.setTranslateY(height/3.5);
         ////////////////////////////////////////////////////////////
         ///////////////setting images for buttons///////////////////
         ////////////////////////////////////////////////////////////
@@ -176,6 +211,8 @@ public class MainMenu {
         buttonImages[9] = insertImage(quitButton ,"Assets\\mainMenu\\quitButton_Black.png", false);
         buttonImages[10] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", true );
         buttonImages[11] = insertImage(selectLevelButton ,"Assets\\mainMenu\\howToPlayButton_White.png", false );
+        buttonImages[12] = insertImage(selectShipButton, "Assets\\mainMenu\\howToPlayButton_White.png", true);
+        buttonImages[13] = insertImage(selectShipButton, "Assets\\mainMenu\\howToPlayButton_Black.png", false);
         // for settings menu
         insertImage(settingsButtonHighlight, "Assets\\mainMenu\\buttonHighlight.png", true);
         settingsButtonImages[0] = insertImage(videoResolutionButton ,"Assets\\mainMenu\\videoResolution_White.png", false);
@@ -196,6 +233,14 @@ public class MainMenu {
         levelButtonImages[3] = insertImage(levelButton2 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
         levelButtonImages[4] = insertImage(levelButton3 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
         levelButtonImages[5] = insertImage(levelButton3,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        // for ship selection
+        insertImage(selectShipHighlight ,"Assets\\mainMenu\\buttonHighlight.png", true );
+        shipSelectImages[0] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        shipSelectImages[1] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        shipSelectImages[2] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        shipSelectImages[3] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
+        shipSelectImages[4] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_White.png", true);
+        shipSelectImages[5] = insertImage(levelButton1 ,"Assets\\mainMenu\\howToPlayButton_Black.png", false);
         ////////////////////////////////////////////////////////////
         //////////////add necessary elements to root////////////////
         ////////////////////////////////////////////////////////////
@@ -216,6 +261,12 @@ public class MainMenu {
         menuRoot.getChildren().add(levelButton1);
         menuRoot.getChildren().add(levelButton2);
         menuRoot.getChildren().add(levelButton3);
+        menuRoot.getChildren().add(selectShipHighlight);
+        menuRoot.getChildren().add(selectShipButton);
+        menuRoot.getChildren().add(selectShip1);
+        menuRoot.getChildren().add(selectShip2);
+        menuRoot.getChildren().add(selectShip3);
+
         // make settings invisible.
         goBackButton.setVisible(false);
         changeShipButton.setVisible(false);
@@ -227,10 +278,14 @@ public class MainMenu {
         levelButton1.setVisible(false);
         levelButton2.setVisible(false);
         levelButton3.setVisible(false);
+        selectShip1.setVisible(false);
+        selectShip2.setVisible(false);
+        selectShip3.setVisible(false);
+        selectShipHighlight.setVisible(false);
 
 
         // create the controller and return
-        menuController = new MenuController(buttons, buttonImages,  buttonHighlight, controlImage, settingButtons, settingsButtonImages, settingsButtonHighlight , levelButtons , levelButtonImages, levelButtonHighlight);
+        menuController = new MenuController(buttons, buttonImages,  buttonHighlight, controlImage, settingButtons, settingsButtonImages, settingsButtonHighlight , levelButtons , levelButtonImages, levelButtonHighlight,shipSelectButtons , shipSelectImages , selectShipHighlight);
         return menuRoot;
     }
 
@@ -238,6 +293,7 @@ public class MainMenu {
     public void update(Game game)
     {
         menuController.update(game, menuRoot);
+        shipSelected = menuController.getShipSelected();
     }
 
     //Setup buttonHandler to control menu
@@ -271,6 +327,10 @@ public class MainMenu {
             }
         }
         return  imagePattern;
+    }
+    public int getShipSelected(){
+        shipSelected = menuController.getShipSelected();
+        return shipSelected;
     }
     public boolean isFullscreen(){
         return menuController.isFullscreen();
