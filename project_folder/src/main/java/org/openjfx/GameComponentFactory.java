@@ -22,6 +22,7 @@ public class GameComponentFactory {
     ImagePattern[] explosionImage = new ImagePattern[8];
     ImagePattern[] atlasImage = new ImagePattern[3];
     ImagePattern[] dienamiteImage = new ImagePattern[9];
+
     /// SINGLES
     ImagePattern dodgerImage;
     ImagePattern dividusImage;
@@ -30,6 +31,7 @@ public class GameComponentFactory {
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
     ImagePattern civilianImage;
+    ImagePattern bossImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -77,6 +79,8 @@ public class GameComponentFactory {
             temp = new Collectible(40, 50, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
+        }  else if (type.equals("boss")) {
+            temp = new Boss(width, height, bossImage);
         }
 
         gameComponents.add(temp);
@@ -110,6 +114,7 @@ public class GameComponentFactory {
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
         civilianImage = openAsset("Assets\\Civilian.png");
+        bossImage = openAsset("Assets\\array_tuezuen.png");
 
     }
 

@@ -17,7 +17,7 @@ public class Atlas extends Enemy {
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
-    public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedfactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -47,7 +47,7 @@ public class Atlas extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2];
+        speed_x = moveValues[2] * speedfactor;
         speed_y = moveValues[3];
         if(directionX == 1)
             body.setFill(animationFrames[2]);
