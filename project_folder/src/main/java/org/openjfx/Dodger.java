@@ -1,6 +1,7 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 public class Dodger extends Enemy {
@@ -9,12 +10,13 @@ public class Dodger extends Enemy {
     private boolean is_skill_active = true;
     private int countdown = 0;
 
-    Dodger(double width, double height, String assetLocation) {
-        super(width / 38.4, height / 36, "enemyType2");
+    Dodger(double width, double height, ImagePattern asset) {
+        super(width, height, "dodger");
 
-        this.width = width / 38.4;
-        this.height = height / 36;
-        super.initBody(assetLocation, width, height);
+        this.height = magicConverter(60);
+        this.width = magicConverter(30);
+        super.initBody(asset, width, height);
+        setShootBehaviour(new ShootWithLaserBullet());
     }
 
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
@@ -25,11 +27,11 @@ public class Dodger extends Enemy {
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
-                boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
+                boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet"; // TODO: change to enemybullettype2 when implemented
-                    initBullet(GCF, bulletType);
+                    shootBehaviour.shoot(GCF , this , gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500
@@ -80,6 +82,11 @@ public class Dodger extends Enemy {
                 is_skill_active = true;
             } else if (countdown < teleport_cooldown)
                 countdown += 5;
+        }
+
+        if (dead) {
+            dropAbility(GCF);
+            explode("explode", GCF);
         }
     }
 }

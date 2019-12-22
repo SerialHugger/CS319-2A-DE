@@ -1,17 +1,20 @@
 package org.openjfx;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-public class laserBullet extends EnemyBullet{
-    laserBullet(double width, double height, String assetLocation, boolean toLeft, GameComponent player){
-        super(width,height,assetLocation);
+public class LaserBullet extends EnemyBullet{
+    LaserBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
+        super(width,height,"laserBullet");
         this.facingLeft = toLeft;
         hitBoxes = new Rectangle[1];
-        speed = 7;
-        hitBoxes[0] = new ComponentHitBoxRectangle(width, height, "enemyBulletHitbox");
-        body = new Rectangle(width,height, Color.RED);
-        //fillImage(assetLocation);
+        speed = magicConverter(7);
+        this.height = magicConverter(10);
+        this.width = magicConverter(15);
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "laserBullet");
+        body = new Rectangle(this.width, this.height, Color.RED);
+        body.setFill(asset);
         x_player = player.getX() + player.width/2;
         y_player = player.getY() + player.height/2;
     }

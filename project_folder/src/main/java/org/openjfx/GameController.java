@@ -29,6 +29,9 @@ public class GameController {
     double slidingSpeed; // sliding speed for background
     // level counter
     int level = 1;
+    int deadCounter = 0;
+    long score = 0;
+    int noOfEnemies = 0;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty[] keyInputs = new BooleanProperty[14];
 
@@ -67,14 +70,14 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        createLevel(level); // create the level with enemies // blo
-        slidingLimit = width - player.getWidth() * 4;
+        //createLevel(level); // create the level with enemies
+        slidingLimit = width - player.getWidth() * 5;
         slidingCounter = slidingLimit * -1;
-        slidingSpeed = (width - player.getWidth() * 4) / 66; // some numbers yes.
+        slidingSpeed = (width - player.getWidth() * 5) / 65; // some numbers yes.
     }
     void updateInteraction(){
         //update interaction
-        interactionHandler.handleInteraction(gameRoot);
+        interactionHandler.handleInteraction(gameRoot, player);
     }
     void updateGame(int fps) {
         // update game components
@@ -108,6 +111,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     atlas.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                 Dodger dodger = ((Dodger) gameComponents.get(i));
@@ -116,6 +121,8 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dodger.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                 Dividus dividus = ((Dividus) gameComponents.get(i));
@@ -124,14 +131,18 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dividus.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                 Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                dienamite.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
                 if (dienamite.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     dienamite.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
             } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
                 DivingWind divingWind = ((DivingWind) gameComponents.get(i));
@@ -140,9 +151,11 @@ public class GameController {
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
                     divingWind.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
                 }
-            } else if (gameComponents.get(i) instanceof laserBullet) { // else if its an instance class of EnemyBulletType1.
-                laserBullet laserBullet = (laserBullet) gameComponents.get(i); // cast it to a temporary variable.
+            } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
+                LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
                 laserBullet.updateLaserBullet(); // update it.
                 // if its not in the boundaries of camera/root remove it.
                 // first check for X then check for Y.
@@ -180,6 +193,65 @@ public class GameController {
                     guidedBullet.die();
                 }
             }
+            else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
+                SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
+                speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                if (speedRunner.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    speedRunner.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 100;
+                }
+            }
+            else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
+                EnemySelfDestruct enemySelfDestruct = ((EnemySelfDestruct) gameComponents.get(i));
+                enemySelfDestruct.updateSelfDestruct(); // update it.
+                if (enemySelfDestruct.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    enemySelfDestruct.die(); // kill it, remove it from root.
+                }
+            }
+            else if (gameComponents.get(i) instanceof Shield) {
+                Shield shield = ((Shield) gameComponents.get(i));
+                shield.moveShield(player);
+                if(shield.dead) {
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    shield.die(); // kill it, remove it from root.
+                }
+            }
+            else if (gameComponents.get(i) instanceof Bomb) {
+                Bomb bomb = ((Bomb) gameComponents.get(i));
+                bomb.moveBomb();
+                if (bomb.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    bomb.explode(gameComponentFactory);
+                    bomb.die();
+                }
+            } else if (gameComponents.get(i) instanceof EngineBlast) {
+                EngineBlast blast = ((EngineBlast) gameComponents.get(i));
+                blast.moveEngineBlast(player);
+                if (blast.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    blast.die();
+                }
+            } else if (gameComponents.get(i) instanceof Collectible) {
+                Collectible item = ((Collectible) gameComponents.get(i));
+                item.moveCollectible();
+                if (item.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    item.die();
+                }
+            } else if (gameComponents.get(i) instanceof Barrier) {
+                Barrier item = ((Barrier) gameComponents.get(i));
+                item.moveBarrier(scenery);
+            }
+           createLevel();
         }
         // update root
         if (keyInputs[3].get()) { // if the key D pressed
@@ -212,28 +284,21 @@ public class GameController {
             //todo
         }
         if (startSlidingLeft) { // if the background sliding left
-//            (player.getX() - player.getWidth()*1.5) > gameRoot.getTranslateX()*-1
-            if (true){
-                if (slidingCounter != 0) {// until sliding limit is reached or hits the player to screen limit
-                    gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
-                    scenery.slideScenery(true, slidingSpeed);
-                    slidingCounter += slidingSpeed;
-                } else {
-                    startSlidingLeft = false; // finish the execution when the limit is reached.
-                }
+            if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
+                gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                scenery.slideScenery(true, slidingSpeed);
+                slidingCounter += slidingSpeed;
+            } else {
+                startSlidingLeft = false; // finish the execution when the limit is reached.
             }
         }
         if (startSlidingRight) { // if the background sliding right
-//            (player.getX() + player.getWidth() * 2.5) > (gameRoot.getTranslateX() + width) * -1
-            if(true)
-            {
-                if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
-                scenery.slideScenery(false,slidingSpeed);
-                slidingCounter -= slidingSpeed;
-                } else {
-                    startSlidingRight = false; // finish the execution when the limit is reached.
-                }
+            if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
+            gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+            scenery.slideScenery(false,slidingSpeed);
+            slidingCounter -= slidingSpeed;
+            } else {
+                startSlidingRight = false; // finish the execution when the limit is reached.
             }
         }
         if(!keyInputs[1].get() && !keyInputs[3].get()){ // if the movement keys not pressed
@@ -253,37 +318,85 @@ public class GameController {
         scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
     }
 
+
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber){
+        for (int i = 0; i < atlasNumber; i++) {
+            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
+            atlas.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dodgernumber; i++) {
+            Dodger dodger = (Dodger) gameComponentFactory.createComponent("dodger");
+            dodger.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dividusNumber; i++) {
+            Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
+            dividus.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < dienamiteNumber; i++) {
+            Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
+            dienamite.addShapes(gameRoot);
+        }
+
+        for (int i = 0; i < divingWindNumber; i++) {
+            DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
+            divingWind.addShapes(gameRoot);
+        }
+        for (int i = 0; i < speedRunnerNumber; i++) {
+            SpeedRunner speedRunner = (SpeedRunner) gameComponentFactory.createComponent("speedRunner");
+            speedRunner.addShapes(gameRoot);
+        }
+        for (int i = 0; i < divingWindNumber; i++) {
+            DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
+            divingWind.addShapes(gameRoot);
+        }
+        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
+    }
     /*
      * This creates levels
      * adds enemies
      * todo make it more complex
      */
-    public void createLevel(int lvl) {
-        for (int i = 0; i < 5; i++) {
-            Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
-            atlas.addShapes(gameRoot);
+    public void createLevel() {
+        if ( level == 1 ) {
+            if ( noOfEnemies == 0 )
+            noOfEnemies = createEnemies(5 ,5 ,5 ,5 ,5, 5 );
+
+            if( noOfEnemies == deadCounter ){
+                System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+                level = 2;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
+
+
+        }
+        else if ( level == 2 ){
+            if ( noOfEnemies == 0)
+            noOfEnemies = createEnemies(5 , 0 , 0 , 0 , 0,0 );
+
+            if( noOfEnemies == deadCounter ){
+                level = 3;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
         }
 
-        for (int i = 0; i < 5; i++) {
-            Dodger dodger = (Dodger) gameComponentFactory.createComponent("dodger");
-            dodger.addShapes(gameRoot);
-        }
+        else if ( level == 3 ){
+            if ( noOfEnemies == 0)
+                noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0, 0);
 
-        for (int i = 0; i < 3; i++) {
-            Dividus dividus = (Dividus) gameComponentFactory.createComponent("dividus");
-            dividus.addShapes(gameRoot);
+            if( noOfEnemies == deadCounter ){
+                level = 4;
+                deadCounter = 0;
+                noOfEnemies = 0;
+            }
         }
-
-        for (int i = 0; i < 3; i++) {
-            Dienamite dienamite = (Dienamite) gameComponentFactory.createComponent("dienamite");
-            dienamite.addShapes(gameRoot);
+        else if( level == 4 ){
+            //eray hoca boss olarak gelcek
         }
-
-        for (int i = 0; i < 3; i++) {
-            DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
-            divingWind.addShapes(gameRoot);
-        }
-
     }
 
     // Sets buttons to play
@@ -330,6 +443,9 @@ public class GameController {
             if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(true);
             }
+            if (e.getCode() == KeyCode.TAB) {
+                keyInputs[13].set(true);
+            }
         });
         scene.setOnKeyReleased(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -371,10 +487,23 @@ public class GameController {
             if (e.getCode() == KeyCode.ESCAPE) {
                 keyInputs[12].set(false);
             }
+            if (e.getCode() == KeyCode.TAB) {
+                keyInputs[13].set(false);
+            }
         });
+    }
+
+    public void slideScenery(boolean toLeft, double slidingSpeed) {
+        scenery.slideScenery(toLeft, slidingSpeed);
     }
 
     public double magicConverter(double wantedInteger){
         return width/(1920/wantedInteger);
+    }
+    public void setLevel(int levelNum ){
+        level = levelNum;
+    }
+    public int getLevel(){
+        return level;
     }
 }

@@ -5,21 +5,27 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 
 
 public class MenuController {
     // necessary buttons.
     private Rectangle buttonHighlight;
     private Rectangle settingButtonHighlight;
+    private Rectangle levelButtonHighlight;
     private Rectangle controlImage;
     private Rectangle[] buttons; // will hold buttons
     private Rectangle[] settingButtons; // will hold buttons for settings
+    private Rectangle[] levelButtons;
     // Image patterns to store asset information, and make it easier to use dynamically.
     private ImagePattern[] buttonImages; // will hold start white-black, setting white-black, quit white-black
     private ImagePattern[] settingsButtonImages; // todo will hold  images for settings
-
+    private ImagePattern[] levelButtonImages;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty w_Pressed = new SimpleBooleanProperty();
     private BooleanProperty a_Pressed = new SimpleBooleanProperty();
@@ -29,14 +35,19 @@ public class MenuController {
 
     private int currentButton = 0; // 0 -> Start 1 -> How to play 2 -> Settings 3 -> Credits 4 -> Quit
     private int currentButtonSettings = 0; // 0 -> Video Resolution 1 -> Fullscreen 2-> Sound 3 -> Change Ship 4-> Go back
-    private int currentScreen = 0; // 0 -> Main, 1 -> HowtoPlay, 2 -> Settings, 3-> Credits
+    private int currentScreen = 0; // 0 -> Main, 1 -> HowtoPlay, 2 -> Settings, 3-> Credits 4 -> level selection
     private boolean delay = true; // delay to main menu so user can use it hehe :)
     private int delayTimer = 0; // delay timer to adjust delay.
     private int whatImage = 1; // just to make it more easier to code, this will decide the image numbers.
     private int whatImageSettings = 1; // Same purpose but for setting
+    private int whatImagelevel = 1; // Same purpose but for level selection
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
 
-    MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight){
+
+    private MediaPlayer mediaPlayer;
+
+
+    MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight, Rectangle[] levelButtons , ImagePattern[] levelButtonImages , Rectangle levelButtonHighlight ){
         this.buttons = buttons;
         this.buttonImages = buttonImages;
         this.buttonHighlight = buttonHighlight;
@@ -44,9 +55,17 @@ public class MenuController {
         this.settingButtons = settingButtons;
         this.settingsButtonImages = settingsButtonImages;
         this.settingButtonHighlight = settingButtonHighlight;
-        //Assets\Music\destiny2_journey.mp3
+        this.levelButtons = levelButtons;
+        this.levelButtonImages = levelButtonImages;
+        this.levelButtonHighlight = levelButtonHighlight;
+
+        String mainMenuMusicUrl = new File("Assets/Music/destiny2_Journey.mp3").toURI().toString();
+        mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
+        mediaPlayer.play();
+
     }
     public void update(Game game, Pane root) {
+
         // initiate delay timer.
         if(!delay) {
             delayTimer += 10;
@@ -77,11 +96,13 @@ public class MenuController {
                 if(enter_Pressed.get()) {
                     if(currentButton == 0) { // Start Game
                         System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
+                        mediaPlayer.stop();
                         game.startGame();
                     }
                     else if(currentButton == 1) { // How To Play
                         currentScreen = 1;
                         root.getChildren().add(controlImage);
+                        controlImage.setVisible(true);
                     }
                     else if(currentButton == 2) { // Settings
                         currentScreen = 2;
@@ -102,11 +123,24 @@ public class MenuController {
                     else if(currentButton == 4) { // Quit
                         System.exit(0); // this quits the application.
                     }
+                    else if(currentButton == 5 ){ // level selection
+                        System.out.println("Open level selection");
+                        currentScreen = 5;
+                        for ( int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(false);
+                        }
+                        buttonHighlight.setVisible(false);
+                        levelButtonHighlight.setVisible(true);
+                        for( int i = 0; i < levelButtons.length; i++){
+                            levelButtons[i].setVisible(true);
+                        }
+                    }
                     delay = false;
                 }
             } else if (currentScreen == 1) {
                 if(enter_Pressed.get()) {
                     root.getChildren().remove(controlImage);
+                    controlImage.setVisible(false);
                     currentScreen = 0;
                     delay = false;
                 }
@@ -161,6 +195,38 @@ public class MenuController {
                     }
                     delay = false;
                 }
+            }else if (currentScreen == 5 ){
+                if (s_Pressed.get()) { // if the down button pressed change the current position of buttons +1.
+                    if(delay) {
+                        levelUpdateButtons(levelButtons[currentButtonSettings], levelButtons[(currentButtonSettings + 1) % levelButtons.length], true);
+                        currentButtonSettings = (currentButtonSettings + 1) % levelButtons.length;
+                        delay = false;
+                    }
+                }
+                if (w_Pressed.get()) { // if the up button pressed change the current position of buttons by -1.
+                    int temp = 0;
+                    if (currentButtonSettings == 0)
+                        temp = levelButtons.length - 1;
+                    else
+                        temp = (currentButtonSettings - 1) % levelButtons.length;
+                    levelUpdateButtons(levelButtons[currentButtonSettings], levelButtons[temp], false);
+                    currentButtonSettings = temp;
+                    delay = false;
+                }
+                if(enter_Pressed.get()){
+                    if(currentButtonSettings == 0) { // level1
+                        game.startGame(1);
+                        System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
+                    }
+                    else if(currentButtonSettings == 1) { // level2
+                        game.startGame(2);
+                    }
+                    else if(currentButtonSettings == 2) { // level3
+                        game.startGame(3);
+                    }
+
+                    delay = false;
+                }
             }
         }
     }
@@ -200,6 +266,22 @@ public class MenuController {
         settingButtonHighlight.setTranslateX(current.getTranslateX()); // adjust highlight X
         settingButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
     }
+
+
+    private void levelUpdateButtons(Rectangle old, Rectangle current, boolean fromUp) {
+        old.setFill(levelButtonImages[whatImagelevel-1 % 10]); // make old white
+        if(fromUp) {
+            whatImagelevel = (whatImagelevel + 2) % levelButtonImages.length;
+        } else {
+            whatImagelevel = (whatImagelevel - 2) % levelButtonImages.length;
+        }
+        if(whatImagelevel == -1)
+            whatImagelevel = levelButtonImages.length -1;
+        current.setFill(levelButtonImages[whatImagelevel]); // make current black
+        levelButtonHighlight.setTranslateX(current.getTranslateX()); // adjust highlight X
+        levelButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
+    }
+
 
     // returns the fullscreenity
     public boolean isFullscreen(){

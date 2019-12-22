@@ -25,13 +25,13 @@ public class MiddleGround {
         this.gameRoot = gameRoot;
         this.speed = speed;
         //Setup mountains
-        double mt_Left_Width = width * 1.65;
-        double mt_Right_Width = width * 2.035;
+        double mt_Left_Width = width * 1.65; // if 1920 then 3170
+        double mt_Right_Width = width * 2.035; // if 1920 then 3910
         left_mountains_4 = new SceneComponent(mt_Left_Width,height,type,"Assets\\Scenery\\leftMountains.png");
-        left_mountains_4.setTranslateX((width / 3.2 + width * 1.427 + width / 10.21) * -1);
+        left_mountains_4.setTranslateX((width / 3.2 + width * 1.427 + width / 10.21) * -1); // if 1920 set x to 600 + 2740 + 190
         left_mountains_4.setTranslateY(0);
         right_mountains_4 = new SceneComponent(mt_Right_Width,height,type, "Assets\\Scenery\\rightMountains.png");
-        right_mountains_4.setTranslateX(width / 3.2 + width / 10.21);
+        right_mountains_4.setTranslateX(width / 3.2 + width / 10.21); // if 1920 set x to 600 + 190 , 190 is speed difference
         right_mountains_4.setTranslateY(0);
         //add mountains
         gameRoot.getChildren().add(left_mountains_4);

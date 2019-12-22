@@ -1,20 +1,24 @@
 package org.openjfx;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
+
+import java.awt.*;
 
 //enemyType1
 
 public class Dienamite extends Enemy {
-
-    Dienamite(double width, double height, String assetLocation) {
-        super(width / 38, height / 36, "dienamite");
-        this.width = width / 38;
-        this.height = height / 36;
-        super.initBody(assetLocation, width, height);
+    Dienamite(double width, double height, ImagePattern[] assets) {
+        super(width, height, "dienamite");
+        this.height = magicConverter(60);
+        this.width = magicConverter(90);
+        animationFrames = assets;
+        super.initBody(assets[0], width, height);
+        setShootBehaviour(new ShootWithLaserBullet());
     }
 
-    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveDienamite(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -23,11 +27,11 @@ public class Dienamite extends Enemy {
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
-                boolean isObjectInScene = getX() <= width * 38.4 - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
+                boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    initBullet(GCF, bulletType);
+                    shootBehaviour.shoot(GCF,this,gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500
@@ -66,5 +70,19 @@ public class Dienamite extends Enemy {
                 }
             }
         }
+
+        if (dead) {
+            dropAbility(GCF);
+            explode("enemySelfDestruct", GCF);
+        }
+
+        counter += 1;
+        if(counter % 10 == 0) {
+            currentState += 1;
+            counter = 0;
+        }
+        if(currentState == animationFrames.length)
+            currentState = 0;
+        body.setFill(animationFrames[currentState]);
     }
 }
