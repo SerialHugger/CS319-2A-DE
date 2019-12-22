@@ -22,7 +22,6 @@ public class Dodger extends Enemy {
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
-
         if (delay) { // delay: a boolean value to delay shoots
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
 
@@ -70,7 +69,13 @@ public class Dodger extends Enemy {
                         countdown = 0;
                         is_skill_active = false;
                         temp.dead = false;
-                        moveY(1, 50);
+                        int dodgeDirection;
+                        if (Math.random() <= 0.5)
+                            dodgeDirection = 1;
+                        else
+                            dodgeDirection = -1;
+                        double dodgeAmount = (Math.random() * 500) + 100;
+                        moveY(dodgeDirection, dodgeAmount);
                     } else
                         dead = true;
                 }

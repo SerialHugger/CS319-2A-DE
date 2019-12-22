@@ -30,6 +30,7 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern civilianImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -77,6 +78,8 @@ public class GameComponentFactory {
             temp = new Collectible(40, 50, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
+        } else if (type.equals("civilian")) {
+            temp = new Civilian(60, 100, civilianImage);
         }
         gameComponents.add(temp);
         return temp;
@@ -109,7 +112,7 @@ public class GameComponentFactory {
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
-
+        civilianImage = openAsset("Assest\\civilian");
     }
 
     /*
