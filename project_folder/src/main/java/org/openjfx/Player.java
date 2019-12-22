@@ -58,7 +58,7 @@ public class Player extends GameComponent{
         acceleration = magicConverter(0.3);
         maxSpeed = magicConverter(25);
         facingLeft = true;
-        innerAcc = 5;
+        innerAcc = magicConverter(5);
         speed_x = 0;
         teleportDistance = magicConverter(110);
         //update width and height

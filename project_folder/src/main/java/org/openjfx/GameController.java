@@ -120,9 +120,62 @@ public class GameController {
                         size -= 1; // decrease size.
                         playerBullet.die(); // kill it, remove it from root.
                     }
+                } else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
+                    EnemySelfDestruct enemySelfDestruct = ((EnemySelfDestruct) gameComponents.get(i));
+                    enemySelfDestruct.updateSelfDestruct(); // update it.
+                    if (enemySelfDestruct.dead) { // if enemyType1 is dead.
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        enemySelfDestruct.die(); // kill it, remove it from root.
+                    }
+                } else if (gameComponents.get(i) instanceof Shield) {
+                    Shield shield = ((Shield) gameComponents.get(i));
+                    shield.moveShield(player);
+                    if (shield.dead) {
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        shield.die(); // kill it, remove it from root.
+                    }
+                } else if (gameComponents.get(i) instanceof Barrier) {
+                    Barrier item = ((Barrier) gameComponents.get(i));
+                    item.moveBarrier(scenery);
+                } else if (gameComponents.get(i) instanceof Bomb) {
+                    Bomb bomb = ((Bomb) gameComponents.get(i));
+                    bomb.moveBomb();
+                    if (bomb.dead) {
+                        gameComponents.remove(i--);
+                        size -= 1;
+                        bomb.explode(gameComponentFactory);
+                        bomb.die();
+                    }
+                } else if (gameComponents.get(i) instanceof EngineBlast) {
+                    EngineBlast blast = ((EngineBlast) gameComponents.get(i));
+                    blast.moveEngineBlast(player);
+                    if (blast.dead) {
+                        gameComponents.remove(i--);
+                        size -= 1;
+                        blast.die();
+                    }
+                } else if (gameComponents.get(i) instanceof Collectible) {
+                    Collectible item = ((Collectible) gameComponents.get(i));
+                    item.moveCollectible();
+                    if (item.dead) {
+                        System.out.println("Inside destroy collectible...");
+                        gameComponents.remove(i--);
+                        size -= 1;
+                        item.die();
+                    }
+                } else if (gameComponents.get(i) instanceof Melee) {
+                    Melee melee = ((Melee) gameComponents.get(i));
+                    melee.moveMelee(player);
+                    if (melee.dead) {
+                        gameComponents.remove(i--);
+                        size -= 1;
+                        melee.die();
+                    }
                 } else if (gameComponents.get(i) instanceof Atlas) { // else if its an instance class of EmenyType1.
                     Atlas atlas = ((Atlas) gameComponents.get(i));
-                    atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (atlas.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -132,7 +185,7 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                     Dodger dodger = ((Dodger) gameComponents.get(i));
-                    dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (dodger.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -142,7 +195,7 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                     Dividus dividus = ((Dividus) gameComponents.get(i));
-                    dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (dividus.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -152,7 +205,7 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                     Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                    dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (dienamite.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -162,7 +215,7 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
                     DivingWind divingWind = ((DivingWind) gameComponents.get(i));
-                    divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (divingWind.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -210,7 +263,7 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
                     SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
-                    speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                    speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                     if (speedRunner.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
@@ -218,274 +271,31 @@ public class GameController {
                         deadCounter++;
                         score = score + 100;
                     }
-                } else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
-                    EnemySelfDestruct enemySelfDestruct = ((EnemySelfDestruct) gameComponents.get(i));
-                    enemySelfDestruct.updateSelfDestruct(); // update it.
-                    if (enemySelfDestruct.dead) { // if enemyType1 is dead.
-                        gameComponents.remove(i--); // remove it from components.
-                        size -= 1; // decrease size.
-                        enemySelfDestruct.die(); // kill it, remove it from root.
+                }
+                if (startSlidingLeft) { // if the background sliding left
+                    if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
+                        gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                        scenery.slideScenery(true, slidingSpeed);
+                        slidingCounter += slidingSpeed;
+                    } else {
+                        startSlidingLeft = false; // finish the execution when the limit is reached.
                     }
-                } else if (gameComponents.get(i) instanceof Shield) {
-                    Shield shield = ((Shield) gameComponents.get(i));
-                    shield.moveShield(player);
-                    if (shield.dead) {
-                        gameComponents.remove(i--); // remove it from components.
-                        size -= 1; // decrease size.
-                        shield.die(); // kill it, remove it from root.
+                }
+                if (startSlidingRight) { // if the background sliding right
+                    if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
+                        gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+                        scenery.slideScenery(false, slidingSpeed);
+                        slidingCounter -= slidingSpeed;
+                    } else {
+                        startSlidingRight = false; // finish the execution when the limit is reached.
                     }
-                } else if (gameComponents.get(i) instanceof Barrier) {
-                    Barrier item = ((Barrier) gameComponents.get(i));
-                    item.moveBarrier(scenery);
                 }
-                else if (gameComponents.get(i) instanceof Bomb) {
-                    Bomb bomb = ((Bomb) gameComponents.get(i));
-                    bomb.moveBomb();
-                    if (bomb.dead) {
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        bomb.explode(gameComponentFactory);
-                        bomb.die();
-                    }
-                } else if (gameComponents.get(i) instanceof EngineBlast) {
-                    EngineBlast blast = ((EngineBlast) gameComponents.get(i));
-                    blast.moveEngineBlast(player);
-                    if (blast.dead) {
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        blast.die();
-                    }
-                } else if (gameComponents.get(i) instanceof Collectible) {
-                    Collectible item = ((Collectible) gameComponents.get(i));
-                    item.moveCollectible();
-                    if (item.dead) {
-                        System.out.println("Inside destroy collectible...");
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        item.die();
-                    }
-                } else if (gameComponents.get(i) instanceof Melee) {
-                    Melee melee = ((Melee) gameComponents.get(i));
-                    melee.moveMelee(player);
-                    if (melee.dead) {
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        melee.die();
-                    }
-                } else if (gameComponents.get(i) instanceof Atlas) { // else if its an instance class of EmenyType1.
-                Atlas atlas = ((Atlas) gameComponents.get(i));
-                atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
-                if (atlas.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    atlas.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
-                Dodger dodger = ((Dodger) gameComponents.get(i));
-                dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (dodger.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dodger.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
-                Dividus dividus = ((Dividus) gameComponents.get(i));
-                dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (dividus.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dividus.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
-                Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
-                if (dienamite.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dienamite.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
-                DivingWind divingWind = ((DivingWind) gameComponents.get(i));
-                divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (divingWind.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    divingWind.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
-                LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
-                laserBullet.updateLaserBullet(); // update it.
-                // if its not in the boundaries of camera/root remove it.
-                // first check for X then check for Y.
-                if (laserBullet.getX() > (gameRoot.getTranslateX() * -1) + width + laserBullet.width || laserBullet.getX() < (gameRoot.getTranslateX() * -1) + laserBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    laserBullet.die(); // kill it, remove it from root.
-                } else if (laserBullet.getY() >= gameRoot.getHeight() + laserBullet.width || laserBullet.getY() < 0 - laserBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    laserBullet.die(); // kill it, remove it from root.
-                }
-                if (laserBullet.dead) {
-                    gameComponents.remove(i--);
-                    size -= 1;
-                    laserBullet.die();
-                }
-            } else if (gameComponents.get(i) instanceof GuidedBullet) { // else if its an instance class of GuidedBullet
-                GuidedBullet guidedBullet = (GuidedBullet) gameComponents.get(i); // cast it to a temporary variable.
-                guidedBullet.moveGuidedBullet(player); // update it.
-                // if its not in the boundaries of camera/root remove it.
-                // first check for X then check for Y.
-                if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.width || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    guidedBullet.die(); // kill it, remove it from root.
-                } else if (guidedBullet.getY() >= gameRoot.getHeight() + guidedBullet.width || guidedBullet.getY() < 0 - guidedBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    guidedBullet.die(); // kill it, remove it from root.
-                }
-                if (guidedBullet.dead) {
-                    gameComponents.remove(i--);
-                    size -= 1;
-                    guidedBullet.die();
-                }
-              
-            } else if (gameComponents.get(i) instanceof Atlas) { // else if its an instance class of EmenyType1.
-                Atlas atlas = ((Atlas) gameComponents.get(i));
-                atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
-                if (atlas.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    atlas.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
-                Dodger dodger = ((Dodger) gameComponents.get(i));
-                dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (dodger.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dodger.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
-                Dividus dividus = ((Dividus) gameComponents.get(i));
-                dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (dividus.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dividus.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
-                Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
-                if (dienamite.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    dienamite.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
-                DivingWind divingWind = ((DivingWind) gameComponents.get(i));
-                divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                if (divingWind.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    divingWind.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
-                }
-            } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
-                LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
-                laserBullet.updateLaserBullet(); // update it.
-                // if its not in the boundaries of camera/root remove it.
-                // first check for X then check for Y.
-                if (laserBullet.getX() > (gameRoot.getTranslateX() * -1) + width + laserBullet.width || laserBullet.getX() < (gameRoot.getTranslateX() * -1) + laserBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    laserBullet.die(); // kill it, remove it from root.
-                } else if (laserBullet.getY() >= gameRoot.getHeight() + laserBullet.width || laserBullet.getY() < 0 - laserBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    laserBullet.die(); // kill it, remove it from root.
-                }
-                if (laserBullet.dead) {
-                    gameComponents.remove(i--);
-                    size -= 1;
-                    laserBullet.die();
-                }
-            } else if (gameComponents.get(i) instanceof GuidedBullet) { // else if its an instance class of GuidedBullet
-                GuidedBullet guidedBullet = (GuidedBullet) gameComponents.get(i); // cast it to a temporary variable.
-                guidedBullet.moveGuidedBullet(player); // update it.
-                // if its not in the boundaries of camera/root remove it.
-                // first check for X then check for Y.
-                if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.width || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    guidedBullet.die(); // kill it, remove it from root.
-                } else if (guidedBullet.getY() >= gameRoot.getHeight() + guidedBullet.width || guidedBullet.getY() < 0 - guidedBullet.width) {
-                    gameComponents.remove(i--); // remove it from components and decrease i.
-                    size -= 1; // decrease size.
-                    guidedBullet.die(); // kill it, remove it from root.
-                }
-                if (guidedBullet.dead) {
-                    gameComponents.remove(i--);
-                    size -= 1;
-                    guidedBullet.die();
-                }
-            }
-            else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
-                SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
-                speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
-                if (speedRunner.dead) { // if enemyType1 is dead.
-                    gameComponents.remove(i--); // remove it from components.
-                    size -= 1; // decrease size.
-                    speedRunner.die(); // kill it, remove it from root.
-                    deadCounter++;
-                    score = score + 100;
 
-            
+                gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
+                // update scenery
+                scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
             }
-            if (startSlidingLeft) { // if the background sliding left
-                if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
-                    gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
-                    scenery.slideScenery(true, slidingSpeed);
-                    slidingCounter += slidingSpeed;
-                } else {
-                    startSlidingLeft = false; // finish the execution when the limit is reached.
-                }
-            }
-            if (startSlidingRight) { // if the background sliding right
-                if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
-                    gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
-                    scenery.slideScenery(false, slidingSpeed);
-                    slidingCounter -= slidingSpeed;
-                } else {
-                    startSlidingRight = false; // finish the execution when the limit is reached.
-                }
-            }
-
-            gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
-            // update scenery
-            scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
         }
-
         else if (currentScreen == 1) { // STOP, SHOW MENU
 
             inGameMenu.displayMenu(gameRoot);
