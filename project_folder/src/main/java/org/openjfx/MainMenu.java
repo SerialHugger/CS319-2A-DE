@@ -18,6 +18,7 @@ public class MainMenu {
     private double height;
     // set menu controller
     private MenuController menuController;
+    private int shipSelected;
 
     /*
      * todo -> Insert setting,  make it good to go before start coding the game part.
@@ -292,6 +293,7 @@ public class MainMenu {
     public void update(Game game)
     {
         menuController.update(game, menuRoot);
+        shipSelected = menuController.getShipSelected();
     }
 
     //Setup buttonHandler to control menu
@@ -325,6 +327,10 @@ public class MainMenu {
             }
         }
         return  imagePattern;
+    }
+    public int getShipSelected(){
+        shipSelected = menuController.getShipSelected();
+        return shipSelected;
     }
     public boolean isFullscreen(){
         return menuController.isFullscreen();

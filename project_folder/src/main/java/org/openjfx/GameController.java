@@ -35,6 +35,7 @@ public class GameController {
     int deadCounter = 0;
     long score = 0;
     int noOfEnemies = 0;
+    int selectShipNumber;
     int currentScreen = 0;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty[] keyInputs = new BooleanProperty[14];
@@ -75,6 +76,7 @@ public class GameController {
         scenery.createContent(); // create its content
         gameComponents = new ArrayList<>(); // create arraylist for gameComponents
         gameComponentFactory = new GameComponentFactory(width, height, gameComponents); // Initiate factory
+        gameComponentFactory.setSelectShip(selectShipNumber);
         player = (Player) gameComponentFactory.createComponent("player"); // first game component is Player
         player.speed = speed; // set speed for player.
         player.addShapes(gameRoot); // add player to root
@@ -457,7 +459,7 @@ public class GameController {
         int speedRunnerNumber= 2;
         int bossNumber = 1;
         int divingWindNumber = 2;
-        int levelMod = level % 4;
+        int levelMod = level % 5;
         if ( levelMod == 1 ) {
             if ( noOfEnemies == 0 ) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
@@ -501,7 +503,7 @@ public class GameController {
                 speedFactor++;
 
             }
-            //eray hoca boss olarak gelcek
+
         }
     }
 
@@ -619,5 +621,11 @@ public class GameController {
         }
 
         currentScreen = screenID;
+    }
+    public void setSelectShipNumber(int shipNum ){
+        selectShipNumber = shipNum;
+    }
+    public int getSelectShipNumber(){
+        return selectShipNumber;
     }
 }
