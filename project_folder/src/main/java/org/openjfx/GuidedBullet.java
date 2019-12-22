@@ -2,7 +2,9 @@ package org.openjfx;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class GuidedBullet extends EnemyBullet{
     private final int guideLimit = 5;

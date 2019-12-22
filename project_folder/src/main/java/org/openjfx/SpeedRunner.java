@@ -15,7 +15,7 @@ public class SpeedRunner extends Enemy {
         super.initBody(asset, width, height);
     }
 
-    public void moveSpeedRunner(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveSpeedRunner(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -55,18 +55,7 @@ public class SpeedRunner extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead())
-                    dead = true;
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             dropAbility(GCF);
             explode("explode", GCF);

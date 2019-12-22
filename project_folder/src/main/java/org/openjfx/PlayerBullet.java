@@ -74,8 +74,5 @@ public class PlayerBullet extends PlayerEquipment {
         }
 
     }
-    public void rotate(double rotateValue){
-        hitBoxes[0].setRotate(rotateValue);
-        body.setRotate(rotateValue);
-    }
+
 }
