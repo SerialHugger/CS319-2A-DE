@@ -35,11 +35,11 @@ public class Hud{
     Hud (double width, double height, String type, Pane gameRoot){
         this.gameRoot = gameRoot;
         healthHud = new SceneComponent(width/3.96,height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
-        skillsHud = new SceneComponent[5];
+        skillsHud = new SceneComponent[3];
 
-        for (int i = skillsHud.length - 1; i >= 0; i--) {
+        for (int i = 0; i < skillsHud.length; i++) {
             skillsHud[i] = new SceneComponent(50, 50, "", "empty");
-            skillsHud[i].setTranslateX(-i * 52 - 100);
+            skillsHud[i].setTranslateX(-(skillsHud.length - i) * 52 - 100);
             skillsHud[i].setTranslateY(height - 40);
             skillsHud[i].setFill(Color.GREEN);
 
@@ -99,6 +99,16 @@ public class Hud{
             delay = false;
         }
         moveX(1, speed);
+    }
+
+    public void displaySkills(String[] abilities) {
+        for (int i = 0; i < skillsHud.length; i++ ) {
+            if (abilities[i].equals("empty")) {
+                skillsHud[i].setFill(Color.GREEN);
+            } else {
+                skillsHud[i].setFill(Color.RED);
+            }
+        }
     }
 
     public void slide(boolean toLeft,double slidingSpeed) {

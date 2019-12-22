@@ -39,7 +39,7 @@ public class Player extends GameComponent{
     int accCount = 0;
     int dirX;
     int dirY;
-    private String[] abilities;
+    String[] abilities;
     double acceleration;
     double innerAcc;
     double innerSpeed = 0;
@@ -536,4 +536,5 @@ public class Player extends GameComponent{
 
     public double getWidth() { return width; }
     public double getHeight() { return height; }
+
 }
