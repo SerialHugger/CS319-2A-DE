@@ -22,10 +22,11 @@ public class GameComponentFactory {
     ImagePattern[] explosionImage = new ImagePattern[8];
     ImagePattern[] atlasImage = new ImagePattern[3];
     ImagePattern[] dienamiteImage = new ImagePattern[9];
+    ImagePattern[] divingWindImage = new ImagePattern[2];
+
     /// SINGLES
     ImagePattern dodgerImage;
     ImagePattern dividusImage;
-    ImagePattern divingWindImage;
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
@@ -100,10 +101,11 @@ public class GameComponentFactory {
         }
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
+        divingWindImage[0] = openAsset("Assets\\ragetrollface.png");
+        divingWindImage[1] = openAsset("Assets\\calmface.png");
         //Open singles
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
-        divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");

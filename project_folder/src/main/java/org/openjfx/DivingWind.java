@@ -10,35 +10,49 @@ import java.net.CookieHandler;
 public class DivingWind extends Enemy {
     private double x_dest;
     private double y_dest;
-    DivingWind(double width, double height, ImagePattern asset) {
-        super(width / 60.95, height / 18, "divingWind");
-        super.initBody(asset, width, height);
-        this.height = magicConverter( 60);
-        this.width = magicConverter( 31.5);
+    boolean canSeePlayer;
+    DivingWind(double width, double height, ImagePattern[] assets) {
+        super(width, height, "divingWind");
+        animationFrames = assets;
+        this.height = magicConverter( 120);
+        this.width = magicConverter( 80);
+        super.initBody(assets[1], width, height);
         speed = 0;
         speed_x = 0;
         speed_y = 0;
         x_dest = 0;
         y_dest = 0;
-        acceleration = magicConverter(5);
-        body.setFill(asset);
+        acceleration = magicConverter(0.3);
+        canSeePlayer = false;
     }
 
     public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
         // TODO: Add Comments
-
+        double random = Math.random() * 10000;
         // TODO: Fix this
+        boolean lastStatus = canSeePlayer;
         if (player.facingLeft){
             if (player.getX() >= getX())
                 canSeePlayer = (player.getX() - getX()) < player.getWidth() * 3;
             else
-                canSeePlayer = (getX() - player.getX()) < 1920 - player.getWidth() * 2;
+                canSeePlayer = (getX() - player.getX()) < magicConverter(1920) - player.getWidth() * 2 - magicConverter(480);
         }
         else {
             if (getX() >= player.getX())
                 canSeePlayer = (getX() - player.getX()) < player.getWidth() * 3;
             else
-                canSeePlayer = (player.getX() - getX()) < 1920 - player.getWidth() * 2;
+                canSeePlayer = (player.getX() - getX()) < magicConverter(1920) - player.getWidth() * 2 - magicConverter(480);
+        }
+        if (canSeePlayer){
+            body.setFill(animationFrames[0]);
+        }
+        else{
+            body.setFill(animationFrames[1]);
+        }
+        if (lastStatus != canSeePlayer){
+            speed_x = 0;
+            speed_y = 0;
+            speed = 0;
         }
         if (canSeePlayer) {
             double xCoord = this.getX() + width / 2;
@@ -55,7 +69,7 @@ public class DivingWind extends Enemy {
                 x_dest = xCoord;
                 y_dest = yCoord;
             } else if ((int) speed == 0) {
-                acceleration = magicConverter(8);
+                acceleration = magicConverter(0.3);
             }
             speed = speed + acceleration;
             if (speed <= maxSpeed) {
@@ -96,9 +110,14 @@ public class DivingWind extends Enemy {
             }
         }
         else{
-            speed = 0;
-            speed_y = 0;
-            speed_x = 0;
+            int[] moveValues = getMoveValues(random);
+
+            directionX = moveValues[0];
+            directionY = moveValues[1];
+            speed_x = moveValues[2];
+            speed_y = moveValues[3];
+            moveY(directionY, speed_y);
+            moveX(directionX, speed_x);
         }
 
         //updates the space ships so they loop around map
