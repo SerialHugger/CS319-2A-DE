@@ -30,6 +30,7 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
 
