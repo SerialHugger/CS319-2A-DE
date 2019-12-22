@@ -42,7 +42,7 @@ public class GameController {
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
-
+     int score = 0;
     MainGame mainGame;
 
     /*
