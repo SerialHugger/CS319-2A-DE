@@ -6,25 +6,29 @@ import javafx.scene.shape.Rectangle;
 
 public class GuidedBullet extends EnemyBullet{
     private final int guideLimit = 5;
+
     private int guideTime = 0;
     private boolean guidable = true;
+    private int rotate = 5;
     GuidedBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"guidedBullet");
         this.facingLeft = toLeft;
         hitBoxes = new Rectangle[1];
-        speed = magicConverter(7);
-        this.height = magicConverter(30);
-        this.width = magicConverter(30);
+        speed = magicConverter(2.5);
+        this.height = magicConverter(60);
+        this.width = magicConverter(60);
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "guidedBullet");
         body = new Rectangle(this.width,this.height, Color.RED);
         body.setFill(asset);
     }
     public void moveGuidedBullet(Player player) {
+        rotate += 25;
+        body.setRotate(rotate);
         if (guidable) {
             x_player = player.getX() + player.getWidth() / 2;
             y_player = player.getY() + player.getHeight() / 2;
-            dist_x = Math.abs(x_player - this.getX()); // calculate distance x
-            dist_y = Math.abs(y_player - this.getY()); // calculate distance y
+            dist_x = x_player - this.getX(); // calculate distance x
+            dist_y = y_player - this.getY(); // calculate distance y
             hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
             speed_x = dist_x / hipo * speed; // calculate speed of x
             speed_y = dist_y / hipo * speed; // calculate speed of y

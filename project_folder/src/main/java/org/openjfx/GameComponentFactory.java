@@ -62,7 +62,7 @@ public class GameComponentFactory {
         } else if (type.equals("laserBullet")) {
             temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedBullet")) {
-            temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
+            temp = new GuidedBullet(width, height, /* TODO TEMP */guidedBulletImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
@@ -110,7 +110,7 @@ public class GameComponentFactory {
         divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
-        guidedBulletImage = openAsset("empty");
+        guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
 
     }
