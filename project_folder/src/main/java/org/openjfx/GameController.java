@@ -463,7 +463,6 @@ public class GameController {
                 noOfEnemies = 0;
             }
 
-
         }
         else if ( levelMod == 2 ){
             if ( noOfEnemies == 0)
@@ -492,7 +491,6 @@ public class GameController {
             if( noOfEnemies == deadCounter){
                 level = level + 1;
                 speedFactor++;
-
             }
 
         }
