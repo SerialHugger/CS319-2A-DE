@@ -46,7 +46,7 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width, height / 15.4, playerImage);
+            temp = new Player(width, height, playerImage);
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
@@ -62,15 +62,15 @@ public class GameComponentFactory {
         } else if( type.equals("speedRunner")){
             temp = new SpeedRunner(width , height , speedRunnerImage);
         } else if (type.equals("laserBullet")) {
-            temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
+            temp = new LaserBullet(width, height, laserBulletImage, true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedBullet")) {
-            temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
+            temp = new GuidedBullet(width, height, laserBulletImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explosionImage, false);
         } else if (type.equals("bomb")) {
-            temp = new Bomb(40, 50, "empty");
+            temp = new Bomb(width, height, null, (Player)gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield( width, height, "empty");
         } else if (type.equals("engineBlast")) {
@@ -112,7 +112,7 @@ public class GameComponentFactory {
         dividusImage = openAsset("Assets\\pacman.png");
         divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        laserBulletImage = openAsset("empty");
+        laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");
         guidedBulletImage = openAsset("empty");
         civilianImage = openAsset("Assets\\Civilian.png");
         bossImage = openAsset("Assets\\array_tuezuen.png");

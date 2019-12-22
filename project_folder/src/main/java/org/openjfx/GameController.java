@@ -71,10 +71,9 @@ public class GameController {
         player.addShapes(gameRoot); // add player to root
         interactionHandler = new InteractionHandler();
         gameRoot.setTranslateX(width); // set starting camera
-        //createLevel(level); // create the level with enemies
-        slidingLimit = width - player.getWidth() * 5;
+        slidingLimit = width - player.getWidth() * 7;
         slidingCounter = slidingLimit * -1;
-        slidingSpeed = (width - player.getWidth() * 5) / 65; // some numbers yes.
+        slidingSpeed = (width - player.getWidth() * 7) / 65; // some numbers yes.
     }
     void updateInteraction(){
         //update interaction
@@ -271,9 +270,9 @@ public class GameController {
                     score = score + 10000;
                 }
             }
-
            createLevel();
         }
+        createLevel();
         // update root
         if (keyInputs[3].get()) { // if the key D pressed
             //handle the acceleration with scenery!

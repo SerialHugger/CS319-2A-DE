@@ -1,16 +1,20 @@
 package org.openjfx;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Bomb extends PlayerEquipment {
-    Bomb(double width, double height,  String assetLocation) {
+    Bomb(double width, double height, ImagePattern assets, Player player) {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
+        speed = magicConverter(10);
+        this.height = magicConverter(50);
+        this.width = magicConverter(40);
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "bomb");
-        System.out.println("Some bomb cheese!!!");
+        speed_x = player.speed;
         body = new Rectangle(this.width, this.height);
         body.setFill(Color.RED);
 
@@ -19,8 +23,8 @@ public class Bomb extends PlayerEquipment {
     public void moveBomb() {
         if (gameRoot.getHeight() - height <= getY())
             dead = true;
-
-        moveY(1, 10);
+        moveX(1, speed_x);
+        moveY(1, speed);
         rotate(60);
     }
 
