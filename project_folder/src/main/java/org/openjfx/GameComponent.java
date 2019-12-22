@@ -32,6 +32,7 @@ public class GameComponent {
     ImagePattern[] animationFrames; // frames for animation
     int currentState = 0; // state of animation
     int counter = 0; // counter for animation state
+    int rotate = 0;
     GameComponent(double width, double height, String type){
         this.type = type;
         this.width = width;
@@ -79,7 +80,9 @@ public class GameComponent {
     public void die(){ // if called the component will be removed from game.
         for(int i = 0; i < hitBoxes.length; i++ ){
             gameRoot.getChildren().remove(hitBoxes[i]);
+            System.out.println("Killin tha mothefucka!!!");
         }
+        System.out.println("Dead mothafucka!");
         gameRoot.getChildren().remove(body);
     }
 
@@ -128,5 +131,24 @@ public class GameComponent {
             return width/(1920/wantedInteger);
         else
             return gameRoot.getWidth()/(1920/wantedInteger);
+    }
+
+    public boolean updateDeath() {
+        for (Shape hitBox : hitBoxes) {
+            if (hitBox instanceof ComponentHitBoxCircle) {
+                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
+                if (temp.isDead())
+                    return true;
+            } else if (hitBox instanceof ComponentHitBoxRectangle) {
+                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
+                if (temp.isDead()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    public void rotate(double rotateValue){
+        hitBoxes[0].setRotate(rotateValue);
+        body.setRotate(rotateValue);
     }
 }

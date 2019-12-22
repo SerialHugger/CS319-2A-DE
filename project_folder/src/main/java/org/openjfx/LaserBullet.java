@@ -2,23 +2,27 @@ package org.openjfx;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class LaserBullet extends EnemyBullet{
     LaserBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"laserBullet");
         this.facingLeft = toLeft;
-        hitBoxes = new Rectangle[1];
+        hitBoxes = new Shape[1];
         speed = magicConverter(7);
         this.height = magicConverter(10);
         this.width = magicConverter(15);
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "enemyBullet", "laserBullet");
-        body = new Rectangle(this.width, this.height, Color.RED);
+        hitBoxes[0] = new ComponentHitBoxCircle(this.width/2, "enemyBullet", "laserBullet");
+        body = new Circle(this.width/2, Color.RED);
         body.setFill(asset);
         x_player = player.getX() + player.width/2;
         y_player = player.getY() + player.height/2;
     }
     public void updateLaserBullet() {
+        body.setRotate(rotate);
+        rotate += 15;
         if( x_player > x_initial && y_player == y_initial) // if the player is directly on the right side
             moveX(1, speed);
         else if (x_player < x_initial && y_player == y_initial) // if the player is directly on the left side
