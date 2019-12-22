@@ -205,7 +205,7 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[8].get()) { // H pressed
-
+            activateGuidedRocket(GCF);
         }
         if(keyInputs[9].get()) { // J pressed
             //todo add skill 1
@@ -334,6 +334,13 @@ public class Player extends GameComponent{
             isShieldActive = true;
         }
 
+    }
+
+    public void activateGuidedRocket(GameComponentFactory GCF){
+        GuidedRocket gRocket = (GuidedRocket) GCF.createComponent("guidedRocket");
+        gRocket.setX(body.getTranslateX() + this.width / 2);
+        gRocket.setY(body.getTranslateY() + this.height / 2);
+        gRocket.addShapes(gameRoot);
     }
 
     public void activateBarrier(GameComponentFactory GCF){
@@ -474,7 +481,7 @@ public class Player extends GameComponent{
                         bulletRainCount = 0;
                     }
                 } else if (abilityType.equals("guidedRocket")) {
-
+                    activateGuidedRocket(GCF);
                 } else if (abilityType.equals("melee")) {
 
                 }
@@ -485,6 +492,8 @@ public class Player extends GameComponent{
         }
         return false;
     }
+
+
 
     public double getWidth() { return width; }
     public double getHeight() { return height; }
