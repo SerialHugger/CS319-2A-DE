@@ -33,7 +33,6 @@ public class GameComponentFactory {
     ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
-    ImagePattern guidedRocketImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
