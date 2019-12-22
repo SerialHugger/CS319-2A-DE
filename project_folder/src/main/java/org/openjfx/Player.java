@@ -39,10 +39,11 @@ public class Player extends GameComponent{
     int accCount = 0;
     int dirX;
     int dirY;
-    private String[] abilities;
+    String[] abilities;
     double acceleration;
     double innerAcc;
     double innerSpeed = 0;
+    long score;
     //immortal mode //todo delete this when needed
     boolean toggleHealth = false;
     int attackDelayTimer = 0;
@@ -536,4 +537,6 @@ public class Player extends GameComponent{
 
     public double getWidth() { return width; }
     public double getHeight() { return height; }
+    public long getScore() {return score;}
+    public void setScore(long score) {this.score = score;}
 }

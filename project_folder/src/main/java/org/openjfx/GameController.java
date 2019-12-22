@@ -33,7 +33,7 @@ public class GameController {
     // level counter
     int level = 1;
     int deadCounter = 0;
-    long score = 0;
+    //long score = 0;
     int noOfEnemies = 0;
     int selectShipNumber;
     int currentScreen = 0;
@@ -277,6 +277,11 @@ public class GameController {
                     GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
                     gRocket.chooseTarget(this.gameComponents);
                     gRocket.moveGuidedRocket();
+                    if (gRocket.getY() >= gameRoot.getHeight() + gRocket.width || gRocket.getY() < 0 - gRocket.width) {
+                        gameComponents.remove(i--); // remove it from components and decrease i.
+                        size -= 1; // decrease size.
+                        gRocket.die(); // kill it, remove it from root.
+                    }
                     if (gRocket.dead) {
                         gameComponents.remove(i--);
                         size -= 1;
@@ -445,7 +450,14 @@ public class GameController {
 
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber + bossNumber);
     }
-
+              
+    public void createCivilians(int civilianNumber){
+        for (int i = 0; i < civilianNumber; i++){
+            Civilian civilian = (Civilian) gameComponentFactory.createComponent("civilian");
+            civilian.addShapes(gameRoot);
+        }
+    }
+              
     /*
      * This creates levels
      * adds enemies
