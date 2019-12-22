@@ -27,7 +27,7 @@ public class Game extends Application {
 
     private double width =  1920; //(int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
     private double height = 1080; //(int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
-
+    private int shipSelected;
     private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
     double lastTime = System.nanoTime() / 1000000000.0; // helps calculate fps
@@ -42,6 +42,7 @@ public class Game extends Application {
 
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
+            shipSelected = mainMenu.getShipSelected();
         }
         if(onGame){
             // I probably miss commended this cuz reasons.
@@ -51,6 +52,7 @@ public class Game extends Application {
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
             frameTime += passedTime; // calculate frameTime
+            shipSelected = mainMenu.getShipSelected();
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
@@ -93,6 +95,7 @@ public class Game extends Application {
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
         mainGame = new MainGame(gameRoot, width, height);
+        mainGame.setShipSelected(mainMenu.getShipSelected());
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
@@ -144,5 +147,9 @@ public class Game extends Application {
         launch(args);
     }
 
+    public int getShipSelected(){
+        shipSelected = mainMenu.getShipSelected();
+        return shipSelected;
+    }
 
 }

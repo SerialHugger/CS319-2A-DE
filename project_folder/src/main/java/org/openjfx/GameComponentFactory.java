@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class GameComponentFactory {
     double width; // width of the game
     double height; // height of the game
+    int shipNum;
     ArrayList<GameComponent> gameComponents; // game components of the game.
     /*
    ////////////////////////
@@ -16,7 +17,10 @@ public class GameComponentFactory {
    ////////////////////////
     */
     /// ARRAYS
-    ImagePattern[] playerImage = new ImagePattern[2];
+    ImagePattern[] playerImage1 = new ImagePattern[2];
+    ImagePattern[] playerImage2 = new ImagePattern[2];
+    ImagePattern[] playerImage3 = new ImagePattern[2];
+    ImagePattern[] playerImage4 = new ImagePattern[2];
     ImagePattern[] playerBulletImage = new ImagePattern[2];
     ImagePattern[] selfDestructImage = new ImagePattern[8];
     ImagePattern[] explosionImage = new ImagePattern[8];
@@ -46,7 +50,14 @@ public class GameComponentFactory {
     public GameComponent createComponent(String type) {
         GameComponent temp = null;
         if (type.equals("player")) {
-            temp = new Player(width, height / 15.4, playerImage);
+            if ( shipNum == 0 )
+                temp = new Player(width, height / 15.4, playerImage1);
+            else if(shipNum == 1 )
+                temp = new Player(width, height / 15.4, playerImage2);
+            else if(shipNum == 2 )
+                temp = new Player(width, height / 15.4, playerImage3);
+            else if(shipNum == 3 )
+                temp = new Player(width, height / 15.4, playerImage4);
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
@@ -87,8 +98,14 @@ public class GameComponentFactory {
     }
     private void openAssets(){
         //Open arrays
-        playerImage[0] = openAsset("Assets\\spaceship_right.png");
-        playerImage[1] = openAsset("Assets\\spaceship_left.png");
+        playerImage1[0] = openAsset("Assets\\spaceship_right.png");
+        playerImage1[1] = openAsset("Assets\\spaceship_left.png");
+        playerImage2[0] = openAsset("Assets\\alternativespaceship1_right.png");
+        playerImage2[1] = openAsset("Assets\\alternativespaceship1_left.png");
+        playerImage3[0] = openAsset("Assets\\alternativeSpaceship2_right.png");
+        playerImage3[1] = openAsset("Assets\\alternativeSpaceship2_left.png");
+        playerImage4[0] = openAsset("Assets\\alternativeSpaceship3.png");
+        playerImage4[1] = openAsset("Assets\\alternativeSpaceship3.png");
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
         for(int i = 0; i < 8; i++) {
@@ -140,5 +157,11 @@ public class GameComponentFactory {
             }
         }
         return  imagePattern;
+    }
+    public int getSelectShip(){
+        return shipNum;
+    }
+    public void setSelectShip(int shipNum){
+        this.shipNum = shipNum;
     }
 }

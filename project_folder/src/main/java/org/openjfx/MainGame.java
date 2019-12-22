@@ -8,6 +8,7 @@ public class MainGame {
     double width;
     double height;
     int level;
+    int shipSelected;
     GameController gameController;
 
     MainGame(Pane root, double width, double height){
@@ -15,15 +16,18 @@ public class MainGame {
         this.width = width;
         this.height = height;
         gameController = new GameController(gameRoot , width, height);
+
     }
     public Parent createContent(){
         //create and set content and controller
         gameRoot.setMaxSize(width, height);
+        gameController.setSelectShipNumber(shipSelected);
         gameController.createContent();
         return gameRoot;
     }
     public void update(Game game, int fps){
         gameController.updateGame(fps);
+
     }
 
     public void setButtonHandler(Scene scene) { gameController.setButtonHandler(scene);}
@@ -35,5 +39,11 @@ public class MainGame {
     }
     public void setlevel(int levelNum){
         gameController.setLevel(levelNum);
+    }
+    public void setShipSelected ( int shipSelected ){
+        this.shipSelected = shipSelected;
+    }
+    public int getShipSelected(){
+        return shipSelected;
     }
 }

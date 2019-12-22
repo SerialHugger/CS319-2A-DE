@@ -29,7 +29,6 @@ public class MenuController {
     private ImagePattern[] settingsButtonImages; // todo will hold  images for settings
     private ImagePattern[] levelButtonImages;
     private ImagePattern[] selectShipImages;
-    private ImagePattern[] shipAssets = new ImagePattern[6];
     // BooleanProperties for smoother control on ui.
     private BooleanProperty w_Pressed = new SimpleBooleanProperty();
     private BooleanProperty a_Pressed = new SimpleBooleanProperty();
@@ -46,10 +45,9 @@ public class MenuController {
     private int whatImageSettings = 1; // Same purpose but for setting
     private int whatImagelevel = 1; // Same purpose but for level selection
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
-
+    private int shipSelected = 0; // check the selected ship's appereance
 
     private MediaPlayer mediaPlayer;
-
 
     MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight, Rectangle[] levelButtons , ImagePattern[] levelButtonImages , Rectangle levelButtonHighlight,Rectangle[] selectShipButtons,ImagePattern[] selectShipImages, Rectangle shipButtonHighlight  ){
         this.buttons = buttons;
@@ -269,6 +267,7 @@ public class MenuController {
                     delay = false;
                 }
                 if(enter_Pressed.get()){
+                    shipSelected = 1;
                     if(currentButtonSettings == 0) { // ship1
                         buttonHighlight.setVisible(true);
                         for (int i = 0; i < buttons.length; i++){
@@ -278,13 +277,34 @@ public class MenuController {
                         for (int i = 0; i < selectShipButtons.length; i++){
                             selectShipButtons[i].setVisible(false);
                         }
+
                         currentScreen = 0;
                     }
                     else if(currentButtonSettings == 1) { // ship2
-                        game.startGame(2);
+                        shipSelected = 2;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
                     else if(currentButtonSettings == 2) { // ship3
-                        game.startGame(3);
+                        shipSelected = 3;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
 
                     delay = false;
@@ -400,5 +420,8 @@ public class MenuController {
                 enter_Pressed.set(false);
             }
         });
+    }
+    public int getShipSelected(){
+        return shipSelected;
     }
 }
