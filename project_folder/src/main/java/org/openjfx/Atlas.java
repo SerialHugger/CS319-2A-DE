@@ -30,7 +30,7 @@ public class Atlas extends Enemy {
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    shootBehaviour.shoot(GCF, this , gameRoot);
+                    shootBehaviour.shoot(GCF , this , gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500

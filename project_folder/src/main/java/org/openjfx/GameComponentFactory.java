@@ -29,8 +29,6 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
-    ImagePattern guidedRocketImage;
-    ImagePattern civilianImage;
 
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -78,10 +76,7 @@ public class GameComponentFactory {
             temp = new Collectible(40, 50, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
-        } else if (type.equals("guidedRocket")) {
-            temp = new GuidedRocket(width, height, guidedRocketImage);
         }
-
         gameComponents.add(temp);
         return temp;
     }
@@ -106,15 +101,12 @@ public class GameComponentFactory {
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
         //Open singles
-
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
         laserBulletImage = openAsset("empty");
         guidedBulletImage = openAsset("empty");
-        guidedRocketImage = openAsset("Assets\\light_saber.png");
-        civilianImage = openAsset("Assets\\Civilian.png");
 
     }
 
