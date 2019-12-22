@@ -41,6 +41,8 @@ public class GameController {
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
 
+    MainGame mainGame;
+
     /*
     For key inputs
     index — key
@@ -57,10 +59,11 @@ public class GameController {
     10 — k
     11 — l
      */
-    GameController(Pane root, double width, double height) {
+    GameController(Pane root, double width, double height, MainGame mainGame) {
         this.gameRoot = root;
         this.width = width;
         this.height = height;
+        this.mainGame = mainGame;
     }
 
     void createContent() {
@@ -337,7 +340,7 @@ public class GameController {
                     inGameMenu.hideMenu();
                 }
                 else if (inGameMenu.getActiveButton() == 1){
-                    
+                    mainGame.backToMainMenu();
                 }
 
             }

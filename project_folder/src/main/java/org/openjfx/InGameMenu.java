@@ -74,6 +74,10 @@ public class InGameMenu extends Rectangle {
 
         backgroundRect.setTranslateX(gameRoot.getTranslateX() * -1);
         backgroundRect.setTranslateY(0);
+
+        backgroundRect.toFront();
+        rectangle1.toFront();
+        rectangle2.toFront();
     }
 
     public void hideMenu() {
