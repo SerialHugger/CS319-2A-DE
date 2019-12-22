@@ -245,6 +245,8 @@ public class InteractionHandler {
                                         circleTemp.dead = true;
                                     } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) {
                                         circleTemp.dead = true;
+                                    } else if (rectangleTemp2.getSpecificType().equals("melee")) {
+                                        circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
                                 }
@@ -459,6 +461,8 @@ public class InteractionHandler {
                                         rectangleTemp2.dead = true;
                                         rectangleTemp.dead = true;
                                     } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) { // if second one is engine blast
+                                        rectangleTemp.dead = true;
+                                    } else if (rectangleTemp2.getSpecificType().equals("melee")) {
                                         rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here

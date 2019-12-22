@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.Arrays;
 
 public class Player extends GameComponent{
-    //Necessary attiributes for teleport ability cooldown.
+    //Necessary attributes for teleport ability cooldown.
     private final int TELEPORT_COOLDOWN = 3;
     private boolean teleportAvailable = true;
     private int teleportCountdown = 0;
@@ -29,6 +29,10 @@ public class Player extends GameComponent{
     private boolean engineBlastActive = false;
     private boolean engineBlastOngoing = false;
     private int engineBlastCount = 0;
+    private final int TOTAL_MELEES = 1;
+    private boolean meleeActive = false;
+    private boolean meleeOngoing = false;
+    private int meleeCount = 0;
     private final int MAX_NO_OF_ABILITIES = 3;
     private int noOfAbilities;
     int maxAcc = 60;
@@ -83,7 +87,7 @@ public class Player extends GameComponent{
   
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF){
         innerSpeed = 0;
-        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing || engineBlastOngoing) {
+        if(!teleportAvailable || bulletRainOnGoing || bombingOngoing || engineBlastOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
@@ -125,6 +129,16 @@ public class Player extends GameComponent{
                     }
                     engineBlastCount += 1;
                     engineBlastActive = true;
+                }
+
+                if (meleeOngoing) {
+                    if (meleeCount >= TOTAL_MELEES) {
+                        meleeActive = false;
+                        meleeCount = 0;
+                        meleeOngoing = false;
+                    }
+                    meleeCount += 1;
+                    meleeActive = true;
                 }
             }
         }
@@ -205,7 +219,11 @@ public class Player extends GameComponent{
             }
         }
         if(keyInputs[8].get()) { // H pressed
-
+            if (!meleeOngoing) {
+                meleeOngoing = true;
+                meleeActive = true;
+                meleeCount = 0;
+            }
         }
         if(keyInputs[9].get()) { // J pressed
             //todo add skill 1
@@ -265,6 +283,12 @@ public class Player extends GameComponent{
             if (engineBlastActive && engineBlastCount >= TOTAL_ENGINE_BLASTS) {
                 activateEngineBlast(GCF);
                 engineBlastActive = false;
+            }
+        }
+        if (meleeOngoing) {
+            if (meleeActive && meleeCount >= TOTAL_MELEES) {
+                activateMelee(GCF);
+                meleeActive = false;
             }
         }
         moveX(1,speed + innerSpeed); // move!
@@ -409,6 +433,19 @@ public class Player extends GameComponent{
         blast.addShapes(gameRoot);
     }
 
+    private void activateMelee(GameComponentFactory GCF) {
+        Melee melee = (Melee) GCF.createComponent("melee");
+
+        // setting the initial position of the arm according to the player's position and movement
+        if (facingLeft)
+            melee.setX(body.getTranslateX() + width);
+        else
+            melee.setX(body.getTranslateX());
+
+        melee.setY(body.getTranslateY() - height * 1.5);
+        melee.addShapes(gameRoot);
+    }
+
     private void activateHyperJump() {
         double chance = 100 * Math.random();
 
@@ -476,7 +513,11 @@ public class Player extends GameComponent{
                 } else if (abilityType.equals("guidedRocket")) {
 
                 } else if (abilityType.equals("melee")) {
-
+                    if (!meleeOngoing) {
+                        meleeOngoing = true;
+                        meleeActive = true;
+                        meleeCount = 0;
+                    }
                 }
                 abilities[index] = "empty";
                 noOfAbilities--;

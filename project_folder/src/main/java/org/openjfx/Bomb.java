@@ -30,9 +30,4 @@ public class Bomb extends PlayerEquipment {
         selfDest.setY(this.getY());
         selfDest.addShapes(gameRoot);
     }
-
-    public void rotate(double rotateValue){
-        hitBoxes[0].setRotate(rotateValue);
-        body.setRotate(rotateValue);
-    }
 }

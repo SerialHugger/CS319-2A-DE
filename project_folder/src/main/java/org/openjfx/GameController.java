@@ -298,6 +298,40 @@ public class GameController {
             }
             if (keyInputs[1].get()) { // A pressed
                 inGameMenu.changeActiveButton(0);
+            else if (gameComponents.get(i) instanceof Bomb) {
+                Bomb bomb = ((Bomb) gameComponents.get(i));
+                bomb.moveBomb();
+                if (bomb.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    bomb.explode(gameComponentFactory);
+                    bomb.die();
+                }
+            } else if (gameComponents.get(i) instanceof EngineBlast) {
+                EngineBlast blast = ((EngineBlast) gameComponents.get(i));
+                blast.moveEngineBlast(player);
+                if (blast.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    blast.die();
+                }
+            } else if (gameComponents.get(i) instanceof Collectible) {
+                Collectible item = ((Collectible) gameComponents.get(i));
+                item.moveCollectible();
+                if (item.dead) {
+                    System.out.println("Inside destroy collectible...");
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    item.die();
+                }
+            } else if (gameComponents.get(i) instanceof Melee) {
+                Melee melee = ((Melee) gameComponents.get(i));
+                melee.moveMelee(player);
+                if (melee.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    melee.die();
+                }
             }
         }
 
@@ -402,7 +436,7 @@ public class GameController {
         for (int i = 0; i < divingWindNumber; i++) {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
-        }
+        }*/
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
     }
 
