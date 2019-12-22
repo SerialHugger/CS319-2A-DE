@@ -25,8 +25,8 @@ public class Game extends Application {
     private boolean onMenu = true;
     private boolean onGame = false;
 
-    private double width =  1920; //(int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-    private double height = 1080; //(int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
+    private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+    private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
     private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
@@ -42,6 +42,7 @@ public class Game extends Application {
 
         if(onMenu){ // if the current scene is menu
             mainMenu.update(this);
+            shipSelected = mainMenu.getShipSelected();
         }
         if(onGame){
             // I probably miss commended this cuz reasons.
@@ -51,6 +52,7 @@ public class Game extends Application {
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
             frameTime += passedTime; // calculate frameTime
+            shipSelected = mainMenu.getShipSelected();
             while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
@@ -90,9 +92,11 @@ public class Game extends Application {
     public void startGame(){
         onMenu = false; // set menu to no update
         onGame = true; // set game to update
+        gameRoot = new Pane();
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
+        mainGame.setShipSelected(mainMenu.getShipSelected());
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
@@ -108,7 +112,7 @@ public class Game extends Application {
         onGame = true; // set game to update
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
         mainGame.setlevel(level);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
@@ -144,5 +148,21 @@ public class Game extends Application {
         launch(args);
     }
 
+    public int getShipSelected(){
+        shipSelected = mainMenu.getShipSelected();
+        return shipSelected;
+    }
 
+    public void backToMainMenu() {
+        onMenu = true; // set menu to no update
+        onGame = false; // set game to update
+        menuRoot.setVisible(true); // make menu invisible
+        gameRoot.setVisible(false); // make game visible
+        mainScene.setRoot(mainMenu.createContent());
+        mainScene.setCursor(Cursor.NONE);
+        mainMenu.setButtonHandler(mainScene);
+        theStage.setScene(mainScene);
+        theStage.setFullScreen(mainMenu.isFullscreen());
+        theStage.show();
+    }
 }

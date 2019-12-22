@@ -26,7 +26,7 @@ public class DivingWind extends Enemy {
         canSeePlayer = false;
     }
 
-    public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
         // TODO: Add Comments
         double random = Math.random() * 10000;
         // TODO: Fix this
@@ -124,18 +124,7 @@ public class DivingWind extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead())
-                    dead = true;
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             dropAbility(GCF);
             explode("explode", GCF);

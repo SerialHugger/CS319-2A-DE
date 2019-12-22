@@ -18,14 +18,17 @@ public class MenuController {
     private Rectangle buttonHighlight;
     private Rectangle settingButtonHighlight;
     private Rectangle levelButtonHighlight;
+    private Rectangle shipButtonHighlight;
     private Rectangle controlImage;
     private Rectangle[] buttons; // will hold buttons
     private Rectangle[] settingButtons; // will hold buttons for settings
     private Rectangle[] levelButtons;
+    private Rectangle[] selectShipButtons;
     // Image patterns to store asset information, and make it easier to use dynamically.
     private ImagePattern[] buttonImages; // will hold start white-black, setting white-black, quit white-black
     private ImagePattern[] settingsButtonImages; // todo will hold  images for settings
     private ImagePattern[] levelButtonImages;
+    private ImagePattern[] selectShipImages;
     // BooleanProperties for smoother control on ui.
     private BooleanProperty w_Pressed = new SimpleBooleanProperty();
     private BooleanProperty a_Pressed = new SimpleBooleanProperty();
@@ -42,12 +45,11 @@ public class MenuController {
     private int whatImageSettings = 1; // Same purpose but for setting
     private int whatImagelevel = 1; // Same purpose but for level selection
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
-
+    private int shipSelected = 0; // check the selected ship's appereance
 
     private MediaPlayer mediaPlayer;
 
-
-    MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight, Rectangle[] levelButtons , ImagePattern[] levelButtonImages , Rectangle levelButtonHighlight ){
+    MenuController (Rectangle[] buttons, ImagePattern[] buttonImages, Rectangle buttonHighlight, Rectangle controlImage, Rectangle[] settingButtons, ImagePattern[] settingsButtonImages, Rectangle settingButtonHighlight, Rectangle[] levelButtons , ImagePattern[] levelButtonImages , Rectangle levelButtonHighlight,Rectangle[] selectShipButtons,ImagePattern[] selectShipImages, Rectangle shipButtonHighlight  ){
         this.buttons = buttons;
         this.buttonImages = buttonImages;
         this.buttonHighlight = buttonHighlight;
@@ -58,6 +60,9 @@ public class MenuController {
         this.levelButtons = levelButtons;
         this.levelButtonImages = levelButtonImages;
         this.levelButtonHighlight = levelButtonHighlight;
+        this.shipButtonHighlight = shipButtonHighlight;
+        this.selectShipButtons = selectShipButtons;
+        this.selectShipImages = selectShipImages;
 
         String mainMenuMusicUrl = new File("Assets/Music/destiny2_Journey.mp3").toURI().toString();
         mediaPlayer = new MediaPlayer( new Media(mainMenuMusicUrl));
@@ -133,6 +138,18 @@ public class MenuController {
                         levelButtonHighlight.setVisible(true);
                         for( int i = 0; i < levelButtons.length; i++){
                             levelButtons[i].setVisible(true);
+                        }
+                    }
+                    else if( currentButton == 6 ){
+                        System.out.println("open ship selection");
+                        currentScreen = 6;// seletship
+                        for ( int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(false);
+                        }
+                        buttonHighlight.setVisible(false);
+                        shipButtonHighlight.setVisible(true);
+                        for( int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(true);
                         }
                     }
                     delay = false;
@@ -215,14 +232,79 @@ public class MenuController {
                 }
                 if(enter_Pressed.get()){
                     if(currentButtonSettings == 0) { // level1
+                        mediaPlayer.stop();
                         game.startGame(1);
                         System.out.println("Start Game"); // todo call startGame method of Game <-- first create that method hehe
                     }
                     else if(currentButtonSettings == 1) { // level2
+                        mediaPlayer.stop();
                         game.startGame(2);
                     }
                     else if(currentButtonSettings == 2) { // level3
+                        mediaPlayer.stop();
                         game.startGame(3);
+                    }
+
+                    delay = false;
+                }
+            }
+            else if ( currentScreen == 6 ){
+                if (s_Pressed.get()) { // if the down button pressed change the current position of buttons +1.
+                    if(delay) {
+                        shipUpdateButtons(selectShipButtons[currentButtonSettings], selectShipButtons[(currentButtonSettings + 1) % selectShipButtons.length], true);
+                        currentButtonSettings = (currentButtonSettings + 1) % selectShipButtons.length;
+                        delay = false;
+                    }
+                }
+                if (w_Pressed.get()) { // if the up button pressed change the current position of buttons by -1.
+                    int temp = 0;
+                    if (currentButtonSettings == 0)
+                        temp = selectShipButtons.length - 1;
+                    else
+                        temp = (currentButtonSettings - 1) % selectShipButtons.length;
+                    shipUpdateButtons(selectShipButtons[currentButtonSettings], selectShipButtons[temp], false);
+                    currentButtonSettings = temp;
+                    delay = false;
+                }
+                if(enter_Pressed.get()){
+                    shipSelected = 1;
+                    if(currentButtonSettings == 0) { // ship1
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
+                    }
+                    else if(currentButtonSettings == 1) { // ship2
+                        shipSelected = 2;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
+                    }
+                    else if(currentButtonSettings == 2) { // ship3
+                        shipSelected = 3;
+                        buttonHighlight.setVisible(true);
+                        for (int i = 0; i < buttons.length; i++){
+                            buttons[i].setVisible(true);
+                        }
+                        shipButtonHighlight.setVisible(false);
+                        for (int i = 0; i < selectShipButtons.length; i++){
+                            selectShipButtons[i].setVisible(false);
+                        }
+
+                        currentScreen = 0;
                     }
 
                     delay = false;
@@ -282,6 +364,19 @@ public class MenuController {
         levelButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
     }
 
+    private void shipUpdateButtons( Rectangle old , Rectangle current , boolean fromUp ){
+        if(fromUp) {
+            whatImagelevel = (whatImagelevel + 2) % selectShipImages.length;
+        } else {
+            whatImagelevel = (whatImagelevel - 2) % selectShipImages.length;
+        }
+        if(whatImagelevel == -1)
+            whatImagelevel = selectShipImages.length -1;
+        current.setFill(selectShipImages[whatImagelevel]); // make current black
+        shipButtonHighlight.setTranslateX(current.getTranslateX()); // adjust highlight X
+        shipButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
+    }
+
 
     // returns the fullscreenity
     public boolean isFullscreen(){
@@ -325,5 +420,8 @@ public class MenuController {
                 enter_Pressed.set(false);
             }
         });
+    }
+    public int getShipSelected(){
+        return shipSelected;
     }
 }
