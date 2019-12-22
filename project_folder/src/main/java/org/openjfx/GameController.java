@@ -388,6 +388,11 @@ public class GameController {
         }
     }
 
+    /*
+     * This creates levels
+     * adds enemies
+     * todo make it more complex
+     */
 
     public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber , int bossNumber){
         for (int i = 0; i < atlasNumber; i++) {
