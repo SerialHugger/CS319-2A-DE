@@ -271,29 +271,35 @@ public class GameController {
                         deadCounter++;
                         score = score + 100;
                     }
-                }
-                if (startSlidingLeft) { // if the background sliding left
-                    if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
-                        gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
-                        scenery.slideScenery(true, slidingSpeed);
-                        slidingCounter += slidingSpeed;
-                    } else {
-                        startSlidingLeft = false; // finish the execution when the limit is reached.
+                } else if (gameComponents.get(i) instanceof Boss) { // else if its an instance class of EmenyType1.
+                    Boss boss = ((Boss) gameComponents.get(i));
+                    boss.moveBoss(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
+                    if (boss.dead) { // if enemyType1 is dead.
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        boss.die(); // kill it, remove it from root.
+                        deadCounter++;
+                        score = score + 100;
                     }
                 }
-                if (startSlidingRight) { // if the background sliding right
-                    if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
-                        gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
-                        scenery.slideScenery(false, slidingSpeed);
-                        slidingCounter -= slidingSpeed;
-                    } else {
-                        startSlidingRight = false; // finish the execution when the limit is reached.
-                    }
+            }
+            if (startSlidingLeft) { // if the background sliding left
+                if (slidingCounter < 0) {// until sliding limit is reached or hits the player to screen limit
+                    gameRoot.setTranslateX(gameRoot.getTranslateX() + slidingSpeed); // change background with sliding speed
+                    scenery.slideScenery(true, slidingSpeed);
+                    slidingCounter += slidingSpeed;
+                } else {
+                    startSlidingLeft = false; // finish the execution when the limit is reached.
                 }
-
-                gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
-                // update scenery
-                scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
+            }
+            if (startSlidingRight) { // if the background sliding right
+                if (slidingLimit * -1 != slidingCounter) {// until counter hits the 0
+                    gameRoot.setTranslateX(gameRoot.getTranslateX() - slidingSpeed); // change background with sliding speed
+                    scenery.slideScenery(false, slidingSpeed);
+                    slidingCounter -= slidingSpeed;
+                } else {
+                    startSlidingRight = false; // finish the execution when the limit is reached.
+                }
             }
         }
         else if (currentScreen == 1) { // STOP, SHOW MENU
@@ -374,6 +380,11 @@ public class GameController {
                 if (speed > 0)
                     speed = 0;
             }
+        }
+        if (currentScreen == 0) {
+        gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
+        // update scenery
+        scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
         }
     }
 
