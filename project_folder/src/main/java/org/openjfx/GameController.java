@@ -243,9 +243,18 @@ public class GameController {
                 Collectible item = ((Collectible) gameComponents.get(i));
                 item.moveCollectible();
                 if (item.dead) {
+                    System.out.println("Inside destroy collectible...");
                     gameComponents.remove(i--);
                     size -= 1;
                     item.die();
+                }
+            } else if (gameComponents.get(i) instanceof Melee) {
+                Melee melee = ((Melee) gameComponents.get(i));
+                melee.moveMelee(player);
+                if (melee.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    melee.die();
                 }
             }
            createLevel();
@@ -317,7 +326,7 @@ public class GameController {
 
 
     public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber){
-        for (int i = 0; i < atlasNumber; i++) {
+        /*for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
@@ -348,7 +357,7 @@ public class GameController {
         for (int i = 0; i < divingWindNumber; i++) {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
-        }
+        }*/
         return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
     }
     /*
