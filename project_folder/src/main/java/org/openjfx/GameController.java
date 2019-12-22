@@ -397,6 +397,7 @@ public class GameController {
                 noOfEnemies = 0;
             }
 
+
         }
         else if ( levelMod == 2 ){
             if ( noOfEnemies == 0)

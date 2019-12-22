@@ -82,7 +82,6 @@ public class GameComponentFactory {
         }  else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
         }
-
         gameComponents.add(temp);
         return temp;
     }
