@@ -83,6 +83,8 @@ public class GameComponentFactory {
             temp = new Barrier(700, 700, "empty");
         }  else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
+        } else if (type.equals("explosion")) {
+            temp = new Explosion(width, height, selfDestructImage, "empty");
         }
         gameComponents.add(temp);
         return temp;

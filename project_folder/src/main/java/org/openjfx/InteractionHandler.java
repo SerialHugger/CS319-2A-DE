@@ -114,6 +114,9 @@ public class InteractionHandler {
                                         circleTemp.dead = true;
                                     } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bullet
                                         circleTemp.dead = true;
+                                        circleTemp2.dead = true;
+                                    } else if (circleTemp2.getSpecificType().equals("explosion")) {
+                                        circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
                                 }
@@ -376,6 +379,9 @@ public class InteractionHandler {
                                         circleTemp2.dead = true;
                                         rectangleTemp.dead = true;
                                     } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bullet
+                                        rectangleTemp.dead = true;
+                                        circleTemp2.dead = true;
+                                    } else if (circleTemp2.getSpecificType().equals("explosion")) {
                                         rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here

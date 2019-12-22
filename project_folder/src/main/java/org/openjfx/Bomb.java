@@ -9,11 +9,9 @@ public class Bomb extends PlayerEquipment {
     Bomb(double width, double height,  String assetLocation) {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
-        hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "bomb");
-        System.out.println("Some bomb cheese!!!");
-        body = new Rectangle(this.width, this.height);
+        hitBoxes[0] = new ComponentHitBoxCircle(this.width, "playerEquipment", "bomb");
+        body = new Circle(this.width);
         body.setFill(Color.RED);
-
     }
 
     public void moveBomb() {
@@ -25,9 +23,9 @@ public class Bomb extends PlayerEquipment {
     }
 
     public void explode(GameComponentFactory GCF) {
-        EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
-        selfDest.setX(this.getX());
-        selfDest.setY(this.getY());
-        selfDest.addShapes(gameRoot);
+        Explosion explosion = (Explosion) GCF.createComponent("explosion");
+        explosion.setX(this.getX());
+        explosion.setY(this.getY());
+        explosion.addShapes(gameRoot);
     }
 }

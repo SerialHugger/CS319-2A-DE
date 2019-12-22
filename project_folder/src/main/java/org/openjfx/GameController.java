@@ -227,10 +227,18 @@ public class GameController {
                 Bomb bomb = ((Bomb) gameComponents.get(i));
                 bomb.moveBomb();
                 if (bomb.dead) {
+                    bomb.explode(gameComponentFactory);
                     gameComponents.remove(i--);
                     size -= 1;
-                    bomb.explode(gameComponentFactory);
                     bomb.die();
+                }
+            } else if (gameComponents.get(i) instanceof Explosion) {
+                Explosion explosion = ((Explosion) gameComponents.get(i));
+                explosion.updateExplosion();
+                if (explosion.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    explosion.die();
                 }
             } else if (gameComponents.get(i) instanceof EngineBlast) {
                 EngineBlast blast = ((EngineBlast) gameComponents.get(i));
