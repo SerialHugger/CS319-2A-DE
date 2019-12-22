@@ -24,7 +24,7 @@ public class DivingWind extends Enemy {
         body.setFill(asset);
     }
 
-    public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
         // TODO: Add Comments
         //System.out.println("Updating...");
         double xCoord = this.getX() + width / 2;
@@ -47,7 +47,7 @@ public class DivingWind extends Enemy {
             acceleration = magicConverter(5);
             //System.out.println(acceleration);
         }
-        speed = speed + acceleration;
+        speed = (speed + acceleration) * speedFactor;
         //System.out.println(acceleration);
         if (speed <= maxSpeed){
             speed_x = speed * x_dist / hipo;

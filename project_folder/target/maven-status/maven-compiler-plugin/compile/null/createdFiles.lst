@@ -1,6 +1,8 @@
-org/openjfx/EngineBlast.class
-org/openjfx/Shootable.class
-org/openjfx/ShootNoWay.class
+org\openjfx\Game.class
+org\openjfx\DivingWind.class
+org\openjfx\Dividus.class
+org\openjfx\MainGame.class
+org\openjfx\Boss.class
 module-info.class
 org/openjfx/ShootWithGuidedBullet.class
 org/openjfx/Collectible.class

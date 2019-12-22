@@ -20,6 +20,7 @@ public class GameController {
     private double speed = 15; // players speed
     private double maxSpeed = 25; // players maximum speed
     private double acceleration = 0.3; // screens acceleration todo add acceleration
+    private int speedFactor = 1;
     // Necessary attiributes for changing directions with the ship
     boolean toLeft = true; // if facing left true else false. Starts with false;
     boolean startSlidingLeft = false; // slides background to left
@@ -106,7 +107,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof Atlas) { // else if its an instance class of EmenyType1.
                 Atlas atlas = ((Atlas) gameComponents.get(i));
-                atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                atlas.moveAtlas(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
                 if (atlas.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -116,7 +117,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                 Dodger dodger = ((Dodger) gameComponents.get(i));
-                dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                dodger.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                 if (dodger.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -126,7 +127,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                 Dividus dividus = ((Dividus) gameComponents.get(i));
-                dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                dividus.update(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                 if (dividus.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -136,7 +137,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                 Dienamite dienamite = ((Dienamite) gameComponents.get(i));
-                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                dienamite.moveDienamite(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
                 if (dienamite.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -146,7 +147,7 @@ public class GameController {
                 }
             } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
                 DivingWind divingWind = ((DivingWind) gameComponents.get(i));
-                divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                divingWind.moveDivingWind(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
                 if (divingWind.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -195,7 +196,7 @@ public class GameController {
             }
             else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
                 SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
-                speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
+                speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
                 if (speedRunner.dead) { // if enemyType1 is dead.
                     gameComponents.remove(i--); // remove it from components.
                     size -= 1; // decrease size.
@@ -256,7 +257,21 @@ public class GameController {
                     size -= 1;
                     melee.die();
                 }
+            } else if (gameComponents.get(i) instanceof Barrier) {
+                Barrier item = ((Barrier) gameComponents.get(i));
+                item.moveBarrier(scenery);
+            } else if( gameComponents.get(i) instanceof  Boss ){
+                Boss boss = ((Boss) gameComponents.get(i));
+                boss.moveBoss(gameComponentFactory, gameRoot, player, keyInputs[1].get() , speedFactor); // update it.
+                if (boss.dead) { // if enemyType1 is dead.
+                    gameComponents.remove(i--); // remove it from components.
+                    size -= 1; // decrease size.
+                    boss.die(); // kill it, remove it from root.
+                    deadCounter++;
+                    score = score + 10000;
+                }
             }
+
            createLevel();
         }
         // update root
@@ -325,8 +340,8 @@ public class GameController {
     }
 
 
-    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber){
-        /*for (int i = 0; i < atlasNumber; i++) {
+    public int createEnemies( int atlasNumber , int dodgernumber , int dividusNumber , int dienamiteNumber , int speedRunnerNumber, int divingWindNumber , int bossNumber){
+        for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
             atlas.addShapes(gameRoot);
         }
@@ -357,8 +372,13 @@ public class GameController {
         for (int i = 0; i < divingWindNumber; i++) {
             DivingWind divingWind = (DivingWind) gameComponentFactory.createComponent("divingWind");
             divingWind.addShapes(gameRoot);
-        }*/
-        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber);
+        }
+        for (int i = 0; i < bossNumber; i++) {
+            Boss boss = (Boss) gameComponentFactory.createComponent("boss");
+            boss.addShapes(gameRoot);
+        }
+
+        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber + bossNumber);
     }
     /*
      * This creates levels
@@ -366,41 +386,58 @@ public class GameController {
      * todo make it more complex
      */
     public void createLevel() {
-        if ( level == 1 ) {
-            if ( noOfEnemies == 0 )
-            noOfEnemies = createEnemies(5 ,5 ,5 ,5 ,5, 5 );
-
+        int atlasNumber = 2;
+        int dodgerNumber = 2;
+        int dividusNumber = 2;
+        int dienamiteNumber = 2;
+        int speedRunnerNumber= 2;
+        int bossNumber = 1;
+        int divingWindNumber = 2;
+        int levelMod = level % 4;
+        if ( levelMod == 1 ) {
+            if ( noOfEnemies == 0 ) {
+                //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
+                noOfEnemies = createEnemies(0,0,0,0,0,0,1);
+            }
             if( noOfEnemies == deadCounter ){
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-                level = 2;
+                level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
             }
 
 
         }
-        else if ( level == 2 ){
+        else if ( levelMod == 2 ){
             if ( noOfEnemies == 0)
-            noOfEnemies = createEnemies(5 , 0 , 0 , 0 , 0,0 );
+            noOfEnemies = createEnemies(atlasNumber * levelMod , dodgerNumber * levelMod , dividusNumber * levelMod , dienamiteNumber * levelMod , speedRunnerNumber * levelMod,divingWindNumber * levelMod ,0);
 
             if( noOfEnemies == deadCounter ){
-                level = 3;
+                level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
             }
         }
 
-        else if ( level == 3 ){
+        else if ( levelMod == 3 ){
             if ( noOfEnemies == 0)
-                noOfEnemies = createEnemies(100 , 0 , 0 , 0 , 0, 0);
+                noOfEnemies = createEnemies(atlasNumber * levelMod , dodgerNumber * levelMod , dividusNumber * levelMod , dienamiteNumber * levelMod , speedRunnerNumber * levelMod,divingWindNumber * levelMod ,0);
 
             if( noOfEnemies == deadCounter ){
-                level = 4;
+                level = level + 1; // infinite loop for now
                 deadCounter = 0;
                 noOfEnemies = 0;
             }
         }
-        else if( level == 4 ){
+        else if( levelMod == 4 ){
+            if ( noOfEnemies == 0){
+                noOfEnemies = createEnemies(0,0,0,0,0,0,bossNumber * levelMod);
+            }
+            if( noOfEnemies == deadCounter){
+                level = level + 1;
+                speedFactor++;
+
+            }
             //eray hoca boss olarak gelcek
         }
     }

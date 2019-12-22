@@ -6,31 +6,32 @@ import javafx.scene.shape.Shape;
 
 //enemyType1
 
-public class Atlas extends Enemy {
-
-    Atlas(double width, double height, ImagePattern[] assets) {
-        super(width, height, "atlas");
-        this.height = magicConverter(60);
-        this.width = magicConverter(30);
-        animationFrames = assets;
-        super.initBody(assets[0], width, height);
+public class Boss extends Enemy {
+    int totalHealth = 100;
+    int widthMultiplier = 1;
+    Boss(double width, double height, ImagePattern assets) {
+        super(width, height, "boss");
+        this.height = magicConverter(300);
+        this.width = magicConverter(90 * widthMultiplier);
+        //animationFrames = assets;
+        super.initBody(assets, width, height);
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
-    public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedfactor) {
+    public void moveBoss(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
 
         if (delay) { // delay: a boolean value to delay shoots
-            if (random < 150) { // %1.5 chance TODO: Constant problem for 150
+            if (random < 9000) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
                 boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
 
                 if (isObjectInScene) { // if the enemy is in the view of the player
                     String bulletType = "laserBullet";
-                    shootBehaviour.shoot(GCF , this , gameRoot);
+                    shootBehaviour.shoot(GCF, this , gameRoot);
 
                     delay = false; // make delay false
                     delayTimer = 500; // start delay timer TODO: Constant problem for 500
@@ -47,12 +48,9 @@ public class Atlas extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2] * speedfactor;
+        speed_x = moveValues[2];
         speed_y = moveValues[3];
-        if(directionX == 1)
-            body.setFill(animationFrames[2]);
-        else
-            body.setFill(animationFrames[1]);
+
         moveX(directionX, speed_x); // move X with given inputs
         moveY(directionY, speed_y); // move Y with given inputs
 
@@ -68,7 +66,10 @@ public class Atlas extends Enemy {
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
-                    dead = true;
+                    totalHealth--;
+                    if( totalHealth == 0) {
+                        dead = true;
+                    }
                 }
             }
         }
