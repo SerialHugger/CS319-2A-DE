@@ -37,7 +37,7 @@ public class GameComponentFactory {
     ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
-
+  
     GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
         this.height = height;
@@ -93,6 +93,8 @@ public class GameComponentFactory {
             temp = new Melee(5, 150, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
+        } else if (type.equals("civilian")) {
+            temp = new Civilian(60, 100, civilianImage);
         }  else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
         } else if (type.equals("guidedRocket")) {
@@ -133,10 +135,10 @@ public class GameComponentFactory {
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
+        //civilianImage = openAsset("Assest\\civilian");
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       
-        civilianImage = openAsset("Assets\\Civilian.png");
         bossImage = openAsset("Assets\\array_tuezuen.png");
 
     }

@@ -7,6 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
@@ -14,6 +16,7 @@ import java.io.FileInputStream;
 public class Hud{
     private SceneComponent healthHud; // top part of the Hud
     private StackPane fpsPane; // stackpane for fps display
+    private StackPane scorePane;
     private ImagePattern[] healthHudFrames = new ImagePattern[36]; // the imagepatterns for animation
     private Text fpsText;
     private String type;
@@ -23,6 +26,7 @@ public class Hud{
     boolean delay = true; // delay for animation
     int delayTimer = 0; // timer for delay
     Pane gameRoot;
+    private Text scoreText;
 
     ///////////////
     // Necessary attiributes for changing directions with the ship
@@ -46,7 +50,14 @@ public class Hud{
         fpsText = new Text("fps: ");
         fpsText.setFont(Font.font ("Verdana", width/128));
         fpsText.setFill(Color.ORANGERED);
-
+        scorePane = new StackPane();
+        scorePane.setMaxHeight(height/54);
+        scorePane.setMaxWidth(width/48);
+        scorePane.setTranslateX(-1 * width + width / 10);
+        scorePane.setTranslateY(height/200 + height / 10);
+        scoreText = new Text("SCORE: ");
+        scoreText.setFont(Font.font ("Verdana", FontWeight.BOLD, FontPosture.REGULAR, width / 64));
+        scoreText.setFill(Color.DARKORANGE);
         try {
             for(int i = 0; i < 36; i++) {
                 FileInputStream inputstream = new FileInputStream("Assets\\Scenery\\hud\\hud_" + i + ".png");
@@ -59,13 +70,16 @@ public class Hud{
         gameRoot.getChildren().add(healthHud);
         fpsPane.getChildren().add(fpsText);
         gameRoot.getChildren().add(fpsPane);
+        scorePane.getChildren().add(scoreText);
+        gameRoot.getChildren().add(scorePane);
     }
 
     /*
      * Updates animation for the hud
      */
-    public void update(double speed, int fps){
+    public void update(double speed, int fps, long score){
         fpsText.setText("FPS: " + fps);
+        scoreText.setText("SCORE: " + score);
         if(!delay) {
             delayTimer += 25;
             if(delayTimer == 75)
@@ -95,5 +109,6 @@ public class Hud{
     private void moveX(int direction, double moveSpeed){
         healthHud.setTranslateX(healthHud.getTranslateX() + (direction * moveSpeed));
         fpsText.setTranslateX(fpsText.getTranslateX() + (direction * moveSpeed));
+        scoreText.setTranslateX(scoreText.getTranslateX() + (direction * moveSpeed));
     }
 }
