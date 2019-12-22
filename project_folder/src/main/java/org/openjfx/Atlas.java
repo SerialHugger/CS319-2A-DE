@@ -10,8 +10,8 @@ public class Atlas extends Enemy {
 
     Atlas(double width, double height, ImagePattern[] assets) {
         super(width, height, "atlas");
-        this.height = magicConverter(60);
-        this.width = magicConverter(30);
+        this.height = magicConverter(90);
+        this.width = magicConverter(45);
         animationFrames = assets;
         super.initBody(assets[0], width, height);
         setShootBehaviour(new ShootWithLaserBullet());
@@ -60,21 +60,11 @@ public class Atlas extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead())
-                    dead = true;
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             dropAbility(GCF);
             explode("explode", GCF);
         }
     }
+
 }

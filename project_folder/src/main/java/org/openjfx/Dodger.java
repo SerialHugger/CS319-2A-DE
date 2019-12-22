@@ -76,7 +76,6 @@ public class Dodger extends Enemy {
                 }
             }
         }
-
         if (!is_skill_active) {
             if (countdown == teleport_cooldown) {
                 is_skill_active = true;

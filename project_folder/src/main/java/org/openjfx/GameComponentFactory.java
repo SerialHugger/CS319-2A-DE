@@ -26,14 +26,15 @@ public class GameComponentFactory {
     ImagePattern[] explosionImage = new ImagePattern[8];
     ImagePattern[] atlasImage = new ImagePattern[3];
     ImagePattern[] dienamiteImage = new ImagePattern[9];
+    ImagePattern[] divingWindImage = new ImagePattern[2];
 
     /// SINGLES
     ImagePattern dodgerImage;
     ImagePattern dividusImage;
-    ImagePattern divingWindImage;
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
 
@@ -73,21 +74,23 @@ public class GameComponentFactory {
         } else if( type.equals("speedRunner")){
             temp = new SpeedRunner(width , height , speedRunnerImage);
         } else if (type.equals("laserBullet")) {
-            temp = new LaserBullet(width / 384, height / 108, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0)); // 0 is player //274 //154
+            temp = new LaserBullet(width, height, laserBulletImage, true, gameComponents.get(0)); // 0 is player //274 //154
         } else if (type.equals("guidedBullet")) {
-            temp = new GuidedBullet(width, height, /* TODO TEMP */speedRunnerImage, true, gameComponents.get(0));
+            temp = new GuidedBullet(width, height, guidedBulletImage, true, gameComponents.get(0));
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if(type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explosionImage, false);
         } else if (type.equals("bomb")) {
-            temp = new Bomb(40, 50, "empty");
+            temp = new Bomb(width, height, null, (Player)gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield( width, height, "empty");
         } else if (type.equals("engineBlast")) {
             temp = new EngineBlast(40,50, "empty");
         } else if (type.equals("collectible")) {
             temp = new Collectible(40, 50, "empty");
+        } else if (type.equals("melee")) {
+            temp = new Melee(5, 150, "empty");
         } else if (type.equals("barrier")) {
             temp = new Barrier(700, 700, "empty");
         }  else if (type.equals("boss")) {
@@ -122,13 +125,15 @@ public class GameComponentFactory {
         }
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");
+        divingWindImage[0] = openAsset("Assets\\ragetrollface.png");
+        divingWindImage[1] = openAsset("Assets\\calmface.png");
         //Open singles
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
-        divingWindImage = openAsset("Assets\\ragetrollface.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        laserBulletImage = openAsset("empty");
-        guidedBulletImage = openAsset("empty");
+        guidedBulletImage = openAsset("Assets\\guided_ball.png");
+        guidedRocketImage = openAsset("Assets\\light_saber.png");
+        laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       
         civilianImage = openAsset("Assets\\Civilian.png");
         bossImage = openAsset("Assets\\array_tuezuen.png");
 

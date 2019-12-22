@@ -57,21 +57,7 @@ public class Dividus extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead()) {
-                    createAtlases(GCF);
-                    dead = true;
-                }
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    createAtlases(GCF);
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             dropAbility(GCF);
             explode("explode", GCF);
