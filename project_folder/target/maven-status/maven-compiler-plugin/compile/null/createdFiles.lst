@@ -1,11 +1,27 @@
+<<<<<<< Updated upstream
 org\openjfx\InGameMenu.class
 org\openjfx\Collectible.class
 org\openjfx\ShootWithLaserBullet.class
 org\openjfx\ShootWithGuidedBullet.class
 org\openjfx\Collectible$1.class
 org\openjfx\Shootable.class
+=======
+org\openjfx\Game.class
+org\openjfx\DivingWind.class
+org\openjfx\MainGame.class
+org\openjfx\Boss.class
+org\openjfx\Collectible.class
+org\openjfx\ShootWithLaserBullet.class
+org\openjfx\ShootWithGuidedBullet.class
+org\openjfx\Melee.class
+org\openjfx\Collectible$1.class
+org\openjfx\Dividus.class
+>>>>>>> Stashed changes
 module-info.class
 org\openjfx\EngineBlast.class
 org\openjfx\Barrier.class
 org\openjfx\Collectible$Ability.class
+<<<<<<< Updated upstream
 org\openjfx\ShootNoWay.class
+=======
+>>>>>>> Stashed changes

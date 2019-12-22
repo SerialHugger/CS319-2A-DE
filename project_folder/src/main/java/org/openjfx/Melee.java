@@ -34,7 +34,7 @@ public class Melee extends PlayerEquipment {
         else
             setX(player.body.getTranslateX());
 
-        setY(player.body.getTranslateY() - player.height * 1.5);
+        setY(player.body.getTranslateY() - player.height / 2);
 
         // rotate the arm
         currentAngle += ROTATION_INCREMENT;
