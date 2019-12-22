@@ -244,9 +244,18 @@ public class GameController {
                 Collectible item = ((Collectible) gameComponents.get(i));
                 item.moveCollectible();
                 if (item.dead) {
+                    System.out.println("Inside destroy collectible...");
                     gameComponents.remove(i--);
                     size -= 1;
                     item.die();
+                }
+            } else if (gameComponents.get(i) instanceof Melee) {
+                Melee melee = ((Melee) gameComponents.get(i));
+                melee.moveMelee(player);
+                if (melee.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    melee.die();
                 }
             } else if (gameComponents.get(i) instanceof Barrier) {
                 Barrier item = ((Barrier) gameComponents.get(i));
