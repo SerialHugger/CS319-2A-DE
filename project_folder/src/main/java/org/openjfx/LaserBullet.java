@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class LaserBullet extends EnemyBullet{
+    private final double miss = magicConverter(100);
     LaserBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player){
         super(width,height,"laserBullet");
         this.facingLeft = toLeft;
@@ -17,8 +18,15 @@ public class LaserBullet extends EnemyBullet{
         hitBoxes[0] = new ComponentHitBoxCircle(this.width/2, "enemyBullet", "laserBullet");
         body = new Circle(this.width/2, Color.RED);
         body.setFill(asset);
-        x_player = player.getX() + player.width/2;
-        y_player = player.getY() + player.height/2;
+        double missChance = Math.random() * 10000;
+        if (missChance < 5000) {
+            x_player = player.getX() + player.width/2 - miss;
+            y_player = player.getY() + player.height/2 - miss;
+        }
+        else {
+            x_player = player.getX() + player.width / 2;
+            y_player = player.getY() + player.height / 2;
+        }
     }
     public void updateLaserBullet() {
         body.setRotate(rotate);
