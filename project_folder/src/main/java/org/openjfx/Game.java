@@ -129,7 +129,7 @@ public class Game extends Application {
         menuScene = new Scene(mainMenu.createContent()); // create scene with MainMenu
         mainMenu.setButtonHandler(menuScene);
         mainScene = menuScene;
-        // mainScene.setCursor(Cursor.NONE);
+        mainScene.setCursor(Cursor.NONE);
         theStage.setFullScreen(true);
         theStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         theStage.setScene(mainScene); // set the stage to scene
