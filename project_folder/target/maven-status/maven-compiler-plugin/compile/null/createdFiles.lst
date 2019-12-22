@@ -14,4 +14,5 @@ org\openjfx\ShootWithGuidedBullet.class
 org\openjfx\Collectible$Ability.class
 org\openjfx\Collectible$1.class
 org\openjfx\ShootNoWay.class
+org\openjfx\GuidedRocket.class
 org\openjfx\Shootable.class

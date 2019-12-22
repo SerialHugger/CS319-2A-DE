@@ -112,11 +112,13 @@ public class InteractionHandler {
                                     if(circleTemp2.getSpecificType().equals("playerBullet")) { // if second one is player bullet
                                         circleTemp2.dead = true;
                                         circleTemp.dead = true;
-                                    } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bullet
+                                    } else if(circleTemp2.getSpecificType().equals("bomb")) { // if second one is player bomb
                                         circleTemp.dead = true;
                                     }
+
                                     //TODO PlayerEquipment Interaction here
                                 }
+
                             } else if(circleTemp2.getType().equals("citizen")){ // second one is Citizen
                                 if(circleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
                                     System.out.println("Enemy Circle to Citizen Circle");
@@ -244,6 +246,8 @@ public class InteractionHandler {
                                         rectangleTemp2.dead = true;
                                         circleTemp.dead = true;
                                     } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) {
+                                        circleTemp.dead = true;
+                                    } else if(rectangleTemp2.getSpecificType().equals("guidedRocket")) { //if second one is guided rocket
                                         circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
@@ -459,6 +463,8 @@ public class InteractionHandler {
                                         rectangleTemp2.dead = true;
                                         rectangleTemp.dead = true;
                                     } else if (rectangleTemp2.getSpecificType().equals("engineBlast")) { // if second one is engine blast
+                                        rectangleTemp.dead = true;
+                                    } else if(rectangleTemp2.getSpecificType().equals("guidedRocket")) { //if second one is guided rocket
                                         rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here

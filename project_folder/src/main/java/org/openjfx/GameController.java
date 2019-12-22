@@ -192,8 +192,7 @@ public class GameController {
                     size -= 1;
                     guidedBullet.die();
                 }
-            }
-            else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
+            } else if (gameComponents.get(i) instanceof SpeedRunner) { // else if its an instance class of EmenyType1.
                 SpeedRunner speedRunner = ((SpeedRunner) gameComponents.get(i));
                 speedRunner.moveSpeedRunner(gameComponentFactory, gameRoot, player, keyInputs[1].get()); // update it.
                 if (speedRunner.dead) { // if enemyType1 is dead.
@@ -203,8 +202,7 @@ public class GameController {
                     deadCounter++;
                     score = score + 100;
                 }
-            }
-            else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
+            } else if (gameComponents.get(i) instanceof EnemySelfDestruct) { // else if its an instance class of EmenyType1.
                 EnemySelfDestruct enemySelfDestruct = ((EnemySelfDestruct) gameComponents.get(i));
                 enemySelfDestruct.updateSelfDestruct(); // update it.
                 if (enemySelfDestruct.dead) { // if enemyType1 is dead.
@@ -212,8 +210,7 @@ public class GameController {
                     size -= 1; // decrease size.
                     enemySelfDestruct.die(); // kill it, remove it from root.
                 }
-            }
-            else if (gameComponents.get(i) instanceof Shield) {
+            } else if (gameComponents.get(i) instanceof Shield) {
                 Shield shield = ((Shield) gameComponents.get(i));
                 shield.moveShield(player);
                 if(shield.dead) {
@@ -221,8 +218,7 @@ public class GameController {
                     size -= 1; // decrease size.
                     shield.die(); // kill it, remove it from root.
                 }
-            }
-            else if (gameComponents.get(i) instanceof Bomb) {
+            } else if (gameComponents.get(i) instanceof Bomb) {
                 Bomb bomb = ((Bomb) gameComponents.get(i));
                 bomb.moveBomb();
                 if (bomb.dead) {
@@ -230,6 +226,15 @@ public class GameController {
                     size -= 1;
                     bomb.explode(gameComponentFactory);
                     bomb.die();
+                }
+            } else if (gameComponents.get(i) instanceof GuidedRocket) {
+                GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
+                gRocket.chooseTarget(this.gameComponents);
+                gRocket.moveGuidedRocket();
+                if (gRocket.dead) {
+                    gameComponents.remove(i--);
+                    size -= 1;
+                    gRocket.die();
                 }
             } else if (gameComponents.get(i) instanceof EngineBlast) {
                 EngineBlast blast = ((EngineBlast) gameComponents.get(i));
