@@ -360,7 +360,14 @@ public class Player extends GameComponent{
 
     }
 
-    public void activateBarrier(GameComponentFactory GCF){
+    public void activateGuidedRocket(GameComponentFactory GCF) {
+        GuidedRocket gRocket = (GuidedRocket) GCF.createComponent("guidedRocket");
+        gRocket.setX(body.getTranslateX() + this.width / 2);
+        gRocket.setY(body.getTranslateY() + this.height / 2);
+        gRocket.addShapes(gameRoot);
+    }
+
+        public void activateBarrier(GameComponentFactory GCF){
         Barrier barrier = (Barrier) GCF.createComponent("barrier");
         barrier.setX(this.body.getTranslateX() + this.width / 2);
         barrier.setY(this.body.getTranslateY() + this.height/ 2);
@@ -511,7 +518,7 @@ public class Player extends GameComponent{
                         bulletRainCount = 0;
                     }
                 } else if (abilityType.equals("guidedRocket")) {
-
+                    activateGuidedRocket(GCF);
                 } else if (abilityType.equals("melee")) {
                     if (!meleeOngoing) {
                         meleeOngoing = true;
