@@ -17,7 +17,7 @@ public class Dividus extends Enemy {
         setShootBehaviour(new ShootWithGuidedBullet() );
     }
 
-    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
@@ -47,7 +47,7 @@ public class Dividus extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2];
+        speed_x = moveValues[2] * speedFactor;
         speed_y = moveValues[3];
 
         moveX(directionX, speed_x); // move X with given inputs
@@ -57,21 +57,7 @@ public class Dividus extends Enemy {
         loopAroundTheMap(GCF.width, player, left);
 
         // Actions when collision
-        for (Shape hitBox : hitBoxes) {
-            if (hitBox instanceof ComponentHitBoxCircle) {
-                ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
-                if (temp.isDead()) {
-                    createAtlases(GCF);
-                    dead = true;
-                }
-            } else if (hitBox instanceof ComponentHitBoxRectangle) {
-                ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
-                if (temp.isDead()) {
-                    createAtlases(GCF);
-                    dead = true;
-                }
-            }
-        }
+        dead = updateDeath();
         if (dead) {
             dropAbility(GCF);
             explode("explode", GCF);
