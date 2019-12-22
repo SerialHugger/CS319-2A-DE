@@ -30,6 +30,7 @@ public class GameComponentFactory {
     ImagePattern speedRunnerImage;
     ImagePattern laserBulletImage;
     ImagePattern guidedBulletImage;
+    ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
 
@@ -83,6 +84,8 @@ public class GameComponentFactory {
             temp = new Barrier(700, 700, "empty");
         }  else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
+        } else if (type.equals("guidedRocket")) {
+            temp = new GuidedRocket(width, height, guidedRocketImage);
         }
         gameComponents.add(temp);
         return temp;
