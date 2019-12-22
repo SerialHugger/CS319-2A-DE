@@ -2,8 +2,10 @@ package org.openjfx;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -42,6 +44,11 @@ public class MenuController {
     private int whatImageSettings = 1; // Same purpose but for setting
     private int whatImagelevel = 1; // Same purpose but for level selection
     private int fullscreen = 1; // check the fullscreen 1 = true, 0 = false
+    private boolean inButton0 = false;
+    private boolean inButton1 = false;
+    private boolean inButton2 = false;
+    private boolean inButton3 = false;
+    private boolean inButton4 = false;
 
 
     private MediaPlayer mediaPlayer;
@@ -227,6 +234,96 @@ public class MenuController {
 
                     delay = false;
                 }
+            }
+            buttons[0].setOnMouseEntered(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                   inButton0 = true;
+                }
+            });
+            buttons[1].setOnMouseEntered(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton1 = true;
+                }
+            });
+            buttons[2].setOnMouseEntered(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton2 = true;
+                }
+            });
+            buttons[3].setOnMouseEntered(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton3 = true;
+                }
+            });
+            buttons[4].setOnMouseEntered(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton4 = true;
+                }
+            });
+            buttons[0].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton0 = false;
+                }
+            });
+            buttons[1].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton1 = false;
+                }
+            });
+            buttons[2].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton2 = false;
+                }
+            });
+            buttons[3].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton3 = false;
+                }
+            });
+            buttons[4].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    inButton4 = false;
+                }
+            });
+            if (inButton0) {
+                int temp = currentButton;
+                currentButton = 0;
+                updateButtons(buttons[temp], buttons[currentButton], true);
+                inButton0 = false;
+            }
+            else if (inButton1){
+                int temp = currentButton;
+                currentButton = 1;
+                updateButtons(buttons[temp], buttons[currentButton], true);
+                inButton1 = false;
+            }
+            else if (inButton2){
+                int temp = currentButton;
+                currentButton = 2;
+                updateButtons(buttons[temp], buttons[currentButton], true);
+                inButton2 = false;
+            }
+            else if (inButton3){
+                int temp = currentButton;
+                currentButton = 3;
+                updateButtons(buttons[temp], buttons[currentButton], true);
+                inButton3 = false;
+            }
+            else if (inButton4){
+                int temp = currentButton;
+                currentButton = 4;
+                updateButtons(buttons[temp], buttons[currentButton], true);
+                inButton4 = false;
             }
         }
     }
