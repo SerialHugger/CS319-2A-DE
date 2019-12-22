@@ -9,12 +9,14 @@ public class MainGame {
     double height;
     int level;
     GameController gameController;
+    Game game;
 
-    MainGame(Pane root, double width, double height){
+    MainGame(Pane root, double width, double height, Game game){
         this.gameRoot = root;
         this.width = width;
         this.height = height;
-        gameController = new GameController(gameRoot , width, height);
+        this.game = game;
+        gameController = new GameController(gameRoot, width, height, this);
     }
     public Parent createContent(){
         //create and set content and controller
@@ -35,5 +37,9 @@ public class MainGame {
     }
     public void setlevel(int levelNum){
         gameController.setLevel(levelNum);
+    }
+
+    public void backToMainMenu() {
+        game.backToMainMenu();
     }
 }

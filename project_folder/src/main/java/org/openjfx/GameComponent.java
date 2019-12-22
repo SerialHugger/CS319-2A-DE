@@ -147,7 +147,9 @@ public class GameComponent {
             }
         }
         return false;
-    public void rotate(double rotateValue){
+    }
+
+        public void rotate(double rotateValue){
         hitBoxes[0].setRotate(rotateValue);
         body.setRotate(rotateValue);
     }

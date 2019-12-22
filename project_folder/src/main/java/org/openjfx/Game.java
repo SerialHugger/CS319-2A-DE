@@ -90,9 +90,10 @@ public class Game extends Application {
     public void startGame(){
         onMenu = false; // set menu to no update
         onGame = true; // set game to update
+        gameRoot = new Pane();
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
@@ -108,7 +109,7 @@ public class Game extends Application {
         onGame = true; // set game to update
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
         mainGame.setlevel(level);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
@@ -144,5 +145,16 @@ public class Game extends Application {
         launch(args);
     }
 
-
+    public void backToMainMenu() {
+        onMenu = true; // set menu to no update
+        onGame = false; // set game to update
+        menuRoot.setVisible(true); // make menu invisible
+        gameRoot.setVisible(false); // make game visible
+        mainScene.setRoot(mainMenu.createContent());
+        mainScene.setCursor(Cursor.NONE);
+        mainMenu.setButtonHandler(mainScene);
+        theStage.setScene(mainScene);
+        theStage.setFullScreen(mainMenu.isFullscreen());
+        theStage.show();
+    }
 }
