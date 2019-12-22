@@ -19,7 +19,7 @@ public class Dodger extends Enemy {
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
-    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left) {
+    public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
 
