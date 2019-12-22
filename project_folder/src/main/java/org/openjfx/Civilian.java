@@ -12,6 +12,10 @@ public class Civilian extends GameComponent {
         body.setFill(asset);
     }
 
+    public void initBody(){
+        double startingX = (Math.random() * (width  * 4)) + (width * -2) ;
+        double startingY = 1050;
+    }
     public void moveCivilian(GameComponentFactory GCF, Player player, boolean left){
         if (grabbed){
 
