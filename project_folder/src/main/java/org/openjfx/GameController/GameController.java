@@ -222,7 +222,6 @@ public class GameController {
                     if (dividus.isDead()) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
-                        dividus.createAtlases(gameComponentFactory);
                         dividus.die(); // kill it, remove it from root.
                         deadCounter++;
                         player.setScore(player.getScore() + 100);

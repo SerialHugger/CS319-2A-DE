@@ -108,7 +108,7 @@ public class Collectible extends GameComponent {
 
     private void openCollectibleImages() {
         //barrierHudImage = openAsset("Assets\\barrierImage.png");
-        guidedRocketHudImage = fillImage("Assets\\light_saber.png");
+        guidedRocketHudImage = openAsset("Assets\\light_saber.png");
         //shieldHudImage = openAsset("Assets\\shieldImage.png");
         //engineBlastHudImage = openAsset("Assets\\engineBlastImage.png");
     }
