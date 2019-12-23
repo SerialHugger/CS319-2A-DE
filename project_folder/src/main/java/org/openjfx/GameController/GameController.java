@@ -49,8 +49,12 @@ public class GameController {
     private InGameMenu inGameMenu;
     private EndGameMenu endGameMenu;
 
+
     int score = 0;
     MainGame mainGame;
+
+    private boolean isCounterStarted = false;
+    private double startTime;
 
     ScoreMenu scoreMenu;
 
@@ -490,6 +494,15 @@ public class GameController {
         int bossNumber = 1;
         int divingWindNumber = 2;
         int levelMod = level % 5;
+
+        if (isCounterStarted){
+            double currentTime = System.nanoTime() / 1000000000.0 - startTime;
+            if (currentTime >= 4) {
+                setCurrentScreen(0);
+                isCounterStarted = false;
+            }
+        }
+
         if (levelMod == 1) {
             if (noOfEnemies == 0) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
@@ -500,6 +513,12 @@ public class GameController {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
             }
 
         } else if (levelMod == 2) {
@@ -510,6 +529,12 @@ public class GameController {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
             }
         } else if (levelMod == 3) {
             if (noOfEnemies == 0)
@@ -519,6 +544,12 @@ public class GameController {
                 level = level + 1; // infinite loop for now
                 deadCounter = 0;
                 noOfEnemies = 0;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
             }
         } else if (levelMod == 4) {
             if (noOfEnemies == 0) {
@@ -527,8 +558,13 @@ public class GameController {
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
                 speedFactor++;
-            }
 
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
+            }
         }
     }
 
