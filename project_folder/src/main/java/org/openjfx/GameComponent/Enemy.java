@@ -88,7 +88,7 @@ public class Enemy extends GameComponent {
             if (directionCheckY < 1) // %50 chance
                 directionY = -1; // it goes up
         }
-        if (getY() >= gameRoot.getHeight() - height * 2 || getY() < 0) { // if the height boundaries reached
+        if (getY() >= gameRoot.getHeight() - height || getY() < 0) { // if the height boundaries reached
             directionY *= -1; // change direction
         }
 

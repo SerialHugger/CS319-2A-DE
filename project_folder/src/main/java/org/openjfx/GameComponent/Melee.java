@@ -25,6 +25,7 @@ public class Melee extends PlayerEquipment {
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "melee");
         body = new Circle(this.height / 2);
         body.setFill(asset);
+        body.setRotate(-45);
         body.setStroke(Color.PURPLE);
     }
 
@@ -34,17 +35,22 @@ public class Melee extends PlayerEquipment {
             dead = true; // when 5 full rotations around axis is completed, remove the arm
 
         // set the position of the arm according to the players movement
-        if (player.facingLeft)
+        if (player.facingLeft) {
             setX(player.body.getTranslateX() + player.width);
-        else
+            body.setTranslateX(player.body.getTranslateX() + player.width + 10);
+        } else {
             setX(player.body.getTranslateX());
+            body.setTranslateX(player.body.getTranslateX()+ 10);
+        }
 
         setY(player.body.getTranslateY() - player.height);
         body.setTranslateY(player.body.getTranslateY()+player.getHeight()/2);
 
+
         // rotate the arm
         currentAngle += ROTATION_INCREMENT;
         rotate(currentAngle);
+        body.setRotate(-45 + currentAngle);
         rotations += 1;
     }
 }

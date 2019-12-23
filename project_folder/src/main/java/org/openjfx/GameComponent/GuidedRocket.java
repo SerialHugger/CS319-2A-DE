@@ -48,7 +48,7 @@ public class GuidedRocket extends PlayerEquipment {
             }
         }
         if (targetEnemy != null)
-            isObjectInScene = targetEnemy.getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && targetEnemy.getX() > gameRoot.getTranslateX() * -1;
+            isObjectInScene = targetEnemy.getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && targetEnemy.getX() > gameRoot.getTranslateX() * - 1;
         else
             isObjectInScene = false;
     }

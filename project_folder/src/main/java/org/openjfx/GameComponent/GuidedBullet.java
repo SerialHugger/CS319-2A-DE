@@ -46,6 +46,8 @@ public class GuidedBullet extends EnemyBullet {
                 speed_x = dist_x / hipo * speed; // calculate speed of x
                 speed_y = dist_y / hipo * speed; // calculate speed of y
             }
+        } else {
+            dead = true;
         }
         firstTime = System.nanoTime() / 1000000000.0;
         passedTime = firstTime - lastTime;
