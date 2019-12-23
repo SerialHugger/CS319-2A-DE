@@ -8,6 +8,13 @@ import javafx.scene.shape.Circle;
 
 public class SpeedRunner extends Enemy {
     private int rotate = 0;
+
+    /**
+     * The constructor of the SpeedRunner enemy
+     * @param width the width of the speedRunner
+     * @param height the height of the speedRunner
+     * @param asset the asset used for the enemy
+     */
     SpeedRunner(double width, double height, ImagePattern asset) {
         super(width, height, "speedRunner");
         this.height = magicConverter(108);
@@ -22,6 +29,14 @@ public class SpeedRunner extends Enemy {
         hitBoxes[0].setTranslateY(body.getTranslateY());
     }
 
+    /**
+     * The method that moves the SpeedRunner and updates its properties
+     * @param GCF GameComponentFactory
+     * @param gameRoot Pane that will be used to get the boundaries
+     * @param player Player will be used to compute the position
+     * @param left boolean facing left
+     * @param speedFactor int speedFactor of SpeedRunner
+     */
     public void moveSpeedRunner(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable

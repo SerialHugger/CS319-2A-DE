@@ -12,6 +12,14 @@ public class GuidedBullet extends EnemyBullet {
     private int rotate = 5;
     private final double miss = magicConverter(50);
 
+    /**
+     * Constructor for the GuidedBullet class
+     * @param width double width of the GuidedBullet
+     * @param height double height of the GuidedBullet
+     * @param asset ImagePattern asset for the GuidedBullet
+     * @param toLeft boolean indicating the direction of GuidedRocket
+     * @param player GameComponent player
+     */
     GuidedBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player) {
         super(width, height, "guidedBullet");
         this.facingLeft = toLeft;
@@ -24,6 +32,10 @@ public class GuidedBullet extends EnemyBullet {
         body.setFill(asset);
     }
 
+    /**
+     * This method moves the GuidedBullet on the screen according to the Player's position
+     * @param player Player that will be used to coordinate the movement of GuidedBullet
+     */
     public void moveGuidedBullet(Player player) {
         rotate += 25;
         double missChance = Math.random() * 10000;

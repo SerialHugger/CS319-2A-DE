@@ -39,6 +39,12 @@ public class GameComponentFactory {
     ImagePattern bossImage;
     ImagePattern meleeImage;
 
+    /**
+     * Constructor for the GameComponentFactory class
+     * @param width double the width of the GameComponentFactory
+     * @param height double the height of the GameComponentFactory
+     * @param gameComponents ArrayList<GameComponent> holds the components in the game
+     */
     public GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
         this.height = height;
@@ -48,6 +54,12 @@ public class GameComponentFactory {
 
     /*
      * Creates components with given type and adds it to the gameComponents array
+     */
+
+    /**
+     * Thsi method creates and adds a component to the game
+     * @param type String the type of the component that will be created
+     * @return GameComponent returns the GameComponent that is created
      */
     public GameComponent createComponent(String type) {
         GameComponent temp = null;

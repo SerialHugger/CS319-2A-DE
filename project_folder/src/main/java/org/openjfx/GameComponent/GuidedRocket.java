@@ -19,6 +19,12 @@ public class GuidedRocket extends PlayerEquipment {
     private int rotate = 0;
     boolean isObjectInScene;
 
+    /**
+     * Constructor for tne GuidedRocket class
+     * @param width double width of the GuidedRocket
+     * @param height double height of the GuidedRocket
+     * @param asset ImagePattern asset for the GuidedRocket
+     */
     GuidedRocket(double width, double height, ImagePattern asset) {
         super(width, height, "guidedRocket");
         hitBoxes = new Rectangle[1];
@@ -31,6 +37,10 @@ public class GuidedRocket extends PlayerEquipment {
         body.setFill(asset);
     }
 
+    /**
+     * This method determines the targeted enemy for the GuidedRocket
+     * @param gameComponents ArrayList<GameComponent> holds the components in the game
+     */
     public void chooseTarget(ArrayList<GameComponent> gameComponents) {
         double minDistance = Double.POSITIVE_INFINITY;
         for (int i = 0; i < gameComponents.size(); i++) {
@@ -55,6 +65,9 @@ public class GuidedRocket extends PlayerEquipment {
         player = (Player) gameComponents.get(0);
     }
 
+    /**
+     * This method moves the instance of the GuidedRocket class on the screen
+     */
     public void moveGuidedRocket() {
 
         if (lifeTime > TOTAL_LIFETIME)

@@ -8,6 +8,14 @@ public class PlayerBullet extends PlayerEquipment {
     boolean facingUp = false;
     boolean horizEq = false;
 
+    /**
+     * Constructor for the PlayerBullet class
+     * @param width double the width of the PlayerBullet
+     * @param height double the height of the PlayerBullet
+     * @param assets ImagePatter[] the assets for the PlayerBullet
+     * @param toLeft boolean indicating the direction of the PlayerBullet
+     * @param speed double speed of the PlayerBullet
+     */
     PlayerBullet(double width, double height, ImagePattern[] assets, boolean toLeft, double speed) {
         super(width, height, "playerBullet");
         this.speed = Math.abs(speed) + magicConverter(25);
@@ -20,6 +28,9 @@ public class PlayerBullet extends PlayerEquipment {
         body = new Rectangle(this.width, this.height, animationFrames[0]);
     }
 
+    /**
+     * Thsi method moves the PlayerBullet object
+     */
     public void movePlayerBullet() {
         counter += 1;
         counter = counter % 2;

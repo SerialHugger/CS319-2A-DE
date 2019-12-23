@@ -33,14 +33,21 @@ public class GameComponent {
     int counter = 0; // counter for animation state
     int rotate = 0;
 
+    /**
+     * Constructor for the GameComponent class
+     * @param width double width of the GameComponent
+     * @param height double height of the GameComponent
+     * @param type String the unique type of the GameComponent
+     */
     GameComponent(double width, double height, String type) {
         this.type = type;
         this.width = width;
         this.height = height;
     }
 
-    /*
-     * Add the shapes of this component to the given root
+    /**
+     * This method adds the shapes to the gameRoot
+     * @param gameRoot Pane which the shapes are to be added
      */
     public void addShapes(Pane gameRoot) {
         this.gameRoot = gameRoot;
@@ -50,8 +57,10 @@ public class GameComponent {
         gameRoot.getChildren().add(body);
     }
 
-    /*
-     * Inserts image in assetLocation to body and returns the imagepattern.
+    /**
+     * Inserts image in assetLocation to body and returns the imagepattern
+     * @param assetLocation String
+     * @return ImagePattern
      */
     public ImagePattern fillImage(String assetLocation) {
         ImagePattern imagePattern;
@@ -77,6 +86,9 @@ public class GameComponent {
         return imagePattern;
     }
 
+    /**
+     * This method removes the GameComponent from the screen
+     */
     public void die() { // if called the component will be removed from game.
         for (int i = 0; i < hitBoxes.length; i++) {
             gameRoot.getChildren().remove(hitBoxes[i]);
@@ -84,9 +96,10 @@ public class GameComponent {
         gameRoot.getChildren().remove(body);
     }
 
-    /*
-     Moves both hitboxes and rectangles with the given inputs.
-     if direction is 1 then right, if -1 then left
+    /**
+     * Moves both hitboxes and rectangles with the given inputs
+     * @param direction int  if direction is 1 then right, if -1 then left
+     * @param newSpeed double
      */
     public void moveX(int direction, double newSpeed) {
         for (int i = 0; i < hitBoxes.length; i++) {
@@ -95,9 +108,10 @@ public class GameComponent {
         body.setTranslateX(body.getTranslateX() + (direction * newSpeed));
     }
 
-    /*
-     Moves both hitboxes and rectangles with the given inputs.
-     if 1 then down, if -1 then up
+    /**
+     * Moves both hitboxes and rectangles with the given inputs
+     * @param direction int if 1 then down, if -1 then up
+     * @param newSpeed double
      */
     public void moveY(int direction, double newSpeed) {
         for (int i = 0; i < hitBoxes.length; i++) {
@@ -106,14 +120,26 @@ public class GameComponent {
         body.setTranslateY(body.getTranslateY() + (direction * newSpeed));
     }
 
+    /**
+     * This method returns the X coord. of the GameComponent
+     * @return double
+     */
     public double getX() {
         return body.getTranslateX();
     } // returns the X position of the component
 
+    /**
+     * This method returns the Y coord. of the GameComponent
+     * @return double
+     */
     public double getY() {
         return body.getTranslateY();
     } // returns the Y position of the component
 
+    /**
+     * This methos sets the X coord. of GameComponent
+     * @param newX
+     */
     public void setX(double newX) {
         for (int i = 0; i < hitBoxes.length; i++) {
             hitBoxes[i].setTranslateX(newX);
@@ -121,6 +147,10 @@ public class GameComponent {
         body.setTranslateX(newX);
     }
 
+    /**
+     * This method sets the Y coord. of GameComponent
+     * @param newY double
+     */
     public void setY(double newY) {
         for (int i = 0; i < hitBoxes.length; i++) {
             hitBoxes[i].setTranslateY(newY);
@@ -128,7 +158,11 @@ public class GameComponent {
         body.setTranslateY(newY);
     }
 
-
+    /**
+     * This method sets the dimensions of the GameComponent according to the screen size
+     * @param wantedInteger double
+     * @return double
+     */
     public double magicConverter(double wantedInteger) {
         if (gameRoot == null)
             return width / (1920 / wantedInteger);
@@ -136,6 +170,10 @@ public class GameComponent {
             return gameRoot.getWidth() / (1920 / wantedInteger);
     }
 
+    /**
+     * This method return whether or not the component is dead
+     * @return boolean deathStatus
+     */
     public boolean updateDeath() {
         for (Shape hitBox : hitBoxes) {
             if (hitBox instanceof ComponentHitBoxCircle) {
@@ -156,6 +194,10 @@ public class GameComponent {
         return dead;
     }
 
+    /**
+     * This method rotates the GameComponent
+     * @param rotateValue double amount of return in degrees
+     */
     public void rotate(double rotateValue) {
         hitBoxes[0].setRotate(rotateValue);
         body.setRotate(rotateValue);
@@ -165,6 +207,10 @@ public class GameComponent {
         return width;
     }
 
+    /**
+     * This method return the height of the game componengt
+     * @return double
+     */
     public double getHeight() {
         return height;
     }

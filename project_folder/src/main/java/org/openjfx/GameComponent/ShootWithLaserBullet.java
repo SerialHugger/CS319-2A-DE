@@ -6,6 +6,12 @@ public class ShootWithLaserBullet implements Shootable {
     public ShootWithLaserBullet() {
     }
 
+    /**
+     * This method is the implementation of shooting using laser bullet
+     * @param GCF GameComponentFactory to add the bullet to the game
+     * @param enemy Enemy will be used to set the initial position of the bullet
+     * @param gameRoot Pane
+     */
     public void shoot(GameComponentFactory GCF, Enemy enemy, Pane gameRoot) {
         LaserBullet enemyBullet = (LaserBullet) GCF.createComponent("laserBullet"); // create the bullet
         enemyBullet.facingLeft = enemy.facingLeft; // make it face left

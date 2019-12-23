@@ -14,6 +14,12 @@ public class Melee extends PlayerEquipment {
     private final int ROTATION_INCREMENT = 10;
     private int currentAngle; // the amount that the arm will be rotated relative to its original position
 
+    /**
+     * Constructor for the Melee class
+     * @param width double width of the Melee
+     * @param height double height of the Melee
+     * @param asset ImagePattern asset for the Melee
+     */
     Melee(double width, double height, ImagePattern asset) {
         super(width, height, "playerEquipment");
         this.height = magicConverter(150);
@@ -29,6 +35,10 @@ public class Melee extends PlayerEquipment {
         body.setStroke(Color.PURPLE);
     }
 
+    /**
+     * This method moves the instance of the Melee class with the player
+     * @param player Player that will be used for setting the position of Melee
+     */
     public void moveMelee(Player player) {
 
         if (rotations == MAX_ROTATIONS - 1)

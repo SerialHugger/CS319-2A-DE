@@ -7,6 +7,14 @@ import javafx.scene.shape.Shape;
 
 public class LaserBullet extends EnemyBullet {
 
+    /**
+     * Constructor for the LaserBullet class
+     * @param width double the width of LaserBullet
+     * @param height double the height of LaserBullet
+     * @param asset ImagePattern asset for LaserBullet
+     * @param toLeft boolean indicating the direction of the LaserBullet
+     * @param player Player that will be targeted
+     */
     LaserBullet(double width, double height, ImagePattern asset, boolean toLeft, GameComponent player) {
         super(width, height, "laserBullet");
         this.facingLeft = toLeft;
@@ -23,6 +31,9 @@ public class LaserBullet extends EnemyBullet {
 
     }
 
+    /**
+     * This method moves the instance of the LaserBullet class on the screen
+     */
     public void updateLaserBullet() {
         body.setRotate(rotate);
         rotate += 15;
