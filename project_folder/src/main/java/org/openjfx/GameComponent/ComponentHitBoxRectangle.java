@@ -9,6 +9,7 @@ public class ComponentHitBoxRectangle extends Rectangle {
     private double width;
     private double height;
     public boolean dead = false;
+    public boolean saved = false;
 
     ComponentHitBoxRectangle(double width, double height, String type, String specificType) {
         super(width, height, Color.TRANSPARENT); //Color.TRANSPARENT
@@ -30,4 +31,6 @@ public class ComponentHitBoxRectangle extends Rectangle {
     public boolean isDead() {
         return dead;
     }
+    public boolean isSaved() { return saved; }
+    public void setSaved(boolean status) { saved = status;}
 }
