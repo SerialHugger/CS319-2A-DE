@@ -365,7 +365,7 @@ public class GameController {
                 inGameMenu.changeActiveButton(0);
             }
         } else if (currentScreen == 2) { // STOP, SHOW SCORE
-                scoreMenu.displayScoreScreen(gameRoot, score);
+                scoreMenu.displayScoreScreen(gameRoot, (int) player.getScore());
 
         } else if (currentScreen == 3) { // Game end
             endGameMenu.displayMenu(gameRoot);
