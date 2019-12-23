@@ -10,6 +10,7 @@ import org.openjfx.GameComponent.*;
 import org.openjfx.GameController.MenuManager.EndGameMenu;
 import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.GameController.InteractionManager.InteractionHandler;
+import org.openjfx.GameController.MenuManager.ScoreMenu;
 import org.openjfx.SceneryManager.Scenery;
 
 import java.util.ArrayList;
@@ -50,6 +51,8 @@ public class GameController {
 
     int score = 0;
     MainGame mainGame;
+
+    ScoreMenu scoreMenu;
 
     /*
     For key inputs
@@ -98,6 +101,9 @@ public class GameController {
         endGameMenu = new EndGameMenu(scenery);
         endGameMenu.createButton(gameRoot);
 
+        scoreMenu = new ScoreMenu(scenery);
+        scoreMenu.createScoreScreen(gameRoot);
+
         isMenuCreated = true;
     }
 
@@ -117,7 +123,7 @@ public class GameController {
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         player.die(); // kill it, remove it from root.
-                        currentScreen = 3;
+                        setCurrentScreen(3);
                     }
                 } else if (gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
                     PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -261,7 +267,7 @@ public class GameController {
                     guidedBullet.moveGuidedBullet(player); // update it.
                     // if its not in the boundaries of camera/root remove it.
                     // first check for X then check for Y.
-                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth()) {
+                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() + magicConverter(width/2)|| guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth() - magicConverter(width / 2)) {
                         gameComponents.remove(i--); // remove it from components and decrease i.
                         size -= 1; // decrease size.
                         guidedBullet.die(); // kill it, remove it from root.
@@ -339,6 +345,7 @@ public class GameController {
                 inGameMenu.changeActiveButton(0);
             }
         } else if (currentScreen == 2) { // STOP, SHOW SCORE
+                scoreMenu.displayScoreScreen(gameRoot, score);
 
         } else if (currentScreen == 3) { // Game end
             endGameMenu.displayMenu(gameRoot);
@@ -636,6 +643,10 @@ public class GameController {
 
         if (currentScreen == 1) {
             inGameMenu.hideMenu();
+        }
+
+        if (currentScreen == 2) {
+            scoreMenu.hideScoreScreen();
         }
 
         currentScreen = screenID;
