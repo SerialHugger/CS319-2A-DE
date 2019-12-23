@@ -74,7 +74,7 @@ public class Dodger extends Enemy {
                             dodgeDirection = 1;
                         else
                             dodgeDirection = -1;
-                        double dodgeAmount = (Math.random() * 500) + 100;
+                        double dodgeAmount = (Math.random() * 200) + 100;
                         moveY(dodgeDirection, dodgeAmount);
                     } else
                         dead = true;

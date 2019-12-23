@@ -261,7 +261,7 @@ public class GameController {
                     guidedBullet.moveGuidedBullet(player); // update it.
                     // if its not in the boundaries of camera/root remove it.
                     // first check for X then check for Y.
-                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth()) {
+                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() + magicConverter(width/2)|| guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth() - magicConverter(width / 2)) {
                         gameComponents.remove(i--); // remove it from components and decrease i.
                         size -= 1; // decrease size.
                         guidedBullet.die(); // kill it, remove it from root.

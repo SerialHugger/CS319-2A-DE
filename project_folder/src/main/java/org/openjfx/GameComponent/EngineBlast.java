@@ -11,6 +11,8 @@ public class EngineBlast extends PlayerEquipment {
 
     EngineBlast(double width, double height, String assetLocation) {
         super(width, height, "engineBlast");
+        this.height = magicConverter(50);
+        this.height = magicConverter(40);
         hitBoxes = new Rectangle[1];
         wantedTime = 1;
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "engineBlast");
