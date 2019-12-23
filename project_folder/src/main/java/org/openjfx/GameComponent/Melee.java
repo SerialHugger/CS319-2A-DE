@@ -1,6 +1,8 @@
 package org.openjfx.GameComponent;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -12,15 +14,18 @@ public class Melee extends PlayerEquipment {
     private final int ROTATION_INCREMENT = 10;
     private int currentAngle; // the amount that the arm will be rotated relative to its original position
 
-    Melee(double width, double height, String assetLocation) {
+    Melee(double width, double height, ImagePattern asset) {
         super(width, height, "playerEquipment");
+        this.height = magicConverter(150);
+        this.width = magicConverter(30);
         rotations = 0;
         System.out.println("Melee arm created...");
         currentAngle = ROTATION_INCREMENT;
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "melee");
-        body = new Rectangle(this.width, this.height);
-        body.setFill(Color.ORANGE);
+        body = new Circle(this.height / 2);
+        body.setFill(asset);
+        body.setStroke(Color.PURPLE);
     }
 
     public void moveMelee(Player player) {
@@ -35,6 +40,7 @@ public class Melee extends PlayerEquipment {
             setX(player.body.getTranslateX());
 
         setY(player.body.getTranslateY() - player.height);
+        body.setTranslateY(player.body.getTranslateY()+player.getHeight()/2);
 
         // rotate the arm
         currentAngle += ROTATION_INCREMENT;

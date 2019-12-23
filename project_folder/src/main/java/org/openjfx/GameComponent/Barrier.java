@@ -9,6 +9,8 @@ public class Barrier extends PlayerEquipment {
 
     Barrier(double width, double height, String assetLocation) {
         super(width, height, "shield");
+        this.height = magicConverter(700);
+        this.width = magicConverter(700);
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "barrier", "barrier");
 

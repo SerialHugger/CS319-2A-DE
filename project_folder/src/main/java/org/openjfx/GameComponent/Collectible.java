@@ -60,6 +60,8 @@ public class Collectible extends GameComponent {
 
     Collectible(double width, double height, String assetLocation) {
         super(width, height, "collectible");
+        this.height = magicConverter(50);
+        this.width = magicConverter(40);
         abilityType = Ability.randomAbility();
         didHitTheGround = false;
         System.out.println("Ability type of random: " + abilityType.getType());
