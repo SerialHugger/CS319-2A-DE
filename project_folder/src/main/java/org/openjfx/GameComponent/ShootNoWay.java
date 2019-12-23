@@ -2,9 +2,9 @@ package org.openjfx.GameComponent;
 
 import javafx.scene.layout.Pane;
 
-public class ShootNoWay {
+public class ShootNoWay implements Shootable {
 
-    void shoot(GameComponentFactory GCF, Enemy enemy, Pane gameRoot) {
+    public void shoot(GameComponentFactory GCF, Enemy enemy, Pane gameRoot) {
         // does nothing
     }
 }
