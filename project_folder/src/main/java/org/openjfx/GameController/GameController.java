@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import org.openjfx.GameComponent.*;
+
+import org.openjfx.GameController.MenuManager.EndGameMenu;
 import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.GameController.InteractionManager.InteractionHandler;
 import org.openjfx.SceneryManager.Scenery;
@@ -44,6 +46,8 @@ public class GameController {
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
+    private EndGameMenu endGameMenu;
+
     int score = 0;
     MainGame mainGame;
 
@@ -90,6 +94,10 @@ public class GameController {
 
         inGameMenu = new InGameMenu(scenery);
         inGameMenu.createButtons(gameRoot);
+
+        endGameMenu = new EndGameMenu(scenery);
+        endGameMenu.createButton(gameRoot);
+
         isMenuCreated = true;
     }
 
@@ -109,6 +117,7 @@ public class GameController {
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         player.die(); // kill it, remove it from root.
+                        currentScreen = 3;
                     }
                 } else if (gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
                     PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -331,6 +340,9 @@ public class GameController {
             }
         } else if (currentScreen == 2) { // STOP, SHOW SCORE
 
+        } else if (currentScreen == 3) { // Game end
+            endGameMenu.displayMenu(gameRoot);
+
         }
 
         createLevel();
@@ -370,7 +382,8 @@ public class GameController {
                 } else if (inGameMenu.getActiveButton() == 1) {
                     mainGame.backToMainMenu();
                 }
-
+            } else if (currentScreen == 3) {
+                mainGame.backToMainMenu();
             }
         }
         if (keyInputs[12].get()) { // if ESC is pressed.

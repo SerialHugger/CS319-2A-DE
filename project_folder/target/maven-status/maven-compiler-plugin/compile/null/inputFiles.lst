@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\InteractionManager\InteractionHandler.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Dividus.java
@@ -17,11 +18,15 @@ C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\projec
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\module-info.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameComponent.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SystemInfo.java
+=======
+
+>>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Player.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\BackGround.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MenuController.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Enemy.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\SceneComponent.java
+<<<<<<< HEAD
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MainMenu.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyBullet.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\SpeedRunner.java
@@ -95,3 +100,5 @@ C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\o
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dienamite.java
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dodger.java
 >>>>>>> Stashed changes
+=======
+>>>>>>> unstable
