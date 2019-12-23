@@ -38,18 +38,20 @@ public class Hud {
     Hud(double width, double height, String type, Pane gameRoot) {
         this.gameRoot = gameRoot;
         healthHud = new SceneComponent(width / 3.96, height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
-        skillsHud = new SceneComponent[3];
+        skillsHud = new SceneComponent[5];
 
         for (int i = 0; i < skillsHud.length; i++) {
             skillsHud[i] = new SceneComponent(50, 50, "", "empty");
-            skillsHud[i].setTranslateX( width * -1 + i * 52 + 30 );
+            skillsHud[i].setTranslateX(width * -1 + i * 52 + 30);
             skillsHud[i].setTranslateY(height - 100);
             skillsHud[i].setFill(Color.GREEN);
-
             skillsHud[i].setStroke(Color.BLACK);
             skillsHud[i].setStrokeType(StrokeType.OUTSIDE);
             gameRoot.getChildren().add(skillsHud[i]);
         }
+
+        skillsHud[0].setFill(Color.ORANGE);
+        skillsHud[1].setFill(Color.ORANGE);
 
         this.width = width;
         this.type = type;
@@ -114,18 +116,20 @@ public class Hud {
     }
 
     public void displaySkills(String[] abilities) {
-        for (int i = 0; i < skillsHud.length; i++) {
-            if (abilities[i].equals("empty")) {
+        for (int i = 2; i < skillsHud.length; i++) {
+
+            if (abilities[i - 2].equals("empty")) {
                 skillsHud[i].setFill(Color.GREEN);
-            } else if (abilities[i] == "guidedRocket") {
+            } else if (abilities[i - 2] == "guidedRocket") {
                 skillsHud[i].setFill(guidedRocketHudImage);/* TODO ADD SKILL IMAGES*/
-            } else if (abilities[i] == "barrier") {
+            } else if (abilities[i - 2] == "barrier") {
                 skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
-            } else if (abilities[i] == "shield") {
+            } else if (abilities[i - 2] == "shield") {
                 skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
-            } else if (abilities[i] == "engineBlast") {
+            } else if (abilities[i - 2] == "melee") {
                 skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
             }
+
         }
     }
 
@@ -145,6 +149,7 @@ public class Hud {
             skillsHud[i].setTranslateX(skillsHud[i].getTranslateX() + (direction * moveSpeed));
         }
     }
+
     public ImagePattern openAsset(String assetLocation) {
         ImagePattern imagePattern;
         try {
