@@ -43,7 +43,7 @@ public class Dienamite extends Enemy {
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 
-        directionX = moveValues[0] * speedFactor;
+        directionX = moveValues[0] + (speedFactor/100);
         directionY = moveValues[1];
         speed_x = moveValues[2];
         speed_y = moveValues[3];

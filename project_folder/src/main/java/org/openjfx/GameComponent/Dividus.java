@@ -69,7 +69,7 @@ public class Dividus extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2] * speedFactor;
+        speed_x = moveValues[2] + (speedFactor/100);
         speed_y = moveValues[3];
 
         moveX(directionX, speed_x); // move X with given inputs
