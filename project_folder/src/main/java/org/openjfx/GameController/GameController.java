@@ -313,7 +313,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         boss.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 500);
                     }
                 } else if (gameComponents.get(i) instanceof Civilian) {
                     Civilian civilian = ((Civilian) gameComponents.get(i));
