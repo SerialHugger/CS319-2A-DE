@@ -93,7 +93,7 @@ public class Atlas extends Enemy {
             body.setFill(animationFrames[1]);
         // get new coordinates and speed for the next frame
         if (target == null) {
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];
@@ -138,7 +138,7 @@ public class Atlas extends Enemy {
             }
         }
         else if (!ascending && chasing){
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];
