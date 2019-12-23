@@ -28,6 +28,7 @@ public class Hud {
     int delayTimer = 0; // timer for delay
     Pane gameRoot;
     private Text scoreText;
+    private ImagePattern guidedRocketHudImage = openAsset("Assets\\light_saber.png");
 
     ///////////////
     // Necessary attiributes for changing directions with the ship
@@ -41,8 +42,8 @@ public class Hud {
 
         for (int i = 0; i < skillsHud.length; i++) {
             skillsHud[i] = new SceneComponent(50, 50, "", "empty");
-            skillsHud[i].setTranslateX(-(skillsHud.length - i) * 52 - 100);
-            skillsHud[i].setTranslateY(height - 40);
+            skillsHud[i].setTranslateX( width * -1 + i * 52 + 30 );
+            skillsHud[i].setTranslateY(height - 100);
             skillsHud[i].setFill(Color.GREEN);
 
             skillsHud[i].setStroke(Color.BLACK);
@@ -116,8 +117,14 @@ public class Hud {
         for (int i = 0; i < skillsHud.length; i++) {
             if (abilities[i].equals("empty")) {
                 skillsHud[i].setFill(Color.GREEN);
-            } else {
-                skillsHud[i].setFill(Color.RED);
+            } else if (abilities[i] == "guidedRocket") {
+                skillsHud[i].setFill(guidedRocketHudImage);/* TODO ADD SKILL IMAGES*/
+            } else if (abilities[i] == "barrier") {
+                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
+            } else if (abilities[i] == "shield") {
+                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
+            } else if (abilities[i] == "engineBlast") {
+                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
             }
         }
     }
@@ -137,5 +144,26 @@ public class Hud {
         for (int i = 0; i < skillsHud.length; i++) {
             skillsHud[i].setTranslateX(skillsHud[i].getTranslateX() + (direction * moveSpeed));
         }
+    }
+    public ImagePattern openAsset(String assetLocation) {
+        ImagePattern imagePattern;
+        try {
+            // set background image
+            FileInputStream inputstream = new FileInputStream(assetLocation);
+            Image image = new Image(inputstream);
+            imagePattern = new ImagePattern(image);
+            inputstream.close();
+        } catch (Exception e) {
+            try {
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\", "/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                inputstream.close();
+            } catch (Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
+        }
+        return imagePattern;
     }
 }

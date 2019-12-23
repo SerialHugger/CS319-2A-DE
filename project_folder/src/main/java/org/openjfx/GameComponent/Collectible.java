@@ -1,9 +1,12 @@
 package org.openjfx.GameComponent;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Random;
 
@@ -57,16 +60,27 @@ public class Collectible extends GameComponent {
 
     private boolean didHitTheGround; // checks whether the ability hit the ground or not
     private Ability abilityType;
+    private ImagePattern barrierHudImage;
+    private ImagePattern guidedRocketHudImage;
+    private ImagePattern shieldHudImage;
+    private ImagePattern engineBlastHudImage;
 
     Collectible(double width, double height, String assetLocation) {
         super(width, height, "collectible");
+        this.height = magicConverter(50);
+        this.width = magicConverter(40);
         abilityType = Ability.randomAbility();
         didHitTheGround = false;
         System.out.println("Ability type of random: " + abilityType.getType());
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "collectible", getAbilityType());
+        openCollectibleImages();
         body = new Rectangle(this.width, this.height);
-        body.setFill(Color.PURPLE);
+        if (getAbilityType() == "guidedRocket") {
+            body.setFill(guidedRocketHudImage);
+        }
+        else
+            body.setFill(Color.TRANSPARENT);
     }
 
     public void moveCollectible() {
@@ -90,6 +104,34 @@ public class Collectible extends GameComponent {
                 }
             }
         }
+    }
+
+    private void openCollectibleImages() {
+        //barrierHudImage = openAsset("Assets\\barrierImage.png");
+        guidedRocketHudImage = openAsset("Assets\\light_saber.png");
+        //shieldHudImage = openAsset("Assets\\shieldImage.png");
+        //engineBlastHudImage = openAsset("Assets\\engineBlastImage.png");
+    }
+    public ImagePattern openAsset(String assetLocation) {
+        ImagePattern imagePattern;
+        try {
+            // set background image
+            FileInputStream inputstream = new FileInputStream(assetLocation);
+            Image image = new Image(inputstream);
+            imagePattern = new ImagePattern(image);
+            inputstream.close();
+        } catch (Exception e) {
+            try {
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\", "/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                inputstream.close();
+            } catch (Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
+        }
+        return imagePattern;
     }
 
     public String getAbilityType() {
