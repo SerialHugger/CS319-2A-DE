@@ -58,6 +58,7 @@ public class Dividus extends Enemy {
         // Actions when collision
         dead = updateDeath();
         if (dead) {
+            createAtlases(GCF);
             dropAbility(GCF);
             explode("explode", GCF);
         }

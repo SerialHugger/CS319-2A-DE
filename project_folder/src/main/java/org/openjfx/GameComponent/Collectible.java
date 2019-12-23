@@ -68,19 +68,11 @@ public class Collectible extends GameComponent {
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "collectible", getAbilityType());
         body = new Rectangle(this.width, this.height);
-        body.setFill(Color.TRANSPARENT);
+        body.setFill(Color.PURPLE);
     }
 
     public void moveCollectible() {
 
-        if (didHitTheGround)
-            return;
-
-        if (gameRoot.getHeight() - height <= getY())
-            didHitTheGround = true;
-
-        if (!didHitTheGround)
-            moveY(1, magicConverter(10));
 
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
@@ -88,14 +80,14 @@ public class Collectible extends GameComponent {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("asd123");
+                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("123asd");
+                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             }
