@@ -6,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import org.openjfx.GameComponent.*;
-import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.GameController.InteractionManager.InteractionHandler;
+import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.SceneryManager.Scenery;
 
 import java.util.ArrayList;
