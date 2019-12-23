@@ -237,7 +237,7 @@ public class Player extends GameComponent {
         if (keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
         }
-        if (true)
+        if (false)
             checkDeath();
         else
             lifeCount = 3;
@@ -309,10 +309,11 @@ public class Player extends GameComponent {
                     temp.dead = false;
                 }
             }
-            if (lifeCount == 0) {
+            /*if (lifeCount == 0) {
                 dead = true;
                 break;
             }
+             */
         }
     }
 
