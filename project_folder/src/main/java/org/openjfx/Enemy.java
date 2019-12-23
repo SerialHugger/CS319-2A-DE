@@ -41,7 +41,6 @@ public class Enemy extends GameComponent{
 
         // starting Y of the enemy, randomly selected
         double startingY = this.height*2 + ((Math.random() * height) - this.height*4);
-
         // TODO: there is only 1 hit box --- for now. Change it if necessary
         hitBoxes = new Shape[1];
 

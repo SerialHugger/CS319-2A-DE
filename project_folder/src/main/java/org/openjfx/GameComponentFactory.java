@@ -62,7 +62,7 @@ public class GameComponentFactory {
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
-            temp = new Atlas(width, height, atlasImage);
+            temp = new Atlas(width, height, atlasImage, gameComponents);
         } else if (type.equals("dodger")) {
             temp = new Dodger(width, height, dodgerImage);
         } else if (type.equals("dividus")) {
@@ -135,7 +135,7 @@ public class GameComponentFactory {
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        //civilianImage = openAsset("Assest\\civilian");
+        civilianImage = openAsset("Assets\\civilian.png");
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       

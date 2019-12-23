@@ -24,6 +24,7 @@ public class Game extends Application {
     private MainGame mainGame;
     private boolean onMenu = true;
     private boolean onGame = false;
+    int shipSelected;
 
     private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
     private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
