@@ -59,6 +59,11 @@ public class Atlas extends Enemy {
     }
     public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedfactor) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
+        /*if (target != null && target.isSaved())
+            target = null;
+        System.out.println(target == null);
+        if (target != null)
+            System.out.println(target.isSaved());*/
         double random = Math.random() * 10000; // random for chance based updates
         if (delay) { // delay: a boolean value to delay shoots
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
@@ -93,7 +98,7 @@ public class Atlas extends Enemy {
             body.setFill(animationFrames[1]);
         // get new coordinates and speed for the next frame
         if (target == null) {
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];
@@ -138,7 +143,7 @@ public class Atlas extends Enemy {
             }
         }
         else if (!ascending && chasing){
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];
