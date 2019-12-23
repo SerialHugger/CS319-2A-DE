@@ -431,6 +431,12 @@ public class InteractionHandler {
                                         rectangleTemp.dead = true; // change rectangle to dead status.
                                         circleTemp2.dead = true; // change circleTemp2 to dead status
                                     }
+                                } else if(rectangleTemp.getSpecificType().equals("melee")) {
+                                    if (rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                        System.out.println("melee rectangle to enemyBullet Circle");
+                                        //TODO ADD CITIZEN INTERACTION HERE
+                                        circleTemp2.dead = true; // change circleTemp2 to dead status
+                                    }
                                 }
                             }
                         }

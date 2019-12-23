@@ -78,14 +78,14 @@ public class Collectible extends GameComponent {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("COLLECTIBE: " +abilityType.getType() + " DEAD");
+                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("COLLECTIBE: " +abilityType.getType() + " DEAD");
+                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             }
