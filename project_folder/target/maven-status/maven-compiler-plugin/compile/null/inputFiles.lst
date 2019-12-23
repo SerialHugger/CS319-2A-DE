@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
+=======
+>>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Dividus.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ShootWithGuidedBullet.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\Scenery.java
@@ -10,7 +13,10 @@ C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\projec
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Barrier.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\module-info.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameComponent.java
+<<<<<<< HEAD
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameController.java
+=======
+>>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SystemInfo.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MainMenu.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyBullet.java
@@ -38,12 +44,16 @@ C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\projec
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\DivingWind.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Melee.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Shield.java
+<<<<<<< HEAD
 
+=======
+>>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Player.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\BackGround.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MenuController.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Enemy.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\SceneComponent.java
+<<<<<<< HEAD
 
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MainMenu.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyBullet.java
@@ -137,6 +147,8 @@ C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\o
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dienamite.java
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dodger.java
 
+=======
+>>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\SpeedRunner.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ComponentHitBoxRectangle.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\Hud.java
@@ -147,6 +159,7 @@ C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\projec
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MainGame.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Shootable.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\PlayerBullet.java
+<<<<<<< HEAD
 =======
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\GameComponent\Dodger.java
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\GameComponent\GuidedBullet.java
@@ -256,4 +269,6 @@ C:\Users\Batuhan\Desktop\project\CS319-2A-DE\project_folder\src\main\java\org\op
 /Users/cemalardakizilkaya/Desktop/CS319-2A-DE/project_folder/src/main/java/org/openjfx/GameComponent/Civilian.java
 /Users/cemalardakizilkaya/Desktop/CS319-2A-DE/project_folder/src/main/java/org/openjfx/GameController/InteractionManager/InteractionHandler.java
 /Users/cemalardakizilkaya/Desktop/CS319-2A-DE/project_folder/src/main/java/org/openjfx/GameController/MenuManager/EndGameMenu.java
+>>>>>>> unstable
+=======
 >>>>>>> unstable
