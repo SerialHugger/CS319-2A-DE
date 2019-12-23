@@ -90,9 +90,9 @@ public class InteractionHandler {
                                         circleTemp2.dead = true; // change circleTemp2 to dead status
                                     }
                                 }
-                            } else if (circleTemp2.getType().equals("citizen")) { // second one is Citizen
+                            } else if (circleTemp2.getType().equals("civilian")) { // second one is Citizen
                                 if (circleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
-                                    System.out.println("Player Circle to Citizen");
+                                    System.out.println("Player Circle to Civilian");
                                     if (!isDead.get()) { // if the player is not dead
                                         //TODO ADD CITIZEN INTERACTION HERE
                                     }
@@ -468,11 +468,11 @@ public class InteractionHandler {
                                         rectangleTemp2.dead = true; // change rectangleTemp2 to dead status
                                     }
                                 }
-                            } else if (rectangleTemp2.getType().equals("citizen")) { // second one is Citizen
+                            } else if (rectangleTemp2.getType().equals("civilian")) { // second one is Citizen
                                 if (rectangleTemp.getBoundsInParent().intersects(rectangleTemp2.getBoundsInParent())) { // if they intersect
                                     System.out.println("Player Circle to Citizen Rectangle");
                                     if (!isDead.get()) { // if the player is not dead
-                                        //TODO ADD CITIZEN INTERACTION HERE
+                                        rectangleTemp2.saved = true;
                                     }
                                 }
                             } else if (rectangleTemp2.getType().equals("collectible")) { // second is Collectible

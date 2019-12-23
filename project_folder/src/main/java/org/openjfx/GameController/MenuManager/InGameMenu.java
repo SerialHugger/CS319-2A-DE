@@ -18,6 +18,10 @@ public class InGameMenu extends Rectangle {
     private Rectangle rectangle2;
     private Rectangle backgroundRect;
 
+    /**
+     * Constructor
+     * @param scenery parent scenery
+     */
     public InGameMenu(Scenery scenery) {
         activeButton = 0;
 
@@ -27,6 +31,10 @@ public class InGameMenu extends Rectangle {
         buttonHeight = 50;
     }
 
+    /**
+     * create buttons for In Game menu with background
+     * @param gameRoot root pane
+     */
     public void createButtons(Pane gameRoot) {
         rectangle1 = new Rectangle(buttonWidth, buttonHeight);
         rectangle2 = new Rectangle(buttonWidth, buttonHeight);
@@ -45,11 +53,18 @@ public class InGameMenu extends Rectangle {
         fillRectangles();
     }
 
+    /**
+     * Changes active button to 1 or 0. 0 is continue, 1 is exit to menu
+     * @param buttonID integer ID for the button
+     */
     public void changeActiveButton(int buttonID) {
         activeButton = buttonID;
         fillRectangles();
     }
 
+    /**
+     * fills all rectangle objects with colors
+     */
     private void fillRectangles() {
         backgroundRect.setFill(Color.rgb(42, 44, 54, 0.7));
 
@@ -62,6 +77,10 @@ public class InGameMenu extends Rectangle {
         }
     }
 
+    /**
+     * Displays menu over parent screen
+     * @param gameRoot root pane
+     */
     public void displayMenu(Pane gameRoot) {
         backgroundRect.setVisible(true);
         rectangle1.setVisible(true);
@@ -81,12 +100,19 @@ public class InGameMenu extends Rectangle {
         rectangle2.toFront();
     }
 
+    /**
+     * hides menu
+     */
     public void hideMenu() {
         rectangle1.setVisible(false);
         rectangle2.setVisible(false);
         backgroundRect.setVisible(false);
     }
 
+    /**
+     *
+     * @return id of current active button
+     */
     public int getActiveButton() {
         return activeButton;
     }

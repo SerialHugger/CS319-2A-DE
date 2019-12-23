@@ -17,6 +17,12 @@ public class Boss extends Enemy {
     boolean flagForDiwingWind60 = true;
     boolean flagForDiwingWind50 = true;
 
+    /**
+     * constructor for enemy type boss
+     * @param width  width of boss
+     * @param height height of boss
+     * @param assets for animation of boss
+     */
     Boss(double width, double height, ImagePattern assets) {
         super(width, height, "boss");
         this.height = magicConverter(300);
@@ -26,6 +32,14 @@ public class Boss extends Enemy {
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
+    /**
+     * function for moving the enemy type boss, and shooting
+     * @param GCF needs gamecomonentfactory for spawning enemies
+     * @param gameRoot parameter for root of the game
+     * @param player enemies need the player
+     * @param left checking if it moves left
+     * @param speedFactor an integer which multiplies the speed of the enemy
+     */
     public void moveBoss(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
@@ -100,6 +114,12 @@ public class Boss extends Enemy {
             explode("explode", GCF);
         }
     }
+
+    /**
+     * function for boss to create divingwinds
+     * @param GCF gamecomponentfactory for creating divingwinds
+     * @param numberOfEnemy indicates how many will be produced
+     */
     public void createDivingWinds(GameComponentFactory GCF, int numberOfEnemy) {
             for( int i = 0; i < numberOfEnemy; i++ ){
             DivingWind temp1 = (DivingWind) GCF.createComponent("divingWind");
@@ -108,6 +128,12 @@ public class Boss extends Enemy {
             temp1.setY(body.getTranslateY());
         }
     }
+
+    /**
+     * special function for spawning divingwinds when boss's health reaches specific
+     * healths
+     * @param GCF needs gamecomponentfactory to create divingwind
+     */
     public void spawnDivingWind(GameComponentFactory GCF ){
         if( totalHealth == 90 && flagForDiwingWind90 ){
             createDivingWinds(GCF , 2 );
