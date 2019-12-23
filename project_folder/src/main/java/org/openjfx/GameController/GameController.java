@@ -349,6 +349,14 @@ public class GameController {
                         civilian.die(); // kill it, remove it from root.
                         player.setScore(player.getScore() + 300);
                     }
+                } else if (gameComponents.get(i) instanceof Explosion) { // else if its an instance class of EmenyType1.
+                    Explosion explosion = ((Explosion) gameComponents.get(i));
+                    explosion.updateExplosion(); // update it.
+                    if (explosion.isDead()) { // if enemyType1 is dead.
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        explosion.die(); // kill it, remove it from root.
+                    }
                 }
             }
             if (startSlidingLeft) { // if the background sliding left

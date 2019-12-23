@@ -42,7 +42,7 @@ public class Bomb extends PlayerEquipment {
      * @param GCF needs the gamefactory since it needs to call selfdestruct object
      */
     public void explode(GameComponentFactory GCF) {
-        EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
+        Explosion selfDest = (Explosion) GCF.createComponent("explosion");
         selfDest.setX(this.getX());
         selfDest.setY(this.getY());
         selfDest.addShapes(gameRoot);

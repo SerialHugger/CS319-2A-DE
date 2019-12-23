@@ -24,6 +24,7 @@ public class GameComponentFactory {
     ImagePattern[] playerBulletImage = new ImagePattern[2];
     ImagePattern[] selfDestructImage = new ImagePattern[8];
     ImagePattern[] explosionImage = new ImagePattern[8];
+    ImagePattern[] explodeImage = new ImagePattern[8];
     ImagePattern[] atlasImage = new ImagePattern[3];
     ImagePattern[] dienamiteImage = new ImagePattern[9];
     ImagePattern[] divingWindImage = new ImagePattern[2];
@@ -39,6 +40,7 @@ public class GameComponentFactory {
     ImagePattern civilianImage;
     ImagePattern bossImage;
     ImagePattern meleeImage;
+    ImagePattern barrierImage;
 
     public GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -82,23 +84,25 @@ public class GameComponentFactory {
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if (type.equals("explode")) {
-            temp = new EnemySelfDestruct(width, height, explosionImage, false);
+            temp = new EnemySelfDestruct(width, height, explodeImage, false);
         } else if (type.equals("bomb")) {
             temp = new Bomb(width, height, null, (Player) gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield(width, height, shieldImage);
-        }  else if (type.equals("collectible")) {
+        } else if (type.equals("collectible")) {
             temp = new Collectible(width, height, "empty");
         } else if (type.equals("melee")) {
             temp = new Melee(width, height, meleeImage);
         } else if (type.equals("barrier")) {
-            temp = new Barrier(width, height, null);
+            temp = new Barrier(width, height, barrierImage);
         } else if (type.equals("civilian")) {
             temp = new Civilian(60, 100, civilianImage);
         } else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
         } else if (type.equals("guidedRocket")) {
             temp = new GuidedRocket(width, height, guidedRocketImage);
+        } else if (type.equals("explosion")) {
+            temp = new Explosion(width, height, explosionImage);
         }
         gameComponents.add(temp);
         return temp;
@@ -120,7 +124,10 @@ public class GameComponentFactory {
             selfDestructImage[i] = openAsset("Assets\\Enemies\\enemySelfDestruct\\selfDestruct_" + (i + 1) + ".png");
         }
         for (int i = 0; i < 8; i++) {
-            explosionImage[i] = openAsset("Assets\\Enemies\\explosion\\explosion_" + (i + 1) + ".png");
+            explosionImage[i] = openAsset("Assets\\skills\\shield\\shield_" + (i + 1) + ".png");
+        }
+        for (int i = 0; i < 8; i++) {
+            explodeImage[i] = openAsset("Assets\\Enemies\\explosion\\explosion_" + (i + 1) + ".png");
         }
         for (int i = 0; i < 14; i++) {
             dodgerImage[i] = openAsset("Assets\\Enemies\\dodger\\dodger_" + (i + 1) + ".png");
@@ -142,6 +149,7 @@ public class GameComponentFactory {
         divingWindImage[0] = openAsset("Assets\\Enemies\\divingWind\\divingWind_2.png");
         divingWindImage[1] = openAsset("Assets\\Enemies\\divingWind\\divingWind_1.png");
         //Open singles
+        barrierImage = openAsset("Assets\\skills\\shield.png");
         speedRunnerImage = openAsset("Assets\\Enemies\\speedRunner\\speedRunner.png");
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");

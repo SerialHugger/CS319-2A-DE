@@ -117,6 +117,8 @@ public class InteractionHandler {
                                         circleTemp2.dead = true;
                                     } else if (circleTemp2.getSpecificType().equals("explosion")) {
                                         circleTemp.dead = true;
+                                    } else if (circleTemp2.getSpecificType().equals("barrier")) {
+                                        circleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
                                 }
@@ -392,6 +394,8 @@ public class InteractionHandler {
                                         circleTemp2.dead = true;
                                     } else if (circleTemp2.getSpecificType().equals("explosion")) {
                                         rectangleTemp.dead = true;
+                                    } else if (circleTemp2.getSpecificType().equals("barrier")){
+                                        rectangleTemp.dead = true;
                                     }
                                     //TODO PlayerEquipment Interaction here
                                 }
@@ -426,7 +430,7 @@ public class InteractionHandler {
                                     circleTemp2.dead = true; // change circleTemp2 to dead status
                                 }
                             }
-                        } else if (rectangleTemp.getType().equals("playerEquipment")) { // first one is citizen
+                        } else if (rectangleTemp.getType().equals("playerEquipment")) { // first one is playerEquipment
                             if (circleTemp2.getType().equals("enemyBullet")) { // second one is enemyBullet
                                 if (rectangleTemp.getSpecificType().equals("playerBullet")) {
                                     if (rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
