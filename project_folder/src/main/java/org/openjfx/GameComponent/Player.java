@@ -285,11 +285,10 @@ public class Player extends GameComponent {
                     temp.dead = false;
                 }
             }
-            /*if (lifeCount == 0) {
+            if (lifeCount == 0) {
                 dead = true;
                 break;
             }
-             */
         }
     }
 
