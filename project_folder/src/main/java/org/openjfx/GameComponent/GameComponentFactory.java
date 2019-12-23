@@ -37,6 +37,7 @@ public class GameComponentFactory {
     ImagePattern guidedRocketImage;
     ImagePattern civilianImage;
     ImagePattern bossImage;
+    ImagePattern meleeImage;
 
     public GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -62,7 +63,7 @@ public class GameComponentFactory {
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
-            temp = new Atlas(width, height, atlasImage);
+            temp = new Atlas(width, height, atlasImage, gameComponents);
         } else if (type.equals("dodger")) {
             temp = new Dodger(width, height, dodgerImage);
         } else if (type.equals("dividus")) {
@@ -86,13 +87,13 @@ public class GameComponentFactory {
         } else if (type.equals("shield")) {
             temp = new Shield(width, height, "empty");
         } else if (type.equals("engineBlast")) {
-            temp = new EngineBlast(40, 50, "empty");
+            temp = new EngineBlast(width, height, "empty");
         } else if (type.equals("collectible")) {
-            temp = new Collectible(40, 50, "empty");
+            temp = new Collectible(width, height, "empty");
         } else if (type.equals("melee")) {
-            temp = new Melee(5, 150, "empty");
+            temp = new Melee(width, height, meleeImage);
         } else if (type.equals("barrier")) {
-            temp = new Barrier(700, 700, null);
+            temp = new Barrier(width, height, "empty");
         } else if (type.equals("civilian")) {
             temp = new Civilian(60, 100, civilianImage);
         } else if (type.equals("boss")) {
@@ -139,9 +140,9 @@ public class GameComponentFactory {
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");
-        civilianImage = openAsset("Assets\\Civilian.png");
+        civilianImage = openAsset("Assets\\civilian.png");
         bossImage = openAsset("Assets\\WhatsApp_Image_2019-12-22_at_08-removebg-preview.png");
-
+        meleeImage = openAsset("Assets\\double_lightsaber_melee.png");
     }
 
     /*
