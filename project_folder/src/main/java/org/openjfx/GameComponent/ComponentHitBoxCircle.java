@@ -17,7 +17,7 @@ public class ComponentHitBoxCircle extends Circle {
      */
     ComponentHitBoxCircle(double radius, String type, String specificType) {
         super(radius, Color.TRANSPARENT); //Color.TRANSPARENT
-        this.setStroke(Color.RED);
+        //this.setStroke(Color.RED);
         this.specificType = specificType;
         this.radius = radius;
         this.type = type;
