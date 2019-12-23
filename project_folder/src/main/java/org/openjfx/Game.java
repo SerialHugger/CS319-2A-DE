@@ -2,11 +2,15 @@ package org.openjfx;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.*;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.openjfx.GameController.MainGame;
+import org.openjfx.GameController.MenuManager.MainMenu;
+
 
 /**
  * JavaFX App
@@ -25,10 +29,11 @@ public class Game extends Application {
     private boolean onMenu = true;
     private boolean onGame = false;
 
-    private double width =  (int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
-    private double height = (int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
+    private double width = 1920; //(int)Screen.getPrimary().getVisualBounds().getWidth(); // deafult screen width // adjust here manually for now
+    private double height = 1080; //(int)Screen.getPrimary().getVisualBounds().getHeight(); // default screen height // adjust here manually for now
 
-    private final double UPDATE_CAP = 1.0/60.0; // fps limit is indicatied by 1/x, x is fps limit.
+
+    private final double UPDATE_CAP = 1.0 / 60.0; // fps limit is indicatied by 1/x, x is fps limit.
     double firstTime = 0; // hold the initial time.
     double lastTime = System.nanoTime() / 1000000000.0; // helps calculate fps
     double passedTime = 0; // helps calculate fps
@@ -37,13 +42,15 @@ public class Game extends Application {
     double frameTime = 0; // hold the frameTime
     int frames = 0; // frame count
     int fps = 0; // fps count
-  
+    int shipSelected = 0;
+
     private void update() {
 
-        if(onMenu){ // if the current scene is menu
+        if (onMenu) { // if the current scene is menu
             mainMenu.update(this);
+            shipSelected = mainMenu.getShipSelected();
         }
-        if(onGame){
+        if (onGame) {
             // I probably miss commended this cuz reasons.
             render = false;
             firstTime = System.nanoTime() / 1000000000.0; // get time
@@ -51,21 +58,22 @@ public class Game extends Application {
             lastTime = firstTime; // reset last time.
             unprocessedTime += passedTime; // calculate unprocessedTime
             frameTime += passedTime; // calculate frameTime
-            while(unprocessedTime >= UPDATE_CAP){ // if unprocessedTime is greater then UPDATE_CAP, intended frame.
+            shipSelected = mainMenu.getShipSelected();
+            while (unprocessedTime >= UPDATE_CAP) { // if unprocessedTime is greater then UPDATE_CAP, intended frame.
                 unprocessedTime -= UPDATE_CAP; // reset unprocecssedTime
                 render = true; // make render true
                 mainGame.updateInteraction(); // update Interaction/Game
-                if(frameTime >= 1.0){ //keeping track of the frames
+                if (frameTime >= 1.0) { //keeping track of the frames
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
                 }
             }
-            if(render){ // if the game updated Render it
+            if (render) { // if the game updated Render it
                 mainGame.update(this, fps); // render game.
                 frames++;
             } else {
-                try{
+                try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -74,9 +82,9 @@ public class Game extends Application {
         }
     }
 
-    private void startTimer(){
+    private void startTimer() {
         // timer create
-        AnimationTimer timer =  new AnimationTimer() {
+        AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 update();
@@ -87,12 +95,14 @@ public class Game extends Application {
         //timer start
     }
 
-    public void startGame(){
+    public void startGame() {
         onMenu = false; // set menu to no update
         onGame = true; // set game to update
+        gameRoot = new Pane();
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
+        mainGame.setShipSelected(mainMenu.getShipSelected());
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
         mainScene.setCursor(Cursor.NONE);
@@ -102,13 +112,14 @@ public class Game extends Application {
         // todo do stuff here yes hehe
         // todo make menu to game smoother
     }
+
     // start game from a level
-    public void startGame(int level){
+    public void startGame(int level) {
         onMenu = false; // set menu to no update
         onGame = true; // set game to update
         menuRoot.setVisible(false); // make menu invisible
         gameRoot.setVisible(true); // make game visible
-        mainGame = new MainGame(gameRoot, width, height);
+        mainGame = new MainGame(gameRoot, width, height, this);
         mainGame.setlevel(level);
         mainScene.setRoot(mainGame.createContent());
         mainGame.setButtonHandler(mainScene);
@@ -121,7 +132,7 @@ public class Game extends Application {
     }
 
     @Override
-    public void start(Stage theStage) throws Exception{
+    public void start(Stage theStage) throws Exception {
         //Start the Game here.
         this.theStage = theStage;
         mainMenu = new MainMenu(menuRoot, width, height); // Create MainMenu
@@ -136,7 +147,7 @@ public class Game extends Application {
         theStage.show(); // show it
     }
 
-    public void setFullScreen(boolean fullScreen){
+    public void setFullScreen(boolean fullScreen) {
         theStage.setFullScreen(fullScreen);
     }
 
@@ -144,5 +155,21 @@ public class Game extends Application {
         launch(args);
     }
 
+    public int getShipSelected() {
+        shipSelected = mainMenu.getShipSelected();
+        return shipSelected;
+    }
 
+    public void backToMainMenu() {
+        onMenu = true; // set menu to no update
+        onGame = false; // set game to update
+        menuRoot.setVisible(true); // make menu invisible
+        gameRoot.setVisible(false); // make game visible
+        mainScene.setRoot(mainMenu.createContent());
+        mainScene.setCursor(Cursor.NONE);
+        mainMenu.setButtonHandler(mainScene);
+        theStage.setScene(mainScene);
+        theStage.setFullScreen(mainMenu.isFullscreen());
+        theStage.show();
+    }
 }
