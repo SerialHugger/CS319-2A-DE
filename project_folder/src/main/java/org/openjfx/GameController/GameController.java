@@ -5,13 +5,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import org.openjfx.GameComponent.*;
 
+import org.openjfx.GameComponent.*;
+import org.openjfx.GameController.InteractionManager.InteractionHandler;
 import org.openjfx.GameController.MenuManager.EndGameMenu;
 import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.GameController.InteractionManager.InteractionHandler;
 import org.openjfx.GameController.MenuManager.ScoreMenu;
 import org.openjfx.SceneryManager.Scenery;
+import org.openjfx.SystemInfo;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class GameController {
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
     // level counter
-    int level = 1;
+    int level = 6; // Using mod 5  for infinite levels so need to start at 1
     int deadCounter = 0;
     //long score = 0;
     int noOfEnemies = 0;
@@ -478,7 +480,7 @@ public class GameController {
             boss.addShapes(gameRoot);
         }
 
-        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber + bossNumber);
+        return (atlasNumber + dodgernumber + (dividusNumber* 3) + dienamiteNumber + speedRunnerNumber + divingWindNumber + (bossNumber*29) );
     }
 
     public void createCivilians(int civilianNumber) {
@@ -523,6 +525,7 @@ public class GameController {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
 
                 if (!isCounterStarted) {
                     startTime = System.nanoTime() / 1000000000.0;
@@ -531,15 +534,19 @@ public class GameController {
                 }
             }
 
+
         } else if (levelMod == 2) {
-            if (noOfEnemies == 0){
-                noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
+            if (noOfEnemies == 0) {
+                noOfEnemies = createEnemies(20, 0, 0, 0, 20, 0, 0);
                 createCivilians(civilianNumber);
+                System.out.println("level2 entered ");
             }
+                
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
 
                 if (!isCounterStarted) {
                     startTime = System.nanoTime() / 1000000000.0;
@@ -548,14 +555,16 @@ public class GameController {
                 }
             }
         } else if (levelMod == 3) {
-            if (noOfEnemies == 0){
-                noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
+            if (noOfEnemies == 0) {
+                noOfEnemies = createEnemies(0, 20, 20, 0, 0, 0, 0);
+                System.out.println("level3 entered ");
                 createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
-                level = level + 1; // infinite loop for now
+                level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
 
                 if (!isCounterStarted) {
                     startTime = System.nanoTime() / 1000000000.0;
@@ -565,12 +574,15 @@ public class GameController {
             }
         } else if (levelMod == 4) {
             if (noOfEnemies == 0) {
-                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, bossNumber * levelMod);
+                noOfEnemies = createEnemies(0, 0, 0, 20, 0, 20, 0);
+                System.out.println("level4 entered ");
                 createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
+                noOfEnemies = 0;
                 speedFactor++;
+                levelMod = level % 5;
 
                 if (!isCounterStarted) {
                     startTime = System.nanoTime() / 1000000000.0;
