@@ -89,6 +89,7 @@ public class Atlas extends Enemy {
      */
     public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedfactor) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
+
         double random = Math.random() * 10000; // random for chance based updates
         if (delay) { // delay: a boolean value to delay shoots
             if (random < 150) { // %1.5 chance TODO: Constant problem for 150
