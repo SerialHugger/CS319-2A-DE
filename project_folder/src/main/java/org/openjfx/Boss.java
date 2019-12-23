@@ -24,7 +24,7 @@ public class Boss extends Enemy {
         double random = Math.random() * 10000; // random for chance based updates
 
         if (delay) { // delay: a boolean value to delay shoots
-            if (random < 9000) { // %1.5 chance TODO: Constant problem for 150
+            if( true) { // %1.5 chance TODO: Constant problem for 150
 
                 // TODO: explain or convert to a constant: 38.4 and -1
                 boolean isObjectInScene = getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && getX() > gameRoot.getTranslateX() * -1;
@@ -34,7 +34,7 @@ public class Boss extends Enemy {
                     shootBehaviour.shoot(GCF, this , gameRoot);
 
                     delay = false; // make delay false
-                    delayTimer = 500; // start delay timer TODO: Constant problem for 500
+                    delayTimer = 0; // start delay timer TODO: Constant problem for 500
                 }
             }
         } else { // if delay is on
