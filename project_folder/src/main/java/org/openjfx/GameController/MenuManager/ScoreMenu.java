@@ -18,11 +18,19 @@ public class ScoreMenu extends Rectangle {
     private StackPane scorePane;
     private Text scoreText;
 
+    /**
+     * constructor
+     * @param scenery parent scenery
+     */
     public ScoreMenu(Scenery scenery) {
         sceneryWidth = scenery.getWidth();
         sceneryHeight = scenery.getHeight();
     }
 
+    /**
+     * creates score screen elements
+     * @param gameRoot root pane
+     */
     public void createScoreScreen(Pane gameRoot) {
         backgroundRect = new Rectangle(sceneryWidth, sceneryHeight);
         scorePane = new StackPane();
@@ -44,6 +52,11 @@ public class ScoreMenu extends Rectangle {
 
     }
 
+    /**
+     * displays score screen
+     * @param gameRoot root pane
+     * @param score current score
+     */
     public void displayScoreScreen(Pane gameRoot, int score) {
         scoreText.setText("LEVEL COMPLETED. SCORE: " + score);
 
@@ -60,6 +73,9 @@ public class ScoreMenu extends Rectangle {
         scorePane.toFront();
     }
 
+    /**
+     * hide score screen
+     */
     public void hideScoreScreen() {
         scorePane.setVisible(false);
         backgroundRect.setVisible(false);
