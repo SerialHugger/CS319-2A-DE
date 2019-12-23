@@ -94,7 +94,7 @@ public class Collectible extends GameComponent {
             body.setFill(guidedRocketHudImage);
         }
         else
-            body.setFill(Color.TRANSPARENT);
+            body.setFill(Color.GREENYELLOW);
     }
 
     /**

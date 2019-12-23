@@ -14,9 +14,8 @@ public class Explosion extends PlayerEquipment {
      * @param width width of equipment
      * @param height height of equipment
      * @param assets images for equipment
-     * @param assetLocation image locations
      */
-    Explosion(double width, double height, ImagePattern[] assets, String assetLocation) {
+    Explosion(double width, double height, ImagePattern[] assets) {
         super(width, height, "explosion");
         wantedTime = 1;
         lifetime = 0;

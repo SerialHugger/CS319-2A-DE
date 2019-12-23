@@ -13,10 +13,12 @@ public class SpeedRunner extends Enemy {
         this.height = magicConverter(108);
         this.width = magicConverter(64);
         super.initBody(asset, width, height);
+        double currentX = this.getX();
+        double currentY = this.getY();
         hitBoxes[0] = new ComponentHitBoxCircle(this.width / 2, "enemy", "speedRunner");
         body = new Circle(this.width/2);
-        body.setTranslateX(hitBoxes[0].getTranslateX() + this.width/2);
-        body.setTranslateY(hitBoxes[0].getTranslateY() + this.width/2);
+        body.setTranslateX(currentX + this.width/2);
+        body.setTranslateY(currentY+ this.width/2);
         body.setFill(asset);
         hitBoxes[0].setTranslateX(body.getTranslateX());
         hitBoxes[0].setTranslateY(body.getTranslateY());

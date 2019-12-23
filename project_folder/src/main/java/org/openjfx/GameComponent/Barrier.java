@@ -14,15 +14,15 @@ public class Barrier extends PlayerEquipment {
      * @param height height oof the barrier's effective area
      * @param assets images for animation
      */
-    Barrier(double width, double height, String assets) {
+    Barrier(double width, double height, ImagePattern assets) {
         super(width, height, "shield");
-        this.height = magicConverter(700);
-        this.width = magicConverter(700);
+        this.height = magicConverter(500);
+        this.width = magicConverter(500);
         hitBoxes = new Shape[1];
-        hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "playerEquipment", "barrier");
+        hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width)/2, "playerEquipment", "barrier");
 
-        this.body = new Circle(magicConverter(width));
-        this.body.setFill(Color.rgb(255, 204, 0, 0.4));
+        this.body = new Circle(magicConverter(width)/2);
+        this.body.setFill(assets);
         // set X and Y
     }
 

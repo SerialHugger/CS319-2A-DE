@@ -168,7 +168,6 @@ public class Atlas extends Enemy {
             }
         }
         else if (!ascending && chasing){
-            System.out.println("chasing...");
             if (angerNumber == 0) {
                 xCoord = this.getX() + width / 2;
                 yCoord = this.getY() + height / 2;
