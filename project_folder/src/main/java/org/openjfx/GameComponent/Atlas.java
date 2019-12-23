@@ -20,6 +20,14 @@ public class Atlas extends Enemy {
     private double y_dist;
     private int angerNumber;
     private ArrayList<GameComponent> componentList;
+
+    /**
+     * constructor for enemy type atlas
+     * @param width is the width of Atlas
+     * @param height is the height of atlas
+     * @param assets is the image assets of atlas
+     * @param gameComponents inndicates which number in the gamecomponent arraylist
+     */
     Atlas(double width, double height, ImagePattern[] assets, ArrayList<GameComponent> gameComponents) {
         super(width, height, "atlas");
         this.height = magicConverter(90);
@@ -34,6 +42,10 @@ public class Atlas extends Enemy {
         angerNumber = -1;
     }
 
+    /**
+     * atlass catches a civilian and rises to abduct it
+     * @param gameComponents gets the civilian from arraylist
+     */
     public void chooseCivilian(ArrayList<GameComponent> gameComponents){
         double minDist = Double.POSITIVE_INFINITY;
         for (int i = 0; i < gameComponents.size(); i++){
@@ -49,17 +61,32 @@ public class Atlas extends Enemy {
         }
     }
 
+    /**
+     * function for grabbing civilian
+     */
     public void grabCivilian(){
         target.setGrabbed(true);
         ascending = true;
     }
 
+    /**
+     * function for situtations  when atlas reaches top with civilian
+     */
     public void eatCivilian(){
         target.dead = true;
         ascending = false;
         chasing = true;
         angerNumber = 0;
     }
+
+    /**
+     * typical move function of enemy atlas includes move and shoot
+     * @param GCF gets the Gamecomponent
+     * @param gameRoot gets the game pane
+     * @param player needs the player for moving to player
+     * @param left boolean for moving left
+     * @param speedfactor an integer which multiplies the speed of the enemy
+     */
     public void moveAtlas(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedfactor) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates
