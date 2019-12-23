@@ -42,8 +42,8 @@ public class Hud {
 
         for (int i = 0; i < skillsHud.length; i++) {
             skillsHud[i] = new SceneComponent(50, 50, "", "empty");
-            skillsHud[i].setTranslateX(-(skillsHud.length - i) * 52 - 100);
-            skillsHud[i].setTranslateY(height - 40);
+            skillsHud[i].setTranslateX( width * -1 + i * 52 + 30 );
+            skillsHud[i].setTranslateY(height - 100);
             skillsHud[i].setFill(Color.GREEN);
 
             skillsHud[i].setStroke(Color.BLACK);

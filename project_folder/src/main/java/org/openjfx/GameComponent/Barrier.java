@@ -8,7 +8,7 @@ import org.openjfx.SceneryManager.Scenery;
 
 public class Barrier extends PlayerEquipment {
 
-    Barrier(double width, double height, ImagePattern[] assets) {
+    Barrier(double width, double height, String assets) {
         super(width, height, "shield");
         this.height = magicConverter(700);
         this.width = magicConverter(700);
