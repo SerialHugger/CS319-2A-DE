@@ -28,6 +28,9 @@ public class MainGame {
     }
     public void update(Game game, int fps){
         gameController.updateGame(fps);
+        if( gameController.getReturnMainMenu() ){
+            backToMainMenu();
+        }
 
     }
 
@@ -51,4 +54,5 @@ public class MainGame {
     public int getShipSelected(){
         return shipSelected;
     }
+
 }

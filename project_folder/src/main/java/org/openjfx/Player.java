@@ -312,6 +312,7 @@ public class Player extends GameComponent{
             }
             if(lifeCount == 0){
                 dead = true;
+
                 break;
             }
         }
@@ -539,4 +540,5 @@ public class Player extends GameComponent{
     public double getHeight() { return height; }
     public long getScore() {return score;}
     public void setScore(long score) {this.score = score;}
+    public boolean isDead(){ return dead;}
 }

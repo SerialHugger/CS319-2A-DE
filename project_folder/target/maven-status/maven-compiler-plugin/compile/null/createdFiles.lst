@@ -11,6 +11,7 @@ org\openjfx\ShootWithLaserBullet.class
 org\openjfx\GameController.class
 org\openjfx\ShootWithGuidedBullet.class
 org\openjfx\Melee.class
+org\openjfx\Civilian.class
 org\openjfx\Atlas.class
 org\openjfx\Collectible$1.class
 org\openjfx\Bomb.class

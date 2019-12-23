@@ -27,6 +27,7 @@ public class GameController {
     boolean toLeft = true; // if facing left true else false. Starts with false;
     boolean startSlidingLeft = false; // slides background to left
     boolean startSlidingRight = false; // slides background to right
+    boolean returnback = false; // return back to menu on some occasion
     double slidingLimit; // sliding limit for bacground
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
@@ -37,8 +38,9 @@ public class GameController {
     int noOfEnemies = 0;
     int selectShipNumber;
     int currentScreen = 0;
+    int score = 0;
     // BooleanProperties for smoother control on ui.
-    private BooleanProperty[] keyInputs = new BooleanProperty[14];
+    private BooleanProperty[] keyInputs = new BooleanProperty[15];
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
@@ -327,6 +329,9 @@ public class GameController {
         else if (currentScreen == 2) { // STOP, SHOW SCORE
 
         }
+        if( player.isDead() ){
+
+        }
 
         createLevel();
         // update root
@@ -396,6 +401,9 @@ public class GameController {
         gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
         // update scenery
         scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
+        }
+        if ( keyInputs[14].get() && player.isDead() ){
+             returnback = true;
         }
     }
 
@@ -556,6 +564,9 @@ public class GameController {
             if (e.getCode() == KeyCode.TAB) {
                 keyInputs[13].set(true);
             }
+            if ( e.getCode() == KeyCode.B){
+                keyInputs[14].set(true);
+            }
         });
         scene.setOnKeyReleased(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -600,6 +611,9 @@ public class GameController {
             if (e.getCode() == KeyCode.TAB) {
                 keyInputs[13].set(false);
             }
+            if (e.getCode() == KeyCode.B) {
+                keyInputs[14].set(false);
+            }
         });
     }
 
@@ -632,5 +646,8 @@ public class GameController {
     }
     public int getSelectShipNumber(){
         return selectShipNumber;
+    }
+    public boolean getReturnMainMenu(){
+        return returnback;
     }
 }
