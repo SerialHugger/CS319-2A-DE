@@ -38,6 +38,7 @@ org\openjfx\GameComponent\Dividus.class
 org\openjfx\GameComponent\Explosion.class
 org\openjfx\GameComponent\Atlas.class
 org\openjfx\GameComponent\Civilian.class
+org\openjfx\GameController\MenuManager\EndGameMenu.class
 org\openjfx\GameComponent\ComponentHitBoxCircle.class
 org\openjfx\GameComponent\Enemy.class
 org\openjfx\GameComponent\SpeedRunner.class
