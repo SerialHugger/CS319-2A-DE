@@ -92,7 +92,7 @@ public class GameComponentFactory {
         } else if (type.equals("melee")) {
             temp = new Melee(5, 150, "empty");
         } else if (type.equals("barrier")) {
-            temp = new Barrier(700, 700, "empty");
+            temp = new Barrier(700, 700, null);
         } else if (type.equals("civilian")) {
             temp = new Civilian(60, 100, civilianImage);
         } else if (type.equals("boss")) {
