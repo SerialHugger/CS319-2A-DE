@@ -10,12 +10,18 @@ public class Dodger extends Enemy {
     private boolean is_skill_active = true;
     private int countdown = 0;
 
-    Dodger(double width, double height, ImagePattern asset) {
+    Dodger(double width, double height, ImagePattern[] assets) {
         super(width, height, "dodger");
 
         this.height = magicConverter(60);
-        this.width = magicConverter(30);
-        super.initBody(asset, width, height);
+        this.width = magicConverter(60);
+        animationFrames = new ImagePattern[14];
+        for (int i = 0; i < 14; i++)
+            animationFrames[i] = assets[i];
+        super.initBody(assets[0], width, height);
+        body.setFill(animationFrames[currentState]);
+        delay = false;
+        delayTimer = 0;
         setShootBehaviour(new ShootWithLaserBullet());
     }
 
@@ -41,13 +47,16 @@ public class Dodger extends Enemy {
                 delay = true; // make delay true
             delayTimer -= 5; // decrease delay timer TODO: Why? Could you explain
         }
-
+        currentState++;
+        if (currentState == 14)
+            currentState = 0;
+        body.setFill(animationFrames[currentState]);
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2];
+        speed_x = moveValues[2] + (speedFactor/100);
         speed_y = moveValues[3];
 
         moveX(directionX, speed_x); // move X with given inputs

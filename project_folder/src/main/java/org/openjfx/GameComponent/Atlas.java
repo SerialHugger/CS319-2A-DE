@@ -84,6 +84,8 @@ public class Atlas extends Enemy {
                 delay = true; // make delay true
             delayTimer -= 5; // decrease delay timer TODO: Why? Could you explain
         }
+
+        // get new coordinates and speed for the next frame
         if (directionX == 1)
             body.setFill(animationFrames[2]);
         else

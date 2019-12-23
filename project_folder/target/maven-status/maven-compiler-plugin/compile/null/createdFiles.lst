@@ -1,5 +1,4 @@
 org\openjfx\Game.class
-<<<<<<< Updated upstream
 org\openjfx\GameComponent\GuidedRocket.class
 org\openjfx\SceneryManager\BackGround.class
 org\openjfx\GameComponent\ShootNoWay.class
@@ -28,11 +27,11 @@ org\openjfx\GameComponent\EngineBlast.class
 org\openjfx\GameComponent\Barrier.class
 org\openjfx\GameController\GameController.class
 org\openjfx\GameComponent\ShootWithGuidedBullet.class
+org\openjfx\GameController\MenuManager\ScoreMenu.class
 org\openjfx\GameComponent\EnemySelfDestruct.class
 org\openjfx\GameController\MenuManager\MainMenu.class
 org\openjfx\GameController\MainGame.class
 module-info.class
-org\openjfx\GameComponent\GameController.class
 org\openjfx\SceneryManager\Scenery.class
 org\openjfx\GameComponent\Bomb.class
 org\openjfx\GameComponent\Dividus.class
@@ -52,20 +51,3 @@ org\openjfx\GameComponent\ShootWithLaserBullet.class
 org\openjfx\SystemInfo.class
 org\openjfx\GameComponent\GuidedBullet.class
 org\openjfx\SceneryManager\ForeGround.class
-=======
-org\openjfx\DivingWind.class
-org\openjfx\MainGame.class
-org\openjfx\InGameMenu.class
-org\openjfx\Collectible.class
-org\openjfx\ShootWithLaserBullet.class
-org\openjfx\ShootWithGuidedBullet.class
-org\openjfx\Melee.class
-org\openjfx\Civilian.class
-org\openjfx\Collectible$1.class
-org\openjfx\Shootable.class
-module-info.class
-org\openjfx\EngineBlast.class
-org\openjfx\Barrier.class
-org\openjfx\Collectible$Ability.class
-org\openjfx\ShootNoWay.class
->>>>>>> Stashed changes
