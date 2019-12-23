@@ -480,7 +480,7 @@ public class GameController {
             boss.addShapes(gameRoot);
         }
 
-        return (atlasNumber + dodgernumber + (dividusNumber* 3) + dienamiteNumber + speedRunnerNumber + divingWindNumber + (bossNumber*29) );
+        return (atlasNumber + dodgernumber + (dividusNumber* 3) + dienamiteNumber + speedRunnerNumber + divingWindNumber + (bossNumber*30) );
     }
 
     public void createCivilians(int civilianNumber) {
@@ -532,12 +532,13 @@ public class GameController {
                     isCounterStarted = true;
                     setCurrentScreen(2);
                 }
-            }
 
+            }
+            System.out.println("counter" + deadCounter);
 
         } else if (levelMod == 2) {
             if (noOfEnemies == 0) {
-                noOfEnemies = createEnemies(20, 0, 0, 0, 20, 0, 0);
+                noOfEnemies = createEnemies(0, 0, 0, 0, 20, 0, 0);
                 createCivilians(civilianNumber);
                 System.out.println("level2 entered ");
             }
@@ -574,7 +575,7 @@ public class GameController {
             }
         } else if (levelMod == 4) {
             if (noOfEnemies == 0) {
-                noOfEnemies = createEnemies(0, 0, 0, 20, 0, 20, 0);
+                noOfEnemies = createEnemies(20, 0, 0, 20, 0, 20, 0);
                 System.out.println("level4 entered ");
                 createCivilians(civilianNumber);
             }
