@@ -1,4 +1,4 @@
-package org.openjfx.GameComponentPackage;
+package org.openjfx.GameComponent;
 
 import javafx.scene.layout.Pane;
 
