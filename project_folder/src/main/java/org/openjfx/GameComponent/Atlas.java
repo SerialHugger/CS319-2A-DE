@@ -84,13 +84,21 @@ public class Atlas extends Enemy {
                 delay = true; // make delay true
             delayTimer -= 5; // decrease delay timer TODO: Why? Could you explain
         }
+
+        // get new coordinates and speed for the next frame
+        int[] moveValues = getMoveValues(random);
+
+        directionX = moveValues[0];
+        directionY = moveValues[1];
+        speed_x = moveValues[2] + (speedfactor/100);
+        speed_y = moveValues[3];
         if (directionX == 1)
             body.setFill(animationFrames[2]);
         else
             body.setFill(animationFrames[1]);
         // get new coordinates and speed for the next frame
         if (target == null) {
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];
@@ -135,7 +143,7 @@ public class Atlas extends Enemy {
             }
         }
         else if (!ascending && chasing){
-            int[] moveValues = getMoveValues(random);
+            moveValues = getMoveValues(random);
 
             directionX = moveValues[0];
             directionY = moveValues[1];

@@ -109,7 +109,7 @@ public class DivingWind extends Enemy {
 
             directionX = moveValues[0];
             directionY = moveValues[1];
-            speed_x = moveValues[2];
+            speed_x = moveValues[2] + (speedFactor/100);
             speed_y = moveValues[3];
             moveY(directionY, speed_y);
             moveX(directionX, speed_x);

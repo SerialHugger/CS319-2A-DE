@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6cb90921-090e-46e6-91c9-0a77c4329371" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameController/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent/Collectible.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent/Collectible.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/GameComponent/Player.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,6 +142,10 @@
       <workItem from="1577089924838" duration="64000" />
       <workItem from="1577090046993" duration="395000" />
       <workItem from="1577090624127" duration="60000" />
+      <workItem from="1577090692351" duration="234000" />
+      <workItem from="1577104585404" duration="57000" />
+      <workItem from="1577104672015" duration="113000" />
+      <workItem from="1577108766415" duration="1581000" />
     </task>
     <servers />
   </component>

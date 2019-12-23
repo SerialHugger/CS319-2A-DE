@@ -8,7 +8,7 @@ import org.openjfx.SceneryManager.Scenery;
 
 public class Barrier extends PlayerEquipment {
 
-    Barrier(double width, double height, ImagePattern[] assets) {
+    Barrier(double width, double height, String assets) {
         super(width, height, "shield");
         this.height = magicConverter(700);
         this.width = magicConverter(700);
@@ -16,8 +16,6 @@ public class Barrier extends PlayerEquipment {
         hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "playerEquipment", "barrier");
 
         this.body = new Circle(magicConverter(width));
-        this.height = magicConverter(width);
-        this.width = magicConverter(height);
         this.body.setFill(Color.rgb(255, 204, 0, 0.4));
         // set X and Y
     }
