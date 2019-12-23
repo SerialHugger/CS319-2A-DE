@@ -1,16 +1,17 @@
 package org.openjfx.GameComponent;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import org.openjfx.SceneryManager.Scenery;
 
 public class Barrier extends PlayerEquipment {
 
-    Barrier(double width, double height, String assetLocation) {
+    Barrier(double width, double height, ImagePattern[] assets) {
         super(width, height, "shield");
         hitBoxes = new Shape[1];
-        hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "barrier", "barrier");
+        hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "playerEquipment", "barrier");
 
         this.body = new Circle(magicConverter(width));
         this.height = magicConverter(width);

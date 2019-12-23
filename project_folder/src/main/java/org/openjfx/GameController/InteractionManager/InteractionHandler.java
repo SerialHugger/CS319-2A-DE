@@ -194,6 +194,15 @@ public class InteractionHandler {
                                     circleTemp2.dead = true; // change circleTemp2 to dead status
                                 }
                             }
+                        } else if(circleTemp.getType().equals("playerEquipment")) { // first one is citizen
+                            if(circleTemp2.getType().equals("enemyBullet")){ // second one is enemyBullet
+                                if(circleTemp.getSpecificType().equals("barrier")) {
+                                    if (circleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                        System.out.println("barrier circle to enemyBullet Circle");
+                                        circleTemp2.dead = true; // change circleTemp2 to dead status
+                                    }
+                                }
+                            }
                         }
                     } else if (j instanceof ComponentHitBoxRectangle) { // for rectangles
                         //////////////////////
@@ -411,6 +420,23 @@ public class InteractionHandler {
                                     //TODO ADD CITIZEN INTERACTION HERE
                                     rectangleTemp.dead = true; // change rectangle to dead status.
                                     circleTemp2.dead = true; // change circleTemp2 to dead status
+                                }
+                            }
+                        } else if(rectangleTemp.getType().equals("playerEquipment")) { // first one is citizen
+                            if(circleTemp2.getType().equals("enemyBullet")){ // second one is enemyBullet
+                                if(rectangleTemp.getSpecificType().equals("playerBullet")) {
+                                    if (rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                        System.out.println("playerBullet rectangle to enemyBullet Circle");
+                                        //TODO ADD CITIZEN INTERACTION HERE
+                                        rectangleTemp.dead = true; // change rectangle to dead status.
+                                        circleTemp2.dead = true; // change circleTemp2 to dead status
+                                    }
+                                } else if(rectangleTemp.getSpecificType().equals("melee")) {
+                                    if (rectangleTemp.getBoundsInParent().intersects(circleTemp2.getBoundsInParent())) { // if they intersect
+                                        System.out.println("melee rectangle to enemyBullet Circle");
+                                        //TODO ADD CITIZEN INTERACTION HERE
+                                        circleTemp2.dead = true; // change circleTemp2 to dead status
+                                    }
                                 }
                             }
                         }
