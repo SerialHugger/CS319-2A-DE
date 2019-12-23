@@ -14,7 +14,7 @@ import java.util.Random;
 public class Collectible extends GameComponent {
 
     enum Ability { // an enum that represents the special abilities
-        Shield, Bomb, EngineBlast, BulletRain, Barrier, GuidedRocket, Melee;
+        Shield, Bomb, TimeFreeze, BulletRain, Barrier, GuidedRocket, Melee;
 
         private static final List<Ability> VALUES = List.of(values()); // holds the abilities
 
@@ -36,8 +36,8 @@ public class Collectible extends GameComponent {
                 case Bomb:
                     type = "bomb";
                     break;
-                case EngineBlast:
-                    type = "engineBlast";
+                case TimeFreeze:
+                    type = "timeFreeze";
                     break;
                 case BulletRain:
                     type = "bulletRain";
@@ -84,8 +84,6 @@ public class Collectible extends GameComponent {
     }
 
     public void moveCollectible() {
-
-
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
             if (hitBox instanceof ComponentHitBoxCircle) {
