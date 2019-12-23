@@ -200,7 +200,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         atlas.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                     Dodger dodger = ((Dodger) gameComponents.get(i));
@@ -210,7 +210,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         dodger.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                     Dividus dividus = ((Dividus) gameComponents.get(i));
@@ -221,7 +221,7 @@ public class GameController {
                         dividus.createAtlases(gameComponentFactory);
                         dividus.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                     Dienamite dienamite = ((Dienamite) gameComponents.get(i));
@@ -231,7 +231,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         dienamite.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
                     DivingWind divingWind = ((DivingWind) gameComponents.get(i));
@@ -241,7 +241,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         divingWind.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
                     LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -314,6 +314,15 @@ public class GameController {
                         boss.die(); // kill it, remove it from root.
                         deadCounter++;
                         score = score + 100;
+                    }
+                } else if (gameComponents.get(i) instanceof Civilian) {
+                    Civilian civilian = ((Civilian) gameComponents.get(i));
+                    civilian.moveCivilian(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
+                    if (civilian.dead) { // if enemyType1 is dead.
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        civilian.die(); // kill it, remove it from root.
+                        player.setScore(player.getScore() - 200);
                     }
                 }
             }
@@ -489,11 +498,13 @@ public class GameController {
         int speedRunnerNumber = 2;
         int bossNumber = 1;
         int divingWindNumber = 2;
+        int civilianNumber = 5;
         int levelMod = level % 5;
         if (levelMod == 1) {
             if (noOfEnemies == 0) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
                 noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, 1);
+                createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
@@ -503,18 +514,20 @@ public class GameController {
             }
 
         } else if (levelMod == 2) {
-            if (noOfEnemies == 0)
+            if (noOfEnemies == 0){
                 noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
-
+                createCivilians(civilianNumber);
+            }
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
             }
         } else if (levelMod == 3) {
-            if (noOfEnemies == 0)
+            if (noOfEnemies == 0){
                 noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
-
+                createCivilians(civilianNumber);
+            }
             if (noOfEnemies == deadCounter) {
                 level = level + 1; // infinite loop for now
                 deadCounter = 0;
@@ -523,6 +536,7 @@ public class GameController {
         } else if (levelMod == 4) {
             if (noOfEnemies == 0) {
                 noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, bossNumber * levelMod);
+                createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
