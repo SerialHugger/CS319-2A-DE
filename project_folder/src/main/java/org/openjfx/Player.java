@@ -39,7 +39,7 @@ public class Player extends GameComponent{
     int accCount = 0;
     int dirX;
     int dirY;
-    private String[] abilities;
+    String[] abilities;
     double acceleration;
     double innerAcc;
     double innerSpeed = 0;
@@ -49,6 +49,7 @@ public class Player extends GameComponent{
     int attackDelayTimer = 0;
     boolean attackDelay = false;
     int lifeCount = 3;
+    boolean immortality = true;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
     boolean isShieldActive = false;
@@ -238,11 +239,11 @@ public class Player extends GameComponent{
         if(keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
         }
-        if(false)
+        /*if(false)
             checkDeath();
         else
             lifeCount = 3;
-
+        */
         if(!keyInputs[1].get() && !keyInputs[3].get()){ //if keys are not pressed
             //handle the acceleration with scenery!
             if(speed > 0) {
@@ -295,7 +296,7 @@ public class Player extends GameComponent{
         moveX(1,speed + innerSpeed); // move!
     }
 
-    private void checkDeath() {
+    public void checkDeath() {
         for(int i = 0; i < hitBoxes.length; i++){
             if(hitBoxes[i] instanceof ComponentHitBoxCircle){
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle)hitBoxes[i]);
@@ -310,9 +311,8 @@ public class Player extends GameComponent{
                     temp.dead = false;
                 }
             }
-            if(lifeCount == 0){
+            if(lifeCount == 0 && !immortality ){
                 dead = true;
-
                 break;
             }
         }

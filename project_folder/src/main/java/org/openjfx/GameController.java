@@ -44,7 +44,6 @@ public class GameController {
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
-
     MainGame mainGame;
 
     /*
@@ -105,10 +104,15 @@ public class GameController {
             for (int i = 0; i < size; i++) { // for every component in gameComponents.
                 if (gameComponents.get(i) instanceof Player) { // if its an instance class of Player.
                     ((Player) gameComponents.get(i)).movePlayer(keyInputs, gameComponentFactory); // update it.
-                    if (player.dead) { // if player is dead.
+                    player.checkDeath();
+                    if (player.isDead()) { // if player is dead.
+                        System.out.println("palyer is dead dead and dead");
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         player.die(); // kill it, remove it from root.
+                        if ( keyInputs[14].get() ){
+                            returnback = true;
+                        }
                     }
                 } else if (gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
                     PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -203,6 +207,7 @@ public class GameController {
                     if (dividus.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
+                        dividus.createAtlases(gameComponentFactory);
                         dividus.die(); // kill it, remove it from root.
                         deadCounter++;
                         score = score + 100;
@@ -279,6 +284,11 @@ public class GameController {
                     GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
                     gRocket.chooseTarget(this.gameComponents);
                     gRocket.moveGuidedRocket();
+                    if (gRocket.getY() >= gameRoot.getHeight() + gRocket.width || gRocket.getY() < 0 - gRocket.width) {
+                        gameComponents.remove(i--); // remove it from components and decrease i.
+                        size -= 1; // decrease size.
+                        gRocket.die(); // kill it, remove it from root.
+                    }
                     if (gRocket.dead) {
                         gameComponents.remove(i--);
                         size -= 1;
@@ -327,9 +337,6 @@ public class GameController {
         }
 
         else if (currentScreen == 2) { // STOP, SHOW SCORE
-
-        }
-        if( player.isDead() ){
 
         }
 
@@ -402,9 +409,7 @@ public class GameController {
         // update scenery
         scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
         }
-        if ( keyInputs[14].get() && player.isDead() ){
-             returnback = true;
-        }
+
     }
 
     /*

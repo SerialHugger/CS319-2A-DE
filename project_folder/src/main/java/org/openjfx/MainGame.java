@@ -27,10 +27,10 @@ public class MainGame {
         return gameRoot;
     }
     public void update(Game game, int fps){
-        gameController.updateGame(fps);
         if( gameController.getReturnMainMenu() ){
             backToMainMenu();
         }
+        gameController.updateGame(fps);
 
     }
 

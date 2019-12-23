@@ -135,7 +135,6 @@ public class GameComponentFactory {
         dodgerImage = openAsset("Assets\\pacman.png");
         dividusImage = openAsset("Assets\\pacman.png");
         speedRunnerImage = openAsset("Assets\\alpaka.png");
-        //civilianImage = openAsset("Assest\\civilian");
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");       
