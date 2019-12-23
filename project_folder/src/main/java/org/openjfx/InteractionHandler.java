@@ -236,7 +236,6 @@ public class InteractionHandler {
                                         System.out.println("Destroying rectangle " + rectangleTemp2.getSpecificType());
                                         rectangleTemp2.dead = true;
                                     }
-
                                 }
                             }
                         } else if(circleTemp.getType().equals("enemy")) { // first one is enemy
@@ -368,7 +367,6 @@ public class InteractionHandler {
                                         System.out.println("Destroying circle " + circleTemp2.getSpecificType());
                                         circleTemp2.dead = true;
                                     }
-
                                 }
                             }
                         } else if(rectangleTemp.getType().equals("enemy")) { // first one is enemy

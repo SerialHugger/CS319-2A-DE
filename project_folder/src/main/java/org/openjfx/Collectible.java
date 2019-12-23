@@ -56,29 +56,21 @@ public class Collectible extends GameComponent {
         }
     }
 
-    private boolean didHitTheGround; // checks whether the ability hit the ground or not
     private Ability abilityType;
 
     Collectible(double width, double height, String assetLocation) {
         super(width, height, "collectible");
         abilityType = Ability.randomAbility();
-        didHitTheGround = false;
         System.out.println("Ability type of random: " + abilityType.getType());
-        hitBoxes = new Shape[1];
+        hitBoxes = new Rectangle[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "collectible", getAbilityType());
         body = new Rectangle(this.width, this.height);
-        body.setFill(Color.TRANSPARENT);
+        body.setFill(Color.YELLOW);
     }
 
     public void moveCollectible() {
 
-        if (didHitTheGround)
-            return;
-
-        if (gameRoot.getHeight() - height <= getY())
-            didHitTheGround = true;
-
-        if (!didHitTheGround)
+        if (gameRoot.getHeight() - height * 1.2 > getY())
             moveY(1, magicConverter(10));
 
         // Actions when collision
