@@ -16,8 +16,6 @@ public class Barrier extends PlayerEquipment {
         hitBoxes[0] = new ComponentHitBoxCircle(magicConverter(width), "playerEquipment", "barrier");
 
         this.body = new Circle(magicConverter(width));
-        this.height = magicConverter(width);
-        this.width = magicConverter(height);
         this.body.setFill(Color.rgb(255, 204, 0, 0.4));
         // set X and Y
     }
