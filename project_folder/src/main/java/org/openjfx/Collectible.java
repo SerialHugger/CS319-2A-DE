@@ -13,7 +13,7 @@ import java.util.Random;
 public class Collectible extends GameComponent {
 
     enum Ability { // an enum that represents the special abilities
-        Shield, HyperJump, EngineBlast, BulletRain, Barrier, GuidedRocket, Melee;
+        Shield, Bomb, EngineBlast, BulletRain, Barrier, GuidedRocket, Melee;
 
         private static final List<Ability> VALUES = List.of(values()); // holds the abilities
 
@@ -31,8 +31,8 @@ public class Collectible extends GameComponent {
                 case Shield:
                     type =  "shield";
                     break;
-                case HyperJump:
-                    type = "hyperJump";
+                case Bomb:
+                    type = "bomb";
                     break;
                 case EngineBlast:
                     type = "engineBlast";

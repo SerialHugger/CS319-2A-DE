@@ -21,7 +21,7 @@ public class Player extends GameComponent{
     private int totalBulletRainWave = 3;
     private boolean bulletRainOnGoing = false;
     private int bulletRainCount = 0;
-    private final int TOTAL_BOMB_DROPS = 3;
+    private final int TOTAL_BOMB_DROPS = 1;
     private boolean bombingOngoing = false;
     private boolean bombingActive = false;
     private int bombDropCount = 0;
@@ -212,10 +212,10 @@ public class Player extends GameComponent{
             } 
         }
         if(keyInputs[7].get()) { // E pressed
-            if (!bombingOngoing) {
-                bombingActive = true;
-                bombingOngoing = true;
-                bombDropCount = 0;
+            if (!meleeOngoing) {
+                meleeOngoing = true;
+                meleeActive = true;
+                meleeCount = 0;
             }
         }
         if(keyInputs[8].get()) { // H pressed
@@ -274,7 +274,7 @@ public class Player extends GameComponent{
             }
         }
         if (bombingOngoing) {
-            if (bombingActive) {
+            if (bombingActive && bombDropCount >= TOTAL_BOMB_DROPS) {
                 dropBomb(GCF);
                 bombingActive = false;
             }
@@ -357,7 +357,6 @@ public class Player extends GameComponent{
             shield.addShapes(gameRoot);
             isShieldActive = true;
         }
-
     }
 
     public void activateBarrier(GameComponentFactory GCF){
@@ -446,23 +445,6 @@ public class Player extends GameComponent{
         melee.addShapes(gameRoot);
     }
 
-    private void activateHyperJump() {
-        double chance = 100 * Math.random();
-
-        /*if (chance <= 10.0)
-            lifeCount--;*/
-
-        int vertDist = (int) (Math.random() * magicConverter(100.0));
-        int horizDist = (int) (Math.random() * magicConverter(1000.0));
-
-        int vert = Math.random() > 0.5 ? 1 : -1;
-        int horiz = Math.random() > 0.5 ? 1: -1;
-
-        moveX(horiz, horizDist);
-        moveY(vert, vertDist);
-        gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
-    }
-
     public boolean addAbility(String abilityType) {
         if (noOfAbilities < MAX_NO_OF_ABILITIES && !hasAbility(abilityType)) {
             for (int i = 0; i < MAX_NO_OF_ABILITIES; i++) {
@@ -493,17 +475,17 @@ public class Player extends GameComponent{
 
                 if (abilityType.equals("shield")) {
                     activateShield(GCF, this);
-                } else if (abilityType.equals("hyperJump")) {
-                    activateHyperJump();
                 } else if (abilityType.equals("engineBlast")) {
                     if (!engineBlastOngoing) {
                         engineBlastOngoing = true;
                         engineBlastActive = true;
                         engineBlastCount = 0;
                     }
+                } else if (abilityType.equals("overcharge")) {
+                    if (isShieldActive)
+                        System.out.println("Some overcharge cheese baby!!!!");
                 } else if (abilityType.equals("barrier")) {
                     activateBarrier(GCF);
-
                 } else if (abilityType.equals("bulletRain")) {
                     if(!bulletRainOnGoing) {
                         bulletRainOnGoing = true;
@@ -512,15 +494,20 @@ public class Player extends GameComponent{
                     }
                 } else if (abilityType.equals("guidedRocket")) {
 
-                } else if (abilityType.equals("melee")) {
-                    if (!meleeOngoing) {
-                        meleeOngoing = true;
-                        meleeActive = true;
-                        meleeCount = 0;
+                } else if (abilityType.equals("bomb")) {
+                    if (!bombingOngoing) {
+                        bombingActive = true;
+                        bombingOngoing = true;
+                        bombDropCount = 0;
                     }
                 }
-                abilities[index] = "empty";
-                noOfAbilities--;
+
+                if (abilities[index].equals("shield"))
+                    abilities[index] = "overcharge";
+                else {
+                    abilities[index] = "empty";
+                    noOfAbilities--;
+                }
                 return true;
             }
         }
