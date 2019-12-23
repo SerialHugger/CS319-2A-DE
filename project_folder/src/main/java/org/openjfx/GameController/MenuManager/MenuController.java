@@ -71,6 +71,11 @@ public class MenuController {
 
     }
 
+    /**
+     *
+     * @param game updates menu objects
+     * @param root root pane
+     */
     public void update(Game game, Pane root) {
 
         // initiate delay timer.
@@ -300,7 +305,7 @@ public class MenuController {
         }
     }
 
-    /*
+    /**
      * changes the properties of current with old.
      * uses buttonHighlight
      */
@@ -318,7 +323,7 @@ public class MenuController {
         buttonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
     }
 
-    /*
+    /**
      * changes the properties of current with old for settings
      * uses settingButtonHighlight
      */
@@ -336,7 +341,12 @@ public class MenuController {
         settingButtonHighlight.setTranslateY(current.getTranslateY()); // adjust highlight Y
     }
 
-
+    /**
+     * updates level buttons
+     * @param old olt button
+     * @param current current button
+     * @param fromUp from up or not
+     */
     private void levelUpdateButtons(Rectangle old, Rectangle current, boolean fromUp) {
         old.setFill(levelButtonImages[whatImagelevel - 1 % 10]); // make old white
         if (fromUp) {
@@ -365,14 +375,20 @@ public class MenuController {
     }
 
 
-    // returns the fullscreenity
+    /**
+     *
+     * @return if full screen or not
+     */
     public boolean isFullscreen() {
         if (fullscreen == 1)
             return true;
         return false;
     }
 
-    // Set buttons for give control over menu
+    /**
+     *
+     * @param scene current scene
+     */
     public void setButtonHandler(Scene scene) {
         scene.setOnKeyPressed(e -> {
             if ((e.getCode() == KeyCode.W) || (e.getCode() == KeyCode.UP)) {
@@ -410,6 +426,10 @@ public class MenuController {
         });
     }
 
+    /**
+     *
+     * @return selected ship id
+     */
     public int getShipSelected() {
         return shipSelected;
     }
