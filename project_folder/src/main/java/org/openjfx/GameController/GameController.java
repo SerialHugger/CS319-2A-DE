@@ -318,7 +318,7 @@ public class GameController {
                 } else if (gameComponents.get(i) instanceof Civilian) {
                     Civilian civilian = ((Civilian) gameComponents.get(i));
                     civilian.moveCivilian(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                    if (civilian.dead) { // if enemyType1 is dead.
+                    if (civilian.isDead()) {
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         civilian.die(); // kill it, remove it from root.
