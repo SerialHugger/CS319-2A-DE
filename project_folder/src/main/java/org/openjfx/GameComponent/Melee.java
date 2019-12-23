@@ -13,7 +13,7 @@ public class Melee extends PlayerEquipment {
     private int currentAngle; // the amount that the arm will be rotated relative to its original position
 
     Melee(double width, double height, String assetLocation) {
-        super(width, height, "playerEquipment");
+        super(width, height, "melee");
         rotations = 0;
         System.out.println("Melee arm created...");
         currentAngle = ROTATION_INCREMENT;
