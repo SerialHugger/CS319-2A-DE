@@ -9,7 +9,12 @@ public class Dodger extends Enemy {
     final private int teleport_cooldown = 1000;
     private boolean is_skill_active = true;
     private int countdown = 0;
-
+    /**
+     * constructor for enemy type dodger
+     * @param width is the width of dodger
+     * @param height is the height of dodger
+     * @param assets is the image assets of dodger
+     */
     Dodger(double width, double height, ImagePattern[] assets) {
         super(width, height, "dodger");
 
@@ -24,7 +29,14 @@ public class Dodger extends Enemy {
         delayTimer = 0;
         setShootBehaviour(new ShootWithLaserBullet());
     }
-
+    /**
+     *
+     * @param GCF needs gamecomponentfactory since it updates from there
+     * @param gameRoot needs the pane
+     * @param player needs the player to shoot it
+     * @param left indicator if it is looking left
+     * @param speedFactor an integer indicates the speed of the dividus
+     */
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
         // TODO: Why 10000? Explain with comments or make it a constant variable
         double random = Math.random() * 10000; // random for chance based updates

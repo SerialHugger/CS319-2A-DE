@@ -11,10 +11,20 @@ public class EnemyBullet extends EnemyEquipment {
     double direction_y = 0;
     double hipo = 0;
 
+    /**
+     * constructor for enemybullet
+     * @param width width of bullet
+     * @param height height of bullet
+     * @param type type fo bullet
+     */
     EnemyBullet(double width, double height, String type) {
         super(width, height, type);
     }
 
+    /**
+     * set the location of bullet in terms of x
+     * @param x x of x axis
+     */
     public void setX(double x) { // temporary setX method
         body.setTranslateX(x);
         hitBoxes[0].setTranslateX(x);
@@ -22,6 +32,10 @@ public class EnemyBullet extends EnemyEquipment {
         dist_x = Math.abs(x_player - x_initial); // calculate distance x
     }
 
+    /**
+     * set the location of bullet in terms of y
+     * @param y y of y axis
+     */
     public void setY(double y) { //temporary setY method
         body.setTranslateY(y);
         hitBoxes[0].setTranslateY(y);
@@ -30,6 +44,9 @@ public class EnemyBullet extends EnemyEquipment {
         setBodyAndDirection();
     }
 
+    /**
+     * function for behaviour of bullet ( acceleration, speed etc..)
+     */
     private void setBodyAndDirection() {
         hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
         speed_x = dist_x / hipo * speed; // calculate speed of x

@@ -23,7 +23,6 @@ org\openjfx\GameController\MenuManager\MenuController.class
 org\openjfx\GameController\InteractionManager\InteractionHandler.class
 org\openjfx\GameComponent\GameComponent.class
 org\openjfx\GameComponent\PlayerBullet.class
-org\openjfx\GameComponent\EngineBlast.class
 org\openjfx\GameComponent\Barrier.class
 org\openjfx\GameController\GameController.class
 org\openjfx\GameComponent\ShootWithGuidedBullet.class
