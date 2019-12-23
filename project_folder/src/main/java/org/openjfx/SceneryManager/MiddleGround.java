@@ -26,8 +26,7 @@ public class MiddleGround {
     private SceneComponent temple_1;
 
     double speed;
-
-    //  ______            _____                 ____              ___________________________      _______     __________________________
+    //____            _____                 ____              ___________________________      _______     __________________________
     //////           //////                ///\\\             ||||||||||||||||||||||||||||     ||||||||    |||||||||||||||||||||||||||
     ///////         ///////               ////\\\\            ||||||||||||||||||||||||||||     ||||||||    |||||||||||||||||||||||||||
     ////////       ////////              /////\\\\\           ||||||||||||||||||||||||||||     ||||||||    |||||||||||||||||||||||||||
@@ -40,6 +39,7 @@ public class MiddleGround {
     //////           //////       //////            \\\\\\    ||||||||||_________|||||||||     ||||||||    |||||||||||||||||||||||||||
     //////           //////      //////              \\\\\\   ||||||||||||||||||||||||||||     ||||||||    |||||||||||||||||||||||||||
     //////           //////     //////                \\\\\\  ||||||||||||||||||||||||||||     ||||||||    |||||||||||||||||||||||||||
+    //
     MiddleGround(double width, double height, String type, Pane gameRoot, double speed) {
         this.type = type;
         this.width = width;
@@ -55,13 +55,13 @@ public class MiddleGround {
         ////// Setup human settlements
         humanSettlement_3 = new SceneComponent(magicConverter(3640), height, type, "Assets\\Scenery\\humanSettlement_1.png");
         humanSettlement_3.setTranslateX(magicConverter(3981) * -1);
-        humanSettlement_3.setTranslateY(0);
+        humanSettlement_3.setTranslateY(magicConverter(-25));
         humanSettlement_2 = new SceneComponent(magicConverter(3880), height, type, "Assets\\Scenery\\humanSettlement_2.png");
         humanSettlement_2.setTranslateX(magicConverter(4125) * -1);
-        humanSettlement_2.setTranslateY(0);
+        humanSettlement_2.setTranslateY(magicConverter(-25));
         humanSettlement_1 = new SceneComponent(magicConverter(4120), height, type, "Assets\\Scenery\\humanSettlement_3.png");
         humanSettlement_1.setTranslateX(magicConverter(4269) * -1);
-        humanSettlement_1.setTranslateY(0);
+        humanSettlement_1.setTranslateY(magicConverter(-25));
 
         ////// Setup alien Structures
         alienStructure_3 = new SceneComponent(magicConverter(4140), height, type, "Assets\\Scenery\\alienStructure_1.png");
@@ -112,7 +112,7 @@ public class MiddleGround {
     void update(boolean left, boolean right, Player player, double speed) {
 
         moveX(-1, speed);
-        if (speed > 0)
+        if (right)
             checkLoop(false);
         else
             checkLoop(true);
@@ -148,7 +148,7 @@ public class MiddleGround {
         // RANGE = width *4 +-25
         if (left) {
             double mod = Math.abs(gameRoot.getTranslateX()) % (width * 4);
-            if (mod < 35 && mod > -35) {
+            if (mod < magicConverter(300) && mod > magicConverter(-300)) {
                 double newLocationMountain = -1 * (gameRoot.getTranslateX() + mod) - magicConverter(600 + 192) - left_mountains_4.getWidth();
                 double newLocationHumanSettlement_3 = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 288) - humanSettlement_3.getWidth();
                 double newLocationHumanSettlement_2 = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 384) - humanSettlement_2.getWidth();
@@ -159,7 +159,7 @@ public class MiddleGround {
                 humanSettlement_1.setTranslateX(newLocationHumanSettlement_1);
             }
             mod = (Math.abs(gameRoot.getTranslateX()) + width * 2) % (width * 4);
-            if (mod < 35 && mod > -35) {
+            if (mod < magicConverter(300) && mod > magicConverter(-300)) {
                 double newLocationMountain = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(480 + 192 - 260) - right_mountains_4.getWidth();
                 double newLocationTemple_back = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(2880 + 1440 + 360) - temple_3.getWidth();
                 double newLocationTemple_middle = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(2880 + 1920 + 360) - temple_2.getWidth();
@@ -178,7 +178,7 @@ public class MiddleGround {
 
         } else { // MOVING RIGHT YEEE
             double mod = Math.abs(gameRoot.getTranslateX()) % (width * 4);
-            if (mod < 35 && mod > -35) {
+            if (mod < magicConverter(300) && mod > magicConverter(-300)) {
                 double newLocationMountain = -1 * (gameRoot.getTranslateX() + mod) + width * 2 + magicConverter(840 + 572 - 260);
                 double newLocationHumanSettlement_3 = -1 * (gameRoot.getTranslateX() + mod) + width * 2 + magicConverter(840 + 864 - 130);
                 double newLocationHumanSettlement_2 = -1 * (gameRoot.getTranslateX() + mod) + width * 2 + magicConverter(840 + 1152 - 130);
@@ -190,7 +190,7 @@ public class MiddleGround {
 
             }
             mod = (Math.abs(gameRoot.getTranslateX()) + width * 2) % (width * 4);
-            if (mod < 35 && mod > -35) {
+            if (mod < magicConverter(300) && mod > magicConverter(-300)) {
                 double newLocationMountain = -1 * (gameRoot.getTranslateX() + mod) + width * 2 + magicConverter(600 + 572);
                 double newLocationTemple_back = -1 * (gameRoot.getTranslateX() + mod) + magicConverter(3220 + 864);
                 double newLocationTemple_middle = -1 * (gameRoot.getTranslateX() + mod) + magicConverter(3220 + 1152);
