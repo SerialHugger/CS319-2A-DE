@@ -63,7 +63,7 @@ public class GameComponentFactory {
         } else if (type.equals("playerBullet")) {
             temp = new PlayerBullet(width, height, playerBulletImage, true, gameComponents.get(0).speed);
         } else if (type.equals("atlas")) {
-            temp = new Atlas(width, height, atlasImage);
+            temp = new Atlas(width, height, atlasImage, gameComponents);
         } else if (type.equals("dodger")) {
             temp = new Dodger(width, height, dodgerImage);
         } else if (type.equals("dividus")) {
@@ -95,7 +95,7 @@ public class GameComponentFactory {
         } else if (type.equals("barrier")) {
             temp = new Barrier(width, height, "empty");
         } else if (type.equals("civilian")) {
-            temp = new Civilian(width, height, civilianImage);
+            temp = new Civilian(60, 100, civilianImage);
         } else if (type.equals("boss")) {
             temp = new Boss(width, height, bossImage);
         } else if (type.equals("guidedRocket")) {
@@ -140,7 +140,7 @@ public class GameComponentFactory {
         guidedBulletImage = openAsset("Assets\\guided_ball.png");
         guidedRocketImage = openAsset("Assets\\light_saber.png");
         laserBulletImage = openAsset("Assets\\Enemies\\enemyBullet.png");
-        civilianImage = openAsset("Assets\\Civilian.png");
+        civilianImage = openAsset("Assets\\civilian.png");
         bossImage = openAsset("Assets\\WhatsApp_Image_2019-12-22_at_08-removebg-preview.png");
         meleeImage = openAsset("Assets\\double_lightsaber_melee.png");
     }
