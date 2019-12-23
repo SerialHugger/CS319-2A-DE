@@ -31,6 +31,7 @@ public class Player extends GameComponent {
     private int meleeCount = 0;
     private final int MAX_NO_OF_ABILITIES = 3;
     private int noOfAbilities;
+    private Shield playerShield;
     int maxAcc = 60;
     int accCount = 0;
     int dirX;
@@ -210,11 +211,13 @@ public class Player extends GameComponent {
         if (keyInputs[9].get()) { // J pressed
             //todo add skill 1
             //  for now its shield
-            useAbility(0, GCF);
+            //useAbility(0, GCF);
+            activateShield(GCF, this);
         }
         if (keyInputs[10].get()) { // K pressed
             // todo some stuff
-            useAbility(1, GCF);
+            //useAbility(1, GCF);
+            playerShield.overCharge(this);
         }
         if (keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
@@ -336,6 +339,7 @@ public class Player extends GameComponent {
 
         if (!isShieldActive) {
             Shield shield = (Shield) GCF.createComponent("shield");
+            playerShield = shield;
             shield.setX(body.getTranslateX() + width / 2);
             shield.setY(body.getTranslateY() + height / 2);
             shield.addShapes(gameRoot);
@@ -451,6 +455,7 @@ public class Player extends GameComponent {
                 } else if (abilityType.equals("overcharge")) {
                     if(isShieldActive) {
                         // TODO BABY
+                        playerShield.overCharge(this);
                     }
                 } else if (abilityType.equals("bomb")) {
                     if (!bombingOngoing) {
