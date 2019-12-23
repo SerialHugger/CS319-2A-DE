@@ -42,7 +42,7 @@ public class GameController {
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
-
+     int score = 0;
     MainGame mainGame;
 
     /*
@@ -201,6 +201,7 @@ public class GameController {
                     if (dividus.dead) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
+                        dividus.createAtlases(gameComponentFactory);
                         dividus.die(); // kill it, remove it from root.
                         deadCounter++;
                         score = score + 100;
@@ -277,6 +278,11 @@ public class GameController {
                     GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
                     gRocket.chooseTarget(this.gameComponents);
                     gRocket.moveGuidedRocket();
+                    if (gRocket.getY() >= gameRoot.getHeight() + gRocket.width || gRocket.getY() < 0 - gRocket.width) {
+                        gameComponents.remove(i--); // remove it from components and decrease i.
+                        size -= 1; // decrease size.
+                        gRocket.die(); // kill it, remove it from root.
+                    }
                     if (gRocket.dead) {
                         gameComponents.remove(i--);
                         size -= 1;
@@ -479,7 +485,6 @@ public class GameController {
                 noOfEnemies = 0;
             }
 
-
         }
         else if ( levelMod == 2 ){
             if ( noOfEnemies == 0)
@@ -508,7 +513,6 @@ public class GameController {
             if( noOfEnemies == deadCounter){
                 level = level + 1;
                 speedFactor++;
-
             }
 
         }

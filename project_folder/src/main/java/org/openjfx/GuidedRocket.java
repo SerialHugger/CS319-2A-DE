@@ -17,6 +17,7 @@ public class GuidedRocket extends PlayerEquipment {
     private double hipo;
     private Enemy targetEnemy;
     private int rotate = 0;
+    boolean isObjectInScene;
 
     GuidedRocket(double width, double height, ImagePattern asset) {
         super(width, height, "guidedRocket");
@@ -34,6 +35,7 @@ public class GuidedRocket extends PlayerEquipment {
         for (int i = 0; i < gameComponents.size(); i++) {
             if (gameComponents.get(i) instanceof Enemy) {
                 Enemy enemy = (Enemy) gameComponents.get(i);
+
                 double temp_x_enemy = enemy.getX() + enemy.getWidth() / 2;
                 double temp_y_enemy = enemy.getY() + enemy.getHeight() / 2;
                 double temp_dist_x = temp_x_enemy - this.getX();
@@ -45,6 +47,10 @@ public class GuidedRocket extends PlayerEquipment {
                 }
             }
         }
+        if (targetEnemy != null)
+            isObjectInScene = targetEnemy.getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && targetEnemy.getX() > gameRoot.getTranslateX() * -1;
+        else
+            isObjectInScene = false;
     }
     public void moveGuidedRocket() {
 
@@ -60,14 +66,19 @@ public class GuidedRocket extends PlayerEquipment {
             totalPassedTime = 0; // reset timer
             lifeTime++;
         }
-        x_enemy = targetEnemy.getX() + targetEnemy.getWidth() / 2;
-        y_enemy = targetEnemy.getY() + targetEnemy.getHeight() / 2;
-        dist_x = x_enemy - this.getX(); // calculate distance x
-        dist_y = y_enemy - this.getY(); // calculate distance y
-        hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
-        speed_x = dist_x / hipo * speed; // calculate speed of x
-        speed_y = dist_y / hipo * speed; // calculate speed of y
+        if (isObjectInScene) {
+            x_enemy = targetEnemy.getX() + targetEnemy.getWidth() / 2;
+            y_enemy = targetEnemy.getY() + targetEnemy.getHeight() / 2;
+            dist_x = x_enemy - this.getX(); // calculate distance x
+            dist_y = y_enemy - this.getY(); // calculate distance y
+            hipo = Math.sqrt(Math.pow(dist_x, 2) + Math.pow(dist_y, 2)); // hipotenus of x and y
+            speed_x = dist_x / hipo * speed; // calculate speed of x
+            speed_y = dist_y / hipo * speed; // calculate speed of y
+        }
+        else {
+            moveY(1, speed);
+        }
         this.setX(this.getX() + speed_x);
-        this.setY(this.getY() +speed_y);
+        this.setY(this.getY() + speed_y);
     }
 }
