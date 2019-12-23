@@ -21,6 +21,10 @@ public class EndGameMenu extends Rectangle {
     private StackPane gameOverPane;
     private Text gameOverText;
 
+    /**
+     * Constructor
+     * @param scenery game scenery
+     */
     public EndGameMenu(Scenery scenery) {
         sceneryWidth = scenery.getWidth();
         sceneryHeight = scenery.getHeight();
@@ -28,6 +32,10 @@ public class EndGameMenu extends Rectangle {
         buttonHeight = 50;
     }
 
+    /**
+     * creates go back button with background image
+     * @param gameRoot root pane
+     */
     public void createButton(Pane gameRoot) {
         returnBackButton = new Rectangle(buttonWidth, buttonHeight);
         backgroundRect = new Rectangle(sceneryWidth, sceneryHeight);
@@ -41,11 +49,18 @@ public class EndGameMenu extends Rectangle {
         fillRectangles();
     }
 
+    /**
+     * fills all EndGameMenu rectangles with colors
+     */
     private void fillRectangles() {
         backgroundRect.setFill(Color.rgb(42, 44, 54, 0.9));
         returnBackButton.setFill(Color.rgb(255, 204, 0, 0.9));
     }
 
+    /**
+     * displays menu over the parent pane
+     * @param gameRoot root pane to display menu
+     */
     public void displayMenu(Pane gameRoot) {
 
         gameOverPane = new StackPane();
