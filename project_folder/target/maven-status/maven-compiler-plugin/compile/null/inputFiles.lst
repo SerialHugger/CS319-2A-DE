@@ -1,39 +1,47 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
->>>>>>> unstable
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\InteractionManager\InteractionHandler.java
+
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Dividus.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ShootWithGuidedBullet.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\GameController.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\Scenery.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Boss.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ShootWithLaserBullet.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\LaserBullet.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Bomb.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Barrier.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\module-info.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameComponent.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameController.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SystemInfo.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MainMenu.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyBullet.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\ScoreMenu.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Dodger.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ShootNoWay.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Collectible.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameComponentFactory.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Atlas.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\ForeGround.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\InGameMenu.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GuidedBullet.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\PlayerEquipment.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyEquipment.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemySelfDestruct.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Civilian.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\InteractionManager\InteractionHandler.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Explosion.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\GameController.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Boss.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\EndGameMenu.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\LaserBullet.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ComponentHitBoxCircle.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EngineBlast.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\DivingWind.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Barrier.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Melee.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Shield.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\module-info.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GameComponent.java
-C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SystemInfo.java
-<<<<<<< HEAD
-=======
 
->>>>>>> unstable
-=======
->>>>>>> unstable
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Player.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\BackGround.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MenuController.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Enemy.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\SceneComponent.java
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MenuManager\MainMenu.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\EnemyBullet.java
 C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\SpeedRunner.java
@@ -106,9 +114,14 @@ C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\o
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\GameComponentFactory.java
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dienamite.java
 C:\Users\buckethead\Desktop\CS319\CS319-2A-DE\project_folder\src\main\java\org\openjfx\Dodger.java
->>>>>>> Stashed changes
-=======
->>>>>>> unstable
-=======
 
->>>>>>> unstable
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\SpeedRunner.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\ComponentHitBoxRectangle.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\Hud.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\Game.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\SceneryManager\MiddleGround.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Dienamite.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\GuidedRocket.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameController\MainGame.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\Shootable.java
+C:\Users\tolga\Desktop\workspace\subarch_uni\y3s1\cs319\workspace\project\project_folder\src\main\java\org\openjfx\GameComponent\PlayerBullet.java
