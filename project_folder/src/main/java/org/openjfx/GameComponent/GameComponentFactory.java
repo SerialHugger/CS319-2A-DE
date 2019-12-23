@@ -29,6 +29,7 @@ public class GameComponentFactory {
     ImagePattern[] divingWindImage = new ImagePattern[2];
     ImagePattern[] dodgerImage = new ImagePattern[14];
     ImagePattern[] dividusImage = new ImagePattern[10];
+    ImagePattern[] shieldImage = new ImagePattern[9];
 
     /// SINGLES
     ImagePattern speedRunnerImage;
@@ -85,7 +86,7 @@ public class GameComponentFactory {
         } else if (type.equals("bomb")) {
             temp = new Bomb(width, height, null, (Player) gameComponents.get(0));
         } else if (type.equals("shield")) {
-            temp = new Shield(width, height, "empty");
+            temp = new Shield(width, height, shieldImage);
         } else if (type.equals("engineBlast")) {
             temp = new EngineBlast(width, height, "empty");
         } else if (type.equals("collectible")) {
@@ -134,6 +135,9 @@ public class GameComponentFactory {
         atlasImage[2] = openAsset("Assets\\Enemies\\atlas\\atlas_toRight.png");
         for (int i = 0; i < 9; i++) {
             dienamiteImage[i] = openAsset("Assets\\Enemies\\dienamite\\dienamite_" + (i + 1) + ".png");
+        }
+        for (int i = 0; i < 9; i++) {
+            shieldImage[i] = openAsset("Assets\\skills\\shield\\shield_" + i + ".png");
         }
         playerBulletImage[0] = openAsset("Assets\\playerBullet\\playerBullet_1.png");
         playerBulletImage[1] = openAsset("Assets\\playerBullet\\playerBullet_2.png");

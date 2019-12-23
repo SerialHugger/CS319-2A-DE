@@ -61,7 +61,6 @@ public class Atlas extends Enemy {
         // TODO: Why 10000? Explain with comments or make it a constant variable
         //if (target != null && target.isSaved())
         //    target = null;
-        System.out.println(target == null);
         //if (target != null)
         //    System.out.println(target.isSaved());
         double random = Math.random() * 10000; // random for chance based updates
