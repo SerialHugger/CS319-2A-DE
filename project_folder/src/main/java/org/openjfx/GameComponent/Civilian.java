@@ -9,6 +9,13 @@ public class Civilian extends GameComponent {
     boolean grabbed;
     boolean targeted;
     boolean saved;
+
+    /**
+     * constructor for civilian
+     * @param width width of the civilian
+     * @param height height of the civilian
+     * @param asset images for animations
+     */
     Civilian (double width, double height, ImagePattern asset){
         super(width, height, "civilian");
         grabbed = false;
@@ -30,6 +37,14 @@ public class Civilian extends GameComponent {
         acceleration = magicConverter(0.4);
     }
 
+    /**
+     * indicates the civilians actions
+     * @param GCF needs factory to update civilian's position
+     * @param gameRoot needs the pane
+     * @param player the player saves civilians needs to interact with the civilian
+     * @param left indicates if civilian is going left
+     * @param speedFactor an integer which multiplies the speed of the civilian
+     */
     public void moveCivilian(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left , int speedFactor){
         if (grabbed){
                 speed_x = 0;

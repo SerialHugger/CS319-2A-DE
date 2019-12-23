@@ -22,11 +22,19 @@ public class Collectible extends GameComponent {
         private static final Random RANDOM = new Random();
 
         // returns a random ability that will be added to the inventory upon collection of collectible
+
+        /**
+         * \function to use randomability
+         * @return the ability
+         */
         public static Ability randomAbility() {
             return VALUES.get(RANDOM.nextInt(SIZE));
         }
 
-        // returns the type of the ability
+        /**
+         *  gets the type of ability
+         * @return the specific type of ability
+         */
         public String getType() {
             String type;
             switch (this) {
@@ -65,6 +73,12 @@ public class Collectible extends GameComponent {
     private ImagePattern shieldHudImage;
     private ImagePattern engineBlastHudImage;
 
+    /**
+     * constructor for collectible
+     * @param width the width of collectible
+     * @param height the height of collectib;e
+     * @param assetLocation image for animation
+     */
     Collectible(double width, double height, String assetLocation) {
         super(width, height, "collectible");
         this.height = magicConverter(50);
@@ -83,6 +97,9 @@ public class Collectible extends GameComponent {
             body.setFill(Color.TRANSPARENT);
     }
 
+    /**
+     * function for falling of the collectibles due to gravity
+     */
     public void moveCollectible() {
         // Actions when collision
         for (Shape hitBox : hitBoxes) {
@@ -104,12 +121,21 @@ public class Collectible extends GameComponent {
         }
     }
 
+    /**
+     * macro for opening the assets of colectibles
+     */
     private void openCollectibleImages() {
         //barrierHudImage = openAsset("Assets\\barrierImage.png");
         guidedRocketHudImage = openAsset("Assets\\light_saber.png");
         //shieldHudImage = openAsset("Assets\\shieldImage.png");
         //engineBlastHudImage = openAsset("Assets\\engineBlastImage.png");
     }
+
+    /**
+     * macro for opening the assets in general
+     * @param assetLocation parameter for location of assets
+     * @return returns javafx type imagepattern
+     */
     public ImagePattern openAsset(String assetLocation) {
         ImagePattern imagePattern;
         try {
@@ -132,6 +158,10 @@ public class Collectible extends GameComponent {
         return imagePattern;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAbilityType() {
         return abilityType.getType();
     }

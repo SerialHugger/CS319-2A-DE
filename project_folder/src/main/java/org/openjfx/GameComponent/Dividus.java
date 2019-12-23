@@ -11,6 +11,13 @@ import java.awt.*;
 public class Dividus extends Enemy {
     private int lifetime;
     private final double wantedTime = 0.05;
+
+    /**
+     * constructor for enemy type dividus
+     * @param width  width of dividus
+     * @param height height of dividus
+     * @param assets for animation of dividus
+     */
     Dividus(double width, double height, ImagePattern[] assets) {
         super(width, height, "dividus");
         this.height = magicConverter(98); // height of dividus
@@ -29,6 +36,14 @@ public class Dividus extends Enemy {
         lifetime = 0;
     }
 
+    /**
+     *
+     * @param GCF needs gamecomponentfactory since it updates from there
+     * @param gameRoot needs the pane
+     * @param player needs the player to shoot it
+     * @param left indicator if it is looking left
+     * @param speedFactor an integer indicates the speed of the dividus
+     */
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
@@ -112,6 +127,11 @@ public class Dividus extends Enemy {
         return new int[]{directionX, directionY, (int) speed_x, (int) speed_y};
     }
 
+    /**
+     * dividus creates two atlases when it dies
+     * this function creates two atlases from gamecomponentfactory
+     * @param GCF needs gamecomponentfactory since it creates atlases from factory
+     */
     public void createAtlases(GameComponentFactory GCF) {
         Atlas temp1 = (Atlas) GCF.createComponent("atlas");
         Atlas temp2 = (Atlas) GCF.createComponent("atlas");

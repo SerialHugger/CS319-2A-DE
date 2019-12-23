@@ -76,6 +76,15 @@ public class GameController {
     10 — k
     11 — l
      */
+
+    /**
+     * Constructor of GameController, GameController is the function for
+     * controlling and creating levels
+     * @param root root is the pane of the game we created
+     * @param width width of the screen
+     * @param height height o the screen
+     * @param mainGame maingame is the component that creates the scenery and launches the game
+     */
     GameController(Pane root, double width, double height, MainGame mainGame) {
         this.gameRoot = root;
         this.width = width;
@@ -83,6 +92,10 @@ public class GameController {
         this.mainGame = mainGame;
     }
 
+    /**
+     *  createContent function is the function for creating the in-game objects such as
+     *  player and enemies and hold that in an array called gamecomponents
+     */
     void createContent() {
         speed = 0;
         maxSpeed = magicConverter(25); // If width = 1920 then maxSpeed = 25.
@@ -113,11 +126,20 @@ public class GameController {
         isMenuCreated = true;
     }
 
+    /**
+     * handles interaction such as collisions of bullets
+     */
     void updateInteraction() {
         //update interaction
         interactionHandler.handleInteraction(gameRoot, player);
     }
 
+    /**
+     *  update game is the function for updating the game's components every time in the game
+     *  the arraylist called gamecomponents is accessed here in order to control every in game object
+     *  the in-game components also got removed from game here
+     * @param fps is the frame per second of the launched game
+     */
     void updateGame(int fps) {
         if (currentScreen == 0) {
             // update game components
@@ -172,14 +194,6 @@ public class GameController {
                         size -= 1;
                         bomb.explode(gameComponentFactory);
                         bomb.die();
-                    }
-                } else if (gameComponents.get(i) instanceof EngineBlast) {
-                    EngineBlast blast = ((EngineBlast) gameComponents.get(i));
-                    blast.moveEngineBlast(player);
-                    if (blast.isDead()) {
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        blast.die();
                     }
                 } else if (gameComponents.get(i) instanceof Collectible) {
                     Collectible item = ((Collectible) gameComponents.get(i));
@@ -438,16 +452,23 @@ public class GameController {
         if (currentScreen == 0) {
             gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
             // update scenery
-            scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
+            scenery.update(keyInputs, player, fps, speed);
         }
     }
 
-    /*
-     * This creates levels
-     * adds enemies
-     * todo make it more complex
-     */
 
+    /**
+     * this function is just a macro or creating different types of enemies at the same time
+     * we used this function for holding the number of total  enemies in the level
+     * @param atlasNumber number of enemy type atlas
+     * @param dodgernumber number of enemy type dodger
+     * @param dividusNumber number of enemy type dividus
+     * @param dienamiteNumber number of enemy type dienamite
+     * @param speedRunnerNumber number of enemy type speedrunner
+     * @param divingWindNumber number of enemy type divingwind
+     * @param bossNumber number of boss
+     * @return sum of parameters
+     */
     public int createEnemies(int atlasNumber, int dodgernumber, int dividusNumber, int dienamiteNumber, int speedRunnerNumber, int divingWindNumber, int bossNumber) {
         for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
@@ -489,6 +510,10 @@ public class GameController {
         return (atlasNumber + dodgernumber + (dividusNumber* 3) + dienamiteNumber + speedRunnerNumber + divingWindNumber + (bossNumber*30) );
     }
 
+    /**
+     * function for creating the civilians
+     * @param civilianNumber is the number of civilians
+     */
     public void createCivilians(int civilianNumber) {
         for (int i = 0; i < civilianNumber; i++) {
             Civilian civilian = (Civilian) gameComponentFactory.createComponent("civilian");
@@ -496,10 +521,10 @@ public class GameController {
         }
     }
 
-    /*
-     * This creates levels
-     * adds enemies
-     * todo make it more complex
+    /**
+     * that is the function creates levels each time
+     * theorethecially 2 billion levels can be generated
+     * in every four level boss appears
      */
     public void createLevel() {
         int atlasNumber = 2;
@@ -600,7 +625,10 @@ public class GameController {
         }
     }
 
-    // Sets buttons to play
+    /**
+     *  macro for hotkeys in the game
+     * @param scene is the scene of the in-game
+     */
     public void setButtonHandler(Scene scene) {
         for (int i = 0; i < keyInputs.length; i++)
             keyInputs[i] = new SimpleBooleanProperty();
@@ -691,22 +719,46 @@ public class GameController {
         });
     }
 
+    /**
+     * slides the game
+     * @param toLeft slides to left
+     * @param slidingSpeed sliding speed pf the slide
+     */
     public void slideScenery(boolean toLeft, double slidingSpeed) {
         scenery.slideScenery(toLeft, slidingSpeed);
     }
 
+    /**
+     *a macro for getting the values for the screen resolution 1920p
+     * @param wantedInteger you enter the integer you want
+     * @return is the integer used in program
+     */
     public double magicConverter(double wantedInteger) {
         return width / (1920 / wantedInteger);
     }
 
+    /**
+     * for starting the game from any level
+     * setting the level of the game
+     * setter method for integer level
+     * @param levelNum the number of level you want to start
+     */
     public void setLevel(int levelNum) {
         level = levelNum;
     }
 
+    /**
+     * getter method for integer level
+     * @return the private integer level
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     *  causes the pause screen to appear
+     * @param screenID gets the screenID
+     */
     public void setCurrentScreen(int screenID) {
 
         if (currentScreen == 1) {
@@ -720,10 +772,18 @@ public class GameController {
         currentScreen = screenID;
     }
 
+    /**
+     * setter for integer selectShipNumber
+     * @param shipNum is the number we want to set the selectshipnNumber
+     */
     public void setSelectShipNumber(int shipNum) {
         selectShipNumber = shipNum;
     }
 
+    /**
+     * getter for selectShipNumber
+     * @return the private integer selectShipNumber
+     */
     public int getSelectShipNumber() {
         return selectShipNumber;
     }

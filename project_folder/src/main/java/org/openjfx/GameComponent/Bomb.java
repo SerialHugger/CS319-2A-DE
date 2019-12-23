@@ -6,6 +6,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Bomb extends PlayerEquipment {
+    /**
+     * constructor for bomb a player equipment
+     * @param width width of the bomb's area effect
+     * @param height height of the bomb's area affect
+     * @param assets images for animation
+     * @param player needs player to get used
+     */
     Bomb(double width, double height, ImagePattern assets, Player player) {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
@@ -19,6 +26,9 @@ public class Bomb extends PlayerEquipment {
 
     }
 
+    /**
+     * fall of the bomb because of the gravity
+     */
     public void moveBomb() {
         if (gameRoot.getHeight() - height <= getY())
             dead = true;
@@ -27,6 +37,10 @@ public class Bomb extends PlayerEquipment {
         rotate(60);
     }
 
+    /**
+     * explosion of the bomb when it hits enemy or ground
+     * @param GCF needs the gamefactory since it needs to call selfdestruct object
+     */
     public void explode(GameComponentFactory GCF) {
         EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent("enemySelfDestruct");
         selfDest.setX(this.getX());
