@@ -63,7 +63,7 @@ public class Dienamite extends Enemy {
         }
 
         counter += 1;
-        if (counter % 10 == 0) {
+        if (counter % 20 == 0) {
             currentState += 1;
             counter = 0;
         }
