@@ -322,12 +322,18 @@ public class GameController {
                     }
                 } else if (gameComponents.get(i) instanceof Civilian) {
                     Civilian civilian = ((Civilian) gameComponents.get(i));
-                    civilian.moveCivilian(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor); // update it.
-                    if (civilian.isDead()) {
+                    civilian.moveCivilian(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor);
+                    if (civilian.isDead()) { 
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         civilian.die(); // kill it, remove it from root.
                         player.setScore(player.getScore() - 200);
+                    }
+                    if (civilian.isSaved()){
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1;
+                        civilian.die(); // kill it, remove it from root.
+                        player.setScore(player.getScore() + 300);
                     }
                 }
             }
@@ -517,7 +523,7 @@ public class GameController {
         if (levelMod == 1) {
             if (noOfEnemies == 0) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
-                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, 1);
+                noOfEnemies = createEnemies(1, 0, 0, 0, 0, 0, 0);
                 createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {

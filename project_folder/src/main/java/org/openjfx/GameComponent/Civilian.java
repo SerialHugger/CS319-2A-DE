@@ -39,13 +39,21 @@ public class Civilian extends GameComponent {
         else if (this.getY() < 960){
             speed_y = speed_y + acceleration;
             moveY(1, speed_y);
-            System.out.println(speed_y);
+
         }
         else if (this.getY() >= 960){
             if (speed_y > maxSpeed)
                 dead = true;
         }
+        ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBoxes[0]);
+        if (temp.isSaved() && this.getY() < 960)
+            saved = true;
+        else {
+            saved = false;
+            ((ComponentHitBoxRectangle) hitBoxes[0]).setSaved(false);
+        }
         loopAroundTheMap(GCF.width, player, left);
+
     }
     public void loopAroundTheMap(double bgWidth, Player player, boolean left) {
         //updates the space ships so they loop around map
@@ -68,4 +76,7 @@ public class Civilian extends GameComponent {
     public void setGrabbed(boolean status){
         grabbed = status;
     }
+
+
+    public boolean isSaved(){return saved;}
 }
