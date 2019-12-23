@@ -5,10 +5,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+
 import org.openjfx.GameComponent.*;
+import org.openjfx.GameController.InteractionManager.InteractionHandler;
+import org.openjfx.GameController.MenuManager.EndGameMenu;
 import org.openjfx.GameController.MenuManager.InGameMenu;
 import org.openjfx.GameController.InteractionManager.InteractionHandler;
+import org.openjfx.GameController.MenuManager.ScoreMenu;
 import org.openjfx.SceneryManager.Scenery;
+import org.openjfx.SystemInfo;
 
 import java.util.ArrayList;
 
@@ -33,7 +38,7 @@ public class GameController {
     double slidingCounter; // sliding counter for background
     double slidingSpeed; // sliding speed for background
     // level counter
-    int level = 1;
+    int level = 6; // Using mod 5  for infinite levels so need to start at 1
     int deadCounter = 0;
     //long score = 0;
     int noOfEnemies = 0;
@@ -44,8 +49,16 @@ public class GameController {
 
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
+    private EndGameMenu endGameMenu;
+
+
     int score = 0;
     MainGame mainGame;
+
+    private boolean isCounterStarted = false;
+    private double startTime;
+
+    ScoreMenu scoreMenu;
 
     /*
     For key inputs
@@ -63,6 +76,15 @@ public class GameController {
     10 — k
     11 — l
      */
+
+    /**
+     * Constructor of GameController, GameController is the function for
+     * controlling and creating levels
+     * @param root root is the pane of the game we created
+     * @param width width of the screen
+     * @param height height o the screen
+     * @param mainGame maingame is the component that creates the scenery and launches the game
+     */
     GameController(Pane root, double width, double height, MainGame mainGame) {
         this.gameRoot = root;
         this.width = width;
@@ -70,6 +92,10 @@ public class GameController {
         this.mainGame = mainGame;
     }
 
+    /**
+     *  createContent function is the function for creating the in-game objects such as
+     *  player and enemies and hold that in an array called gamecomponents
+     */
     void createContent() {
         speed = 0;
         maxSpeed = magicConverter(25); // If width = 1920 then maxSpeed = 25.
@@ -90,14 +116,30 @@ public class GameController {
 
         inGameMenu = new InGameMenu(scenery);
         inGameMenu.createButtons(gameRoot);
+
+        endGameMenu = new EndGameMenu(scenery);
+        endGameMenu.createButton(gameRoot);
+
+        scoreMenu = new ScoreMenu(scenery);
+        scoreMenu.createScoreScreen(gameRoot);
+
         isMenuCreated = true;
     }
 
+    /**
+     * handles interaction such as collisions of bullets
+     */
     void updateInteraction() {
         //update interaction
         interactionHandler.handleInteraction(gameRoot, player);
     }
 
+    /**
+     *  update game is the function for updating the game's components every time in the game
+     *  the arraylist called gamecomponents is accessed here in order to control every in game object
+     *  the in-game components also got removed from game here
+     * @param fps is the frame per second of the launched game
+     */
     void updateGame(int fps) {
         if (currentScreen == 0) {
             // update game components
@@ -109,6 +151,7 @@ public class GameController {
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
                         player.die(); // kill it, remove it from root.
+                        setCurrentScreen(3);
                     }
                 } else if (gameComponents.get(i) instanceof PlayerBullet) { // else if its an instance class of PlayerBullet.
                     PlayerBullet playerBullet = (PlayerBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -152,14 +195,6 @@ public class GameController {
                         bomb.explode(gameComponentFactory);
                         bomb.die();
                     }
-                } else if (gameComponents.get(i) instanceof EngineBlast) {
-                    EngineBlast blast = ((EngineBlast) gameComponents.get(i));
-                    blast.moveEngineBlast(player);
-                    if (blast.isDead()) {
-                        gameComponents.remove(i--);
-                        size -= 1;
-                        blast.die();
-                    }
                 } else if (gameComponents.get(i) instanceof Collectible) {
                     Collectible item = ((Collectible) gameComponents.get(i));
                     item.moveCollectible();
@@ -185,7 +220,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         atlas.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dodger) { // else if its an instance class of EmenyType1.
                     Dodger dodger = ((Dodger) gameComponents.get(i));
@@ -195,7 +230,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         dodger.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dividus) { // else if its an instance class of EmenyType1.
                     Dividus dividus = ((Dividus) gameComponents.get(i));
@@ -203,10 +238,9 @@ public class GameController {
                     if (dividus.isDead()) { // if enemyType1 is dead.
                         gameComponents.remove(i--); // remove it from components.
                         size -= 1; // decrease size.
-                        dividus.createAtlases(gameComponentFactory);
                         dividus.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof Dienamite) { // else if its an instance class of EmenyType1.
                     Dienamite dienamite = ((Dienamite) gameComponents.get(i));
@@ -216,7 +250,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         dienamite.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof DivingWind) { // else if its an instance class of EmenyType1.
                     DivingWind divingWind = ((DivingWind) gameComponents.get(i));
@@ -226,7 +260,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         divingWind.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof LaserBullet) { // else if its an instance class of EnemyBulletType1.
                     LaserBullet laserBullet = (LaserBullet) gameComponents.get(i); // cast it to a temporary variable.
@@ -252,7 +286,7 @@ public class GameController {
                     guidedBullet.moveGuidedBullet(player); // update it.
                     // if its not in the boundaries of camera/root remove it.
                     // first check for X then check for Y.
-                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() || guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth()) {
+                    if (guidedBullet.getX() > (gameRoot.getTranslateX() * -1) + width + guidedBullet.getWidth() + magicConverter(width/2)|| guidedBullet.getX() < (gameRoot.getTranslateX() * -1) + guidedBullet.getWidth() - magicConverter(width / 2)) {
                         gameComponents.remove(i--); // remove it from components and decrease i.
                         size -= 1; // decrease size.
                         guidedBullet.die(); // kill it, remove it from root.
@@ -274,7 +308,7 @@ public class GameController {
                         size -= 1; // decrease size.
                         speedRunner.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 100);
                     }
                 } else if (gameComponents.get(i) instanceof GuidedRocket) {
                     GuidedRocket gRocket = (GuidedRocket) gameComponents.get(i);
@@ -298,7 +332,22 @@ public class GameController {
                         size -= 1; // decrease size.
                         boss.die(); // kill it, remove it from root.
                         deadCounter++;
-                        score = score + 100;
+                        player.setScore(player.getScore() + 500);
+                    }
+                } else if (gameComponents.get(i) instanceof Civilian) {
+                    Civilian civilian = ((Civilian) gameComponents.get(i));
+                    civilian.moveCivilian(gameComponentFactory, gameRoot, player, keyInputs[1].get(), speedFactor);
+                    if (civilian.isDead()) { 
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1; // decrease size.
+                        civilian.die(); // kill it, remove it from root.
+                        player.setScore(player.getScore() - 200);
+                    }
+                    if (civilian.isSaved()){
+                        gameComponents.remove(i--); // remove it from components.
+                        size -= 1;
+                        civilian.die(); // kill it, remove it from root.
+                        player.setScore(player.getScore() + 300);
                     }
                 }
             }
@@ -330,6 +379,10 @@ public class GameController {
                 inGameMenu.changeActiveButton(0);
             }
         } else if (currentScreen == 2) { // STOP, SHOW SCORE
+                scoreMenu.displayScoreScreen(gameRoot, (int) player.getScore());
+
+        } else if (currentScreen == 3) { // Game end
+            endGameMenu.displayMenu(gameRoot);
 
         }
 
@@ -370,7 +423,8 @@ public class GameController {
                 } else if (inGameMenu.getActiveButton() == 1) {
                     mainGame.backToMainMenu();
                 }
-
+            } else if (currentScreen == 3) {
+                mainGame.backToMainMenu();
             }
         }
         if (keyInputs[12].get()) { // if ESC is pressed.
@@ -398,16 +452,23 @@ public class GameController {
         if (currentScreen == 0) {
             gameRoot.setTranslateX(gameRoot.getTranslateX() - speed);
             // update scenery
-            scenery.update(keyInputs, player, fps, speed); // todo fix background speed etc.
+            scenery.update(keyInputs, player, fps, speed);
         }
     }
 
-    /*
-     * This creates levels
-     * adds enemies
-     * todo make it more complex
-     */
 
+    /**
+     * this function is just a macro or creating different types of enemies at the same time
+     * we used this function for holding the number of total  enemies in the level
+     * @param atlasNumber number of enemy type atlas
+     * @param dodgernumber number of enemy type dodger
+     * @param dividusNumber number of enemy type dividus
+     * @param dienamiteNumber number of enemy type dienamite
+     * @param speedRunnerNumber number of enemy type speedrunner
+     * @param divingWindNumber number of enemy type divingwind
+     * @param bossNumber number of boss
+     * @return sum of parameters
+     */
     public int createEnemies(int atlasNumber, int dodgernumber, int dividusNumber, int dienamiteNumber, int speedRunnerNumber, int divingWindNumber, int bossNumber) {
         for (int i = 0; i < atlasNumber; i++) {
             Atlas atlas = (Atlas) gameComponentFactory.createComponent("atlas");
@@ -446,9 +507,13 @@ public class GameController {
             boss.addShapes(gameRoot);
         }
 
-        return (atlasNumber + dodgernumber + dividusNumber + dienamiteNumber + speedRunnerNumber + divingWindNumber + bossNumber);
+        return (atlasNumber + dodgernumber + (dividusNumber* 3) + dienamiteNumber + speedRunnerNumber + divingWindNumber + (bossNumber*30) );
     }
 
+    /**
+     * function for creating the civilians
+     * @param civilianNumber is the number of civilians
+     */
     public void createCivilians(int civilianNumber) {
         for (int i = 0; i < civilianNumber; i++) {
             Civilian civilian = (Civilian) gameComponentFactory.createComponent("civilian");
@@ -456,10 +521,10 @@ public class GameController {
         }
     }
 
-    /*
-     * This creates levels
-     * adds enemies
-     * todo make it more complex
+    /**
+     * that is the function creates levels each time
+     * theorethecially 2 billion levels can be generated
+     * in every four level boss appears
      */
     public void createLevel() {
         int atlasNumber = 2;
@@ -469,50 +534,101 @@ public class GameController {
         int speedRunnerNumber = 2;
         int bossNumber = 1;
         int divingWindNumber = 2;
+        int civilianNumber = 5;
         int levelMod = level % 5;
+
+        if (isCounterStarted){
+            double currentTime = System.nanoTime() / 1000000000.0 - startTime;
+            if (currentTime >= 4) {
+                setCurrentScreen(0);
+                isCounterStarted = false;
+            }
+        }
+
         if (levelMod == 1) {
             if (noOfEnemies == 0) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
-                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, 1);
+                noOfEnemies = createEnemies(1, 0, 0, 0, 0, 0, 0);
+                createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
                 System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
+
             }
+            System.out.println("counter" + deadCounter);
 
         } else if (levelMod == 2) {
-            if (noOfEnemies == 0)
-                noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
-
+            if (noOfEnemies == 0) {
+                noOfEnemies = createEnemies(0, 0, 0, 0, 20, 0, 0);
+                createCivilians(civilianNumber);
+                System.out.println("level2 entered ");
+            }
+                
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
             }
         } else if (levelMod == 3) {
-            if (noOfEnemies == 0)
-                noOfEnemies = createEnemies(atlasNumber * levelMod, dodgerNumber * levelMod, dividusNumber * levelMod, dienamiteNumber * levelMod, speedRunnerNumber * levelMod, divingWindNumber * levelMod, 0);
-
+            if (noOfEnemies == 0) {
+                noOfEnemies = createEnemies(0, 20, 20, 0, 0, 0, 0);
+                System.out.println("level3 entered ");
+                createCivilians(civilianNumber);
+            }
             if (noOfEnemies == deadCounter) {
-                level = level + 1; // infinite loop for now
+                level = level + 1;
                 deadCounter = 0;
                 noOfEnemies = 0;
+                levelMod = level % 5;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
             }
         } else if (levelMod == 4) {
             if (noOfEnemies == 0) {
-                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, bossNumber * levelMod);
+                noOfEnemies = createEnemies(20, 0, 0, 20, 0, 20, 0);
+                System.out.println("level4 entered ");
+                createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {
                 level = level + 1;
+                noOfEnemies = 0;
                 speedFactor++;
-            }
+                levelMod = level % 5;
 
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
+            }
         }
     }
 
-    // Sets buttons to play
+    /**
+     *  macro for hotkeys in the game
+     * @param scene is the scene of the in-game
+     */
     public void setButtonHandler(Scene scene) {
         for (int i = 0; i < keyInputs.length; i++)
             keyInputs[i] = new SimpleBooleanProperty();
@@ -603,35 +719,71 @@ public class GameController {
         });
     }
 
+    /**
+     * slides the game
+     * @param toLeft slides to left
+     * @param slidingSpeed sliding speed pf the slide
+     */
     public void slideScenery(boolean toLeft, double slidingSpeed) {
         scenery.slideScenery(toLeft, slidingSpeed);
     }
 
+    /**
+     *a macro for getting the values for the screen resolution 1920p
+     * @param wantedInteger you enter the integer you want
+     * @return is the integer used in program
+     */
     public double magicConverter(double wantedInteger) {
         return width / (1920 / wantedInteger);
     }
 
+    /**
+     * for starting the game from any level
+     * setting the level of the game
+     * setter method for integer level
+     * @param levelNum the number of level you want to start
+     */
     public void setLevel(int levelNum) {
         level = levelNum;
     }
 
+    /**
+     * getter method for integer level
+     * @return the private integer level
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     *  causes the pause screen to appear
+     * @param screenID gets the screenID
+     */
     public void setCurrentScreen(int screenID) {
 
         if (currentScreen == 1) {
             inGameMenu.hideMenu();
         }
 
+        if (currentScreen == 2) {
+            scoreMenu.hideScoreScreen();
+        }
+
         currentScreen = screenID;
     }
 
+    /**
+     * setter for integer selectShipNumber
+     * @param shipNum is the number we want to set the selectshipnNumber
+     */
     public void setSelectShipNumber(int shipNum) {
         selectShipNumber = shipNum;
     }
 
+    /**
+     * getter for selectShipNumber
+     * @return the private integer selectShipNumber
+     */
     public int getSelectShipNumber() {
         return selectShipNumber;
     }

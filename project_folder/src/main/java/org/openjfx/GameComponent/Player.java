@@ -6,6 +6,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import org.openjfx.GameController.GameController;
 
 import java.io.File;
 import java.util.Arrays;
@@ -20,14 +21,10 @@ public class Player extends GameComponent {
     private int totalBulletRainWave = 3;
     private boolean bulletRainOnGoing = false;
     private int bulletRainCount = 0;
-    private final int TOTAL_BOMB_DROPS = 3;
+    private final int TOTAL_BOMB_DROPS = 1;
     private boolean bombingOngoing = false;
     private boolean bombingActive = false;
     private int bombDropCount = 0;
-    private final int TOTAL_ENGINE_BLASTS = 1;
-    private boolean engineBlastActive = false;
-    private boolean engineBlastOngoing = false;
-    private int engineBlastCount = 0;
     private final int TOTAL_MELEES = 1;
     private boolean meleeActive = false;
     private boolean meleeOngoing = false;
@@ -87,7 +84,7 @@ public class Player extends GameComponent {
 
     public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF) {
         innerSpeed = 0;
-        if (!teleportAvailable || bulletRainOnGoing || bombingOngoing || engineBlastOngoing || meleeOngoing) {
+        if (!teleportAvailable || bulletRainOnGoing || bombingOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
             passedTime = firstTime - lastTime; // calculate passedTime
             lastTime = firstTime; // reset last time.
@@ -119,16 +116,6 @@ public class Player extends GameComponent {
                     }
                     bombDropCount += 1;
                     bombingActive = true;
-                }
-
-                if (engineBlastOngoing) {
-                    if (engineBlastCount >= TOTAL_ENGINE_BLASTS) {
-                        engineBlastActive = false;
-                        engineBlastCount = 0;
-                        engineBlastOngoing = false;
-                    }
-                    engineBlastCount += 1;
-                    engineBlastActive = true;
                 }
 
                 if (meleeOngoing) {
@@ -212,18 +199,13 @@ public class Player extends GameComponent {
             }
         }
         if (keyInputs[7].get()) { // E pressed
-            if (!bombingOngoing) {
-                bombingActive = true;
-                bombingOngoing = true;
-                bombDropCount = 0;
-            }
-        }
-        if (keyInputs[8].get()) { // H pressed
             if (!meleeOngoing) {
                 meleeOngoing = true;
                 meleeActive = true;
                 meleeCount = 0;
             }
+        }
+        if (keyInputs[8].get()) { // H pressed
         }
         if (keyInputs[9].get()) { // J pressed
             //todo add skill 1
@@ -274,15 +256,9 @@ public class Player extends GameComponent {
             }
         }
         if (bombingOngoing) {
-            if (bombingActive) {
+            if (bombingActive && bombDropCount >= TOTAL_BOMB_DROPS) {
                 dropBomb(GCF);
                 bombingActive = false;
-            }
-        }
-        if (engineBlastOngoing) {
-            if (engineBlastActive && engineBlastCount >= TOTAL_ENGINE_BLASTS) {
-                activateEngineBlast(GCF);
-                engineBlastActive = false;
             }
         }
         if (meleeOngoing) {
@@ -356,7 +332,7 @@ public class Player extends GameComponent {
         attackDelayTimer = 100; // start delay timer
     }
 
-    public void activateShield(GameComponentFactory GCF, Player player) {
+    private void activateShield(GameComponentFactory GCF, Player player) {
 
         if (!isShieldActive) {
             Shield shield = (Shield) GCF.createComponent("shield");
@@ -365,17 +341,16 @@ public class Player extends GameComponent {
             shield.addShapes(gameRoot);
             isShieldActive = true;
         }
-
     }
 
-    public void activateGuidedRocket(GameComponentFactory GCF) {
+    private void activateGuidedRocket(GameComponentFactory GCF) {
         GuidedRocket gRocket = (GuidedRocket) GCF.createComponent("guidedRocket");
         gRocket.setX(body.getTranslateX() + this.width / 2);
         gRocket.setY(body.getTranslateY() + this.height / 2);
         gRocket.addShapes(gameRoot);
     }
 
-    public void activateBarrier(GameComponentFactory GCF) {
+    private void activateBarrier(GameComponentFactory GCF) {
         Barrier barrier = (Barrier) GCF.createComponent("barrier");
         barrier.setX(this.body.getTranslateX() + this.width / 2);
         barrier.setY(this.body.getTranslateY() + this.height / 2);
@@ -426,25 +401,8 @@ public class Player extends GameComponent {
         bomb.addShapes(gameRoot);
     }
 
-    private void activateEngineBlast(GameComponentFactory GCF) {
-        EngineBlast blast = (EngineBlast) GCF.createComponent("engineBlast");
-
-        if (facingLeft) {
-            blast.setX(body.getTranslateX() - width / 2.7);
-            if (accCount - 10 > -1 * maxAcc) {
-                accCount -= 10;
-                innerSpeed = innerAcc * 10;
-            }
-        } else {
-            blast.setX(body.getTranslateX() + width / 0.9);
-            if (accCount + 10 < maxAcc) {
-                accCount += 10;
-                innerSpeed = innerAcc * 10;
-            }
-        }
-
-        blast.setY(body.getTranslateY());
-        blast.addShapes(gameRoot);
+    private void activateTimeFreeze() {
+        // TODO
     }
 
     private void activateMelee(GameComponentFactory GCF) {
@@ -458,23 +416,6 @@ public class Player extends GameComponent {
 
         melee.setY(body.getTranslateY() - height * 1.5);
         melee.addShapes(gameRoot);
-    }
-
-    private void activateHyperJump() {
-        double chance = 100 * Math.random();
-
-        /*if (chance <= 10.0)
-            lifeCount--;*/
-
-        int vertDist = (int) (Math.random() * magicConverter(100.0));
-        int horizDist = (int) (Math.random() * magicConverter(1000.0));
-
-        int vert = Math.random() > 0.5 ? 1 : -1;
-        int horiz = Math.random() > 0.5 ? 1 : -1;
-
-        moveX(horiz, horizDist);
-        moveY(vert, vertDist);
-        gameRoot.setTranslateX(gameRoot.getTranslateX() + -1 * horiz * horizDist);
     }
 
     public boolean addAbility(String abilityType) {
@@ -507,17 +448,20 @@ public class Player extends GameComponent {
 
                 if (abilityType.equals("shield")) {
                     activateShield(GCF, this);
-                } else if (abilityType.equals("hyperJump")) {
-                    activateHyperJump();
-                } else if (abilityType.equals("engineBlast")) {
-                    if (!engineBlastOngoing) {
-                        engineBlastOngoing = true;
-                        engineBlastActive = true;
-                        engineBlastCount = 0;
+                } else if (abilityType.equals("overcharge")) {
+                    if(isShieldActive) {
+                        // TODO BABY
                     }
+                } else if (abilityType.equals("bomb")) {
+                    if (!bombingOngoing) {
+                        bombingActive = true;
+                        bombingOngoing = true;
+                        bombDropCount = 0;
+                    }
+                } else if (abilityType.equals("timeFreeze")) {
+                    activateTimeFreeze();
                 } else if (abilityType.equals("barrier")) {
                     activateBarrier(GCF);
-
                 } else if (abilityType.equals("bulletRain")) {
                     if (!bulletRainOnGoing) {
                         bulletRainOnGoing = true;
@@ -526,15 +470,19 @@ public class Player extends GameComponent {
                     }
                 } else if (abilityType.equals("guidedRocket")) {
                     activateGuidedRocket(GCF);
-                } else if (abilityType.equals("melee")) {
-                    if (!meleeOngoing) {
-                        meleeOngoing = true;
-                        meleeActive = true;
-                        meleeCount = 0;
+                } else if (abilityType.equals("bomb")) {
+                    if (!bombingOngoing) {
+                        bombingActive = true;
+                        bombingOngoing = true;
+                        bombDropCount = 0;
                     }
                 }
-                abilities[index] = "empty";
-                noOfAbilities--;
+                if (abilityType.equals("shield"))
+                    abilities[index] = "overcharge";
+                else {
+                    abilities[index] = "empty";
+                    noOfAbilities--;
+                }
                 return true;
             }
         }

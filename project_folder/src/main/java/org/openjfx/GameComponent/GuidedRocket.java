@@ -14,6 +14,7 @@ public class GuidedRocket extends PlayerEquipment {
     private double dist_x;
     private double dist_y;
     private double hipo;
+    private Player player;
     private Enemy targetEnemy;
     private int rotate = 0;
     boolean isObjectInScene;
@@ -48,9 +49,10 @@ public class GuidedRocket extends PlayerEquipment {
             }
         }
         if (targetEnemy != null)
-            isObjectInScene = targetEnemy.getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && targetEnemy.getX() > gameRoot.getTranslateX() * -1;
+            isObjectInScene = targetEnemy.getX() <= gameRoot.getWidth() - gameRoot.getTranslateX() && targetEnemy.getX() > gameRoot.getTranslateX() * - 1;
         else
             isObjectInScene = false;
+        player = (Player) gameComponents.get(0);
     }
 
     public void moveGuidedRocket() {
@@ -76,7 +78,10 @@ public class GuidedRocket extends PlayerEquipment {
             speed_x = dist_x / hipo * speed; // calculate speed of x
             speed_y = dist_y / hipo * speed; // calculate speed of y
         } else {
-            moveY(1, speed);
+            if(targetEnemy == null) {
+                this.setX(player.getX());
+                this.setY(player.getY());
+            }
         }
         this.setX(this.getX() + speed_x);
         this.setY(this.getY() + speed_y);

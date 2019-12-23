@@ -6,6 +6,12 @@ import javafx.scene.paint.ImagePattern;
 //enemyType1
 
 public class Dienamite extends Enemy {
+    /**
+     * constructor for enemy type dienamite
+     * @param width  width of dienamite
+     * @param height height of dienamite
+     * @param assets for animation of dienamite
+     */
     Dienamite(double width, double height, ImagePattern[] assets) {
         super(width, height, "dienamite");
         this.height = magicConverter(60);
@@ -14,7 +20,14 @@ public class Dienamite extends Enemy {
         super.initBody(assets[0], width, height);
         setShootBehaviour(new ShootWithLaserBullet());
     }
-
+    /**
+     * typical move function of enemy atlas includes move and shoot
+     * @param GCF gets the Gamecomponent
+     * @param gameRoot gets the game pane
+     * @param player needs the player for moving to player
+     * @param left boolean for moving left
+     * @param speedFactor an integer which multiplies the speed of the enemy
+     */
     public void moveDienamite(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
@@ -43,7 +56,7 @@ public class Dienamite extends Enemy {
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 
-        directionX = moveValues[0] * speedFactor;
+        directionX = moveValues[0] + (speedFactor/100);
         directionY = moveValues[1];
         speed_x = moveValues[2];
         speed_y = moveValues[3];
@@ -63,7 +76,7 @@ public class Dienamite extends Enemy {
         }
 
         counter += 1;
-        if (counter % 10 == 0) {
+        if (counter % 20 == 0) {
             currentState += 1;
             counter = 0;
         }

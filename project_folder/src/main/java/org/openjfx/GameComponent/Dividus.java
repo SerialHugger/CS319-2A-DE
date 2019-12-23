@@ -3,19 +3,47 @@ package org.openjfx.GameComponent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 
+import java.awt.*;
+
 
 // enemy type 4
 
 public class Dividus extends Enemy {
+    private int lifetime;
+    private final double wantedTime = 0.05;
 
-    Dividus(double width, double height, ImagePattern asset) {
+    /**
+     * constructor for enemy type dividus
+     * @param width  width of dividus
+     * @param height height of dividus
+     * @param assets for animation of dividus
+     */
+    Dividus(double width, double height, ImagePattern[] assets) {
         super(width, height, "dividus");
-        this.height = magicConverter(120); // height of dividus
+        this.height = magicConverter(98); // height of dividus
         this.width = magicConverter(200); // width of dividus
-        super.initBody(asset, width, height);
+        super.initBody(assets[0], width, height);
+        hitBoxes[0] = new ComponentHitBoxRectangle(this.width - magicConverter(200),this.height,"enemy", "dividus");
+        hitBoxes[0].setTranslateX(body.getTranslateX()+magicConverter(100));
+        hitBoxes[0].setTranslateY(body.getTranslateY());
+        animationFrames = new ImagePattern[10];
+        for (int i = 0; i < 10; i++)
+            animationFrames[i] = assets[i];
+        delay = false;
+        delayTimer = 0;
+        body.setFill(animationFrames[currentState]);
         setShootBehaviour(new ShootWithGuidedBullet());
+        lifetime = 0;
     }
 
+    /**
+     *
+     * @param GCF needs gamecomponentfactory since it updates from there
+     * @param gameRoot needs the pane
+     * @param player needs the player to shoot it
+     * @param left indicator if it is looking left
+     * @param speedFactor an integer indicates the speed of the dividus
+     */
     public void update(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
 
         // TODO: Why 10000? Explain with comments or make it a constant variable
@@ -40,13 +68,23 @@ public class Dividus extends Enemy {
                 delay = true; // make delay true
             delayTimer -= 5; // decrease delay timer TODO: Why? Could you explain
         }
-
+        firstTime = System.nanoTime() / 1000000000.0; // get time
+        passedTime = firstTime - lastTime; // calculate passedTime
+        lastTime = firstTime; // reset last time.
+        totalPassedTime += passedTime; // calculate total passed time
+        if (totalPassedTime > wantedTime) { // if 0.02 second is passed
+            totalPassedTime = 0; // reset timer
+            currentState++;
+        }
+        if (currentState == 10)
+            currentState =  0;
+        body.setFill(animationFrames[currentState]);
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2] * speedFactor;
+        speed_x = moveValues[2] + (speedFactor/100);
         speed_y = moveValues[3];
 
         moveX(directionX, speed_x); // move X with given inputs
@@ -89,6 +127,11 @@ public class Dividus extends Enemy {
         return new int[]{directionX, directionY, (int) speed_x, (int) speed_y};
     }
 
+    /**
+     * dividus creates two atlases when it dies
+     * this function creates two atlases from gamecomponentfactory
+     * @param GCF needs gamecomponentfactory since it creates atlases from factory
+     */
     public void createAtlases(GameComponentFactory GCF) {
         Atlas temp1 = (Atlas) GCF.createComponent("atlas");
         Atlas temp2 = (Atlas) GCF.createComponent("atlas");
