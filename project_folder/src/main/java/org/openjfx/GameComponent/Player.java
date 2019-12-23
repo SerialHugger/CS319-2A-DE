@@ -274,18 +274,26 @@ public class Player extends GameComponent {
     }
 
     private void checkDeath() {
+        String mainMenuMusicUrl;
+        MediaPlayer mediaPlayer;
         for (int i = 0; i < hitBoxes.length; i++) {
             if (hitBoxes[i] instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBoxes[i]);
                 if (temp.isDead()) {
                     lifeCount -= 1;
                     temp.dead = false;
+                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                     mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                    mediaPlayer.play();
                 }
             } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBoxes[i]);
                 if (temp.isDead()) {
                     lifeCount -= 1;
                     temp.dead = false;
+                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                    mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                    mediaPlayer.play();
                 }
             }
             if (lifeCount == 0) {

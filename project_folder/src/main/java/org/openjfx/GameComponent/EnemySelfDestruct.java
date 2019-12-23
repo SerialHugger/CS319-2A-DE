@@ -10,6 +10,13 @@ public class EnemySelfDestruct extends EnemyEquipment {
     private int lifetime = 0;
     private boolean harmful;
 
+    /**
+     * constructor for enemy selfdestruct
+     * @param width width of the destruction range
+     * @param height height of the destruction range
+     * @param assets images for destruction
+     * @param harmful set if the explosion is harmful
+     */
     EnemySelfDestruct(double width, double height, ImagePattern[] assets, boolean harmful) {
         super(width, height, "enemySelfDestruct");
         hitBoxes = new Circle[1];
@@ -37,6 +44,9 @@ public class EnemySelfDestruct extends EnemyEquipment {
         delay = false;
     }
 
+    /**
+     * function for selfdestructing the enemy when they die
+     */
     public void updateSelfDestruct() {
 
         if (lifetime > TOTAL_LIFETIME) {

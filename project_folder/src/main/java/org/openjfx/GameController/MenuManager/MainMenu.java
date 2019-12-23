@@ -20,8 +20,11 @@ public class MainMenu {
     private MenuController menuController;
     private int shipSelected;
 
-    /*
-     * todo -> Insert setting,  make it good to go before start coding the game part.
+    /**
+     * Constructor
+     * @param root root pane
+     * @param width width of the screen
+     * @param height height of the screen
      */
     public MainMenu(Pane root, double width, double height) {
         menuRoot = root; // get root
@@ -29,7 +32,10 @@ public class MainMenu {
         this.height = height; // get height
     }
 
-    //Create content for main menu here.
+    /**
+     * creates all the menu contents
+     * @return default javafx return value
+     */
     public Parent createContent() {
         ////////////////////////////////////////////////////////////
         /////////////creating buttons and its holders///////////////
@@ -289,18 +295,30 @@ public class MainMenu {
         return menuRoot;
     }
 
-    // update everything with the current input
+    /**
+     * updates the menu
+     * @param game
+     */
     public void update(Game game) {
         menuController.update(game, menuRoot);
         shipSelected = menuController.getShipSelected();
     }
 
-    //Setup buttonHandler to control menu
+    /**
+     *
+     * @param scene current scene
+     */
     public void setButtonHandler(Scene scene) {
         menuController.setButtonHandler(scene);
     }
 
-    // Sets the image from url to button and return imagePattern, if fill is true, else just opens it and returns.
+    /** Sets the image from url to button and return imagePattern, if fill is true, else just opens it and returns.
+     *
+     * @param button button to insert
+     * @param url asset url
+     * @param fill fill or not
+     * @return ImagePattern
+     */
     public ImagePattern insertImage(Rectangle button, String url, boolean fill) {
         ImagePattern imagePattern;
         try {
@@ -328,11 +346,19 @@ public class MainMenu {
         return imagePattern;
     }
 
+    /**
+     *
+     * @return id of selected ship
+     */
     public int getShipSelected() {
         shipSelected = menuController.getShipSelected();
         return shipSelected;
     }
 
+    /**
+     *
+     * @return is full screen or not
+     */
     public boolean isFullscreen() {
         return menuController.isFullscreen();
     }

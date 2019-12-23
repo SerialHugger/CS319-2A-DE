@@ -9,6 +9,13 @@ public class Explosion extends PlayerEquipment {
     private double wantedTime;
     private int lifetime;
 
+    /**
+     * constructor for explosion of equipments
+     * @param width width of equipment
+     * @param height height of equipment
+     * @param assets images for equipment
+     * @param assetLocation image locations
+     */
     Explosion(double width, double height, ImagePattern[] assets, String assetLocation) {
         super(width, height, "explosion");
         wantedTime = 1;
@@ -27,6 +34,9 @@ public class Explosion extends PlayerEquipment {
         delay = false;
     }
 
+    /**
+     * update the range of explosion
+     */
     public void updateExplosion() {
 
         if (lifetime > TOTAL_LIFETIME)

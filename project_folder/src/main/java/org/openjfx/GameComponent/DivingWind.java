@@ -8,7 +8,12 @@ public class DivingWind extends Enemy {
     private double x_dest;
     private double y_dest;
     boolean canSeePlayer;
-
+    /**
+     * constructor for enemy type divingwind
+     * @param width  width of divingwind
+     * @param height height of divingwind
+     * @param assets for animation of divingwind
+     */
     DivingWind(double width, double height, ImagePattern[] assets) {
         super(width, height, "divingWind");
         animationFrames = assets;
@@ -23,7 +28,14 @@ public class DivingWind extends Enemy {
         acceleration = magicConverter(0.3);
         canSeePlayer = false;
     }
-
+    /**
+     * typical move function of enemy atlas includes move and shoot
+     * @param GCF gets the Gamecomponent
+     * @param gameRoot gets the game pane
+     * @param player needs the player for moving to player
+     * @param left boolean for moving left
+     * @param speedFactor an integer which multiplies the speed of the enemy
+     */
     public void moveDivingWind(GameComponentFactory GCF, Pane gameRoot, Player player, boolean left, int speedFactor) {
         // TODO: Add Comments
         double random = Math.random() * 10000;

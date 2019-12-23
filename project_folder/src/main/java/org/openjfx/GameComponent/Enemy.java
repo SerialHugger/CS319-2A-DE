@@ -96,36 +96,16 @@ public class Enemy extends GameComponent {
     }
 
 
-    /**
-     * initialize bullets for the enemy
-     * @param GCF TODO: explain what is this and what is its purpose
-     * @param bulletType bullet type to create. Ex: enemyBulletType1 or enemyBulletType2
-     */
-    /*public void initBullet(GameComponentFactory GCF, String bulletType) {
-        if(bulletType.equals("laserbullet")) {
-            LaserBullet enemyBullet = (LaserBullet) GCF.createComponent(bulletType); // create the bullet
-            enemyBullet.facingLeft = facingLeft; // make it face left
-            enemyBullet.setX(body.getTranslateX()); // set its X
-            enemyBullet.setY(body.getTranslateY()); // set its Y
-            enemyBullet.addShapes(gameRoot); // add its shapes to Root
-        } else if(bulletType.equals("guidedbullet")) {
-            GuidedBullet enemyBullet = (GuidedBullet) GCF.createComponent(bulletType); // create the bullet
-            enemyBullet.facingLeft = facingLeft; // make it face left
-            enemyBullet.setX(body.getTranslateX()); // set its X
-            enemyBullet.setY(body.getTranslateY()); // set its Y
-            enemyBullet.addShapes(gameRoot); // add its shapes to Root
-        }
-    }
-    */
+
 
 
     /**
      * Transports the objects at one end of the map to the another map to simulate infinite map
      * Briefly, objects loop around the map when they reach an end of the map
      *
-     * @param bgWidth: TODO: explain // Width of the screen.
-     * @param player:  TODO: explain
-     * @param left:    TODO: explain
+     * @param bgWidth: the width needed for looping the map
+     * @param player:  player that user controls
+     * @param left:    if player is going left
      */
     public void loopAroundTheMap(double bgWidth, Player player, boolean left) {
         //updates the space ships so they loop around map
@@ -146,6 +126,11 @@ public class Enemy extends GameComponent {
         }
     }
 
+    /**
+     * function for exploding enemies when they die
+     * @param explodeType the type of explosion
+     * @param GCF the gamecomponentfactory
+     */
     public void explode(String explodeType, GameComponentFactory GCF) {
         EnemySelfDestruct selfDest = (EnemySelfDestruct) GCF.createComponent(explodeType);
         selfDest.setX(this.getX() + width / 2);
@@ -162,6 +147,10 @@ public class Enemy extends GameComponent {
         }
     }
 
+    /**
+     * function for dropping abilities when enemies die
+     * @param GCF gamecomponentfactory for creating abilities in game
+     */
     public void dropAbility(GameComponentFactory GCF) {
         if (canDropItem) {
             Collectible item = (Collectible) GCF.createComponent("collectible");
@@ -171,18 +160,34 @@ public class Enemy extends GameComponent {
         }
     }
 
+    /**
+     * setting the shootbehaviour of the enemy of the strategy pattern
+     * @param shootBehaviour shootbehaviour ( laser , guided etc )
+     */
     public void setShootBehaviour(Shootable shootBehaviour) {
         this.shootBehaviour = shootBehaviour;
     }
 
+    /**
+     * for performin the shooting
+     * @param GCF gets gamecomponentfactory to initiliaze bullets
+     */
     public void performShoot(GameComponentFactory GCF) {
         shootBehaviour.shoot(GCF, this, gameRoot);
     }
 
+    /**
+     * getter for width
+     * @return width
+     */
     public double getWidth() {
         return width;
     }
 
+    /**
+     * getter for height
+     * @return height
+     */
     public double getHeight() {
         return height;
     }

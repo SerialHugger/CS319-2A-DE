@@ -87,9 +87,7 @@ public class GameComponentFactory {
             temp = new Bomb(width, height, null, (Player) gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield(width, height, shieldImage);
-        } else if (type.equals("engineBlast")) {
-            temp = new EngineBlast(width, height, "empty");
-        } else if (type.equals("collectible")) {
+        }  else if (type.equals("collectible")) {
             temp = new Collectible(width, height, "empty");
         } else if (type.equals("melee")) {
             temp = new Melee(width, height, meleeImage);
