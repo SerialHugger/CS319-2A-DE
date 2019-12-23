@@ -24,6 +24,7 @@ public class GameComponentFactory {
     ImagePattern[] playerBulletImage = new ImagePattern[2];
     ImagePattern[] selfDestructImage = new ImagePattern[8];
     ImagePattern[] explosionImage = new ImagePattern[8];
+    ImagePattern[] explodeImage = new ImagePattern[8];
     ImagePattern[] atlasImage = new ImagePattern[3];
     ImagePattern[] dienamiteImage = new ImagePattern[9];
     ImagePattern[] divingWindImage = new ImagePattern[2];
@@ -83,7 +84,7 @@ public class GameComponentFactory {
         } else if (type.equals("enemySelfDestruct")) {
             temp = new EnemySelfDestruct(width, height, selfDestructImage, true);
         } else if (type.equals("explode")) {
-            temp = new EnemySelfDestruct(width, height, selfDestructImage, false);
+            temp = new EnemySelfDestruct(width, height, explodeImage, false);
         } else if (type.equals("bomb")) {
             temp = new Bomb(width, height, null, (Player) gameComponents.get(0));
         } else if (type.equals("shield")) {
@@ -124,6 +125,9 @@ public class GameComponentFactory {
         }
         for (int i = 0; i < 8; i++) {
             explosionImage[i] = openAsset("Assets\\skills\\shield\\shield_" + (i + 1) + ".png");
+        }
+        for (int i = 0; i < 8; i++) {
+            explodeImage[i] = openAsset("Assets\\Enemies\\explosion\\explosion_" + (i + 1) + ".png");
         }
         for (int i = 0; i < 14; i++) {
             dodgerImage[i] = openAsset("Assets\\Enemies\\dodger\\dodger_" + (i + 1) + ".png");

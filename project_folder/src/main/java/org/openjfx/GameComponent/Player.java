@@ -211,13 +211,11 @@ public class Player extends GameComponent {
         if (keyInputs[9].get()) { // J pressed
             //todo add skill 1
             //  for now its shield
-            //useAbility(0, GCF);
-            activateShield(GCF, this);
+            useAbility(0, GCF);
         }
         if (keyInputs[10].get()) { // K pressed
             // todo some stuff
-            //useAbility(1, GCF);
-            playerShield.overCharge(this);
+            useAbility(1, GCF);
         }
         if (keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
