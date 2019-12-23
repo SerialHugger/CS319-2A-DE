@@ -46,7 +46,7 @@ public class Atlas extends Enemy {
 
         directionX = moveValues[0];
         directionY = moveValues[1];
-        speed_x = moveValues[2] * speedfactor;
+        speed_x = moveValues[2] + (speedfactor/100);
         speed_y = moveValues[3];
         if (directionX == 1)
             body.setFill(animationFrames[2]);
