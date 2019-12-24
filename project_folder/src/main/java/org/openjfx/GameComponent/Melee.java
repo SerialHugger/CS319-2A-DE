@@ -19,7 +19,6 @@ public class Melee extends PlayerEquipment {
         this.height = magicConverter(150);
         this.width = magicConverter(30);
         rotations = 0;
-        System.out.println("Melee arm created...");
         currentAngle = ROTATION_INCREMENT;
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "melee");

@@ -71,9 +71,6 @@ public class Boss extends Enemy {
             loweringDelay = 500;
             shootFaster = 10000;
         }
-        System.out.println("totalHealth is " + totalHealth);
-        System.out.println( " shootfaster " + shootFaster);
-        System.out.println( " loweringdelay " + loweringDelay);
         // get new coordinates and speed for the next frame
         int[] moveValues = getMoveValues(random);
 

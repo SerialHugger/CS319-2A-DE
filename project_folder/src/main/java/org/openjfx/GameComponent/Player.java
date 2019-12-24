@@ -43,8 +43,10 @@ public class Player extends GameComponent {
     long score;
     //immortal mode //todo delete this when needed
     boolean toggleHealth = false;
-    int attackDelayTimer = 0;
-    boolean attackDelay = false;
+    private int attackDelayTimer = 0;
+    private boolean attackDelay = false;
+    private boolean shieldDelay = false;
+    private int shieldDelayTimer = 0;
     int lifeCount = 3;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
@@ -250,6 +252,12 @@ public class Player extends GameComponent {
                 attackDelay = false; // make delay false
             attackDelayTimer -= 25; // decrease delay
         }
+        if (shieldDelay) {
+            if (shieldDelayTimer == 0)
+                shieldDelay = false;
+            shieldDelayTimer -= 25;
+        }
+        System.out.println(shieldDelayTimer);
         if (bulletRainOnGoing) {
             if (bulletRainActive) {
                 activateBulletRain(GCF);
@@ -342,6 +350,8 @@ public class Player extends GameComponent {
             shield.setY(body.getTranslateY() + height / 2);
             shield.addShapes(gameRoot);
             isShieldActive = true;
+            shieldDelay = true;
+            shieldDelayTimer = 100;
         }
     }
 
@@ -429,7 +439,6 @@ public class Player extends GameComponent {
                 }
             }
             noOfAbilities++;
-            System.out.println("Added ability to inventory: " + abilityType);
             return true;
         }
         return false;
@@ -447,13 +456,14 @@ public class Player extends GameComponent {
         if (index < MAX_NO_OF_ABILITIES && index >= 0) {
             if (!"empty".equals(abilities[index])) {
                 String abilityType = abilities[index];
-
                 if (abilityType.equals("shield")) {
                     activateShield(GCF, this);
                 } else if (abilityType.equals("overcharge")) {
                     if(isShieldActive) {
-                        // TODO BABY
-                        playerShield.overCharge(this);
+                        if (!shieldDelay) {
+                            System.out.println("calling overcharge");
+                            playerShield.overCharge(this);
+                        }
                     }
                 } else if (abilityType.equals("bomb")) {
                     if (!bombingOngoing) {
