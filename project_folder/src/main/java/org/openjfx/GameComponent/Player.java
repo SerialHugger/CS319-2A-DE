@@ -86,7 +86,7 @@ public class Player extends GameComponent {
         Arrays.fill(abilities, "empty");
     }
 
-    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF) {
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF, GameController gameController) {
         innerSpeed = 0;
         if (!teleportAvailable || bulletRainOnGoing || bombingOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
@@ -276,6 +276,10 @@ public class Player extends GameComponent {
                 meleeActive = false;
             }
         }
+        if(timeFreeze) {
+            gameController.freeze();
+            timeFreeze = false;
+        }
         moveX(1, speed + innerSpeed); // move!
     }
 
@@ -286,20 +290,24 @@ public class Player extends GameComponent {
             if (hitBoxes[i] instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                     mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                    mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             }
             if (lifeCount == 0) {
@@ -445,6 +453,8 @@ public class Player extends GameComponent {
     }
 
     private boolean hasAbility(String abilityType) {
+        if(abilityType.equals("shield") && isShieldActive)
+            return false;
         for (String ability : abilities) {
             if (ability.equals(abilityType))
                 return true;
