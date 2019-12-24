@@ -678,6 +678,27 @@ public class GameController {
                     setCurrentScreen(2);
                 }
             }
+        } else  if (levelMod == 0) {
+            if (noOfEnemies == 0) {
+                //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
+                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, 1);
+                createCivilians(civilianNumber);
+            }
+            if (noOfEnemies == deadCounter) {
+                System.out.println("Level1 cleared !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+                level = level + 1;
+                deadCounter = 0;
+                noOfEnemies = 0;
+                levelMod = level % 5;
+
+                if (!isCounterStarted) {
+                    startTime = System.nanoTime() / 1000000000.0;
+                    isCounterStarted = true;
+                    setCurrentScreen(2);
+                }
+
+            }
+
         }
     }
 
