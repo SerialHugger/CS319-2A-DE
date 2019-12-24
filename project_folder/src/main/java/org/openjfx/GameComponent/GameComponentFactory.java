@@ -41,6 +41,7 @@ public class GameComponentFactory {
     ImagePattern bossImage;
     ImagePattern meleeImage;
     ImagePattern barrierImage;
+    ImagePattern bombImage;
 
     public GameComponentFactory(double width, double height, ArrayList<GameComponent> gameComponents) {
         this.width = width;
@@ -86,7 +87,7 @@ public class GameComponentFactory {
         } else if (type.equals("explode")) {
             temp = new EnemySelfDestruct(width, height, explodeImage, false);
         } else if (type.equals("bomb")) {
-            temp = new Bomb(width, height, null, (Player) gameComponents.get(0));
+            temp = new Bomb(width, height, bombImage, (Player) gameComponents.get(0));
         } else if (type.equals("shield")) {
             temp = new Shield(width, height, shieldImage);
         } else if (type.equals("collectible")) {
@@ -157,6 +158,7 @@ public class GameComponentFactory {
         civilianImage = openAsset("Assets\\civilian.png");
         bossImage = openAsset("Assets\\WhatsApp_Image_2019-12-22_at_08-removebg-preview.png");
         meleeImage = openAsset("Assets\\double_lightsaber_melee.png");
+        bombImage = openAsset("Assets\\skills\\bombFalling.png");
     }
 
     /*

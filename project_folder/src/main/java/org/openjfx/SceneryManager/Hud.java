@@ -29,6 +29,13 @@ public class Hud {
     Pane gameRoot;
     private Text scoreText;
     private ImagePattern guidedRocketHudImage = openAsset("Assets\\light_saber.png");
+    private ImagePattern meleeHudImage = openAsset("Assets\\double_lightsaber_melee.png");
+    private ImagePattern shieldHudImage = openAsset("Assets\\skills\\shield.png");
+    private ImagePattern barrierHudImage = openAsset("Assets\\skills\\barrier.png");
+    private ImagePattern dodgeHudImage = openAsset("Assets\\skills\\dodge.png");
+    private ImagePattern bulletRainHudImage = openAsset("Assets\\skills\\bullet_rain.png");
+    private ImagePattern bombHudImage = openAsset("Assets\\skills\\bomb.png");
+    private ImagePattern timeFreezeHudImage = openAsset("Assets\\skills\\time_freeze.png");
 
     ///////////////
     // Necessary attiributes for changing directions with the ship
@@ -123,14 +130,21 @@ public class Hud {
             } else if (abilities[i - 2] == "guidedRocket") {
                 skillsHud[i].setFill(guidedRocketHudImage);/* TODO ADD SKILL IMAGES*/
             } else if (abilities[i - 2] == "barrier") {
-                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
+                skillsHud[i].setFill(barrierHudImage);/* TODO ADD SKILL IMAGES*/
             } else if (abilities[i - 2] == "shield") {
-                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
+                skillsHud[i].setFill(shieldHudImage);/* TODO ADD SKILL IMAGES*/
             } else if (abilities[i - 2] == "melee") {
-                skillsHud[i].setFill(Color.RED);/* TODO ADD SKILL IMAGES*/
-            }
+                //skillsHud[i].setFill(meleeHudImage);/* TODO ADD SKILL IMAGES*/
+            } else if (abilities[i - 2].equals("bomb")) {
+                skillsHud[i].setFill(bombHudImage);
+            } else if (abilities[i - 2].equals("bulletRain")) {
+                skillsHud[i].setFill(bulletRainHudImage);
+            } else if (abilities[i - 2].equals("timeFreeze"))
+                skillsHud[i].setFill(timeFreezeHudImage);
 
         }
+        skillsHud[0].setFill(dodgeHudImage);
+        skillsHud[1].setFill(meleeHudImage);
     }
 
     public void slide(boolean toLeft, double slidingSpeed) {
