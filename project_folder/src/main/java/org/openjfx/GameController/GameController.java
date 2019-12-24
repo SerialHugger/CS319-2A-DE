@@ -555,7 +555,7 @@ public class GameController {
         if (levelMod == 1) {
             if (noOfEnemies == 0) {
                 //noOfEnemies = createEnemies(atlasNumber * levelMod ,dodgerNumber * levelMod ,dividusNumber * levelMod ,dienamiteNumber * levelMod,speedRunnerNumber * levelMod, divingWindNumber * levelMod , 0);
-                noOfEnemies = createEnemies(1, 0, 0, 0, 0, 0, 0);
+                noOfEnemies = createEnemies(0, 0, 0, 0, 0, 0, 1);
                 createCivilians(civilianNumber);
             }
             if (noOfEnemies == deadCounter) {

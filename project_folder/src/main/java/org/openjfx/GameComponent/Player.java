@@ -30,6 +30,7 @@ public class Player extends GameComponent {
     private boolean meleeOngoing = false;
     private int meleeCount = 0;
     private final int MAX_NO_OF_ABILITIES = 3;
+    private boolean timeFreeze = false;
     private int noOfAbilities;
     private Shield playerShield;
     int maxAcc = 60;
@@ -60,7 +61,7 @@ public class Player extends GameComponent {
         facingLeft = true;
         innerAcc = magicConverter(5);
         speed_x = 0;
-        teleportDistance = magicConverter(110);
+        teleportDistance = magicConverter(220);
         //update width and height
         double tempWidth = magicConverter(110);
         double tempHeight = magicConverter(50);
@@ -222,7 +223,7 @@ public class Player extends GameComponent {
         if (keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
         }
-        if (false)
+        if (true)
             checkDeath();
         else
             lifeCount = 3;
@@ -414,7 +415,7 @@ public class Player extends GameComponent {
     }
 
     private void activateTimeFreeze() {
-        // TODO
+        timeFreeze = true;
     }
 
     private void activateMelee(GameComponentFactory GCF) {
@@ -527,4 +528,7 @@ public class Player extends GameComponent {
     }
 
 
+    public int getLifeCount() {
+        return lifeCount;
+    }
 }

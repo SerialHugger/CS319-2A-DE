@@ -46,7 +46,7 @@ public class Scenery {
     public void update(BooleanProperty[] keyInputs, Player player, int fps, double speed) {
         //Update all elements of scenery
         backGround.update(keyInputs[1].get(), player);
-        hud.update(speed, fps, player.getScore());
+        hud.update(speed, fps, player.getScore(), player);
         hud.displaySkills(player.getAbilities());
         middleGround.update(keyInputs[1].get(), keyInputs[3].get(), player, speed);
         foreGround.update(keyInputs[1].get(), player);
@@ -85,4 +85,5 @@ public class Scenery {
     public double getWidth() {
         return width;
     }
+
 }
