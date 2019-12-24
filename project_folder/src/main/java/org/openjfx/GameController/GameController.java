@@ -199,7 +199,6 @@ public class GameController {
                     Collectible item = ((Collectible) gameComponents.get(i));
                     item.moveCollectible();
                     if (item.isDead()) {
-                        System.out.println("Inside destroy collectible...");
                         gameComponents.remove(i--);
                         size -= 1;
                         item.die();
@@ -573,7 +572,6 @@ public class GameController {
                 }
 
             }
-            System.out.println("counter" + deadCounter);
 
         } else if (levelMod == 2) {
             if (noOfEnemies == 0) {

@@ -10,10 +10,10 @@ public class Bomb extends PlayerEquipment {
      * constructor for bomb a player equipment
      * @param width width of the bomb's area effect
      * @param height height of the bomb's area affect
-     * @param assets images for animation
+     * @param asset images for animation
      * @param player needs player to get used
      */
-    Bomb(double width, double height, ImagePattern assets, Player player) {
+    Bomb(double width, double height, ImagePattern asset, Player player) {
         super(width, height, "bomb");
         hitBoxes = new Shape[1];
         speed = magicConverter(10);
@@ -22,7 +22,7 @@ public class Bomb extends PlayerEquipment {
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "playerEquipment", "bomb");
         speed_x = player.speed;
         body = new Rectangle(this.width, this.height);
-        body.setFill(Color.RED);
+        body.setFill(asset);
 
     }
 
