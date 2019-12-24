@@ -258,7 +258,6 @@ public class Player extends GameComponent {
                 shieldDelay = false;
             shieldDelayTimer -= 25;
         }
-        System.out.println(shieldDelayTimer);
         if (bulletRainOnGoing) {
             if (bulletRainActive) {
                 activateBulletRain(GCF);
@@ -462,7 +461,6 @@ public class Player extends GameComponent {
                 } else if (abilityType.equals("overcharge")) {
                     if(isShieldActive) {
                         if (!shieldDelay) {
-                            System.out.println("calling overcharge");
                             playerShield.overCharge(this);
                         }
                     }
