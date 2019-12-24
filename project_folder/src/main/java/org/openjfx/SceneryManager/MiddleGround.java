@@ -149,7 +149,7 @@ public class MiddleGround {
         if (left) {
             double mod = Math.abs(gameRoot.getTranslateX()) % (width * 4);
             if (mod < magicConverter(150) && mod > -1*magicConverter(150)) {
-                double newLocationMountain = -1 * (gameRoot.getTranslateX() + mod) - magicConverter(600 + 192 - 200) - left_mountains_4.getWidth();
+                double newLocationMountain = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 192 ) - left_mountains_4.getWidth();
                 double newLocationHumanSettlement_3 = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 288) - humanSettlement_3.getWidth();
                 double newLocationHumanSettlement_2 = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 384) - humanSettlement_2.getWidth();
                 double newLocationHumanSettlement_1 = -1 * (gameRoot.getTranslateX() - mod) - magicConverter(600 + 480) - humanSettlement_1.getWidth();
@@ -190,7 +190,7 @@ public class MiddleGround {
 
             }
             mod = (Math.abs(gameRoot.getTranslateX()) + width * 2) % (width * 4);
-            if (mod < magicConverter(150) && mod > -1*magicConverter(-150)) {
+            if (mod < magicConverter(150) && mod > -1*magicConverter(150)) {
                 double newLocationMountain = -1 * (gameRoot.getTranslateX() + mod) + width * 2 + magicConverter(600 + 572);
                 double newLocationTemple_back = -1 * (gameRoot.getTranslateX() + mod) + magicConverter(3220 + 864);
                 double newLocationTemple_middle = -1 * (gameRoot.getTranslateX() + mod) + magicConverter(3220 + 1152);

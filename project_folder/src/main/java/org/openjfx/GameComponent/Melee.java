@@ -25,7 +25,6 @@ public class Melee extends PlayerEquipment {
         body = new Circle(this.height / 2);
         body.setFill(asset);
         body.setRotate(-45);
-        body.setStroke(Color.PURPLE);
     }
 
     public void moveMelee(Player player) {
