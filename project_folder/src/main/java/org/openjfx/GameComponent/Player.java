@@ -30,6 +30,7 @@ public class Player extends GameComponent {
     private boolean meleeOngoing = false;
     private int meleeCount = 0;
     private final int MAX_NO_OF_ABILITIES = 3;
+    private boolean timeFreeze = false;
     private int noOfAbilities;
     private Shield playerShield;
     int maxAcc = 60;
@@ -60,7 +61,7 @@ public class Player extends GameComponent {
         facingLeft = true;
         innerAcc = magicConverter(5);
         speed_x = 0;
-        teleportDistance = magicConverter(110);
+        teleportDistance = magicConverter(220);
         //update width and height
         double tempWidth = magicConverter(110);
         double tempHeight = magicConverter(50);
@@ -85,7 +86,7 @@ public class Player extends GameComponent {
         Arrays.fill(abilities, "empty");
     }
 
-    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF) {
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF, GameController gameController) {
         innerSpeed = 0;
         if (!teleportAvailable || bulletRainOnGoing || bombingOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
@@ -222,7 +223,7 @@ public class Player extends GameComponent {
         if (keyInputs[11].get()) { // L pressed
             useAbility(2, GCF);
         }
-        if (false)
+        if (true)
             checkDeath();
         else
             lifeCount = 3;
@@ -275,6 +276,10 @@ public class Player extends GameComponent {
                 meleeActive = false;
             }
         }
+        if(timeFreeze) {
+            gameController.freeze();
+            timeFreeze = false;
+        }
         moveX(1, speed + innerSpeed); // move!
     }
 
@@ -285,20 +290,24 @@ public class Player extends GameComponent {
             if (hitBoxes[i] instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                     mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                    mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             }
             if (lifeCount == 0) {
@@ -413,7 +422,7 @@ public class Player extends GameComponent {
     }
 
     private void activateTimeFreeze() {
-        // TODO
+        timeFreeze = true;
     }
 
     private void activateMelee(GameComponentFactory GCF) {
@@ -444,6 +453,8 @@ public class Player extends GameComponent {
     }
 
     private boolean hasAbility(String abilityType) {
+        if(abilityType.equals("shield") && isShieldActive)
+            return false;
         for (String ability : abilities) {
             if (ability.equals(abilityType))
                 return true;
@@ -525,4 +536,7 @@ public class Player extends GameComponent {
     }
 
 
+    public int getLifeCount() {
+        return lifeCount;
+    }
 }

@@ -1,5 +1,6 @@
 package org.openjfx.SceneryManager;
 
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -10,15 +11,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.openjfx.GameComponent.Player;
 
 import java.io.FileInputStream;
 
 public class Hud {
     private SceneComponent healthHud; // top part of the Hud
+    private SceneComponent health;
     private SceneComponent[] skillsHud;
     private StackPane fpsPane; // stackpane for fps display
     private StackPane scorePane;
     private ImagePattern[] healthHudFrames = new ImagePattern[36]; // the imagepatterns for animation
+    private ImagePattern[] healthFrames = new ImagePattern[3];
     private Text fpsText;
     private String type;
     private double width; // width of the game
@@ -45,6 +49,7 @@ public class Hud {
     Hud(double width, double height, String type, Pane gameRoot) {
         this.gameRoot = gameRoot;
         healthHud = new SceneComponent(width / 3.96, height / 5.684, "topHud", "Assets\\Scenery\\hud\\hud_0.png");
+        health = new SceneComponent( width / 3.96, height / 5.684, "healthHud", "Assets\\Scenery\\hud\\health_1.png");
         skillsHud = new SceneComponent[5];
 
         for (int i = 0; i < skillsHud.length; i++) {
@@ -66,7 +71,8 @@ public class Hud {
         toLeft = false;
         healthHud.setTranslateX(-1 * width);
         healthHud.setTranslateY(height / 200);
-
+        health.setTranslateX(height / 200);
+        health.setTranslateX(-1 * width + width/192);
         fpsPane = new StackPane();
         fpsPane.setMaxHeight(height / 54);
         fpsPane.setMaxWidth(width / 48);
@@ -89,10 +95,16 @@ public class Hud {
                 Image image = new Image(inputstream);
                 healthHudFrames[i] = new ImagePattern(image);
             }
+            for(int i = 0; i < 3; i++){
+                FileInputStream inputstream = new FileInputStream("Assets\\Scenery\\hud\\health_" + (i+1) + ".png");
+                Image image = new Image(inputstream);
+                healthFrames[i] = new ImagePattern(image);
+            }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
         gameRoot.getChildren().add(healthHud);
+        gameRoot.getChildren().add(health);
         fpsPane.getChildren().add(fpsText);
         gameRoot.getChildren().add(fpsPane);
         scorePane.getChildren().add(scoreText);
@@ -102,9 +114,11 @@ public class Hud {
     /*
      * Updates animation for the hud
      */
-    public void update(double speed, int fps, long score) {
+    public void update(double speed, int fps, long score, Player player) {
         fpsText.setText("FPS: " + fps);
         scoreText.setText("SCORE: " + score);
+        int lifeCount = player.getLifeCount();
+        health.setFill(healthFrames[lifeCount-1]);
         if (!delay) {
             delayTimer += 25;
             if (delayTimer == 75) {
@@ -157,6 +171,7 @@ public class Hud {
 
     private void moveX(int direction, double moveSpeed) {
         healthHud.setTranslateX(healthHud.getTranslateX() + (direction * moveSpeed));
+        health.setTranslateX(health.getTranslateX() + (direction * moveSpeed));
         fpsText.setTranslateX(fpsText.getTranslateX() + (direction * moveSpeed));
         scoreText.setTranslateX(scoreText.getTranslateX() + (direction * moveSpeed));
         for (int i = 0; i < skillsHud.length; i++) {
