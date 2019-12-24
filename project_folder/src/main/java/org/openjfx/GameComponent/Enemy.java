@@ -26,7 +26,7 @@ public class Enemy extends GameComponent {
      */
     Enemy(double width, double height, String type) {
         super(width, height, type);
-        canDropItem = ((10000 * Math.random()) < 9000) ? true : false;
+        canDropItem = ((10000 * Math.random()) < 2000) ? true : false;
     }
 
 
