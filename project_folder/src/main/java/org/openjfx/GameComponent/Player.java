@@ -30,6 +30,7 @@ public class Player extends GameComponent {
     private boolean meleeOngoing = false;
     private int meleeCount = 0;
     private final int MAX_NO_OF_ABILITIES = 3;
+    private boolean timeFreeze = false;
     private int noOfAbilities;
     private Shield playerShield;
     int maxAcc = 60;
@@ -43,8 +44,10 @@ public class Player extends GameComponent {
     long score;
     //immortal mode //todo delete this when needed
     boolean toggleHealth = false;
-    int attackDelayTimer = 0;
-    boolean attackDelay = false;
+    private int attackDelayTimer = 0;
+    private boolean attackDelay = false;
+    private boolean shieldDelay = false;
+    private int shieldDelayTimer = 0;
     int lifeCount = 3;
     ImagePattern[] shipStatus = new ImagePattern[2]; // holds left and right
 
@@ -58,7 +61,7 @@ public class Player extends GameComponent {
         facingLeft = true;
         innerAcc = magicConverter(5);
         speed_x = 0;
-        teleportDistance = magicConverter(110);
+        teleportDistance = magicConverter(220);
         //update width and height
         double tempWidth = magicConverter(110);
         double tempHeight = magicConverter(50);
@@ -83,7 +86,7 @@ public class Player extends GameComponent {
         Arrays.fill(abilities, "empty");
     }
 
-    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF) {
+    public void movePlayer(BooleanProperty[] keyInputs, GameComponentFactory GCF, GameController gameController) {
         innerSpeed = 0;
         if (!teleportAvailable || bulletRainOnGoing || bombingOngoing || meleeOngoing) {
             firstTime = System.nanoTime() / 1000000000.0; // get time
@@ -250,6 +253,11 @@ public class Player extends GameComponent {
                 attackDelay = false; // make delay false
             attackDelayTimer -= 25; // decrease delay
         }
+        if (shieldDelay) {
+            if (shieldDelayTimer == 0)
+                shieldDelay = false;
+            shieldDelayTimer -= 25;
+        }
         if (bulletRainOnGoing) {
             if (bulletRainActive) {
                 activateBulletRain(GCF);
@@ -268,6 +276,10 @@ public class Player extends GameComponent {
                 meleeActive = false;
             }
         }
+        if(timeFreeze) {
+            gameController.freeze();
+            timeFreeze = false;
+        }
         moveX(1, speed + innerSpeed); // move!
     }
 
@@ -278,20 +290,24 @@ public class Player extends GameComponent {
             if (hitBoxes[i] instanceof ComponentHitBoxCircle) {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                     mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             } else if (hitBoxes[i] instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBoxes[i]);
                 if (temp.isDead()) {
-                    lifeCount -= 1;
+                    if(!isShieldActive) {
+                        lifeCount -= 1;
+                        mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
+                        mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
+                        mediaPlayer.play();
+                    }
                     temp.dead = false;
-                    mainMenuMusicUrl = new File("Assets/Music/playerDamage.mp3").toURI().toString();
-                    mediaPlayer = new MediaPlayer(new Media(mainMenuMusicUrl));
-                    mediaPlayer.play();
                 }
             }
             if (lifeCount == 0) {
@@ -342,6 +358,8 @@ public class Player extends GameComponent {
             shield.setY(body.getTranslateY() + height / 2);
             shield.addShapes(gameRoot);
             isShieldActive = true;
+            shieldDelay = true;
+            shieldDelayTimer = 100;
         }
     }
 
@@ -404,7 +422,7 @@ public class Player extends GameComponent {
     }
 
     private void activateTimeFreeze() {
-        // TODO
+        timeFreeze = true;
     }
 
     private void activateMelee(GameComponentFactory GCF) {
@@ -429,13 +447,14 @@ public class Player extends GameComponent {
                 }
             }
             noOfAbilities++;
-            System.out.println("Added ability to inventory: " + abilityType);
             return true;
         }
         return false;
     }
 
     private boolean hasAbility(String abilityType) {
+        if(abilityType.equals("shield") && isShieldActive)
+            return false;
         for (String ability : abilities) {
             if (ability.equals(abilityType))
                 return true;
@@ -447,13 +466,13 @@ public class Player extends GameComponent {
         if (index < MAX_NO_OF_ABILITIES && index >= 0) {
             if (!"empty".equals(abilities[index])) {
                 String abilityType = abilities[index];
-
                 if (abilityType.equals("shield")) {
                     activateShield(GCF, this);
                 } else if (abilityType.equals("overcharge")) {
                     if(isShieldActive) {
-                        // TODO BABY
-                        playerShield.overCharge(this);
+                        if (!shieldDelay) {
+                            playerShield.overCharge(this);
+                        }
                     }
                 } else if (abilityType.equals("bomb")) {
                     if (!bombingOngoing) {
@@ -517,4 +536,7 @@ public class Player extends GameComponent {
     }
 
 
+    public int getLifeCount() {
+        return lifeCount;
+    }
 }

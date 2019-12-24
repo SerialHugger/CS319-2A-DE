@@ -32,7 +32,6 @@ public class Shield extends PlayerEquipment {
     }
 
     public void moveShield(Player player) {
-        System.out.println(player.isShieldActive);
         setX(player.body.getTranslateX() + player.width / 2);
         setY(player.body.getTranslateY() + player.height / 2);
         if (!overChargeActive) {

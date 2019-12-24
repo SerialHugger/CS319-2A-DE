@@ -21,7 +21,7 @@ public class Explosion extends PlayerEquipment {
         lifetime = 0;
         hitBoxes = new Circle[1];
         hitBoxes[0] = new ComponentHitBoxCircle(height, "playerEquipment", "explosion");
-        body = new Circle(height);
+        body = new Circle(height + height/2);
 
         animationFrames = new ImagePattern[8];
         for (int i = 0; i < 8; i++) {

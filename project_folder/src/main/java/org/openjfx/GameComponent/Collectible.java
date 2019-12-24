@@ -14,7 +14,7 @@ import java.util.Random;
 public class Collectible extends GameComponent {
 
     enum Ability { // an enum that represents the special abilities
-        Shield, Bomb, TimeFreeze, BulletRain, Barrier, GuidedRocket, Melee;
+        Shield, Bomb, TimeFreeze, BulletRain, Barrier, GuidedRocket;
 
         private static final List<Ability> VALUES = List.of(values()); // holds the abilities
 
@@ -56,9 +56,6 @@ public class Collectible extends GameComponent {
                 case GuidedRocket:
                     type = "guidedRocket";
                     break;
-                case Melee:
-                    type = "melee";
-                    break;
                 default:
                     type = "";
             }
@@ -71,7 +68,9 @@ public class Collectible extends GameComponent {
     private ImagePattern barrierHudImage;
     private ImagePattern guidedRocketHudImage;
     private ImagePattern shieldHudImage;
-    private ImagePattern engineBlastHudImage;
+    private ImagePattern bombHudImage;
+    private ImagePattern bulletRainHudImage;
+    private ImagePattern timeFreezeHudImage;
 
     /**
      * constructor for collectible
@@ -85,14 +84,22 @@ public class Collectible extends GameComponent {
         this.width = magicConverter(40);
         abilityType = Ability.randomAbility();
         didHitTheGround = false;
-        System.out.println("Ability type of random: " + abilityType.getType());
         hitBoxes = new Shape[1];
         hitBoxes[0] = new ComponentHitBoxRectangle(this.width, this.height, "collectible", getAbilityType());
         openCollectibleImages();
         body = new Rectangle(this.width, this.height);
         if (getAbilityType() == "guidedRocket") {
             body.setFill(guidedRocketHudImage);
-        }
+        } else if (getAbilityType() == "shield")
+            body.setFill(shieldHudImage);
+        else if (getAbilityType() == "barrier")
+            body.setFill(barrierHudImage);
+        else if (getAbilityType() == "bomb")
+            body.setFill(bombHudImage);
+        else if (getAbilityType().equals("bulletRain"))
+            body.setFill(bulletRainHudImage);
+        else if (getAbilityType().equals("timeFreeze"))
+            body.setFill(timeFreezeHudImage);
         else
             body.setFill(Color.GREENYELLOW);
     }
@@ -107,14 +114,12 @@ public class Collectible extends GameComponent {
                 ComponentHitBoxCircle temp = ((ComponentHitBoxCircle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             } else if (hitBox instanceof ComponentHitBoxRectangle) {
                 ComponentHitBoxRectangle temp = ((ComponentHitBoxRectangle) hitBox);
                 if (temp.isDead()) {
                     dead = true;
-                    System.out.println("COLLECTIBE: " + abilityType.getType() + " DEAD");
                     moveY(-1, 500);
                 }
             }
@@ -125,10 +130,12 @@ public class Collectible extends GameComponent {
      * macro for opening the assets of colectibles
      */
     private void openCollectibleImages() {
-        //barrierHudImage = openAsset("Assets\\barrierImage.png");
+        barrierHudImage = openAsset("Assets\\skills\\barrier.png");
         guidedRocketHudImage = openAsset("Assets\\light_saber.png");
-        //shieldHudImage = openAsset("Assets\\shieldImage.png");
-        //engineBlastHudImage = openAsset("Assets\\engineBlastImage.png");
+        shieldHudImage = openAsset("Assets\\skills\\shield.png");
+        bombHudImage = openAsset("Assets\\skills\\bomb.png");
+        bulletRainHudImage = openAsset("Assets\\skills\\bullet_rain.png");
+        timeFreezeHudImage = openAsset("Assets\\skills\\time_freeze.png");
     }
 
     /**

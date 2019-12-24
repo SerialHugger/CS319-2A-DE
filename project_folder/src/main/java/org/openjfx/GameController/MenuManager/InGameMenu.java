@@ -1,9 +1,13 @@
 package org.openjfx.GameController.MenuManager;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import org.openjfx.SceneryManager.Scenery;
+
+import java.io.FileInputStream;
 
 public class InGameMenu extends Rectangle {
 
@@ -67,14 +71,43 @@ public class InGameMenu extends Rectangle {
      */
     private void fillRectangles() {
         backgroundRect.setFill(Color.rgb(42, 44, 54, 0.7));
-
+        ImagePattern continueActiveImage = openAsset("Assets\\continue_black.png");
+        ImagePattern continueInactiveImage = openAsset("Assets\\continue_white.png");
+        ImagePattern exitActiveImage = openAsset("Assets\\exit_black.png");
+        ImagePattern exitInactiveImage = openAsset("Assets\\exit_white.png");
         if (activeButton == 0) {
-            rectangle1.setFill(Color.rgb(255, 204, 0, 0.9));
-            rectangle2.setFill(Color.rgb(144, 3, 252, 0.4));
+            rectangle1.setFill(continueActiveImage);
+            rectangle2.setFill(exitInactiveImage);
+            //rectangle1.setFill(Color.rgb(255, 204, 0, 0.9));
+            //rectangle2.setFill(Color.rgb(144, 3, 252, 0.4));
+
         } else {
-            rectangle1.setFill(Color.rgb(144, 3, 252, 0.4));
-            rectangle2.setFill(Color.rgb(255, 204, 0, 0.9));
+            rectangle1.setFill(continueInactiveImage);
+            rectangle2.setFill(exitActiveImage);
+            //rectangle1.setFill(Color.rgb(144, 3, 252, 0.4));
+            //rectangle2.setFill(Color.rgb(255, 204, 0, 0.9));
         }
+    }
+    public ImagePattern openAsset(String assetLocation) {
+        ImagePattern imagePattern;
+        try {
+            // set background image
+            FileInputStream inputstream = new FileInputStream(assetLocation);
+            Image image = new Image(inputstream);
+            imagePattern = new ImagePattern(image);
+            inputstream.close();
+        } catch (Exception e) {
+            try {
+                FileInputStream inputstream = new FileInputStream(assetLocation.replace("\\", "/"));
+                Image image = new Image(inputstream);
+                imagePattern = new ImagePattern(image);
+                inputstream.close();
+            } catch (Exception e2) {
+                System.out.println(e2.toString());
+                return null;
+            }
+        }
+        return imagePattern;
     }
 
     /**
