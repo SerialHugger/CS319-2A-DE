@@ -44,7 +44,6 @@ public class Shield extends PlayerEquipment {
             lastTime = firstTime; // reset last time.
             totalPassedTime += passedTime; // calculate total passed time
             if (totalPassedTime > 0.03) {
-                System.out.println("shield dead");
                 totalPassedTime = 0;
                 player.isShieldActive = false;
                 dead = true;
