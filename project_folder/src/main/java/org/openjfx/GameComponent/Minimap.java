@@ -34,16 +34,29 @@ public class Minimap extends Rectangle {
         for (GameComponent g : this.components){
             //System.out.println("Iterate components..");
             if (g instanceof Enemy){
-                System.out.println("Enemy");
-                Rectangle rect = new Rectangle(30, 30);
-                rect.setFill(Color.YELLOWGREEN);
-                rect.setTranslateX(-currentX + (g.getX() % (width * 4)) / 4);
-                rect.setTranslateY(background.getTranslateY() + g.getY() / 4);
-                //System.out.println("x: " + rect.getTranslateX());
-                //System.out.println("y: " + rect.getTranslateY());
-                rect.setVisible(false);
-                componentRects.add(rect);
-                gameRoot.getChildren().add(rect);
+                //System.out.println("Enemy");
+                if (g instanceof Boss){
+                    Rectangle rect = new Rectangle(60, 60);
+                    rect.setFill(Color.DARKORANGE);
+                    rect.setTranslateX(-currentX + (g.getX() % (width * 4)) / 4);
+                    rect.setTranslateY(background.getTranslateY() + g.getY() / 4);
+                    //System.out.println("x: " + rect.getTranslateX());
+                    //System.out.println("y: " + rect.getTranslateY());
+                    rect.setVisible(false);
+                    componentRects.add(rect);
+                    gameRoot.getChildren().add(rect);
+                }
+                else{
+                    Rectangle rect = new Rectangle(30, 30);
+                    rect.setFill(Color.YELLOWGREEN);
+                    rect.setTranslateX(-currentX + (g.getX() % (width * 4)) / 4);
+                    rect.setTranslateY(background.getTranslateY() + g.getY() / 4);
+                    //System.out.println("x: " + rect.getTranslateX());
+                    //System.out.println("y: " + rect.getTranslateY());
+                    rect.setVisible(false);
+                    componentRects.add(rect);
+                    gameRoot.getChildren().add(rect);
+                }
             }
             else if (g instanceof Player){
                 //System.out.println("Player");
