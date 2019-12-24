@@ -50,6 +50,7 @@ public class GameController {
     private boolean isMenuCreated = false;
     private InGameMenu inGameMenu;
     private EndGameMenu endGameMenu;
+    private Minimap minimap;
 
 
     int score = 0;
@@ -131,6 +132,8 @@ public class GameController {
         scoreMenu.createScoreScreen(gameRoot);
 
         isMenuCreated = true;
+
+        minimap = new Minimap();
     }
 
     /**
@@ -422,11 +425,13 @@ public class GameController {
                 inGameMenu.changeActiveButton(0);
             }
         } else if (currentScreen == 2) { // STOP, SHOW SCORE
-                scoreMenu.displayScoreScreen(gameRoot, (int) player.getScore());
+            scoreMenu.displayScoreScreen(gameRoot, (int) player.getScore());
 
         } else if (currentScreen == 3) { // Game end
             endGameMenu.displayMenu(gameRoot);
 
+        } else if (currentScreen == 4) {
+            minimap.display(gameRoot);
         }
 
         createLevel();
@@ -479,7 +484,16 @@ public class GameController {
                 keyInputs[12].set(false);
             }
         }
-
+        if (keyInputs[13].get()){ // if TAB is pressed
+            if (currentScreen == 0){
+                setCurrentScreen(4);
+                minimap.createMinimap(gameRoot, gameComponents, gameRoot.getTranslateX(), scenery.getWidth(), scenery.getHeight());
+                keyInputs[13].set(false);
+            } else if (currentScreen == 4){
+                setCurrentScreen(0);
+                keyInputs[13].set(false);
+            }
+        }
         if (!keyInputs[1].get() && !keyInputs[3].get() && currentScreen == 0) { // if the movement keys not pressed
             //handle the acceleration
             if (speed > 0) {
@@ -809,6 +823,10 @@ public class GameController {
 
         if (currentScreen == 2) {
             scoreMenu.hideScoreScreen();
+        }
+
+        if (currentScreen == 4){
+            minimap.hide(gameRoot);
         }
 
         currentScreen = screenID;
